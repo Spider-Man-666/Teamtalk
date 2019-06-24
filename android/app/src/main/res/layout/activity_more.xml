@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#18191D"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:id="@+id/titlebar"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:orientation="horizontal"
+        android:background="#2B2B31">
+
+        <ImageButton
+            android:id="@+id/back"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="9dp"
+            android:layout_marginStart="4dp"
+            android:background="@mipmap/btn_back"/>
+        <TextView
+            android:id="@+id/textfanhui"
+            android:layout_width="28dp"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/back"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="9dp"
+            android:layout_marginStart="8dp"
+            android:textColor="#ffffff"
+            android:textSize="14sp"
+            android:text="返回"/>
+
+        <TextView
+            android:id="@+id/textSttings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="9dp"
+            android:text="系统设置"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="1dp"
+        android:orientation="horizontal"
+        android:background="#2B2B31"
+        >
+
+        <TextView
+            android:layout_width="96dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="10dp"
+            android:background="#2B2B31"
+            android:text="服务器IP："
+            android:textColor="#FFFFFF"
+            android:textSize="18sp" />
+        <EditText
+            android:id="@+id/serverIP"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint=" 格式如127.0.0.1"
+            android:textColorHint="#A5A4A9"
+            android:textColor="#ffffff"
+
+            android:maxLength="15"
+            android:maxLines="1"
+            android:background="#2B2B31"
+            />
+		<!--android:digits=".0123456789"-->
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="1dp"
+        android:orientation="horizontal"
+        android:background="#2B2B31">
+
+        <TextView
+            android:layout_width="96dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="10dp"
+            android:background="#2B2B31"
+            android:text="端口号："
+            android:textColor="#ffffff"
+            android:textSize="18sp" />
+        <EditText
+            android:id="@+id/serverPort"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="number"
+            android:textColorHint="#A5A4A9"
+            android:hint=" 默认31001"
+            android:digits="0123456789"
+            android:maxLength="5"
+            android:maxLines="1"
+            android:textColor="#ffffff"
+            android:background="#2B2B31"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="1dp"
+        android:orientation="horizontal"
+        android:background="#2B2B31">
+
+        <TextView
+            android:layout_width="96dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="10dp"
+            android:background="#2B2B31"
+            android:text="设备ID："
+            android:textColor="#ffffff"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/DevID"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#2B2B31"
+            android:hint=" 默认2A00002D"
+            android:inputType="number"
+            android:textColor="#ffffff"
+            android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+            android:maxLength="28"
+            android:maxLines="1"
+            android:textColorHint="#A5A4A9" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/save"
+        android:layout_width="320dp"
+        android:layout_height="46dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:background="#0080FF"
+        android:text="保存"
+        android:textColor="#FFFFFF"
+
+        android:textSize="16sp" />
+</LinearLayout>

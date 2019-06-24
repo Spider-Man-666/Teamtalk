@@ -1,0 +1,9 @@
+FROM xiaominfc/centos_tt_test:latest
+
+RUN yum install -y supervisor
+
+RUN systemctl enable supervisord
+
+COPY ./supervisor_confs/*.ini /etc/supervisord.d/
+
+CMD ["/usr/sbin/init"]

@@ -1,0 +1,13 @@
+# comment
+
+*/*/CMakeCache.txt
+*/*/CMakeFiles
+*/*/cmake_install.cmake
+*/*/Makefile
+*/*/*.dylib
+*/*/*.so
+*/*/*.so*
+*/*/*.a*
+*/*/*.o*
+
+*.sw
