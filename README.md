@@ -27,6 +27,18 @@
   加上支持监听和连接unix socket的功能 使用后应该会有助于本地连接的稳定性
 ~~~~
 
+2019-06-24:
+修改增加restart.sh all 选项
+增加一键重启所有服务脚本 reboot_teamtalk.sh
+
+将protobuf2 升级为protobuf3,因为protobuf3的文件编译，不在支持lite模式，所以这里要修改链接库
+
+增加C#代码生成
+
+修改替换proto2不支持的方法
+增加拷贝重启所有服务脚本
+
+升级替换所有平台的proto文件2版本为3版本
 
 
 
