@@ -33,6 +33,7 @@ function restart() {
     else 
         ../daeml ./$1
     fi
+    cd ..
 }
 
 case $1 in
@@ -59,6 +60,18 @@ case $1 in
         ;;
     msfs)
         restart $1
+        ;;
+	all)
+        restart db_proxy_server
+        restart login_server
+        restart route_server
+        restart msg_server
+        restart http_msg_server
+        restart file_server
+        restart msfs
+        restart push_server
+	ps -ef | grep _server
+	ps -ef | grep msfs
         ;;
     *)
         echo "Usage: "
