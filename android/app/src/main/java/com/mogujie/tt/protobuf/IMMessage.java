@@ -17,15 +17,7 @@ public final class IMMessage {
      *cmd id:		0x0301
      * </pre>
      *
-     * <code>required uint32 from_user_id = 1;</code>
-     */
-    boolean hasFromUserId();
-    /**
-     * <pre>
-     *cmd id:		0x0301
-     * </pre>
-     *
-     * <code>required uint32 from_user_id = 1;</code>
+     * <code>uint32 from_user_id = 1;</code>
      */
     int getFromUserId();
 
@@ -34,60 +26,36 @@ public final class IMMessage {
      *消息接受方
      * </pre>
      *
-     * <code>required uint32 to_session_id = 2;</code>
-     */
-    boolean hasToSessionId();
-    /**
-     * <pre>
-     *消息接受方
-     * </pre>
-     *
-     * <code>required uint32 to_session_id = 2;</code>
+     * <code>uint32 to_session_id = 2;</code>
      */
     int getToSessionId();
 
     /**
-     * <code>required uint32 msg_id = 3;</code>
-     */
-    boolean hasMsgId();
-    /**
-     * <code>required uint32 msg_id = 3;</code>
+     * <code>uint32 msg_id = 3;</code>
      */
     int getMsgId();
 
     /**
-     * <code>required uint32 create_time = 4;</code>
-     */
-    boolean hasCreateTime();
-    /**
-     * <code>required uint32 create_time = 4;</code>
+     * <code>uint32 create_time = 4;</code>
      */
     int getCreateTime();
 
     /**
-     * <code>required .IM.BaseDefine.MsgType msg_type = 5;</code>
+     * <code>.IM.BaseDefine.MsgType msg_type = 5;</code>
      */
-    boolean hasMsgType();
+    int getMsgTypeValue();
     /**
-     * <code>required .IM.BaseDefine.MsgType msg_type = 5;</code>
+     * <code>.IM.BaseDefine.MsgType msg_type = 5;</code>
      */
     com.mogujie.tt.protobuf.IMBaseDefine.MsgType getMsgType();
 
     /**
-     * <code>required bytes msg_data = 6;</code>
-     */
-    boolean hasMsgData();
-    /**
-     * <code>required bytes msg_data = 6;</code>
+     * <code>bytes msg_data = 6;</code>
      */
     com.google.protobuf.ByteString getMsgData();
 
     /**
-     * <code>optional bytes attach_data = 20;</code>
-     */
-    boolean hasAttachData();
-    /**
-     * <code>optional bytes attach_data = 20;</code>
+     * <code>bytes attach_data = 20;</code>
      */
     com.google.protobuf.ByteString getAttachData();
   }
@@ -104,11 +72,9 @@ public final class IMMessage {
       // @@protoc_insertion_point(message_implements:IM.Message.IMMsgData)
       IMMsgDataOrBuilder {
     private IMMsgData() {
-      msgType_ = 1;
       msgData_ = com.google.protobuf.ByteString.EMPTY;
       attachData_ = com.google.protobuf.ByteString.EMPTY;
     }
-    private int bitField0_;
     public static final int FROM_USER_ID_FIELD_NUMBER = 1;
     private int fromUserId_;
     /**
@@ -116,17 +82,7 @@ public final class IMMessage {
      *cmd id:		0x0301
      * </pre>
      *
-     * <code>required uint32 from_user_id = 1;</code>
-     */
-    public boolean hasFromUserId() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <pre>
-     *cmd id:		0x0301
-     * </pre>
-     *
-     * <code>required uint32 from_user_id = 1;</code>
+     * <code>uint32 from_user_id = 1;</code>
      */
     public int getFromUserId() {
       return fromUserId_;
@@ -136,10 +92,10 @@ public final class IMMessage {
      *cmd id:		0x0301
      * </pre>
      *
-     * <code>required uint32 from_user_id = 1;</code>
+     * <code>uint32 from_user_id = 1;</code>
      */
     private void setFromUserId(int value) {
-      bitField0_ |= 0x00000001;
+      
       fromUserId_ = value;
     }
     /**
@@ -147,10 +103,10 @@ public final class IMMessage {
      *cmd id:		0x0301
      * </pre>
      *
-     * <code>required uint32 from_user_id = 1;</code>
+     * <code>uint32 from_user_id = 1;</code>
      */
     private void clearFromUserId() {
-      bitField0_ = (bitField0_ & ~0x00000001);
+      
       fromUserId_ = 0;
     }
 
@@ -161,17 +117,7 @@ public final class IMMessage {
      *消息接受方
      * </pre>
      *
-     * <code>required uint32 to_session_id = 2;</code>
-     */
-    public boolean hasToSessionId() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <pre>
-     *消息接受方
-     * </pre>
-     *
-     * <code>required uint32 to_session_id = 2;</code>
+     * <code>uint32 to_session_id = 2;</code>
      */
     public int getToSessionId() {
       return toSessionId_;
@@ -181,10 +127,10 @@ public final class IMMessage {
      *消息接受方
      * </pre>
      *
-     * <code>required uint32 to_session_id = 2;</code>
+     * <code>uint32 to_session_id = 2;</code>
      */
     private void setToSessionId(int value) {
-      bitField0_ |= 0x00000002;
+      
       toSessionId_ = value;
     }
     /**
@@ -192,189 +138,171 @@ public final class IMMessage {
      *消息接受方
      * </pre>
      *
-     * <code>required uint32 to_session_id = 2;</code>
+     * <code>uint32 to_session_id = 2;</code>
      */
     private void clearToSessionId() {
-      bitField0_ = (bitField0_ & ~0x00000002);
+      
       toSessionId_ = 0;
     }
 
     public static final int MSG_ID_FIELD_NUMBER = 3;
     private int msgId_;
     /**
-     * <code>required uint32 msg_id = 3;</code>
-     */
-    public boolean hasMsgId() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    /**
-     * <code>required uint32 msg_id = 3;</code>
+     * <code>uint32 msg_id = 3;</code>
      */
     public int getMsgId() {
       return msgId_;
     }
     /**
-     * <code>required uint32 msg_id = 3;</code>
+     * <code>uint32 msg_id = 3;</code>
      */
     private void setMsgId(int value) {
-      bitField0_ |= 0x00000004;
+      
       msgId_ = value;
     }
     /**
-     * <code>required uint32 msg_id = 3;</code>
+     * <code>uint32 msg_id = 3;</code>
      */
     private void clearMsgId() {
-      bitField0_ = (bitField0_ & ~0x00000004);
+      
       msgId_ = 0;
     }
 
     public static final int CREATE_TIME_FIELD_NUMBER = 4;
     private int createTime_;
     /**
-     * <code>required uint32 create_time = 4;</code>
-     */
-    public boolean hasCreateTime() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
-    }
-    /**
-     * <code>required uint32 create_time = 4;</code>
+     * <code>uint32 create_time = 4;</code>
      */
     public int getCreateTime() {
       return createTime_;
     }
     /**
-     * <code>required uint32 create_time = 4;</code>
+     * <code>uint32 create_time = 4;</code>
      */
     private void setCreateTime(int value) {
-      bitField0_ |= 0x00000008;
+      
       createTime_ = value;
     }
     /**
-     * <code>required uint32 create_time = 4;</code>
+     * <code>uint32 create_time = 4;</code>
      */
     private void clearCreateTime() {
-      bitField0_ = (bitField0_ & ~0x00000008);
+      
       createTime_ = 0;
     }
 
     public static final int MSG_TYPE_FIELD_NUMBER = 5;
     private int msgType_;
     /**
-     * <code>required .IM.BaseDefine.MsgType msg_type = 5;</code>
+     * <code>.IM.BaseDefine.MsgType msg_type = 5;</code>
      */
-    public boolean hasMsgType() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
+    public int getMsgTypeValue() {
+      return msgType_;
     }
     /**
-     * <code>required .IM.BaseDefine.MsgType msg_type = 5;</code>
+     * <code>.IM.BaseDefine.MsgType msg_type = 5;</code>
      */
     public com.mogujie.tt.protobuf.IMBaseDefine.MsgType getMsgType() {
       com.mogujie.tt.protobuf.IMBaseDefine.MsgType result = com.mogujie.tt.protobuf.IMBaseDefine.MsgType.forNumber(msgType_);
-      return result == null ? com.mogujie.tt.protobuf.IMBaseDefine.MsgType.MSG_TYPE_SINGLE_TEXT : result;
+      return result == null ? com.mogujie.tt.protobuf.IMBaseDefine.MsgType.UNRECOGNIZED : result;
     }
     /**
-     * <code>required .IM.BaseDefine.MsgType msg_type = 5;</code>
+     * <code>.IM.BaseDefine.MsgType msg_type = 5;</code>
+     */
+    private void setMsgTypeValue(int value) {
+        msgType_ = value;
+    }
+    /**
+     * <code>.IM.BaseDefine.MsgType msg_type = 5;</code>
      */
     private void setMsgType(com.mogujie.tt.protobuf.IMBaseDefine.MsgType value) {
       if (value == null) {
         throw new NullPointerException();
       }
-      bitField0_ |= 0x00000010;
+      
       msgType_ = value.getNumber();
     }
     /**
-     * <code>required .IM.BaseDefine.MsgType msg_type = 5;</code>
+     * <code>.IM.BaseDefine.MsgType msg_type = 5;</code>
      */
     private void clearMsgType() {
-      bitField0_ = (bitField0_ & ~0x00000010);
-      msgType_ = 1;
+      
+      msgType_ = 0;
     }
 
     public static final int MSG_DATA_FIELD_NUMBER = 6;
     private com.google.protobuf.ByteString msgData_;
     /**
-     * <code>required bytes msg_data = 6;</code>
-     */
-    public boolean hasMsgData() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
-    }
-    /**
-     * <code>required bytes msg_data = 6;</code>
+     * <code>bytes msg_data = 6;</code>
      */
     public com.google.protobuf.ByteString getMsgData() {
       return msgData_;
     }
     /**
-     * <code>required bytes msg_data = 6;</code>
+     * <code>bytes msg_data = 6;</code>
      */
     private void setMsgData(com.google.protobuf.ByteString value) {
       if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000020;
+  
       msgData_ = value;
     }
     /**
-     * <code>required bytes msg_data = 6;</code>
+     * <code>bytes msg_data = 6;</code>
      */
     private void clearMsgData() {
-      bitField0_ = (bitField0_ & ~0x00000020);
+      
       msgData_ = getDefaultInstance().getMsgData();
     }
 
     public static final int ATTACH_DATA_FIELD_NUMBER = 20;
     private com.google.protobuf.ByteString attachData_;
     /**
-     * <code>optional bytes attach_data = 20;</code>
-     */
-    public boolean hasAttachData() {
-      return ((bitField0_ & 0x00000040) == 0x00000040);
-    }
-    /**
-     * <code>optional bytes attach_data = 20;</code>
+     * <code>bytes attach_data = 20;</code>
      */
     public com.google.protobuf.ByteString getAttachData() {
       return attachData_;
     }
     /**
-     * <code>optional bytes attach_data = 20;</code>
+     * <code>bytes attach_data = 20;</code>
      */
     private void setAttachData(com.google.protobuf.ByteString value) {
       if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000040;
+  
       attachData_ = value;
     }
     /**
-     * <code>optional bytes attach_data = 20;</code>
+     * <code>bytes attach_data = 20;</code>
      */
     private void clearAttachData() {
-      bitField0_ = (bitField0_ & ~0x00000040);
+      
       attachData_ = getDefaultInstance().getAttachData();
     }
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+      if (fromUserId_ != 0) {
         output.writeUInt32(1, fromUserId_);
       }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+      if (toSessionId_ != 0) {
         output.writeUInt32(2, toSessionId_);
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+      if (msgId_ != 0) {
         output.writeUInt32(3, msgId_);
       }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+      if (createTime_ != 0) {
         output.writeUInt32(4, createTime_);
       }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+      if (msgType_ != com.mogujie.tt.protobuf.IMBaseDefine.MsgType.MSG_TYPE_UNIVERSAL.getNumber()) {
         output.writeEnum(5, msgType_);
       }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+      if (!msgData_.isEmpty()) {
         output.writeBytes(6, msgData_);
       }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+      if (!attachData_.isEmpty()) {
         output.writeBytes(20, attachData_);
       }
       unknownFields.writeTo(output);
@@ -385,31 +313,31 @@ public final class IMMessage {
       if (size != -1) return size;
 
       size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+      if (fromUserId_ != 0) {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt32Size(1, fromUserId_);
       }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+      if (toSessionId_ != 0) {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt32Size(2, toSessionId_);
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+      if (msgId_ != 0) {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt32Size(3, msgId_);
       }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+      if (createTime_ != 0) {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt32Size(4, createTime_);
       }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+      if (msgType_ != com.mogujie.tt.protobuf.IMBaseDefine.MsgType.MSG_TYPE_UNIVERSAL.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(5, msgType_);
       }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+      if (!msgData_.isEmpty()) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(6, msgData_);
       }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+      if (!attachData_.isEmpty()) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(20, attachData_);
       }
@@ -522,17 +450,7 @@ public final class IMMessage {
        *cmd id:		0x0301
        * </pre>
        *
-       * <code>required uint32 from_user_id = 1;</code>
-       */
-      public boolean hasFromUserId() {
-        return instance.hasFromUserId();
-      }
-      /**
-       * <pre>
-       *cmd id:		0x0301
-       * </pre>
-       *
-       * <code>required uint32 from_user_id = 1;</code>
+       * <code>uint32 from_user_id = 1;</code>
        */
       public int getFromUserId() {
         return instance.getFromUserId();
@@ -542,7 +460,7 @@ public final class IMMessage {
        *cmd id:		0x0301
        * </pre>
        *
-       * <code>required uint32 from_user_id = 1;</code>
+       * <code>uint32 from_user_id = 1;</code>
        */
       public Builder setFromUserId(int value) {
         copyOnWrite();
@@ -554,7 +472,7 @@ public final class IMMessage {
        *cmd id:		0x0301
        * </pre>
        *
-       * <code>required uint32 from_user_id = 1;</code>
+       * <code>uint32 from_user_id = 1;</code>
        */
       public Builder clearFromUserId() {
         copyOnWrite();
@@ -567,17 +485,7 @@ public final class IMMessage {
        *消息接受方
        * </pre>
        *
-       * <code>required uint32 to_session_id = 2;</code>
-       */
-      public boolean hasToSessionId() {
-        return instance.hasToSessionId();
-      }
-      /**
-       * <pre>
-       *消息接受方
-       * </pre>
-       *
-       * <code>required uint32 to_session_id = 2;</code>
+       * <code>uint32 to_session_id = 2;</code>
        */
       public int getToSessionId() {
         return instance.getToSessionId();
@@ -587,7 +495,7 @@ public final class IMMessage {
        *消息接受方
        * </pre>
        *
-       * <code>required uint32 to_session_id = 2;</code>
+       * <code>uint32 to_session_id = 2;</code>
        */
       public Builder setToSessionId(int value) {
         copyOnWrite();
@@ -599,7 +507,7 @@ public final class IMMessage {
        *消息接受方
        * </pre>
        *
-       * <code>required uint32 to_session_id = 2;</code>
+       * <code>uint32 to_session_id = 2;</code>
        */
       public Builder clearToSessionId() {
         copyOnWrite();
@@ -608,19 +516,13 @@ public final class IMMessage {
       }
 
       /**
-       * <code>required uint32 msg_id = 3;</code>
-       */
-      public boolean hasMsgId() {
-        return instance.hasMsgId();
-      }
-      /**
-       * <code>required uint32 msg_id = 3;</code>
+       * <code>uint32 msg_id = 3;</code>
        */
       public int getMsgId() {
         return instance.getMsgId();
       }
       /**
-       * <code>required uint32 msg_id = 3;</code>
+       * <code>uint32 msg_id = 3;</code>
        */
       public Builder setMsgId(int value) {
         copyOnWrite();
@@ -628,7 +530,7 @@ public final class IMMessage {
         return this;
       }
       /**
-       * <code>required uint32 msg_id = 3;</code>
+       * <code>uint32 msg_id = 3;</code>
        */
       public Builder clearMsgId() {
         copyOnWrite();
@@ -637,19 +539,13 @@ public final class IMMessage {
       }
 
       /**
-       * <code>required uint32 create_time = 4;</code>
-       */
-      public boolean hasCreateTime() {
-        return instance.hasCreateTime();
-      }
-      /**
-       * <code>required uint32 create_time = 4;</code>
+       * <code>uint32 create_time = 4;</code>
        */
       public int getCreateTime() {
         return instance.getCreateTime();
       }
       /**
-       * <code>required uint32 create_time = 4;</code>
+       * <code>uint32 create_time = 4;</code>
        */
       public Builder setCreateTime(int value) {
         copyOnWrite();
@@ -657,7 +553,7 @@ public final class IMMessage {
         return this;
       }
       /**
-       * <code>required uint32 create_time = 4;</code>
+       * <code>uint32 create_time = 4;</code>
        */
       public Builder clearCreateTime() {
         copyOnWrite();
@@ -666,19 +562,27 @@ public final class IMMessage {
       }
 
       /**
-       * <code>required .IM.BaseDefine.MsgType msg_type = 5;</code>
+       * <code>.IM.BaseDefine.MsgType msg_type = 5;</code>
        */
-      public boolean hasMsgType() {
-        return instance.hasMsgType();
+      public int getMsgTypeValue() {
+        return instance.getMsgTypeValue();
       }
       /**
-       * <code>required .IM.BaseDefine.MsgType msg_type = 5;</code>
+       * <code>.IM.BaseDefine.MsgType msg_type = 5;</code>
+       */
+      public Builder setMsgTypeValue(int value) {
+        copyOnWrite();
+        instance.setMsgTypeValue(value);
+        return this;
+      }
+      /**
+       * <code>.IM.BaseDefine.MsgType msg_type = 5;</code>
        */
       public com.mogujie.tt.protobuf.IMBaseDefine.MsgType getMsgType() {
         return instance.getMsgType();
       }
       /**
-       * <code>required .IM.BaseDefine.MsgType msg_type = 5;</code>
+       * <code>.IM.BaseDefine.MsgType msg_type = 5;</code>
        */
       public Builder setMsgType(com.mogujie.tt.protobuf.IMBaseDefine.MsgType value) {
         copyOnWrite();
@@ -686,7 +590,7 @@ public final class IMMessage {
         return this;
       }
       /**
-       * <code>required .IM.BaseDefine.MsgType msg_type = 5;</code>
+       * <code>.IM.BaseDefine.MsgType msg_type = 5;</code>
        */
       public Builder clearMsgType() {
         copyOnWrite();
@@ -695,19 +599,13 @@ public final class IMMessage {
       }
 
       /**
-       * <code>required bytes msg_data = 6;</code>
-       */
-      public boolean hasMsgData() {
-        return instance.hasMsgData();
-      }
-      /**
-       * <code>required bytes msg_data = 6;</code>
+       * <code>bytes msg_data = 6;</code>
        */
       public com.google.protobuf.ByteString getMsgData() {
         return instance.getMsgData();
       }
       /**
-       * <code>required bytes msg_data = 6;</code>
+       * <code>bytes msg_data = 6;</code>
        */
       public Builder setMsgData(com.google.protobuf.ByteString value) {
         copyOnWrite();
@@ -715,7 +613,7 @@ public final class IMMessage {
         return this;
       }
       /**
-       * <code>required bytes msg_data = 6;</code>
+       * <code>bytes msg_data = 6;</code>
        */
       public Builder clearMsgData() {
         copyOnWrite();
@@ -724,19 +622,13 @@ public final class IMMessage {
       }
 
       /**
-       * <code>optional bytes attach_data = 20;</code>
-       */
-      public boolean hasAttachData() {
-        return instance.hasAttachData();
-      }
-      /**
-       * <code>optional bytes attach_data = 20;</code>
+       * <code>bytes attach_data = 20;</code>
        */
       public com.google.protobuf.ByteString getAttachData() {
         return instance.getAttachData();
       }
       /**
-       * <code>optional bytes attach_data = 20;</code>
+       * <code>bytes attach_data = 20;</code>
        */
       public Builder setAttachData(com.google.protobuf.ByteString value) {
         copyOnWrite();
@@ -744,7 +636,7 @@ public final class IMMessage {
         return this;
       }
       /**
-       * <code>optional bytes attach_data = 20;</code>
+       * <code>bytes attach_data = 20;</code>
        */
       public Builder clearAttachData() {
         copyOnWrite();
@@ -754,7 +646,6 @@ public final class IMMessage {
 
       // @@protoc_insertion_point(builder_scope:IM.Message.IMMsgData)
     }
-    private byte memoizedIsInitialized = 2;
     @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
     protected final java.lang.Object dynamicMethod(
         com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
@@ -764,31 +655,7 @@ public final class IMMessage {
           return new com.mogujie.tt.protobuf.IMMessage.IMMsgData();
         }
         case IS_INITIALIZED: {
-          byte isInitialized = memoizedIsInitialized;
-          if (isInitialized == 1) return DEFAULT_INSTANCE;
-          if (isInitialized == 0) return null;
-
-          boolean shouldMemoize = ((Boolean) arg0).booleanValue();
-          if (!hasFromUserId()) {
-            return null;
-          }
-          if (!hasToSessionId()) {
-            return null;
-          }
-          if (!hasMsgId()) {
-            return null;
-          }
-          if (!hasCreateTime()) {
-            return null;
-          }
-          if (!hasMsgType()) {
-            return null;
-          }
-          if (!hasMsgData()) {
-            return null;
-          }
           return DEFAULT_INSTANCE;
-
         }
         case MAKE_IMMUTABLE: {
           return null;
@@ -799,29 +666,21 @@ public final class IMMessage {
         case VISIT: {
           Visitor visitor = (Visitor) arg0;
           com.mogujie.tt.protobuf.IMMessage.IMMsgData other = (com.mogujie.tt.protobuf.IMMessage.IMMsgData) arg1;
-          fromUserId_ = visitor.visitInt(
-              hasFromUserId(), fromUserId_,
-              other.hasFromUserId(), other.fromUserId_);
-          toSessionId_ = visitor.visitInt(
-              hasToSessionId(), toSessionId_,
-              other.hasToSessionId(), other.toSessionId_);
-          msgId_ = visitor.visitInt(
-              hasMsgId(), msgId_,
-              other.hasMsgId(), other.msgId_);
-          createTime_ = visitor.visitInt(
-              hasCreateTime(), createTime_,
-              other.hasCreateTime(), other.createTime_);
-          msgType_ = visitor.visitInt(hasMsgType(), msgType_,
-              other.hasMsgType(), other.msgType_);
-          msgData_ = visitor.visitByteString(
-              hasMsgData(), msgData_,
-              other.hasMsgData(), other.msgData_);
-          attachData_ = visitor.visitByteString(
-              hasAttachData(), attachData_,
-              other.hasAttachData(), other.attachData_);
+          fromUserId_ = visitor.visitInt(fromUserId_ != 0, fromUserId_,
+              other.fromUserId_ != 0, other.fromUserId_);
+          toSessionId_ = visitor.visitInt(toSessionId_ != 0, toSessionId_,
+              other.toSessionId_ != 0, other.toSessionId_);
+          msgId_ = visitor.visitInt(msgId_ != 0, msgId_,
+              other.msgId_ != 0, other.msgId_);
+          createTime_ = visitor.visitInt(createTime_ != 0, createTime_,
+              other.createTime_ != 0, other.createTime_);
+          msgType_ = visitor.visitInt(msgType_ != 0, msgType_,    other.msgType_ != 0, other.msgType_);
+          msgData_ = visitor.visitByteString(msgData_ != com.google.protobuf.ByteString.EMPTY, msgData_,
+              other.msgData_ != com.google.protobuf.ByteString.EMPTY, other.msgData_);
+          attachData_ = visitor.visitByteString(attachData_ != com.google.protobuf.ByteString.EMPTY, attachData_,
+              other.attachData_ != com.google.protobuf.ByteString.EMPTY, other.attachData_);
           if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
               .INSTANCE) {
-            bitField0_ |= other.bitField0_;
           }
           return this;
         }
@@ -848,43 +707,38 @@ public final class IMMessage {
                   break;
                 }
                 case 8: {
-                  bitField0_ |= 0x00000001;
+
                   fromUserId_ = input.readUInt32();
                   break;
                 }
                 case 16: {
-                  bitField0_ |= 0x00000002;
+
                   toSessionId_ = input.readUInt32();
                   break;
                 }
                 case 24: {
-                  bitField0_ |= 0x00000004;
+
                   msgId_ = input.readUInt32();
                   break;
                 }
                 case 32: {
-                  bitField0_ |= 0x00000008;
+
                   createTime_ = input.readUInt32();
                   break;
                 }
                 case 40: {
                   int rawValue = input.readEnum();
-                  com.mogujie.tt.protobuf.IMBaseDefine.MsgType value = com.mogujie.tt.protobuf.IMBaseDefine.MsgType.forNumber(rawValue);
-                  if (value == null) {
-                    super.mergeVarintField(5, rawValue);
-                  } else {
-                    bitField0_ |= 0x00000010;
-                    msgType_ = rawValue;
-                  }
+
+                  msgType_ = rawValue;
                   break;
                 }
                 case 50: {
-                  bitField0_ |= 0x00000020;
+
                   msgData_ = input.readBytes();
                   break;
                 }
                 case 162: {
-                  bitField0_ |= 0x00000040;
+
                   attachData_ = input.readBytes();
                   break;
                 }
@@ -913,10 +767,9 @@ public final class IMMessage {
           return PARSER;
       }
       case GET_MEMOIZED_IS_INITIALIZED: {
-        return memoizedIsInitialized;
+        return (byte) 1;
       }
       case SET_MEMOIZED_IS_INITIALIZED: {
-        memoizedIsInitialized = (byte) (arg0 == null ? 0 : 1);
         return null;
       }
       }
@@ -951,42 +804,26 @@ public final class IMMessage {
      *cmd id:		0x0302
      * </pre>
      *
-     * <code>required uint32 user_id = 1;</code>
-     */
-    boolean hasUserId();
-    /**
-     * <pre>
-     *cmd id:		0x0302
-     * </pre>
-     *
-     * <code>required uint32 user_id = 1;</code>
+     * <code>uint32 user_id = 1;</code>
      */
     int getUserId();
 
     /**
-     * <code>required uint32 session_id = 2;</code>
-     */
-    boolean hasSessionId();
-    /**
-     * <code>required uint32 session_id = 2;</code>
+     * <code>uint32 session_id = 2;</code>
      */
     int getSessionId();
 
     /**
-     * <code>required uint32 msg_id = 3;</code>
-     */
-    boolean hasMsgId();
-    /**
-     * <code>required uint32 msg_id = 3;</code>
+     * <code>uint32 msg_id = 3;</code>
      */
     int getMsgId();
 
     /**
-     * <code>required .IM.BaseDefine.SessionType session_type = 4;</code>
+     * <code>.IM.BaseDefine.SessionType session_type = 4;</code>
      */
-    boolean hasSessionType();
+    int getSessionTypeValue();
     /**
-     * <code>required .IM.BaseDefine.SessionType session_type = 4;</code>
+     * <code>.IM.BaseDefine.SessionType session_type = 4;</code>
      */
     com.mogujie.tt.protobuf.IMBaseDefine.SessionType getSessionType();
   }
@@ -999,9 +836,7 @@ public final class IMMessage {
       // @@protoc_insertion_point(message_implements:IM.Message.IMMsgDataAck)
       IMMsgDataAckOrBuilder {
     private IMMsgDataAck() {
-      sessionType_ = 1;
     }
-    private int bitField0_;
     public static final int USER_ID_FIELD_NUMBER = 1;
     private int userId_;
     /**
@@ -1009,17 +844,7 @@ public final class IMMessage {
      *cmd id:		0x0302
      * </pre>
      *
-     * <code>required uint32 user_id = 1;</code>
-     */
-    public boolean hasUserId() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <pre>
-     *cmd id:		0x0302
-     * </pre>
-     *
-     * <code>required uint32 user_id = 1;</code>
+     * <code>uint32 user_id = 1;</code>
      */
     public int getUserId() {
       return userId_;
@@ -1029,10 +854,10 @@ public final class IMMessage {
      *cmd id:		0x0302
      * </pre>
      *
-     * <code>required uint32 user_id = 1;</code>
+     * <code>uint32 user_id = 1;</code>
      */
     private void setUserId(int value) {
-      bitField0_ |= 0x00000001;
+      
       userId_ = value;
     }
     /**
@@ -1040,116 +865,110 @@ public final class IMMessage {
      *cmd id:		0x0302
      * </pre>
      *
-     * <code>required uint32 user_id = 1;</code>
+     * <code>uint32 user_id = 1;</code>
      */
     private void clearUserId() {
-      bitField0_ = (bitField0_ & ~0x00000001);
+      
       userId_ = 0;
     }
 
     public static final int SESSION_ID_FIELD_NUMBER = 2;
     private int sessionId_;
     /**
-     * <code>required uint32 session_id = 2;</code>
-     */
-    public boolean hasSessionId() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <code>required uint32 session_id = 2;</code>
+     * <code>uint32 session_id = 2;</code>
      */
     public int getSessionId() {
       return sessionId_;
     }
     /**
-     * <code>required uint32 session_id = 2;</code>
+     * <code>uint32 session_id = 2;</code>
      */
     private void setSessionId(int value) {
-      bitField0_ |= 0x00000002;
+      
       sessionId_ = value;
     }
     /**
-     * <code>required uint32 session_id = 2;</code>
+     * <code>uint32 session_id = 2;</code>
      */
     private void clearSessionId() {
-      bitField0_ = (bitField0_ & ~0x00000002);
+      
       sessionId_ = 0;
     }
 
     public static final int MSG_ID_FIELD_NUMBER = 3;
     private int msgId_;
     /**
-     * <code>required uint32 msg_id = 3;</code>
-     */
-    public boolean hasMsgId() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    /**
-     * <code>required uint32 msg_id = 3;</code>
+     * <code>uint32 msg_id = 3;</code>
      */
     public int getMsgId() {
       return msgId_;
     }
     /**
-     * <code>required uint32 msg_id = 3;</code>
+     * <code>uint32 msg_id = 3;</code>
      */
     private void setMsgId(int value) {
-      bitField0_ |= 0x00000004;
+      
       msgId_ = value;
     }
     /**
-     * <code>required uint32 msg_id = 3;</code>
+     * <code>uint32 msg_id = 3;</code>
      */
     private void clearMsgId() {
-      bitField0_ = (bitField0_ & ~0x00000004);
+      
       msgId_ = 0;
     }
 
     public static final int SESSION_TYPE_FIELD_NUMBER = 4;
     private int sessionType_;
     /**
-     * <code>required .IM.BaseDefine.SessionType session_type = 4;</code>
+     * <code>.IM.BaseDefine.SessionType session_type = 4;</code>
      */
-    public boolean hasSessionType() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
+    public int getSessionTypeValue() {
+      return sessionType_;
     }
     /**
-     * <code>required .IM.BaseDefine.SessionType session_type = 4;</code>
+     * <code>.IM.BaseDefine.SessionType session_type = 4;</code>
      */
     public com.mogujie.tt.protobuf.IMBaseDefine.SessionType getSessionType() {
       com.mogujie.tt.protobuf.IMBaseDefine.SessionType result = com.mogujie.tt.protobuf.IMBaseDefine.SessionType.forNumber(sessionType_);
-      return result == null ? com.mogujie.tt.protobuf.IMBaseDefine.SessionType.SESSION_TYPE_SINGLE : result;
+      return result == null ? com.mogujie.tt.protobuf.IMBaseDefine.SessionType.UNRECOGNIZED : result;
     }
     /**
-     * <code>required .IM.BaseDefine.SessionType session_type = 4;</code>
+     * <code>.IM.BaseDefine.SessionType session_type = 4;</code>
+     */
+    private void setSessionTypeValue(int value) {
+        sessionType_ = value;
+    }
+    /**
+     * <code>.IM.BaseDefine.SessionType session_type = 4;</code>
      */
     private void setSessionType(com.mogujie.tt.protobuf.IMBaseDefine.SessionType value) {
       if (value == null) {
         throw new NullPointerException();
       }
-      bitField0_ |= 0x00000008;
+      
       sessionType_ = value.getNumber();
     }
     /**
-     * <code>required .IM.BaseDefine.SessionType session_type = 4;</code>
+     * <code>.IM.BaseDefine.SessionType session_type = 4;</code>
      */
     private void clearSessionType() {
-      bitField0_ = (bitField0_ & ~0x00000008);
-      sessionType_ = 1;
+      
+      sessionType_ = 0;
     }
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+      if (userId_ != 0) {
         output.writeUInt32(1, userId_);
       }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+      if (sessionId_ != 0) {
         output.writeUInt32(2, sessionId_);
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+      if (msgId_ != 0) {
         output.writeUInt32(3, msgId_);
       }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+      if (sessionType_ != com.mogujie.tt.protobuf.IMBaseDefine.SessionType.SESSION_TYPE_UNIVERSAL.getNumber()) {
         output.writeEnum(4, sessionType_);
       }
       unknownFields.writeTo(output);
@@ -1160,19 +979,19 @@ public final class IMMessage {
       if (size != -1) return size;
 
       size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+      if (userId_ != 0) {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt32Size(1, userId_);
       }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+      if (sessionId_ != 0) {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt32Size(2, sessionId_);
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+      if (msgId_ != 0) {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt32Size(3, msgId_);
       }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+      if (sessionType_ != com.mogujie.tt.protobuf.IMBaseDefine.SessionType.SESSION_TYPE_UNIVERSAL.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(4, sessionType_);
       }
@@ -1281,17 +1100,7 @@ public final class IMMessage {
        *cmd id:		0x0302
        * </pre>
        *
-       * <code>required uint32 user_id = 1;</code>
-       */
-      public boolean hasUserId() {
-        return instance.hasUserId();
-      }
-      /**
-       * <pre>
-       *cmd id:		0x0302
-       * </pre>
-       *
-       * <code>required uint32 user_id = 1;</code>
+       * <code>uint32 user_id = 1;</code>
        */
       public int getUserId() {
         return instance.getUserId();
@@ -1301,7 +1110,7 @@ public final class IMMessage {
        *cmd id:		0x0302
        * </pre>
        *
-       * <code>required uint32 user_id = 1;</code>
+       * <code>uint32 user_id = 1;</code>
        */
       public Builder setUserId(int value) {
         copyOnWrite();
@@ -1313,7 +1122,7 @@ public final class IMMessage {
        *cmd id:		0x0302
        * </pre>
        *
-       * <code>required uint32 user_id = 1;</code>
+       * <code>uint32 user_id = 1;</code>
        */
       public Builder clearUserId() {
         copyOnWrite();
@@ -1322,19 +1131,13 @@ public final class IMMessage {
       }
 
       /**
-       * <code>required uint32 session_id = 2;</code>
-       */
-      public boolean hasSessionId() {
-        return instance.hasSessionId();
-      }
-      /**
-       * <code>required uint32 session_id = 2;</code>
+       * <code>uint32 session_id = 2;</code>
        */
       public int getSessionId() {
         return instance.getSessionId();
       }
       /**
-       * <code>required uint32 session_id = 2;</code>
+       * <code>uint32 session_id = 2;</code>
        */
       public Builder setSessionId(int value) {
         copyOnWrite();
@@ -1342,7 +1145,7 @@ public final class IMMessage {
         return this;
       }
       /**
-       * <code>required uint32 session_id = 2;</code>
+       * <code>uint32 session_id = 2;</code>
        */
       public Builder clearSessionId() {
         copyOnWrite();
@@ -1351,19 +1154,13 @@ public final class IMMessage {
       }
 
       /**
-       * <code>required uint32 msg_id = 3;</code>
-       */
-      public boolean hasMsgId() {
-        return instance.hasMsgId();
-      }
-      /**
-       * <code>required uint32 msg_id = 3;</code>
+       * <code>uint32 msg_id = 3;</code>
        */
       public int getMsgId() {
         return instance.getMsgId();
       }
       /**
-       * <code>required uint32 msg_id = 3;</code>
+       * <code>uint32 msg_id = 3;</code>
        */
       public Builder setMsgId(int value) {
         copyOnWrite();
@@ -1371,7 +1168,7 @@ public final class IMMessage {
         return this;
       }
       /**
-       * <code>required uint32 msg_id = 3;</code>
+       * <code>uint32 msg_id = 3;</code>
        */
       public Builder clearMsgId() {
         copyOnWrite();
@@ -1380,19 +1177,27 @@ public final class IMMessage {
       }
 
       /**
-       * <code>required .IM.BaseDefine.SessionType session_type = 4;</code>
+       * <code>.IM.BaseDefine.SessionType session_type = 4;</code>
        */
-      public boolean hasSessionType() {
-        return instance.hasSessionType();
+      public int getSessionTypeValue() {
+        return instance.getSessionTypeValue();
       }
       /**
-       * <code>required .IM.BaseDefine.SessionType session_type = 4;</code>
+       * <code>.IM.BaseDefine.SessionType session_type = 4;</code>
+       */
+      public Builder setSessionTypeValue(int value) {
+        copyOnWrite();
+        instance.setSessionTypeValue(value);
+        return this;
+      }
+      /**
+       * <code>.IM.BaseDefine.SessionType session_type = 4;</code>
        */
       public com.mogujie.tt.protobuf.IMBaseDefine.SessionType getSessionType() {
         return instance.getSessionType();
       }
       /**
-       * <code>required .IM.BaseDefine.SessionType session_type = 4;</code>
+       * <code>.IM.BaseDefine.SessionType session_type = 4;</code>
        */
       public Builder setSessionType(com.mogujie.tt.protobuf.IMBaseDefine.SessionType value) {
         copyOnWrite();
@@ -1400,7 +1205,7 @@ public final class IMMessage {
         return this;
       }
       /**
-       * <code>required .IM.BaseDefine.SessionType session_type = 4;</code>
+       * <code>.IM.BaseDefine.SessionType session_type = 4;</code>
        */
       public Builder clearSessionType() {
         copyOnWrite();
@@ -1410,7 +1215,6 @@ public final class IMMessage {
 
       // @@protoc_insertion_point(builder_scope:IM.Message.IMMsgDataAck)
     }
-    private byte memoizedIsInitialized = 2;
     @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
     protected final java.lang.Object dynamicMethod(
         com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
@@ -1420,25 +1224,7 @@ public final class IMMessage {
           return new com.mogujie.tt.protobuf.IMMessage.IMMsgDataAck();
         }
         case IS_INITIALIZED: {
-          byte isInitialized = memoizedIsInitialized;
-          if (isInitialized == 1) return DEFAULT_INSTANCE;
-          if (isInitialized == 0) return null;
-
-          boolean shouldMemoize = ((Boolean) arg0).booleanValue();
-          if (!hasUserId()) {
-            return null;
-          }
-          if (!hasSessionId()) {
-            return null;
-          }
-          if (!hasMsgId()) {
-            return null;
-          }
-          if (!hasSessionType()) {
-            return null;
-          }
           return DEFAULT_INSTANCE;
-
         }
         case MAKE_IMMUTABLE: {
           return null;
@@ -1449,20 +1235,15 @@ public final class IMMessage {
         case VISIT: {
           Visitor visitor = (Visitor) arg0;
           com.mogujie.tt.protobuf.IMMessage.IMMsgDataAck other = (com.mogujie.tt.protobuf.IMMessage.IMMsgDataAck) arg1;
-          userId_ = visitor.visitInt(
-              hasUserId(), userId_,
-              other.hasUserId(), other.userId_);
-          sessionId_ = visitor.visitInt(
-              hasSessionId(), sessionId_,
-              other.hasSessionId(), other.sessionId_);
-          msgId_ = visitor.visitInt(
-              hasMsgId(), msgId_,
-              other.hasMsgId(), other.msgId_);
-          sessionType_ = visitor.visitInt(hasSessionType(), sessionType_,
-              other.hasSessionType(), other.sessionType_);
+          userId_ = visitor.visitInt(userId_ != 0, userId_,
+              other.userId_ != 0, other.userId_);
+          sessionId_ = visitor.visitInt(sessionId_ != 0, sessionId_,
+              other.sessionId_ != 0, other.sessionId_);
+          msgId_ = visitor.visitInt(msgId_ != 0, msgId_,
+              other.msgId_ != 0, other.msgId_);
+          sessionType_ = visitor.visitInt(sessionType_ != 0, sessionType_,    other.sessionType_ != 0, other.sessionType_);
           if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
               .INSTANCE) {
-            bitField0_ |= other.bitField0_;
           }
           return this;
         }
@@ -1489,29 +1270,24 @@ public final class IMMessage {
                   break;
                 }
                 case 8: {
-                  bitField0_ |= 0x00000001;
+
                   userId_ = input.readUInt32();
                   break;
                 }
                 case 16: {
-                  bitField0_ |= 0x00000002;
+
                   sessionId_ = input.readUInt32();
                   break;
                 }
                 case 24: {
-                  bitField0_ |= 0x00000004;
+
                   msgId_ = input.readUInt32();
                   break;
                 }
                 case 32: {
                   int rawValue = input.readEnum();
-                  com.mogujie.tt.protobuf.IMBaseDefine.SessionType value = com.mogujie.tt.protobuf.IMBaseDefine.SessionType.forNumber(rawValue);
-                  if (value == null) {
-                    super.mergeVarintField(4, rawValue);
-                  } else {
-                    bitField0_ |= 0x00000008;
-                    sessionType_ = rawValue;
-                  }
+
+                  sessionType_ = rawValue;
                   break;
                 }
               }
@@ -1539,10 +1315,9 @@ public final class IMMessage {
           return PARSER;
       }
       case GET_MEMOIZED_IS_INITIALIZED: {
-        return memoizedIsInitialized;
+        return (byte) 1;
       }
       case SET_MEMOIZED_IS_INITIALIZED: {
-        memoizedIsInitialized = (byte) (arg0 == null ? 0 : 1);
         return null;
       }
       }
@@ -1577,42 +1352,26 @@ public final class IMMessage {
      *cmd id:		0x0303
      * </pre>
      *
-     * <code>required uint32 user_id = 1;</code>
-     */
-    boolean hasUserId();
-    /**
-     * <pre>
-     *cmd id:		0x0303
-     * </pre>
-     *
-     * <code>required uint32 user_id = 1;</code>
+     * <code>uint32 user_id = 1;</code>
      */
     int getUserId();
 
     /**
-     * <code>required uint32 session_id = 2;</code>
-     */
-    boolean hasSessionId();
-    /**
-     * <code>required uint32 session_id = 2;</code>
+     * <code>uint32 session_id = 2;</code>
      */
     int getSessionId();
 
     /**
-     * <code>required uint32 msg_id = 3;</code>
-     */
-    boolean hasMsgId();
-    /**
-     * <code>required uint32 msg_id = 3;</code>
+     * <code>uint32 msg_id = 3;</code>
      */
     int getMsgId();
 
     /**
-     * <code>required .IM.BaseDefine.SessionType session_type = 4;</code>
+     * <code>.IM.BaseDefine.SessionType session_type = 4;</code>
      */
-    boolean hasSessionType();
+    int getSessionTypeValue();
     /**
-     * <code>required .IM.BaseDefine.SessionType session_type = 4;</code>
+     * <code>.IM.BaseDefine.SessionType session_type = 4;</code>
      */
     com.mogujie.tt.protobuf.IMBaseDefine.SessionType getSessionType();
   }
@@ -1625,9 +1384,7 @@ public final class IMMessage {
       // @@protoc_insertion_point(message_implements:IM.Message.IMMsgDataReadAck)
       IMMsgDataReadAckOrBuilder {
     private IMMsgDataReadAck() {
-      sessionType_ = 1;
     }
-    private int bitField0_;
     public static final int USER_ID_FIELD_NUMBER = 1;
     private int userId_;
     /**
@@ -1635,17 +1392,7 @@ public final class IMMessage {
      *cmd id:		0x0303
      * </pre>
      *
-     * <code>required uint32 user_id = 1;</code>
-     */
-    public boolean hasUserId() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <pre>
-     *cmd id:		0x0303
-     * </pre>
-     *
-     * <code>required uint32 user_id = 1;</code>
+     * <code>uint32 user_id = 1;</code>
      */
     public int getUserId() {
       return userId_;
@@ -1655,10 +1402,10 @@ public final class IMMessage {
      *cmd id:		0x0303
      * </pre>
      *
-     * <code>required uint32 user_id = 1;</code>
+     * <code>uint32 user_id = 1;</code>
      */
     private void setUserId(int value) {
-      bitField0_ |= 0x00000001;
+      
       userId_ = value;
     }
     /**
@@ -1666,116 +1413,110 @@ public final class IMMessage {
      *cmd id:		0x0303
      * </pre>
      *
-     * <code>required uint32 user_id = 1;</code>
+     * <code>uint32 user_id = 1;</code>
      */
     private void clearUserId() {
-      bitField0_ = (bitField0_ & ~0x00000001);
+      
       userId_ = 0;
     }
 
     public static final int SESSION_ID_FIELD_NUMBER = 2;
     private int sessionId_;
     /**
-     * <code>required uint32 session_id = 2;</code>
-     */
-    public boolean hasSessionId() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <code>required uint32 session_id = 2;</code>
+     * <code>uint32 session_id = 2;</code>
      */
     public int getSessionId() {
       return sessionId_;
     }
     /**
-     * <code>required uint32 session_id = 2;</code>
+     * <code>uint32 session_id = 2;</code>
      */
     private void setSessionId(int value) {
-      bitField0_ |= 0x00000002;
+      
       sessionId_ = value;
     }
     /**
-     * <code>required uint32 session_id = 2;</code>
+     * <code>uint32 session_id = 2;</code>
      */
     private void clearSessionId() {
-      bitField0_ = (bitField0_ & ~0x00000002);
+      
       sessionId_ = 0;
     }
 
     public static final int MSG_ID_FIELD_NUMBER = 3;
     private int msgId_;
     /**
-     * <code>required uint32 msg_id = 3;</code>
-     */
-    public boolean hasMsgId() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    /**
-     * <code>required uint32 msg_id = 3;</code>
+     * <code>uint32 msg_id = 3;</code>
      */
     public int getMsgId() {
       return msgId_;
     }
     /**
-     * <code>required uint32 msg_id = 3;</code>
+     * <code>uint32 msg_id = 3;</code>
      */
     private void setMsgId(int value) {
-      bitField0_ |= 0x00000004;
+      
       msgId_ = value;
     }
     /**
-     * <code>required uint32 msg_id = 3;</code>
+     * <code>uint32 msg_id = 3;</code>
      */
     private void clearMsgId() {
-      bitField0_ = (bitField0_ & ~0x00000004);
+      
       msgId_ = 0;
     }
 
     public static final int SESSION_TYPE_FIELD_NUMBER = 4;
     private int sessionType_;
     /**
-     * <code>required .IM.BaseDefine.SessionType session_type = 4;</code>
+     * <code>.IM.BaseDefine.SessionType session_type = 4;</code>
      */
-    public boolean hasSessionType() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
+    public int getSessionTypeValue() {
+      return sessionType_;
     }
     /**
-     * <code>required .IM.BaseDefine.SessionType session_type = 4;</code>
+     * <code>.IM.BaseDefine.SessionType session_type = 4;</code>
      */
     public com.mogujie.tt.protobuf.IMBaseDefine.SessionType getSessionType() {
       com.mogujie.tt.protobuf.IMBaseDefine.SessionType result = com.mogujie.tt.protobuf.IMBaseDefine.SessionType.forNumber(sessionType_);
-      return result == null ? com.mogujie.tt.protobuf.IMBaseDefine.SessionType.SESSION_TYPE_SINGLE : result;
+      return result == null ? com.mogujie.tt.protobuf.IMBaseDefine.SessionType.UNRECOGNIZED : result;
     }
     /**
-     * <code>required .IM.BaseDefine.SessionType session_type = 4;</code>
+     * <code>.IM.BaseDefine.SessionType session_type = 4;</code>
+     */
+    private void setSessionTypeValue(int value) {
+        sessionType_ = value;
+    }
+    /**
+     * <code>.IM.BaseDefine.SessionType session_type = 4;</code>
      */
     private void setSessionType(com.mogujie.tt.protobuf.IMBaseDefine.SessionType value) {
       if (value == null) {
         throw new NullPointerException();
       }
-      bitField0_ |= 0x00000008;
+      
       sessionType_ = value.getNumber();
     }
     /**
-     * <code>required .IM.BaseDefine.SessionType session_type = 4;</code>
+     * <code>.IM.BaseDefine.SessionType session_type = 4;</code>
      */
     private void clearSessionType() {
-      bitField0_ = (bitField0_ & ~0x00000008);
-      sessionType_ = 1;
+      
+      sessionType_ = 0;
     }
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+      if (userId_ != 0) {
         output.writeUInt32(1, userId_);
       }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+      if (sessionId_ != 0) {
         output.writeUInt32(2, sessionId_);
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+      if (msgId_ != 0) {
         output.writeUInt32(3, msgId_);
       }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+      if (sessionType_ != com.mogujie.tt.protobuf.IMBaseDefine.SessionType.SESSION_TYPE_UNIVERSAL.getNumber()) {
         output.writeEnum(4, sessionType_);
       }
       unknownFields.writeTo(output);
@@ -1786,19 +1527,19 @@ public final class IMMessage {
       if (size != -1) return size;
 
       size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+      if (userId_ != 0) {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt32Size(1, userId_);
       }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+      if (sessionId_ != 0) {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt32Size(2, sessionId_);
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+      if (msgId_ != 0) {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt32Size(3, msgId_);
       }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+      if (sessionType_ != com.mogujie.tt.protobuf.IMBaseDefine.SessionType.SESSION_TYPE_UNIVERSAL.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(4, sessionType_);
       }
@@ -1907,17 +1648,7 @@ public final class IMMessage {
        *cmd id:		0x0303
        * </pre>
        *
-       * <code>required uint32 user_id = 1;</code>
-       */
-      public boolean hasUserId() {
-        return instance.hasUserId();
-      }
-      /**
-       * <pre>
-       *cmd id:		0x0303
-       * </pre>
-       *
-       * <code>required uint32 user_id = 1;</code>
+       * <code>uint32 user_id = 1;</code>
        */
       public int getUserId() {
         return instance.getUserId();
@@ -1927,7 +1658,7 @@ public final class IMMessage {
        *cmd id:		0x0303
        * </pre>
        *
-       * <code>required uint32 user_id = 1;</code>
+       * <code>uint32 user_id = 1;</code>
        */
       public Builder setUserId(int value) {
         copyOnWrite();
@@ -1939,7 +1670,7 @@ public final class IMMessage {
        *cmd id:		0x0303
        * </pre>
        *
-       * <code>required uint32 user_id = 1;</code>
+       * <code>uint32 user_id = 1;</code>
        */
       public Builder clearUserId() {
         copyOnWrite();
@@ -1948,19 +1679,13 @@ public final class IMMessage {
       }
 
       /**
-       * <code>required uint32 session_id = 2;</code>
-       */
-      public boolean hasSessionId() {
-        return instance.hasSessionId();
-      }
-      /**
-       * <code>required uint32 session_id = 2;</code>
+       * <code>uint32 session_id = 2;</code>
        */
       public int getSessionId() {
         return instance.getSessionId();
       }
       /**
-       * <code>required uint32 session_id = 2;</code>
+       * <code>uint32 session_id = 2;</code>
        */
       public Builder setSessionId(int value) {
         copyOnWrite();
@@ -1968,7 +1693,7 @@ public final class IMMessage {
         return this;
       }
       /**
-       * <code>required uint32 session_id = 2;</code>
+       * <code>uint32 session_id = 2;</code>
        */
       public Builder clearSessionId() {
         copyOnWrite();
@@ -1977,19 +1702,13 @@ public final class IMMessage {
       }
 
       /**
-       * <code>required uint32 msg_id = 3;</code>
-       */
-      public boolean hasMsgId() {
-        return instance.hasMsgId();
-      }
-      /**
-       * <code>required uint32 msg_id = 3;</code>
+       * <code>uint32 msg_id = 3;</code>
        */
       public int getMsgId() {
         return instance.getMsgId();
       }
       /**
-       * <code>required uint32 msg_id = 3;</code>
+       * <code>uint32 msg_id = 3;</code>
        */
       public Builder setMsgId(int value) {
         copyOnWrite();
@@ -1997,7 +1716,7 @@ public final class IMMessage {
         return this;
       }
       /**
-       * <code>required uint32 msg_id = 3;</code>
+       * <code>uint32 msg_id = 3;</code>
        */
       public Builder clearMsgId() {
         copyOnWrite();
@@ -2006,19 +1725,27 @@ public final class IMMessage {
       }
 
       /**
-       * <code>required .IM.BaseDefine.SessionType session_type = 4;</code>
+       * <code>.IM.BaseDefine.SessionType session_type = 4;</code>
        */
-      public boolean hasSessionType() {
-        return instance.hasSessionType();
+      public int getSessionTypeValue() {
+        return instance.getSessionTypeValue();
       }
       /**
-       * <code>required .IM.BaseDefine.SessionType session_type = 4;</code>
+       * <code>.IM.BaseDefine.SessionType session_type = 4;</code>
+       */
+      public Builder setSessionTypeValue(int value) {
+        copyOnWrite();
+        instance.setSessionTypeValue(value);
+        return this;
+      }
+      /**
+       * <code>.IM.BaseDefine.SessionType session_type = 4;</code>
        */
       public com.mogujie.tt.protobuf.IMBaseDefine.SessionType getSessionType() {
         return instance.getSessionType();
       }
       /**
-       * <code>required .IM.BaseDefine.SessionType session_type = 4;</code>
+       * <code>.IM.BaseDefine.SessionType session_type = 4;</code>
        */
       public Builder setSessionType(com.mogujie.tt.protobuf.IMBaseDefine.SessionType value) {
         copyOnWrite();
@@ -2026,7 +1753,7 @@ public final class IMMessage {
         return this;
       }
       /**
-       * <code>required .IM.BaseDefine.SessionType session_type = 4;</code>
+       * <code>.IM.BaseDefine.SessionType session_type = 4;</code>
        */
       public Builder clearSessionType() {
         copyOnWrite();
@@ -2036,7 +1763,6 @@ public final class IMMessage {
 
       // @@protoc_insertion_point(builder_scope:IM.Message.IMMsgDataReadAck)
     }
-    private byte memoizedIsInitialized = 2;
     @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
     protected final java.lang.Object dynamicMethod(
         com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
@@ -2046,25 +1772,7 @@ public final class IMMessage {
           return new com.mogujie.tt.protobuf.IMMessage.IMMsgDataReadAck();
         }
         case IS_INITIALIZED: {
-          byte isInitialized = memoizedIsInitialized;
-          if (isInitialized == 1) return DEFAULT_INSTANCE;
-          if (isInitialized == 0) return null;
-
-          boolean shouldMemoize = ((Boolean) arg0).booleanValue();
-          if (!hasUserId()) {
-            return null;
-          }
-          if (!hasSessionId()) {
-            return null;
-          }
-          if (!hasMsgId()) {
-            return null;
-          }
-          if (!hasSessionType()) {
-            return null;
-          }
           return DEFAULT_INSTANCE;
-
         }
         case MAKE_IMMUTABLE: {
           return null;
@@ -2075,20 +1783,15 @@ public final class IMMessage {
         case VISIT: {
           Visitor visitor = (Visitor) arg0;
           com.mogujie.tt.protobuf.IMMessage.IMMsgDataReadAck other = (com.mogujie.tt.protobuf.IMMessage.IMMsgDataReadAck) arg1;
-          userId_ = visitor.visitInt(
-              hasUserId(), userId_,
-              other.hasUserId(), other.userId_);
-          sessionId_ = visitor.visitInt(
-              hasSessionId(), sessionId_,
-              other.hasSessionId(), other.sessionId_);
-          msgId_ = visitor.visitInt(
-              hasMsgId(), msgId_,
-              other.hasMsgId(), other.msgId_);
-          sessionType_ = visitor.visitInt(hasSessionType(), sessionType_,
-              other.hasSessionType(), other.sessionType_);
+          userId_ = visitor.visitInt(userId_ != 0, userId_,
+              other.userId_ != 0, other.userId_);
+          sessionId_ = visitor.visitInt(sessionId_ != 0, sessionId_,
+              other.sessionId_ != 0, other.sessionId_);
+          msgId_ = visitor.visitInt(msgId_ != 0, msgId_,
+              other.msgId_ != 0, other.msgId_);
+          sessionType_ = visitor.visitInt(sessionType_ != 0, sessionType_,    other.sessionType_ != 0, other.sessionType_);
           if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
               .INSTANCE) {
-            bitField0_ |= other.bitField0_;
           }
           return this;
         }
@@ -2115,29 +1818,24 @@ public final class IMMessage {
                   break;
                 }
                 case 8: {
-                  bitField0_ |= 0x00000001;
+
                   userId_ = input.readUInt32();
                   break;
                 }
                 case 16: {
-                  bitField0_ |= 0x00000002;
+
                   sessionId_ = input.readUInt32();
                   break;
                 }
                 case 24: {
-                  bitField0_ |= 0x00000004;
+
                   msgId_ = input.readUInt32();
                   break;
                 }
                 case 32: {
                   int rawValue = input.readEnum();
-                  com.mogujie.tt.protobuf.IMBaseDefine.SessionType value = com.mogujie.tt.protobuf.IMBaseDefine.SessionType.forNumber(rawValue);
-                  if (value == null) {
-                    super.mergeVarintField(4, rawValue);
-                  } else {
-                    bitField0_ |= 0x00000008;
-                    sessionType_ = rawValue;
-                  }
+
+                  sessionType_ = rawValue;
                   break;
                 }
               }
@@ -2165,10 +1863,9 @@ public final class IMMessage {
           return PARSER;
       }
       case GET_MEMOIZED_IS_INITIALIZED: {
-        return memoizedIsInitialized;
+        return (byte) 1;
       }
       case SET_MEMOIZED_IS_INITIALIZED: {
-        memoizedIsInitialized = (byte) (arg0 == null ? 0 : 1);
         return null;
       }
       }
@@ -2203,42 +1900,26 @@ public final class IMMessage {
      *cmd id:		0x0304
      * </pre>
      *
-     * <code>required uint32 user_id = 1;</code>
-     */
-    boolean hasUserId();
-    /**
-     * <pre>
-     *cmd id:		0x0304
-     * </pre>
-     *
-     * <code>required uint32 user_id = 1;</code>
+     * <code>uint32 user_id = 1;</code>
      */
     int getUserId();
 
     /**
-     * <code>required uint32 session_id = 2;</code>
-     */
-    boolean hasSessionId();
-    /**
-     * <code>required uint32 session_id = 2;</code>
+     * <code>uint32 session_id = 2;</code>
      */
     int getSessionId();
 
     /**
-     * <code>required uint32 msg_id = 3;</code>
-     */
-    boolean hasMsgId();
-    /**
-     * <code>required uint32 msg_id = 3;</code>
+     * <code>uint32 msg_id = 3;</code>
      */
     int getMsgId();
 
     /**
-     * <code>required .IM.BaseDefine.SessionType session_type = 4;</code>
+     * <code>.IM.BaseDefine.SessionType session_type = 4;</code>
      */
-    boolean hasSessionType();
+    int getSessionTypeValue();
     /**
-     * <code>required .IM.BaseDefine.SessionType session_type = 4;</code>
+     * <code>.IM.BaseDefine.SessionType session_type = 4;</code>
      */
     com.mogujie.tt.protobuf.IMBaseDefine.SessionType getSessionType();
   }
@@ -2251,9 +1932,7 @@ public final class IMMessage {
       // @@protoc_insertion_point(message_implements:IM.Message.IMMsgDataReadNotify)
       IMMsgDataReadNotifyOrBuilder {
     private IMMsgDataReadNotify() {
-      sessionType_ = 1;
     }
-    private int bitField0_;
     public static final int USER_ID_FIELD_NUMBER = 1;
     private int userId_;
     /**
@@ -2261,17 +1940,7 @@ public final class IMMessage {
      *cmd id:		0x0304
      * </pre>
      *
-     * <code>required uint32 user_id = 1;</code>
-     */
-    public boolean hasUserId() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <pre>
-     *cmd id:		0x0304
-     * </pre>
-     *
-     * <code>required uint32 user_id = 1;</code>
+     * <code>uint32 user_id = 1;</code>
      */
     public int getUserId() {
       return userId_;
@@ -2281,10 +1950,10 @@ public final class IMMessage {
      *cmd id:		0x0304
      * </pre>
      *
-     * <code>required uint32 user_id = 1;</code>
+     * <code>uint32 user_id = 1;</code>
      */
     private void setUserId(int value) {
-      bitField0_ |= 0x00000001;
+      
       userId_ = value;
     }
     /**
@@ -2292,116 +1961,110 @@ public final class IMMessage {
      *cmd id:		0x0304
      * </pre>
      *
-     * <code>required uint32 user_id = 1;</code>
+     * <code>uint32 user_id = 1;</code>
      */
     private void clearUserId() {
-      bitField0_ = (bitField0_ & ~0x00000001);
+      
       userId_ = 0;
     }
 
     public static final int SESSION_ID_FIELD_NUMBER = 2;
     private int sessionId_;
     /**
-     * <code>required uint32 session_id = 2;</code>
-     */
-    public boolean hasSessionId() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <code>required uint32 session_id = 2;</code>
+     * <code>uint32 session_id = 2;</code>
      */
     public int getSessionId() {
       return sessionId_;
     }
     /**
-     * <code>required uint32 session_id = 2;</code>
+     * <code>uint32 session_id = 2;</code>
      */
     private void setSessionId(int value) {
-      bitField0_ |= 0x00000002;
+      
       sessionId_ = value;
     }
     /**
-     * <code>required uint32 session_id = 2;</code>
+     * <code>uint32 session_id = 2;</code>
      */
     private void clearSessionId() {
-      bitField0_ = (bitField0_ & ~0x00000002);
+      
       sessionId_ = 0;
     }
 
     public static final int MSG_ID_FIELD_NUMBER = 3;
     private int msgId_;
     /**
-     * <code>required uint32 msg_id = 3;</code>
-     */
-    public boolean hasMsgId() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    /**
-     * <code>required uint32 msg_id = 3;</code>
+     * <code>uint32 msg_id = 3;</code>
      */
     public int getMsgId() {
       return msgId_;
     }
     /**
-     * <code>required uint32 msg_id = 3;</code>
+     * <code>uint32 msg_id = 3;</code>
      */
     private void setMsgId(int value) {
-      bitField0_ |= 0x00000004;
+      
       msgId_ = value;
     }
     /**
-     * <code>required uint32 msg_id = 3;</code>
+     * <code>uint32 msg_id = 3;</code>
      */
     private void clearMsgId() {
-      bitField0_ = (bitField0_ & ~0x00000004);
+      
       msgId_ = 0;
     }
 
     public static final int SESSION_TYPE_FIELD_NUMBER = 4;
     private int sessionType_;
     /**
-     * <code>required .IM.BaseDefine.SessionType session_type = 4;</code>
+     * <code>.IM.BaseDefine.SessionType session_type = 4;</code>
      */
-    public boolean hasSessionType() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
+    public int getSessionTypeValue() {
+      return sessionType_;
     }
     /**
-     * <code>required .IM.BaseDefine.SessionType session_type = 4;</code>
+     * <code>.IM.BaseDefine.SessionType session_type = 4;</code>
      */
     public com.mogujie.tt.protobuf.IMBaseDefine.SessionType getSessionType() {
       com.mogujie.tt.protobuf.IMBaseDefine.SessionType result = com.mogujie.tt.protobuf.IMBaseDefine.SessionType.forNumber(sessionType_);
-      return result == null ? com.mogujie.tt.protobuf.IMBaseDefine.SessionType.SESSION_TYPE_SINGLE : result;
+      return result == null ? com.mogujie.tt.protobuf.IMBaseDefine.SessionType.UNRECOGNIZED : result;
     }
     /**
-     * <code>required .IM.BaseDefine.SessionType session_type = 4;</code>
+     * <code>.IM.BaseDefine.SessionType session_type = 4;</code>
+     */
+    private void setSessionTypeValue(int value) {
+        sessionType_ = value;
+    }
+    /**
+     * <code>.IM.BaseDefine.SessionType session_type = 4;</code>
      */
     private void setSessionType(com.mogujie.tt.protobuf.IMBaseDefine.SessionType value) {
       if (value == null) {
         throw new NullPointerException();
       }
-      bitField0_ |= 0x00000008;
+      
       sessionType_ = value.getNumber();
     }
     /**
-     * <code>required .IM.BaseDefine.SessionType session_type = 4;</code>
+     * <code>.IM.BaseDefine.SessionType session_type = 4;</code>
      */
     private void clearSessionType() {
-      bitField0_ = (bitField0_ & ~0x00000008);
-      sessionType_ = 1;
+      
+      sessionType_ = 0;
     }
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+      if (userId_ != 0) {
         output.writeUInt32(1, userId_);
       }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+      if (sessionId_ != 0) {
         output.writeUInt32(2, sessionId_);
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+      if (msgId_ != 0) {
         output.writeUInt32(3, msgId_);
       }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+      if (sessionType_ != com.mogujie.tt.protobuf.IMBaseDefine.SessionType.SESSION_TYPE_UNIVERSAL.getNumber()) {
         output.writeEnum(4, sessionType_);
       }
       unknownFields.writeTo(output);
@@ -2412,19 +2075,19 @@ public final class IMMessage {
       if (size != -1) return size;
 
       size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+      if (userId_ != 0) {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt32Size(1, userId_);
       }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+      if (sessionId_ != 0) {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt32Size(2, sessionId_);
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+      if (msgId_ != 0) {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt32Size(3, msgId_);
       }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+      if (sessionType_ != com.mogujie.tt.protobuf.IMBaseDefine.SessionType.SESSION_TYPE_UNIVERSAL.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(4, sessionType_);
       }
@@ -2533,17 +2196,7 @@ public final class IMMessage {
        *cmd id:		0x0304
        * </pre>
        *
-       * <code>required uint32 user_id = 1;</code>
-       */
-      public boolean hasUserId() {
-        return instance.hasUserId();
-      }
-      /**
-       * <pre>
-       *cmd id:		0x0304
-       * </pre>
-       *
-       * <code>required uint32 user_id = 1;</code>
+       * <code>uint32 user_id = 1;</code>
        */
       public int getUserId() {
         return instance.getUserId();
@@ -2553,7 +2206,7 @@ public final class IMMessage {
        *cmd id:		0x0304
        * </pre>
        *
-       * <code>required uint32 user_id = 1;</code>
+       * <code>uint32 user_id = 1;</code>
        */
       public Builder setUserId(int value) {
         copyOnWrite();
@@ -2565,7 +2218,7 @@ public final class IMMessage {
        *cmd id:		0x0304
        * </pre>
        *
-       * <code>required uint32 user_id = 1;</code>
+       * <code>uint32 user_id = 1;</code>
        */
       public Builder clearUserId() {
         copyOnWrite();
@@ -2574,19 +2227,13 @@ public final class IMMessage {
       }
 
       /**
-       * <code>required uint32 session_id = 2;</code>
-       */
-      public boolean hasSessionId() {
-        return instance.hasSessionId();
-      }
-      /**
-       * <code>required uint32 session_id = 2;</code>
+       * <code>uint32 session_id = 2;</code>
        */
       public int getSessionId() {
         return instance.getSessionId();
       }
       /**
-       * <code>required uint32 session_id = 2;</code>
+       * <code>uint32 session_id = 2;</code>
        */
       public Builder setSessionId(int value) {
         copyOnWrite();
@@ -2594,7 +2241,7 @@ public final class IMMessage {
         return this;
       }
       /**
-       * <code>required uint32 session_id = 2;</code>
+       * <code>uint32 session_id = 2;</code>
        */
       public Builder clearSessionId() {
         copyOnWrite();
@@ -2603,19 +2250,13 @@ public final class IMMessage {
       }
 
       /**
-       * <code>required uint32 msg_id = 3;</code>
-       */
-      public boolean hasMsgId() {
-        return instance.hasMsgId();
-      }
-      /**
-       * <code>required uint32 msg_id = 3;</code>
+       * <code>uint32 msg_id = 3;</code>
        */
       public int getMsgId() {
         return instance.getMsgId();
       }
       /**
-       * <code>required uint32 msg_id = 3;</code>
+       * <code>uint32 msg_id = 3;</code>
        */
       public Builder setMsgId(int value) {
         copyOnWrite();
@@ -2623,7 +2264,7 @@ public final class IMMessage {
         return this;
       }
       /**
-       * <code>required uint32 msg_id = 3;</code>
+       * <code>uint32 msg_id = 3;</code>
        */
       public Builder clearMsgId() {
         copyOnWrite();
@@ -2632,19 +2273,27 @@ public final class IMMessage {
       }
 
       /**
-       * <code>required .IM.BaseDefine.SessionType session_type = 4;</code>
+       * <code>.IM.BaseDefine.SessionType session_type = 4;</code>
        */
-      public boolean hasSessionType() {
-        return instance.hasSessionType();
+      public int getSessionTypeValue() {
+        return instance.getSessionTypeValue();
       }
       /**
-       * <code>required .IM.BaseDefine.SessionType session_type = 4;</code>
+       * <code>.IM.BaseDefine.SessionType session_type = 4;</code>
+       */
+      public Builder setSessionTypeValue(int value) {
+        copyOnWrite();
+        instance.setSessionTypeValue(value);
+        return this;
+      }
+      /**
+       * <code>.IM.BaseDefine.SessionType session_type = 4;</code>
        */
       public com.mogujie.tt.protobuf.IMBaseDefine.SessionType getSessionType() {
         return instance.getSessionType();
       }
       /**
-       * <code>required .IM.BaseDefine.SessionType session_type = 4;</code>
+       * <code>.IM.BaseDefine.SessionType session_type = 4;</code>
        */
       public Builder setSessionType(com.mogujie.tt.protobuf.IMBaseDefine.SessionType value) {
         copyOnWrite();
@@ -2652,7 +2301,7 @@ public final class IMMessage {
         return this;
       }
       /**
-       * <code>required .IM.BaseDefine.SessionType session_type = 4;</code>
+       * <code>.IM.BaseDefine.SessionType session_type = 4;</code>
        */
       public Builder clearSessionType() {
         copyOnWrite();
@@ -2662,7 +2311,6 @@ public final class IMMessage {
 
       // @@protoc_insertion_point(builder_scope:IM.Message.IMMsgDataReadNotify)
     }
-    private byte memoizedIsInitialized = 2;
     @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
     protected final java.lang.Object dynamicMethod(
         com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
@@ -2672,25 +2320,7 @@ public final class IMMessage {
           return new com.mogujie.tt.protobuf.IMMessage.IMMsgDataReadNotify();
         }
         case IS_INITIALIZED: {
-          byte isInitialized = memoizedIsInitialized;
-          if (isInitialized == 1) return DEFAULT_INSTANCE;
-          if (isInitialized == 0) return null;
-
-          boolean shouldMemoize = ((Boolean) arg0).booleanValue();
-          if (!hasUserId()) {
-            return null;
-          }
-          if (!hasSessionId()) {
-            return null;
-          }
-          if (!hasMsgId()) {
-            return null;
-          }
-          if (!hasSessionType()) {
-            return null;
-          }
           return DEFAULT_INSTANCE;
-
         }
         case MAKE_IMMUTABLE: {
           return null;
@@ -2701,20 +2331,15 @@ public final class IMMessage {
         case VISIT: {
           Visitor visitor = (Visitor) arg0;
           com.mogujie.tt.protobuf.IMMessage.IMMsgDataReadNotify other = (com.mogujie.tt.protobuf.IMMessage.IMMsgDataReadNotify) arg1;
-          userId_ = visitor.visitInt(
-              hasUserId(), userId_,
-              other.hasUserId(), other.userId_);
-          sessionId_ = visitor.visitInt(
-              hasSessionId(), sessionId_,
-              other.hasSessionId(), other.sessionId_);
-          msgId_ = visitor.visitInt(
-              hasMsgId(), msgId_,
-              other.hasMsgId(), other.msgId_);
-          sessionType_ = visitor.visitInt(hasSessionType(), sessionType_,
-              other.hasSessionType(), other.sessionType_);
+          userId_ = visitor.visitInt(userId_ != 0, userId_,
+              other.userId_ != 0, other.userId_);
+          sessionId_ = visitor.visitInt(sessionId_ != 0, sessionId_,
+              other.sessionId_ != 0, other.sessionId_);
+          msgId_ = visitor.visitInt(msgId_ != 0, msgId_,
+              other.msgId_ != 0, other.msgId_);
+          sessionType_ = visitor.visitInt(sessionType_ != 0, sessionType_,    other.sessionType_ != 0, other.sessionType_);
           if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
               .INSTANCE) {
-            bitField0_ |= other.bitField0_;
           }
           return this;
         }
@@ -2741,29 +2366,24 @@ public final class IMMessage {
                   break;
                 }
                 case 8: {
-                  bitField0_ |= 0x00000001;
+
                   userId_ = input.readUInt32();
                   break;
                 }
                 case 16: {
-                  bitField0_ |= 0x00000002;
+
                   sessionId_ = input.readUInt32();
                   break;
                 }
                 case 24: {
-                  bitField0_ |= 0x00000004;
+
                   msgId_ = input.readUInt32();
                   break;
                 }
                 case 32: {
                   int rawValue = input.readEnum();
-                  com.mogujie.tt.protobuf.IMBaseDefine.SessionType value = com.mogujie.tt.protobuf.IMBaseDefine.SessionType.forNumber(rawValue);
-                  if (value == null) {
-                    super.mergeVarintField(4, rawValue);
-                  } else {
-                    bitField0_ |= 0x00000008;
-                    sessionType_ = rawValue;
-                  }
+
+                  sessionType_ = rawValue;
                   break;
                 }
               }
@@ -2791,10 +2411,9 @@ public final class IMMessage {
           return PARSER;
       }
       case GET_MEMOIZED_IS_INITIALIZED: {
-        return memoizedIsInitialized;
+        return (byte) 1;
       }
       case SET_MEMOIZED_IS_INITIALIZED: {
-        memoizedIsInitialized = (byte) (arg0 == null ? 0 : 1);
         return null;
       }
       }
@@ -3063,15 +2682,7 @@ public final class IMMessage {
      *cmd id:		0x0306
      * </pre>
      *
-     * <code>required uint32 server_time = 1;</code>
-     */
-    boolean hasServerTime();
-    /**
-     * <pre>
-     *cmd id:		0x0306
-     * </pre>
-     *
-     * <code>required uint32 server_time = 1;</code>
+     * <code>uint32 server_time = 1;</code>
      */
     int getServerTime();
   }
@@ -3085,7 +2696,6 @@ public final class IMMessage {
       IMClientTimeRspOrBuilder {
     private IMClientTimeRsp() {
     }
-    private int bitField0_;
     public static final int SERVER_TIME_FIELD_NUMBER = 1;
     private int serverTime_;
     /**
@@ -3093,17 +2703,7 @@ public final class IMMessage {
      *cmd id:		0x0306
      * </pre>
      *
-     * <code>required uint32 server_time = 1;</code>
-     */
-    public boolean hasServerTime() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <pre>
-     *cmd id:		0x0306
-     * </pre>
-     *
-     * <code>required uint32 server_time = 1;</code>
+     * <code>uint32 server_time = 1;</code>
      */
     public int getServerTime() {
       return serverTime_;
@@ -3113,10 +2713,10 @@ public final class IMMessage {
      *cmd id:		0x0306
      * </pre>
      *
-     * <code>required uint32 server_time = 1;</code>
+     * <code>uint32 server_time = 1;</code>
      */
     private void setServerTime(int value) {
-      bitField0_ |= 0x00000001;
+      
       serverTime_ = value;
     }
     /**
@@ -3124,16 +2724,16 @@ public final class IMMessage {
      *cmd id:		0x0306
      * </pre>
      *
-     * <code>required uint32 server_time = 1;</code>
+     * <code>uint32 server_time = 1;</code>
      */
     private void clearServerTime() {
-      bitField0_ = (bitField0_ & ~0x00000001);
+      
       serverTime_ = 0;
     }
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+      if (serverTime_ != 0) {
         output.writeUInt32(1, serverTime_);
       }
       unknownFields.writeTo(output);
@@ -3144,7 +2744,7 @@ public final class IMMessage {
       if (size != -1) return size;
 
       size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+      if (serverTime_ != 0) {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt32Size(1, serverTime_);
       }
@@ -3253,17 +2853,7 @@ public final class IMMessage {
        *cmd id:		0x0306
        * </pre>
        *
-       * <code>required uint32 server_time = 1;</code>
-       */
-      public boolean hasServerTime() {
-        return instance.hasServerTime();
-      }
-      /**
-       * <pre>
-       *cmd id:		0x0306
-       * </pre>
-       *
-       * <code>required uint32 server_time = 1;</code>
+       * <code>uint32 server_time = 1;</code>
        */
       public int getServerTime() {
         return instance.getServerTime();
@@ -3273,7 +2863,7 @@ public final class IMMessage {
        *cmd id:		0x0306
        * </pre>
        *
-       * <code>required uint32 server_time = 1;</code>
+       * <code>uint32 server_time = 1;</code>
        */
       public Builder setServerTime(int value) {
         copyOnWrite();
@@ -3285,7 +2875,7 @@ public final class IMMessage {
        *cmd id:		0x0306
        * </pre>
        *
-       * <code>required uint32 server_time = 1;</code>
+       * <code>uint32 server_time = 1;</code>
        */
       public Builder clearServerTime() {
         copyOnWrite();
@@ -3295,7 +2885,6 @@ public final class IMMessage {
 
       // @@protoc_insertion_point(builder_scope:IM.Message.IMClientTimeRsp)
     }
-    private byte memoizedIsInitialized = 2;
     @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
     protected final java.lang.Object dynamicMethod(
         com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
@@ -3305,16 +2894,7 @@ public final class IMMessage {
           return new com.mogujie.tt.protobuf.IMMessage.IMClientTimeRsp();
         }
         case IS_INITIALIZED: {
-          byte isInitialized = memoizedIsInitialized;
-          if (isInitialized == 1) return DEFAULT_INSTANCE;
-          if (isInitialized == 0) return null;
-
-          boolean shouldMemoize = ((Boolean) arg0).booleanValue();
-          if (!hasServerTime()) {
-            return null;
-          }
           return DEFAULT_INSTANCE;
-
         }
         case MAKE_IMMUTABLE: {
           return null;
@@ -3325,12 +2905,10 @@ public final class IMMessage {
         case VISIT: {
           Visitor visitor = (Visitor) arg0;
           com.mogujie.tt.protobuf.IMMessage.IMClientTimeRsp other = (com.mogujie.tt.protobuf.IMMessage.IMClientTimeRsp) arg1;
-          serverTime_ = visitor.visitInt(
-              hasServerTime(), serverTime_,
-              other.hasServerTime(), other.serverTime_);
+          serverTime_ = visitor.visitInt(serverTime_ != 0, serverTime_,
+              other.serverTime_ != 0, other.serverTime_);
           if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
               .INSTANCE) {
-            bitField0_ |= other.bitField0_;
           }
           return this;
         }
@@ -3357,7 +2935,7 @@ public final class IMMessage {
                   break;
                 }
                 case 8: {
-                  bitField0_ |= 0x00000001;
+
                   serverTime_ = input.readUInt32();
                   break;
                 }
@@ -3386,10 +2964,9 @@ public final class IMMessage {
           return PARSER;
       }
       case GET_MEMOIZED_IS_INITIALIZED: {
-        return memoizedIsInitialized;
+        return (byte) 1;
       }
       case SET_MEMOIZED_IS_INITIALIZED: {
-        memoizedIsInitialized = (byte) (arg0 == null ? 0 : 1);
         return null;
       }
       }
@@ -3424,24 +3001,12 @@ public final class IMMessage {
      *cmd id:		0x0307
      * </pre>
      *
-     * <code>required uint32 user_id = 1;</code>
-     */
-    boolean hasUserId();
-    /**
-     * <pre>
-     *cmd id:		0x0307
-     * </pre>
-     *
-     * <code>required uint32 user_id = 1;</code>
+     * <code>uint32 user_id = 1;</code>
      */
     int getUserId();
 
     /**
-     * <code>optional bytes attach_data = 20;</code>
-     */
-    boolean hasAttachData();
-    /**
-     * <code>optional bytes attach_data = 20;</code>
+     * <code>bytes attach_data = 20;</code>
      */
     com.google.protobuf.ByteString getAttachData();
   }
@@ -3456,7 +3021,6 @@ public final class IMMessage {
     private IMUnreadMsgCntReq() {
       attachData_ = com.google.protobuf.ByteString.EMPTY;
     }
-    private int bitField0_;
     public static final int USER_ID_FIELD_NUMBER = 1;
     private int userId_;
     /**
@@ -3464,17 +3028,7 @@ public final class IMMessage {
      *cmd id:		0x0307
      * </pre>
      *
-     * <code>required uint32 user_id = 1;</code>
-     */
-    public boolean hasUserId() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <pre>
-     *cmd id:		0x0307
-     * </pre>
-     *
-     * <code>required uint32 user_id = 1;</code>
+     * <code>uint32 user_id = 1;</code>
      */
     public int getUserId() {
       return userId_;
@@ -3484,10 +3038,10 @@ public final class IMMessage {
      *cmd id:		0x0307
      * </pre>
      *
-     * <code>required uint32 user_id = 1;</code>
+     * <code>uint32 user_id = 1;</code>
      */
     private void setUserId(int value) {
-      bitField0_ |= 0x00000001;
+      
       userId_ = value;
     }
     /**
@@ -3495,51 +3049,45 @@ public final class IMMessage {
      *cmd id:		0x0307
      * </pre>
      *
-     * <code>required uint32 user_id = 1;</code>
+     * <code>uint32 user_id = 1;</code>
      */
     private void clearUserId() {
-      bitField0_ = (bitField0_ & ~0x00000001);
+      
       userId_ = 0;
     }
 
     public static final int ATTACH_DATA_FIELD_NUMBER = 20;
     private com.google.protobuf.ByteString attachData_;
     /**
-     * <code>optional bytes attach_data = 20;</code>
-     */
-    public boolean hasAttachData() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <code>optional bytes attach_data = 20;</code>
+     * <code>bytes attach_data = 20;</code>
      */
     public com.google.protobuf.ByteString getAttachData() {
       return attachData_;
     }
     /**
-     * <code>optional bytes attach_data = 20;</code>
+     * <code>bytes attach_data = 20;</code>
      */
     private void setAttachData(com.google.protobuf.ByteString value) {
       if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000002;
+  
       attachData_ = value;
     }
     /**
-     * <code>optional bytes attach_data = 20;</code>
+     * <code>bytes attach_data = 20;</code>
      */
     private void clearAttachData() {
-      bitField0_ = (bitField0_ & ~0x00000002);
+      
       attachData_ = getDefaultInstance().getAttachData();
     }
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+      if (userId_ != 0) {
         output.writeUInt32(1, userId_);
       }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+      if (!attachData_.isEmpty()) {
         output.writeBytes(20, attachData_);
       }
       unknownFields.writeTo(output);
@@ -3550,11 +3098,11 @@ public final class IMMessage {
       if (size != -1) return size;
 
       size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+      if (userId_ != 0) {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt32Size(1, userId_);
       }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+      if (!attachData_.isEmpty()) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(20, attachData_);
       }
@@ -3663,17 +3211,7 @@ public final class IMMessage {
        *cmd id:		0x0307
        * </pre>
        *
-       * <code>required uint32 user_id = 1;</code>
-       */
-      public boolean hasUserId() {
-        return instance.hasUserId();
-      }
-      /**
-       * <pre>
-       *cmd id:		0x0307
-       * </pre>
-       *
-       * <code>required uint32 user_id = 1;</code>
+       * <code>uint32 user_id = 1;</code>
        */
       public int getUserId() {
         return instance.getUserId();
@@ -3683,7 +3221,7 @@ public final class IMMessage {
        *cmd id:		0x0307
        * </pre>
        *
-       * <code>required uint32 user_id = 1;</code>
+       * <code>uint32 user_id = 1;</code>
        */
       public Builder setUserId(int value) {
         copyOnWrite();
@@ -3695,7 +3233,7 @@ public final class IMMessage {
        *cmd id:		0x0307
        * </pre>
        *
-       * <code>required uint32 user_id = 1;</code>
+       * <code>uint32 user_id = 1;</code>
        */
       public Builder clearUserId() {
         copyOnWrite();
@@ -3704,19 +3242,13 @@ public final class IMMessage {
       }
 
       /**
-       * <code>optional bytes attach_data = 20;</code>
-       */
-      public boolean hasAttachData() {
-        return instance.hasAttachData();
-      }
-      /**
-       * <code>optional bytes attach_data = 20;</code>
+       * <code>bytes attach_data = 20;</code>
        */
       public com.google.protobuf.ByteString getAttachData() {
         return instance.getAttachData();
       }
       /**
-       * <code>optional bytes attach_data = 20;</code>
+       * <code>bytes attach_data = 20;</code>
        */
       public Builder setAttachData(com.google.protobuf.ByteString value) {
         copyOnWrite();
@@ -3724,7 +3256,7 @@ public final class IMMessage {
         return this;
       }
       /**
-       * <code>optional bytes attach_data = 20;</code>
+       * <code>bytes attach_data = 20;</code>
        */
       public Builder clearAttachData() {
         copyOnWrite();
@@ -3734,7 +3266,6 @@ public final class IMMessage {
 
       // @@protoc_insertion_point(builder_scope:IM.Message.IMUnreadMsgCntReq)
     }
-    private byte memoizedIsInitialized = 2;
     @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
     protected final java.lang.Object dynamicMethod(
         com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
@@ -3744,16 +3275,7 @@ public final class IMMessage {
           return new com.mogujie.tt.protobuf.IMMessage.IMUnreadMsgCntReq();
         }
         case IS_INITIALIZED: {
-          byte isInitialized = memoizedIsInitialized;
-          if (isInitialized == 1) return DEFAULT_INSTANCE;
-          if (isInitialized == 0) return null;
-
-          boolean shouldMemoize = ((Boolean) arg0).booleanValue();
-          if (!hasUserId()) {
-            return null;
-          }
           return DEFAULT_INSTANCE;
-
         }
         case MAKE_IMMUTABLE: {
           return null;
@@ -3764,15 +3286,12 @@ public final class IMMessage {
         case VISIT: {
           Visitor visitor = (Visitor) arg0;
           com.mogujie.tt.protobuf.IMMessage.IMUnreadMsgCntReq other = (com.mogujie.tt.protobuf.IMMessage.IMUnreadMsgCntReq) arg1;
-          userId_ = visitor.visitInt(
-              hasUserId(), userId_,
-              other.hasUserId(), other.userId_);
-          attachData_ = visitor.visitByteString(
-              hasAttachData(), attachData_,
-              other.hasAttachData(), other.attachData_);
+          userId_ = visitor.visitInt(userId_ != 0, userId_,
+              other.userId_ != 0, other.userId_);
+          attachData_ = visitor.visitByteString(attachData_ != com.google.protobuf.ByteString.EMPTY, attachData_,
+              other.attachData_ != com.google.protobuf.ByteString.EMPTY, other.attachData_);
           if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
               .INSTANCE) {
-            bitField0_ |= other.bitField0_;
           }
           return this;
         }
@@ -3799,12 +3318,12 @@ public final class IMMessage {
                   break;
                 }
                 case 8: {
-                  bitField0_ |= 0x00000001;
+
                   userId_ = input.readUInt32();
                   break;
                 }
                 case 162: {
-                  bitField0_ |= 0x00000002;
+
                   attachData_ = input.readBytes();
                   break;
                 }
@@ -3833,10 +3352,9 @@ public final class IMMessage {
           return PARSER;
       }
       case GET_MEMOIZED_IS_INITIALIZED: {
-        return memoizedIsInitialized;
+        return (byte) 1;
       }
       case SET_MEMOIZED_IS_INITIALIZED: {
-        memoizedIsInitialized = (byte) (arg0 == null ? 0 : 1);
         return null;
       }
       }
@@ -3871,24 +3389,12 @@ public final class IMMessage {
      *cmd id:		0x0308
      * </pre>
      *
-     * <code>required uint32 user_id = 1;</code>
-     */
-    boolean hasUserId();
-    /**
-     * <pre>
-     *cmd id:		0x0308
-     * </pre>
-     *
-     * <code>required uint32 user_id = 1;</code>
+     * <code>uint32 user_id = 1;</code>
      */
     int getUserId();
 
     /**
-     * <code>required uint32 total_cnt = 2;</code>
-     */
-    boolean hasTotalCnt();
-    /**
-     * <code>required uint32 total_cnt = 2;</code>
+     * <code>uint32 total_cnt = 2;</code>
      */
     int getTotalCnt();
 
@@ -3907,11 +3413,7 @@ public final class IMMessage {
     int getUnreadinfoListCount();
 
     /**
-     * <code>optional bytes attach_data = 20;</code>
-     */
-    boolean hasAttachData();
-    /**
-     * <code>optional bytes attach_data = 20;</code>
+     * <code>bytes attach_data = 20;</code>
      */
     com.google.protobuf.ByteString getAttachData();
   }
@@ -3935,17 +3437,7 @@ public final class IMMessage {
      *cmd id:		0x0308
      * </pre>
      *
-     * <code>required uint32 user_id = 1;</code>
-     */
-    public boolean hasUserId() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <pre>
-     *cmd id:		0x0308
-     * </pre>
-     *
-     * <code>required uint32 user_id = 1;</code>
+     * <code>uint32 user_id = 1;</code>
      */
     public int getUserId() {
       return userId_;
@@ -3955,10 +3447,10 @@ public final class IMMessage {
      *cmd id:		0x0308
      * </pre>
      *
-     * <code>required uint32 user_id = 1;</code>
+     * <code>uint32 user_id = 1;</code>
      */
     private void setUserId(int value) {
-      bitField0_ |= 0x00000001;
+      
       userId_ = value;
     }
     /**
@@ -3966,39 +3458,33 @@ public final class IMMessage {
      *cmd id:		0x0308
      * </pre>
      *
-     * <code>required uint32 user_id = 1;</code>
+     * <code>uint32 user_id = 1;</code>
      */
     private void clearUserId() {
-      bitField0_ = (bitField0_ & ~0x00000001);
+      
       userId_ = 0;
     }
 
     public static final int TOTAL_CNT_FIELD_NUMBER = 2;
     private int totalCnt_;
     /**
-     * <code>required uint32 total_cnt = 2;</code>
-     */
-    public boolean hasTotalCnt() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <code>required uint32 total_cnt = 2;</code>
+     * <code>uint32 total_cnt = 2;</code>
      */
     public int getTotalCnt() {
       return totalCnt_;
     }
     /**
-     * <code>required uint32 total_cnt = 2;</code>
+     * <code>uint32 total_cnt = 2;</code>
      */
     private void setTotalCnt(int value) {
-      bitField0_ |= 0x00000002;
+      
       totalCnt_ = value;
     }
     /**
-     * <code>required uint32 total_cnt = 2;</code>
+     * <code>uint32 total_cnt = 2;</code>
      */
     private void clearTotalCnt() {
-      bitField0_ = (bitField0_ & ~0x00000002);
+      
       totalCnt_ = 0;
     }
 
@@ -4125,47 +3611,41 @@ public final class IMMessage {
     public static final int ATTACH_DATA_FIELD_NUMBER = 20;
     private com.google.protobuf.ByteString attachData_;
     /**
-     * <code>optional bytes attach_data = 20;</code>
-     */
-    public boolean hasAttachData() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    /**
-     * <code>optional bytes attach_data = 20;</code>
+     * <code>bytes attach_data = 20;</code>
      */
     public com.google.protobuf.ByteString getAttachData() {
       return attachData_;
     }
     /**
-     * <code>optional bytes attach_data = 20;</code>
+     * <code>bytes attach_data = 20;</code>
      */
     private void setAttachData(com.google.protobuf.ByteString value) {
       if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000004;
+  
       attachData_ = value;
     }
     /**
-     * <code>optional bytes attach_data = 20;</code>
+     * <code>bytes attach_data = 20;</code>
      */
     private void clearAttachData() {
-      bitField0_ = (bitField0_ & ~0x00000004);
+      
       attachData_ = getDefaultInstance().getAttachData();
     }
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+      if (userId_ != 0) {
         output.writeUInt32(1, userId_);
       }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+      if (totalCnt_ != 0) {
         output.writeUInt32(2, totalCnt_);
       }
       for (int i = 0; i < unreadinfoList_.size(); i++) {
         output.writeMessage(3, unreadinfoList_.get(i));
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+      if (!attachData_.isEmpty()) {
         output.writeBytes(20, attachData_);
       }
       unknownFields.writeTo(output);
@@ -4176,11 +3656,11 @@ public final class IMMessage {
       if (size != -1) return size;
 
       size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+      if (userId_ != 0) {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt32Size(1, userId_);
       }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+      if (totalCnt_ != 0) {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt32Size(2, totalCnt_);
       }
@@ -4188,7 +3668,7 @@ public final class IMMessage {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(3, unreadinfoList_.get(i));
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+      if (!attachData_.isEmpty()) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(20, attachData_);
       }
@@ -4297,17 +3777,7 @@ public final class IMMessage {
        *cmd id:		0x0308
        * </pre>
        *
-       * <code>required uint32 user_id = 1;</code>
-       */
-      public boolean hasUserId() {
-        return instance.hasUserId();
-      }
-      /**
-       * <pre>
-       *cmd id:		0x0308
-       * </pre>
-       *
-       * <code>required uint32 user_id = 1;</code>
+       * <code>uint32 user_id = 1;</code>
        */
       public int getUserId() {
         return instance.getUserId();
@@ -4317,7 +3787,7 @@ public final class IMMessage {
        *cmd id:		0x0308
        * </pre>
        *
-       * <code>required uint32 user_id = 1;</code>
+       * <code>uint32 user_id = 1;</code>
        */
       public Builder setUserId(int value) {
         copyOnWrite();
@@ -4329,7 +3799,7 @@ public final class IMMessage {
        *cmd id:		0x0308
        * </pre>
        *
-       * <code>required uint32 user_id = 1;</code>
+       * <code>uint32 user_id = 1;</code>
        */
       public Builder clearUserId() {
         copyOnWrite();
@@ -4338,19 +3808,13 @@ public final class IMMessage {
       }
 
       /**
-       * <code>required uint32 total_cnt = 2;</code>
-       */
-      public boolean hasTotalCnt() {
-        return instance.hasTotalCnt();
-      }
-      /**
-       * <code>required uint32 total_cnt = 2;</code>
+       * <code>uint32 total_cnt = 2;</code>
        */
       public int getTotalCnt() {
         return instance.getTotalCnt();
       }
       /**
-       * <code>required uint32 total_cnt = 2;</code>
+       * <code>uint32 total_cnt = 2;</code>
        */
       public Builder setTotalCnt(int value) {
         copyOnWrite();
@@ -4358,7 +3822,7 @@ public final class IMMessage {
         return this;
       }
       /**
-       * <code>required uint32 total_cnt = 2;</code>
+       * <code>uint32 total_cnt = 2;</code>
        */
       public Builder clearTotalCnt() {
         copyOnWrite();
@@ -4464,19 +3928,13 @@ public final class IMMessage {
       }
 
       /**
-       * <code>optional bytes attach_data = 20;</code>
-       */
-      public boolean hasAttachData() {
-        return instance.hasAttachData();
-      }
-      /**
-       * <code>optional bytes attach_data = 20;</code>
+       * <code>bytes attach_data = 20;</code>
        */
       public com.google.protobuf.ByteString getAttachData() {
         return instance.getAttachData();
       }
       /**
-       * <code>optional bytes attach_data = 20;</code>
+       * <code>bytes attach_data = 20;</code>
        */
       public Builder setAttachData(com.google.protobuf.ByteString value) {
         copyOnWrite();
@@ -4484,7 +3942,7 @@ public final class IMMessage {
         return this;
       }
       /**
-       * <code>optional bytes attach_data = 20;</code>
+       * <code>bytes attach_data = 20;</code>
        */
       public Builder clearAttachData() {
         copyOnWrite();
@@ -4494,7 +3952,6 @@ public final class IMMessage {
 
       // @@protoc_insertion_point(builder_scope:IM.Message.IMUnreadMsgCntRsp)
     }
-    private byte memoizedIsInitialized = 2;
     @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
     protected final java.lang.Object dynamicMethod(
         com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
@@ -4504,24 +3961,7 @@ public final class IMMessage {
           return new com.mogujie.tt.protobuf.IMMessage.IMUnreadMsgCntRsp();
         }
         case IS_INITIALIZED: {
-          byte isInitialized = memoizedIsInitialized;
-          if (isInitialized == 1) return DEFAULT_INSTANCE;
-          if (isInitialized == 0) return null;
-
-          boolean shouldMemoize = ((Boolean) arg0).booleanValue();
-          if (!hasUserId()) {
-            return null;
-          }
-          if (!hasTotalCnt()) {
-            return null;
-          }
-          for (int i = 0; i < getUnreadinfoListCount(); i++) {
-            if (!getUnreadinfoList(i).isInitialized()) {
-              return null;
-            }
-          }
           return DEFAULT_INSTANCE;
-
         }
         case MAKE_IMMUTABLE: {
           unreadinfoList_.makeImmutable();
@@ -4533,16 +3973,13 @@ public final class IMMessage {
         case VISIT: {
           Visitor visitor = (Visitor) arg0;
           com.mogujie.tt.protobuf.IMMessage.IMUnreadMsgCntRsp other = (com.mogujie.tt.protobuf.IMMessage.IMUnreadMsgCntRsp) arg1;
-          userId_ = visitor.visitInt(
-              hasUserId(), userId_,
-              other.hasUserId(), other.userId_);
-          totalCnt_ = visitor.visitInt(
-              hasTotalCnt(), totalCnt_,
-              other.hasTotalCnt(), other.totalCnt_);
+          userId_ = visitor.visitInt(userId_ != 0, userId_,
+              other.userId_ != 0, other.userId_);
+          totalCnt_ = visitor.visitInt(totalCnt_ != 0, totalCnt_,
+              other.totalCnt_ != 0, other.totalCnt_);
           unreadinfoList_= visitor.visitList(unreadinfoList_, other.unreadinfoList_);
-          attachData_ = visitor.visitByteString(
-              hasAttachData(), attachData_,
-              other.hasAttachData(), other.attachData_);
+          attachData_ = visitor.visitByteString(attachData_ != com.google.protobuf.ByteString.EMPTY, attachData_,
+              other.attachData_ != com.google.protobuf.ByteString.EMPTY, other.attachData_);
           if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
               .INSTANCE) {
             bitField0_ |= other.bitField0_;
@@ -4572,12 +4009,12 @@ public final class IMMessage {
                   break;
                 }
                 case 8: {
-                  bitField0_ |= 0x00000001;
+
                   userId_ = input.readUInt32();
                   break;
                 }
                 case 16: {
-                  bitField0_ |= 0x00000002;
+
                   totalCnt_ = input.readUInt32();
                   break;
                 }
@@ -4591,7 +4028,7 @@ public final class IMMessage {
                   break;
                 }
                 case 162: {
-                  bitField0_ |= 0x00000004;
+
                   attachData_ = input.readBytes();
                   break;
                 }
@@ -4620,10 +4057,9 @@ public final class IMMessage {
           return PARSER;
       }
       case GET_MEMOIZED_IS_INITIALIZED: {
-        return memoizedIsInitialized;
+        return (byte) 1;
       }
       case SET_MEMOIZED_IS_INITIALIZED: {
-        memoizedIsInitialized = (byte) (arg0 == null ? 0 : 1);
         return null;
       }
       }
@@ -4658,60 +4094,36 @@ public final class IMMessage {
      *cmd id:		0x0309
      * </pre>
      *
-     * <code>required uint32 user_id = 1;</code>
-     */
-    boolean hasUserId();
-    /**
-     * <pre>
-     *cmd id:		0x0309
-     * </pre>
-     *
-     * <code>required uint32 user_id = 1;</code>
+     * <code>uint32 user_id = 1;</code>
      */
     int getUserId();
 
     /**
-     * <code>required .IM.BaseDefine.SessionType session_type = 2;</code>
+     * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
      */
-    boolean hasSessionType();
+    int getSessionTypeValue();
     /**
-     * <code>required .IM.BaseDefine.SessionType session_type = 2;</code>
+     * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
      */
     com.mogujie.tt.protobuf.IMBaseDefine.SessionType getSessionType();
 
     /**
-     * <code>required uint32 session_id = 3;</code>
-     */
-    boolean hasSessionId();
-    /**
-     * <code>required uint32 session_id = 3;</code>
+     * <code>uint32 session_id = 3;</code>
      */
     int getSessionId();
 
     /**
-     * <code>required uint32 msg_id_begin = 4;</code>
-     */
-    boolean hasMsgIdBegin();
-    /**
-     * <code>required uint32 msg_id_begin = 4;</code>
+     * <code>uint32 msg_id_begin = 4;</code>
      */
     int getMsgIdBegin();
 
     /**
-     * <code>required uint32 msg_cnt = 5;</code>
-     */
-    boolean hasMsgCnt();
-    /**
-     * <code>required uint32 msg_cnt = 5;</code>
+     * <code>uint32 msg_cnt = 5;</code>
      */
     int getMsgCnt();
 
     /**
-     * <code>optional bytes attach_data = 20;</code>
-     */
-    boolean hasAttachData();
-    /**
-     * <code>optional bytes attach_data = 20;</code>
+     * <code>bytes attach_data = 20;</code>
      */
     com.google.protobuf.ByteString getAttachData();
   }
@@ -4724,10 +4136,8 @@ public final class IMMessage {
       // @@protoc_insertion_point(message_implements:IM.Message.IMGetMsgListReq)
       IMGetMsgListReqOrBuilder {
     private IMGetMsgListReq() {
-      sessionType_ = 1;
       attachData_ = com.google.protobuf.ByteString.EMPTY;
     }
-    private int bitField0_;
     public static final int USER_ID_FIELD_NUMBER = 1;
     private int userId_;
     /**
@@ -4735,17 +4145,7 @@ public final class IMMessage {
      *cmd id:		0x0309
      * </pre>
      *
-     * <code>required uint32 user_id = 1;</code>
-     */
-    public boolean hasUserId() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <pre>
-     *cmd id:		0x0309
-     * </pre>
-     *
-     * <code>required uint32 user_id = 1;</code>
+     * <code>uint32 user_id = 1;</code>
      */
     public int getUserId() {
       return userId_;
@@ -4755,10 +4155,10 @@ public final class IMMessage {
      *cmd id:		0x0309
      * </pre>
      *
-     * <code>required uint32 user_id = 1;</code>
+     * <code>uint32 user_id = 1;</code>
      */
     private void setUserId(int value) {
-      bitField0_ |= 0x00000001;
+      
       userId_ = value;
     }
     /**
@@ -4766,183 +4166,165 @@ public final class IMMessage {
      *cmd id:		0x0309
      * </pre>
      *
-     * <code>required uint32 user_id = 1;</code>
+     * <code>uint32 user_id = 1;</code>
      */
     private void clearUserId() {
-      bitField0_ = (bitField0_ & ~0x00000001);
+      
       userId_ = 0;
     }
 
     public static final int SESSION_TYPE_FIELD_NUMBER = 2;
     private int sessionType_;
     /**
-     * <code>required .IM.BaseDefine.SessionType session_type = 2;</code>
+     * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
      */
-    public boolean hasSessionType() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
+    public int getSessionTypeValue() {
+      return sessionType_;
     }
     /**
-     * <code>required .IM.BaseDefine.SessionType session_type = 2;</code>
+     * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
      */
     public com.mogujie.tt.protobuf.IMBaseDefine.SessionType getSessionType() {
       com.mogujie.tt.protobuf.IMBaseDefine.SessionType result = com.mogujie.tt.protobuf.IMBaseDefine.SessionType.forNumber(sessionType_);
-      return result == null ? com.mogujie.tt.protobuf.IMBaseDefine.SessionType.SESSION_TYPE_SINGLE : result;
+      return result == null ? com.mogujie.tt.protobuf.IMBaseDefine.SessionType.UNRECOGNIZED : result;
     }
     /**
-     * <code>required .IM.BaseDefine.SessionType session_type = 2;</code>
+     * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
+     */
+    private void setSessionTypeValue(int value) {
+        sessionType_ = value;
+    }
+    /**
+     * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
      */
     private void setSessionType(com.mogujie.tt.protobuf.IMBaseDefine.SessionType value) {
       if (value == null) {
         throw new NullPointerException();
       }
-      bitField0_ |= 0x00000002;
+      
       sessionType_ = value.getNumber();
     }
     /**
-     * <code>required .IM.BaseDefine.SessionType session_type = 2;</code>
+     * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
      */
     private void clearSessionType() {
-      bitField0_ = (bitField0_ & ~0x00000002);
-      sessionType_ = 1;
+      
+      sessionType_ = 0;
     }
 
     public static final int SESSION_ID_FIELD_NUMBER = 3;
     private int sessionId_;
     /**
-     * <code>required uint32 session_id = 3;</code>
-     */
-    public boolean hasSessionId() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    /**
-     * <code>required uint32 session_id = 3;</code>
+     * <code>uint32 session_id = 3;</code>
      */
     public int getSessionId() {
       return sessionId_;
     }
     /**
-     * <code>required uint32 session_id = 3;</code>
+     * <code>uint32 session_id = 3;</code>
      */
     private void setSessionId(int value) {
-      bitField0_ |= 0x00000004;
+      
       sessionId_ = value;
     }
     /**
-     * <code>required uint32 session_id = 3;</code>
+     * <code>uint32 session_id = 3;</code>
      */
     private void clearSessionId() {
-      bitField0_ = (bitField0_ & ~0x00000004);
+      
       sessionId_ = 0;
     }
 
     public static final int MSG_ID_BEGIN_FIELD_NUMBER = 4;
     private int msgIdBegin_;
     /**
-     * <code>required uint32 msg_id_begin = 4;</code>
-     */
-    public boolean hasMsgIdBegin() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
-    }
-    /**
-     * <code>required uint32 msg_id_begin = 4;</code>
+     * <code>uint32 msg_id_begin = 4;</code>
      */
     public int getMsgIdBegin() {
       return msgIdBegin_;
     }
     /**
-     * <code>required uint32 msg_id_begin = 4;</code>
+     * <code>uint32 msg_id_begin = 4;</code>
      */
     private void setMsgIdBegin(int value) {
-      bitField0_ |= 0x00000008;
+      
       msgIdBegin_ = value;
     }
     /**
-     * <code>required uint32 msg_id_begin = 4;</code>
+     * <code>uint32 msg_id_begin = 4;</code>
      */
     private void clearMsgIdBegin() {
-      bitField0_ = (bitField0_ & ~0x00000008);
+      
       msgIdBegin_ = 0;
     }
 
     public static final int MSG_CNT_FIELD_NUMBER = 5;
     private int msgCnt_;
     /**
-     * <code>required uint32 msg_cnt = 5;</code>
-     */
-    public boolean hasMsgCnt() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
-    }
-    /**
-     * <code>required uint32 msg_cnt = 5;</code>
+     * <code>uint32 msg_cnt = 5;</code>
      */
     public int getMsgCnt() {
       return msgCnt_;
     }
     /**
-     * <code>required uint32 msg_cnt = 5;</code>
+     * <code>uint32 msg_cnt = 5;</code>
      */
     private void setMsgCnt(int value) {
-      bitField0_ |= 0x00000010;
+      
       msgCnt_ = value;
     }
     /**
-     * <code>required uint32 msg_cnt = 5;</code>
+     * <code>uint32 msg_cnt = 5;</code>
      */
     private void clearMsgCnt() {
-      bitField0_ = (bitField0_ & ~0x00000010);
+      
       msgCnt_ = 0;
     }
 
     public static final int ATTACH_DATA_FIELD_NUMBER = 20;
     private com.google.protobuf.ByteString attachData_;
     /**
-     * <code>optional bytes attach_data = 20;</code>
-     */
-    public boolean hasAttachData() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
-    }
-    /**
-     * <code>optional bytes attach_data = 20;</code>
+     * <code>bytes attach_data = 20;</code>
      */
     public com.google.protobuf.ByteString getAttachData() {
       return attachData_;
     }
     /**
-     * <code>optional bytes attach_data = 20;</code>
+     * <code>bytes attach_data = 20;</code>
      */
     private void setAttachData(com.google.protobuf.ByteString value) {
       if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000020;
+  
       attachData_ = value;
     }
     /**
-     * <code>optional bytes attach_data = 20;</code>
+     * <code>bytes attach_data = 20;</code>
      */
     private void clearAttachData() {
-      bitField0_ = (bitField0_ & ~0x00000020);
+      
       attachData_ = getDefaultInstance().getAttachData();
     }
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+      if (userId_ != 0) {
         output.writeUInt32(1, userId_);
       }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+      if (sessionType_ != com.mogujie.tt.protobuf.IMBaseDefine.SessionType.SESSION_TYPE_UNIVERSAL.getNumber()) {
         output.writeEnum(2, sessionType_);
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+      if (sessionId_ != 0) {
         output.writeUInt32(3, sessionId_);
       }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+      if (msgIdBegin_ != 0) {
         output.writeUInt32(4, msgIdBegin_);
       }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+      if (msgCnt_ != 0) {
         output.writeUInt32(5, msgCnt_);
       }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+      if (!attachData_.isEmpty()) {
         output.writeBytes(20, attachData_);
       }
       unknownFields.writeTo(output);
@@ -4953,27 +4335,27 @@ public final class IMMessage {
       if (size != -1) return size;
 
       size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+      if (userId_ != 0) {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt32Size(1, userId_);
       }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+      if (sessionType_ != com.mogujie.tt.protobuf.IMBaseDefine.SessionType.SESSION_TYPE_UNIVERSAL.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(2, sessionType_);
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+      if (sessionId_ != 0) {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt32Size(3, sessionId_);
       }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+      if (msgIdBegin_ != 0) {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt32Size(4, msgIdBegin_);
       }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+      if (msgCnt_ != 0) {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt32Size(5, msgCnt_);
       }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+      if (!attachData_.isEmpty()) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(20, attachData_);
       }
@@ -5082,17 +4464,7 @@ public final class IMMessage {
        *cmd id:		0x0309
        * </pre>
        *
-       * <code>required uint32 user_id = 1;</code>
-       */
-      public boolean hasUserId() {
-        return instance.hasUserId();
-      }
-      /**
-       * <pre>
-       *cmd id:		0x0309
-       * </pre>
-       *
-       * <code>required uint32 user_id = 1;</code>
+       * <code>uint32 user_id = 1;</code>
        */
       public int getUserId() {
         return instance.getUserId();
@@ -5102,7 +4474,7 @@ public final class IMMessage {
        *cmd id:		0x0309
        * </pre>
        *
-       * <code>required uint32 user_id = 1;</code>
+       * <code>uint32 user_id = 1;</code>
        */
       public Builder setUserId(int value) {
         copyOnWrite();
@@ -5114,7 +4486,7 @@ public final class IMMessage {
        *cmd id:		0x0309
        * </pre>
        *
-       * <code>required uint32 user_id = 1;</code>
+       * <code>uint32 user_id = 1;</code>
        */
       public Builder clearUserId() {
         copyOnWrite();
@@ -5123,19 +4495,27 @@ public final class IMMessage {
       }
 
       /**
-       * <code>required .IM.BaseDefine.SessionType session_type = 2;</code>
+       * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
        */
-      public boolean hasSessionType() {
-        return instance.hasSessionType();
+      public int getSessionTypeValue() {
+        return instance.getSessionTypeValue();
       }
       /**
-       * <code>required .IM.BaseDefine.SessionType session_type = 2;</code>
+       * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
+       */
+      public Builder setSessionTypeValue(int value) {
+        copyOnWrite();
+        instance.setSessionTypeValue(value);
+        return this;
+      }
+      /**
+       * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
        */
       public com.mogujie.tt.protobuf.IMBaseDefine.SessionType getSessionType() {
         return instance.getSessionType();
       }
       /**
-       * <code>required .IM.BaseDefine.SessionType session_type = 2;</code>
+       * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
        */
       public Builder setSessionType(com.mogujie.tt.protobuf.IMBaseDefine.SessionType value) {
         copyOnWrite();
@@ -5143,7 +4523,7 @@ public final class IMMessage {
         return this;
       }
       /**
-       * <code>required .IM.BaseDefine.SessionType session_type = 2;</code>
+       * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
        */
       public Builder clearSessionType() {
         copyOnWrite();
@@ -5152,19 +4532,13 @@ public final class IMMessage {
       }
 
       /**
-       * <code>required uint32 session_id = 3;</code>
-       */
-      public boolean hasSessionId() {
-        return instance.hasSessionId();
-      }
-      /**
-       * <code>required uint32 session_id = 3;</code>
+       * <code>uint32 session_id = 3;</code>
        */
       public int getSessionId() {
         return instance.getSessionId();
       }
       /**
-       * <code>required uint32 session_id = 3;</code>
+       * <code>uint32 session_id = 3;</code>
        */
       public Builder setSessionId(int value) {
         copyOnWrite();
@@ -5172,7 +4546,7 @@ public final class IMMessage {
         return this;
       }
       /**
-       * <code>required uint32 session_id = 3;</code>
+       * <code>uint32 session_id = 3;</code>
        */
       public Builder clearSessionId() {
         copyOnWrite();
@@ -5181,19 +4555,13 @@ public final class IMMessage {
       }
 
       /**
-       * <code>required uint32 msg_id_begin = 4;</code>
-       */
-      public boolean hasMsgIdBegin() {
-        return instance.hasMsgIdBegin();
-      }
-      /**
-       * <code>required uint32 msg_id_begin = 4;</code>
+       * <code>uint32 msg_id_begin = 4;</code>
        */
       public int getMsgIdBegin() {
         return instance.getMsgIdBegin();
       }
       /**
-       * <code>required uint32 msg_id_begin = 4;</code>
+       * <code>uint32 msg_id_begin = 4;</code>
        */
       public Builder setMsgIdBegin(int value) {
         copyOnWrite();
@@ -5201,7 +4569,7 @@ public final class IMMessage {
         return this;
       }
       /**
-       * <code>required uint32 msg_id_begin = 4;</code>
+       * <code>uint32 msg_id_begin = 4;</code>
        */
       public Builder clearMsgIdBegin() {
         copyOnWrite();
@@ -5210,19 +4578,13 @@ public final class IMMessage {
       }
 
       /**
-       * <code>required uint32 msg_cnt = 5;</code>
-       */
-      public boolean hasMsgCnt() {
-        return instance.hasMsgCnt();
-      }
-      /**
-       * <code>required uint32 msg_cnt = 5;</code>
+       * <code>uint32 msg_cnt = 5;</code>
        */
       public int getMsgCnt() {
         return instance.getMsgCnt();
       }
       /**
-       * <code>required uint32 msg_cnt = 5;</code>
+       * <code>uint32 msg_cnt = 5;</code>
        */
       public Builder setMsgCnt(int value) {
         copyOnWrite();
@@ -5230,7 +4592,7 @@ public final class IMMessage {
         return this;
       }
       /**
-       * <code>required uint32 msg_cnt = 5;</code>
+       * <code>uint32 msg_cnt = 5;</code>
        */
       public Builder clearMsgCnt() {
         copyOnWrite();
@@ -5239,19 +4601,13 @@ public final class IMMessage {
       }
 
       /**
-       * <code>optional bytes attach_data = 20;</code>
-       */
-      public boolean hasAttachData() {
-        return instance.hasAttachData();
-      }
-      /**
-       * <code>optional bytes attach_data = 20;</code>
+       * <code>bytes attach_data = 20;</code>
        */
       public com.google.protobuf.ByteString getAttachData() {
         return instance.getAttachData();
       }
       /**
-       * <code>optional bytes attach_data = 20;</code>
+       * <code>bytes attach_data = 20;</code>
        */
       public Builder setAttachData(com.google.protobuf.ByteString value) {
         copyOnWrite();
@@ -5259,7 +4615,7 @@ public final class IMMessage {
         return this;
       }
       /**
-       * <code>optional bytes attach_data = 20;</code>
+       * <code>bytes attach_data = 20;</code>
        */
       public Builder clearAttachData() {
         copyOnWrite();
@@ -5269,7 +4625,6 @@ public final class IMMessage {
 
       // @@protoc_insertion_point(builder_scope:IM.Message.IMGetMsgListReq)
     }
-    private byte memoizedIsInitialized = 2;
     @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
     protected final java.lang.Object dynamicMethod(
         com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
@@ -5279,28 +4634,7 @@ public final class IMMessage {
           return new com.mogujie.tt.protobuf.IMMessage.IMGetMsgListReq();
         }
         case IS_INITIALIZED: {
-          byte isInitialized = memoizedIsInitialized;
-          if (isInitialized == 1) return DEFAULT_INSTANCE;
-          if (isInitialized == 0) return null;
-
-          boolean shouldMemoize = ((Boolean) arg0).booleanValue();
-          if (!hasUserId()) {
-            return null;
-          }
-          if (!hasSessionType()) {
-            return null;
-          }
-          if (!hasSessionId()) {
-            return null;
-          }
-          if (!hasMsgIdBegin()) {
-            return null;
-          }
-          if (!hasMsgCnt()) {
-            return null;
-          }
           return DEFAULT_INSTANCE;
-
         }
         case MAKE_IMMUTABLE: {
           return null;
@@ -5311,26 +4645,19 @@ public final class IMMessage {
         case VISIT: {
           Visitor visitor = (Visitor) arg0;
           com.mogujie.tt.protobuf.IMMessage.IMGetMsgListReq other = (com.mogujie.tt.protobuf.IMMessage.IMGetMsgListReq) arg1;
-          userId_ = visitor.visitInt(
-              hasUserId(), userId_,
-              other.hasUserId(), other.userId_);
-          sessionType_ = visitor.visitInt(hasSessionType(), sessionType_,
-              other.hasSessionType(), other.sessionType_);
-          sessionId_ = visitor.visitInt(
-              hasSessionId(), sessionId_,
-              other.hasSessionId(), other.sessionId_);
-          msgIdBegin_ = visitor.visitInt(
-              hasMsgIdBegin(), msgIdBegin_,
-              other.hasMsgIdBegin(), other.msgIdBegin_);
-          msgCnt_ = visitor.visitInt(
-              hasMsgCnt(), msgCnt_,
-              other.hasMsgCnt(), other.msgCnt_);
-          attachData_ = visitor.visitByteString(
-              hasAttachData(), attachData_,
-              other.hasAttachData(), other.attachData_);
+          userId_ = visitor.visitInt(userId_ != 0, userId_,
+              other.userId_ != 0, other.userId_);
+          sessionType_ = visitor.visitInt(sessionType_ != 0, sessionType_,    other.sessionType_ != 0, other.sessionType_);
+          sessionId_ = visitor.visitInt(sessionId_ != 0, sessionId_,
+              other.sessionId_ != 0, other.sessionId_);
+          msgIdBegin_ = visitor.visitInt(msgIdBegin_ != 0, msgIdBegin_,
+              other.msgIdBegin_ != 0, other.msgIdBegin_);
+          msgCnt_ = visitor.visitInt(msgCnt_ != 0, msgCnt_,
+              other.msgCnt_ != 0, other.msgCnt_);
+          attachData_ = visitor.visitByteString(attachData_ != com.google.protobuf.ByteString.EMPTY, attachData_,
+              other.attachData_ != com.google.protobuf.ByteString.EMPTY, other.attachData_);
           if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
               .INSTANCE) {
-            bitField0_ |= other.bitField0_;
           }
           return this;
         }
@@ -5357,38 +4684,33 @@ public final class IMMessage {
                   break;
                 }
                 case 8: {
-                  bitField0_ |= 0x00000001;
+
                   userId_ = input.readUInt32();
                   break;
                 }
                 case 16: {
                   int rawValue = input.readEnum();
-                  com.mogujie.tt.protobuf.IMBaseDefine.SessionType value = com.mogujie.tt.protobuf.IMBaseDefine.SessionType.forNumber(rawValue);
-                  if (value == null) {
-                    super.mergeVarintField(2, rawValue);
-                  } else {
-                    bitField0_ |= 0x00000002;
-                    sessionType_ = rawValue;
-                  }
+
+                  sessionType_ = rawValue;
                   break;
                 }
                 case 24: {
-                  bitField0_ |= 0x00000004;
+
                   sessionId_ = input.readUInt32();
                   break;
                 }
                 case 32: {
-                  bitField0_ |= 0x00000008;
+
                   msgIdBegin_ = input.readUInt32();
                   break;
                 }
                 case 40: {
-                  bitField0_ |= 0x00000010;
+
                   msgCnt_ = input.readUInt32();
                   break;
                 }
                 case 162: {
-                  bitField0_ |= 0x00000020;
+
                   attachData_ = input.readBytes();
                   break;
                 }
@@ -5417,10 +4739,9 @@ public final class IMMessage {
           return PARSER;
       }
       case GET_MEMOIZED_IS_INITIALIZED: {
-        return memoizedIsInitialized;
+        return (byte) 1;
       }
       case SET_MEMOIZED_IS_INITIALIZED: {
-        memoizedIsInitialized = (byte) (arg0 == null ? 0 : 1);
         return null;
       }
       }
@@ -5455,42 +4776,26 @@ public final class IMMessage {
      *cmd id:		0x030a
      * </pre>
      *
-     * <code>required uint32 user_id = 1;</code>
-     */
-    boolean hasUserId();
-    /**
-     * <pre>
-     *cmd id:		0x030a
-     * </pre>
-     *
-     * <code>required uint32 user_id = 1;</code>
+     * <code>uint32 user_id = 1;</code>
      */
     int getUserId();
 
     /**
-     * <code>required .IM.BaseDefine.SessionType session_type = 2;</code>
+     * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
      */
-    boolean hasSessionType();
+    int getSessionTypeValue();
     /**
-     * <code>required .IM.BaseDefine.SessionType session_type = 2;</code>
+     * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
      */
     com.mogujie.tt.protobuf.IMBaseDefine.SessionType getSessionType();
 
     /**
-     * <code>required uint32 session_id = 3;</code>
-     */
-    boolean hasSessionId();
-    /**
-     * <code>required uint32 session_id = 3;</code>
+     * <code>uint32 session_id = 3;</code>
      */
     int getSessionId();
 
     /**
-     * <code>required uint32 msg_id_begin = 4;</code>
-     */
-    boolean hasMsgIdBegin();
-    /**
-     * <code>required uint32 msg_id_begin = 4;</code>
+     * <code>uint32 msg_id_begin = 4;</code>
      */
     int getMsgIdBegin();
 
@@ -5509,11 +4814,7 @@ public final class IMMessage {
     int getMsgListCount();
 
     /**
-     * <code>optional bytes attach_data = 20;</code>
-     */
-    boolean hasAttachData();
-    /**
-     * <code>optional bytes attach_data = 20;</code>
+     * <code>bytes attach_data = 20;</code>
      */
     com.google.protobuf.ByteString getAttachData();
   }
@@ -5532,7 +4833,6 @@ public final class IMMessage {
       // @@protoc_insertion_point(message_implements:IM.Message.IMGetMsgListRsp)
       IMGetMsgListRspOrBuilder {
     private IMGetMsgListRsp() {
-      sessionType_ = 1;
       msgList_ = emptyProtobufList();
       attachData_ = com.google.protobuf.ByteString.EMPTY;
     }
@@ -5544,17 +4844,7 @@ public final class IMMessage {
      *cmd id:		0x030a
      * </pre>
      *
-     * <code>required uint32 user_id = 1;</code>
-     */
-    public boolean hasUserId() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <pre>
-     *cmd id:		0x030a
-     * </pre>
-     *
-     * <code>required uint32 user_id = 1;</code>
+     * <code>uint32 user_id = 1;</code>
      */
     public int getUserId() {
       return userId_;
@@ -5564,10 +4854,10 @@ public final class IMMessage {
      *cmd id:		0x030a
      * </pre>
      *
-     * <code>required uint32 user_id = 1;</code>
+     * <code>uint32 user_id = 1;</code>
      */
     private void setUserId(int value) {
-      bitField0_ |= 0x00000001;
+      
       userId_ = value;
     }
     /**
@@ -5575,101 +4865,95 @@ public final class IMMessage {
      *cmd id:		0x030a
      * </pre>
      *
-     * <code>required uint32 user_id = 1;</code>
+     * <code>uint32 user_id = 1;</code>
      */
     private void clearUserId() {
-      bitField0_ = (bitField0_ & ~0x00000001);
+      
       userId_ = 0;
     }
 
     public static final int SESSION_TYPE_FIELD_NUMBER = 2;
     private int sessionType_;
     /**
-     * <code>required .IM.BaseDefine.SessionType session_type = 2;</code>
+     * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
      */
-    public boolean hasSessionType() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
+    public int getSessionTypeValue() {
+      return sessionType_;
     }
     /**
-     * <code>required .IM.BaseDefine.SessionType session_type = 2;</code>
+     * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
      */
     public com.mogujie.tt.protobuf.IMBaseDefine.SessionType getSessionType() {
       com.mogujie.tt.protobuf.IMBaseDefine.SessionType result = com.mogujie.tt.protobuf.IMBaseDefine.SessionType.forNumber(sessionType_);
-      return result == null ? com.mogujie.tt.protobuf.IMBaseDefine.SessionType.SESSION_TYPE_SINGLE : result;
+      return result == null ? com.mogujie.tt.protobuf.IMBaseDefine.SessionType.UNRECOGNIZED : result;
     }
     /**
-     * <code>required .IM.BaseDefine.SessionType session_type = 2;</code>
+     * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
+     */
+    private void setSessionTypeValue(int value) {
+        sessionType_ = value;
+    }
+    /**
+     * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
      */
     private void setSessionType(com.mogujie.tt.protobuf.IMBaseDefine.SessionType value) {
       if (value == null) {
         throw new NullPointerException();
       }
-      bitField0_ |= 0x00000002;
+      
       sessionType_ = value.getNumber();
     }
     /**
-     * <code>required .IM.BaseDefine.SessionType session_type = 2;</code>
+     * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
      */
     private void clearSessionType() {
-      bitField0_ = (bitField0_ & ~0x00000002);
-      sessionType_ = 1;
+      
+      sessionType_ = 0;
     }
 
     public static final int SESSION_ID_FIELD_NUMBER = 3;
     private int sessionId_;
     /**
-     * <code>required uint32 session_id = 3;</code>
-     */
-    public boolean hasSessionId() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    /**
-     * <code>required uint32 session_id = 3;</code>
+     * <code>uint32 session_id = 3;</code>
      */
     public int getSessionId() {
       return sessionId_;
     }
     /**
-     * <code>required uint32 session_id = 3;</code>
+     * <code>uint32 session_id = 3;</code>
      */
     private void setSessionId(int value) {
-      bitField0_ |= 0x00000004;
+      
       sessionId_ = value;
     }
     /**
-     * <code>required uint32 session_id = 3;</code>
+     * <code>uint32 session_id = 3;</code>
      */
     private void clearSessionId() {
-      bitField0_ = (bitField0_ & ~0x00000004);
+      
       sessionId_ = 0;
     }
 
     public static final int MSG_ID_BEGIN_FIELD_NUMBER = 4;
     private int msgIdBegin_;
     /**
-     * <code>required uint32 msg_id_begin = 4;</code>
-     */
-    public boolean hasMsgIdBegin() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
-    }
-    /**
-     * <code>required uint32 msg_id_begin = 4;</code>
+     * <code>uint32 msg_id_begin = 4;</code>
      */
     public int getMsgIdBegin() {
       return msgIdBegin_;
     }
     /**
-     * <code>required uint32 msg_id_begin = 4;</code>
+     * <code>uint32 msg_id_begin = 4;</code>
      */
     private void setMsgIdBegin(int value) {
-      bitField0_ |= 0x00000008;
+      
       msgIdBegin_ = value;
     }
     /**
-     * <code>required uint32 msg_id_begin = 4;</code>
+     * <code>uint32 msg_id_begin = 4;</code>
      */
     private void clearMsgIdBegin() {
-      bitField0_ = (bitField0_ & ~0x00000008);
+      
       msgIdBegin_ = 0;
     }
 
@@ -5796,53 +5080,47 @@ public final class IMMessage {
     public static final int ATTACH_DATA_FIELD_NUMBER = 20;
     private com.google.protobuf.ByteString attachData_;
     /**
-     * <code>optional bytes attach_data = 20;</code>
-     */
-    public boolean hasAttachData() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
-    }
-    /**
-     * <code>optional bytes attach_data = 20;</code>
+     * <code>bytes attach_data = 20;</code>
      */
     public com.google.protobuf.ByteString getAttachData() {
       return attachData_;
     }
     /**
-     * <code>optional bytes attach_data = 20;</code>
+     * <code>bytes attach_data = 20;</code>
      */
     private void setAttachData(com.google.protobuf.ByteString value) {
       if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000010;
+  
       attachData_ = value;
     }
     /**
-     * <code>optional bytes attach_data = 20;</code>
+     * <code>bytes attach_data = 20;</code>
      */
     private void clearAttachData() {
-      bitField0_ = (bitField0_ & ~0x00000010);
+      
       attachData_ = getDefaultInstance().getAttachData();
     }
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+      if (userId_ != 0) {
         output.writeUInt32(1, userId_);
       }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+      if (sessionType_ != com.mogujie.tt.protobuf.IMBaseDefine.SessionType.SESSION_TYPE_UNIVERSAL.getNumber()) {
         output.writeEnum(2, sessionType_);
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+      if (sessionId_ != 0) {
         output.writeUInt32(3, sessionId_);
       }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+      if (msgIdBegin_ != 0) {
         output.writeUInt32(4, msgIdBegin_);
       }
       for (int i = 0; i < msgList_.size(); i++) {
         output.writeMessage(5, msgList_.get(i));
       }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+      if (!attachData_.isEmpty()) {
         output.writeBytes(20, attachData_);
       }
       unknownFields.writeTo(output);
@@ -5853,19 +5131,19 @@ public final class IMMessage {
       if (size != -1) return size;
 
       size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+      if (userId_ != 0) {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt32Size(1, userId_);
       }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+      if (sessionType_ != com.mogujie.tt.protobuf.IMBaseDefine.SessionType.SESSION_TYPE_UNIVERSAL.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(2, sessionType_);
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+      if (sessionId_ != 0) {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt32Size(3, sessionId_);
       }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+      if (msgIdBegin_ != 0) {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt32Size(4, msgIdBegin_);
       }
@@ -5873,7 +5151,7 @@ public final class IMMessage {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(5, msgList_.get(i));
       }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+      if (!attachData_.isEmpty()) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(20, attachData_);
       }
@@ -5988,17 +5266,7 @@ public final class IMMessage {
        *cmd id:		0x030a
        * </pre>
        *
-       * <code>required uint32 user_id = 1;</code>
-       */
-      public boolean hasUserId() {
-        return instance.hasUserId();
-      }
-      /**
-       * <pre>
-       *cmd id:		0x030a
-       * </pre>
-       *
-       * <code>required uint32 user_id = 1;</code>
+       * <code>uint32 user_id = 1;</code>
        */
       public int getUserId() {
         return instance.getUserId();
@@ -6008,7 +5276,7 @@ public final class IMMessage {
        *cmd id:		0x030a
        * </pre>
        *
-       * <code>required uint32 user_id = 1;</code>
+       * <code>uint32 user_id = 1;</code>
        */
       public Builder setUserId(int value) {
         copyOnWrite();
@@ -6020,7 +5288,7 @@ public final class IMMessage {
        *cmd id:		0x030a
        * </pre>
        *
-       * <code>required uint32 user_id = 1;</code>
+       * <code>uint32 user_id = 1;</code>
        */
       public Builder clearUserId() {
         copyOnWrite();
@@ -6029,19 +5297,27 @@ public final class IMMessage {
       }
 
       /**
-       * <code>required .IM.BaseDefine.SessionType session_type = 2;</code>
+       * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
        */
-      public boolean hasSessionType() {
-        return instance.hasSessionType();
+      public int getSessionTypeValue() {
+        return instance.getSessionTypeValue();
       }
       /**
-       * <code>required .IM.BaseDefine.SessionType session_type = 2;</code>
+       * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
+       */
+      public Builder setSessionTypeValue(int value) {
+        copyOnWrite();
+        instance.setSessionTypeValue(value);
+        return this;
+      }
+      /**
+       * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
        */
       public com.mogujie.tt.protobuf.IMBaseDefine.SessionType getSessionType() {
         return instance.getSessionType();
       }
       /**
-       * <code>required .IM.BaseDefine.SessionType session_type = 2;</code>
+       * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
        */
       public Builder setSessionType(com.mogujie.tt.protobuf.IMBaseDefine.SessionType value) {
         copyOnWrite();
@@ -6049,7 +5325,7 @@ public final class IMMessage {
         return this;
       }
       /**
-       * <code>required .IM.BaseDefine.SessionType session_type = 2;</code>
+       * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
        */
       public Builder clearSessionType() {
         copyOnWrite();
@@ -6058,19 +5334,13 @@ public final class IMMessage {
       }
 
       /**
-       * <code>required uint32 session_id = 3;</code>
-       */
-      public boolean hasSessionId() {
-        return instance.hasSessionId();
-      }
-      /**
-       * <code>required uint32 session_id = 3;</code>
+       * <code>uint32 session_id = 3;</code>
        */
       public int getSessionId() {
         return instance.getSessionId();
       }
       /**
-       * <code>required uint32 session_id = 3;</code>
+       * <code>uint32 session_id = 3;</code>
        */
       public Builder setSessionId(int value) {
         copyOnWrite();
@@ -6078,7 +5348,7 @@ public final class IMMessage {
         return this;
       }
       /**
-       * <code>required uint32 session_id = 3;</code>
+       * <code>uint32 session_id = 3;</code>
        */
       public Builder clearSessionId() {
         copyOnWrite();
@@ -6087,19 +5357,13 @@ public final class IMMessage {
       }
 
       /**
-       * <code>required uint32 msg_id_begin = 4;</code>
-       */
-      public boolean hasMsgIdBegin() {
-        return instance.hasMsgIdBegin();
-      }
-      /**
-       * <code>required uint32 msg_id_begin = 4;</code>
+       * <code>uint32 msg_id_begin = 4;</code>
        */
       public int getMsgIdBegin() {
         return instance.getMsgIdBegin();
       }
       /**
-       * <code>required uint32 msg_id_begin = 4;</code>
+       * <code>uint32 msg_id_begin = 4;</code>
        */
       public Builder setMsgIdBegin(int value) {
         copyOnWrite();
@@ -6107,7 +5371,7 @@ public final class IMMessage {
         return this;
       }
       /**
-       * <code>required uint32 msg_id_begin = 4;</code>
+       * <code>uint32 msg_id_begin = 4;</code>
        */
       public Builder clearMsgIdBegin() {
         copyOnWrite();
@@ -6213,19 +5477,13 @@ public final class IMMessage {
       }
 
       /**
-       * <code>optional bytes attach_data = 20;</code>
-       */
-      public boolean hasAttachData() {
-        return instance.hasAttachData();
-      }
-      /**
-       * <code>optional bytes attach_data = 20;</code>
+       * <code>bytes attach_data = 20;</code>
        */
       public com.google.protobuf.ByteString getAttachData() {
         return instance.getAttachData();
       }
       /**
-       * <code>optional bytes attach_data = 20;</code>
+       * <code>bytes attach_data = 20;</code>
        */
       public Builder setAttachData(com.google.protobuf.ByteString value) {
         copyOnWrite();
@@ -6233,7 +5491,7 @@ public final class IMMessage {
         return this;
       }
       /**
-       * <code>optional bytes attach_data = 20;</code>
+       * <code>bytes attach_data = 20;</code>
        */
       public Builder clearAttachData() {
         copyOnWrite();
@@ -6243,7 +5501,6 @@ public final class IMMessage {
 
       // @@protoc_insertion_point(builder_scope:IM.Message.IMGetMsgListRsp)
     }
-    private byte memoizedIsInitialized = 2;
     @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
     protected final java.lang.Object dynamicMethod(
         com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
@@ -6253,30 +5510,7 @@ public final class IMMessage {
           return new com.mogujie.tt.protobuf.IMMessage.IMGetMsgListRsp();
         }
         case IS_INITIALIZED: {
-          byte isInitialized = memoizedIsInitialized;
-          if (isInitialized == 1) return DEFAULT_INSTANCE;
-          if (isInitialized == 0) return null;
-
-          boolean shouldMemoize = ((Boolean) arg0).booleanValue();
-          if (!hasUserId()) {
-            return null;
-          }
-          if (!hasSessionType()) {
-            return null;
-          }
-          if (!hasSessionId()) {
-            return null;
-          }
-          if (!hasMsgIdBegin()) {
-            return null;
-          }
-          for (int i = 0; i < getMsgListCount(); i++) {
-            if (!getMsgList(i).isInitialized()) {
-              return null;
-            }
-          }
           return DEFAULT_INSTANCE;
-
         }
         case MAKE_IMMUTABLE: {
           msgList_.makeImmutable();
@@ -6288,21 +5522,16 @@ public final class IMMessage {
         case VISIT: {
           Visitor visitor = (Visitor) arg0;
           com.mogujie.tt.protobuf.IMMessage.IMGetMsgListRsp other = (com.mogujie.tt.protobuf.IMMessage.IMGetMsgListRsp) arg1;
-          userId_ = visitor.visitInt(
-              hasUserId(), userId_,
-              other.hasUserId(), other.userId_);
-          sessionType_ = visitor.visitInt(hasSessionType(), sessionType_,
-              other.hasSessionType(), other.sessionType_);
-          sessionId_ = visitor.visitInt(
-              hasSessionId(), sessionId_,
-              other.hasSessionId(), other.sessionId_);
-          msgIdBegin_ = visitor.visitInt(
-              hasMsgIdBegin(), msgIdBegin_,
-              other.hasMsgIdBegin(), other.msgIdBegin_);
+          userId_ = visitor.visitInt(userId_ != 0, userId_,
+              other.userId_ != 0, other.userId_);
+          sessionType_ = visitor.visitInt(sessionType_ != 0, sessionType_,    other.sessionType_ != 0, other.sessionType_);
+          sessionId_ = visitor.visitInt(sessionId_ != 0, sessionId_,
+              other.sessionId_ != 0, other.sessionId_);
+          msgIdBegin_ = visitor.visitInt(msgIdBegin_ != 0, msgIdBegin_,
+              other.msgIdBegin_ != 0, other.msgIdBegin_);
           msgList_= visitor.visitList(msgList_, other.msgList_);
-          attachData_ = visitor.visitByteString(
-              hasAttachData(), attachData_,
-              other.hasAttachData(), other.attachData_);
+          attachData_ = visitor.visitByteString(attachData_ != com.google.protobuf.ByteString.EMPTY, attachData_,
+              other.attachData_ != com.google.protobuf.ByteString.EMPTY, other.attachData_);
           if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
               .INSTANCE) {
             bitField0_ |= other.bitField0_;
@@ -6332,28 +5561,23 @@ public final class IMMessage {
                   break;
                 }
                 case 8: {
-                  bitField0_ |= 0x00000001;
+
                   userId_ = input.readUInt32();
                   break;
                 }
                 case 16: {
                   int rawValue = input.readEnum();
-                  com.mogujie.tt.protobuf.IMBaseDefine.SessionType value = com.mogujie.tt.protobuf.IMBaseDefine.SessionType.forNumber(rawValue);
-                  if (value == null) {
-                    super.mergeVarintField(2, rawValue);
-                  } else {
-                    bitField0_ |= 0x00000002;
-                    sessionType_ = rawValue;
-                  }
+
+                  sessionType_ = rawValue;
                   break;
                 }
                 case 24: {
-                  bitField0_ |= 0x00000004;
+
                   sessionId_ = input.readUInt32();
                   break;
                 }
                 case 32: {
-                  bitField0_ |= 0x00000008;
+
                   msgIdBegin_ = input.readUInt32();
                   break;
                 }
@@ -6367,7 +5591,7 @@ public final class IMMessage {
                   break;
                 }
                 case 162: {
-                  bitField0_ |= 0x00000010;
+
                   attachData_ = input.readBytes();
                   break;
                 }
@@ -6396,10 +5620,9 @@ public final class IMMessage {
           return PARSER;
       }
       case GET_MEMOIZED_IS_INITIALIZED: {
-        return memoizedIsInitialized;
+        return (byte) 1;
       }
       case SET_MEMOIZED_IS_INITIALIZED: {
-        memoizedIsInitialized = (byte) (arg0 == null ? 0 : 1);
         return null;
       }
       }
@@ -6434,42 +5657,26 @@ public final class IMMessage {
      *cmd id: 		0x030b
      * </pre>
      *
-     * <code>required uint32 user_id = 1;</code>
-     */
-    boolean hasUserId();
-    /**
-     * <pre>
-     *cmd id: 		0x030b
-     * </pre>
-     *
-     * <code>required uint32 user_id = 1;</code>
+     * <code>uint32 user_id = 1;</code>
      */
     int getUserId();
 
     /**
-     * <code>required .IM.BaseDefine.SessionType session_type = 2;</code>
+     * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
      */
-    boolean hasSessionType();
+    int getSessionTypeValue();
     /**
-     * <code>required .IM.BaseDefine.SessionType session_type = 2;</code>
+     * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
      */
     com.mogujie.tt.protobuf.IMBaseDefine.SessionType getSessionType();
 
     /**
-     * <code>required uint32 session_id = 3;</code>
-     */
-    boolean hasSessionId();
-    /**
-     * <code>required uint32 session_id = 3;</code>
+     * <code>uint32 session_id = 3;</code>
      */
     int getSessionId();
 
     /**
-     * <code>optional bytes attach_data = 20;</code>
-     */
-    boolean hasAttachData();
-    /**
-     * <code>optional bytes attach_data = 20;</code>
+     * <code>bytes attach_data = 20;</code>
      */
     com.google.protobuf.ByteString getAttachData();
   }
@@ -6482,10 +5689,8 @@ public final class IMMessage {
       // @@protoc_insertion_point(message_implements:IM.Message.IMGetLatestMsgIdReq)
       IMGetLatestMsgIdReqOrBuilder {
     private IMGetLatestMsgIdReq() {
-      sessionType_ = 1;
       attachData_ = com.google.protobuf.ByteString.EMPTY;
     }
-    private int bitField0_;
     public static final int USER_ID_FIELD_NUMBER = 1;
     private int userId_;
     /**
@@ -6493,17 +5698,7 @@ public final class IMMessage {
      *cmd id: 		0x030b
      * </pre>
      *
-     * <code>required uint32 user_id = 1;</code>
-     */
-    public boolean hasUserId() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <pre>
-     *cmd id: 		0x030b
-     * </pre>
-     *
-     * <code>required uint32 user_id = 1;</code>
+     * <code>uint32 user_id = 1;</code>
      */
     public int getUserId() {
       return userId_;
@@ -6513,10 +5708,10 @@ public final class IMMessage {
      *cmd id: 		0x030b
      * </pre>
      *
-     * <code>required uint32 user_id = 1;</code>
+     * <code>uint32 user_id = 1;</code>
      */
     private void setUserId(int value) {
-      bitField0_ |= 0x00000001;
+      
       userId_ = value;
     }
     /**
@@ -6524,119 +5719,113 @@ public final class IMMessage {
      *cmd id: 		0x030b
      * </pre>
      *
-     * <code>required uint32 user_id = 1;</code>
+     * <code>uint32 user_id = 1;</code>
      */
     private void clearUserId() {
-      bitField0_ = (bitField0_ & ~0x00000001);
+      
       userId_ = 0;
     }
 
     public static final int SESSION_TYPE_FIELD_NUMBER = 2;
     private int sessionType_;
     /**
-     * <code>required .IM.BaseDefine.SessionType session_type = 2;</code>
+     * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
      */
-    public boolean hasSessionType() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
+    public int getSessionTypeValue() {
+      return sessionType_;
     }
     /**
-     * <code>required .IM.BaseDefine.SessionType session_type = 2;</code>
+     * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
      */
     public com.mogujie.tt.protobuf.IMBaseDefine.SessionType getSessionType() {
       com.mogujie.tt.protobuf.IMBaseDefine.SessionType result = com.mogujie.tt.protobuf.IMBaseDefine.SessionType.forNumber(sessionType_);
-      return result == null ? com.mogujie.tt.protobuf.IMBaseDefine.SessionType.SESSION_TYPE_SINGLE : result;
+      return result == null ? com.mogujie.tt.protobuf.IMBaseDefine.SessionType.UNRECOGNIZED : result;
     }
     /**
-     * <code>required .IM.BaseDefine.SessionType session_type = 2;</code>
+     * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
+     */
+    private void setSessionTypeValue(int value) {
+        sessionType_ = value;
+    }
+    /**
+     * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
      */
     private void setSessionType(com.mogujie.tt.protobuf.IMBaseDefine.SessionType value) {
       if (value == null) {
         throw new NullPointerException();
       }
-      bitField0_ |= 0x00000002;
+      
       sessionType_ = value.getNumber();
     }
     /**
-     * <code>required .IM.BaseDefine.SessionType session_type = 2;</code>
+     * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
      */
     private void clearSessionType() {
-      bitField0_ = (bitField0_ & ~0x00000002);
-      sessionType_ = 1;
+      
+      sessionType_ = 0;
     }
 
     public static final int SESSION_ID_FIELD_NUMBER = 3;
     private int sessionId_;
     /**
-     * <code>required uint32 session_id = 3;</code>
-     */
-    public boolean hasSessionId() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    /**
-     * <code>required uint32 session_id = 3;</code>
+     * <code>uint32 session_id = 3;</code>
      */
     public int getSessionId() {
       return sessionId_;
     }
     /**
-     * <code>required uint32 session_id = 3;</code>
+     * <code>uint32 session_id = 3;</code>
      */
     private void setSessionId(int value) {
-      bitField0_ |= 0x00000004;
+      
       sessionId_ = value;
     }
     /**
-     * <code>required uint32 session_id = 3;</code>
+     * <code>uint32 session_id = 3;</code>
      */
     private void clearSessionId() {
-      bitField0_ = (bitField0_ & ~0x00000004);
+      
       sessionId_ = 0;
     }
 
     public static final int ATTACH_DATA_FIELD_NUMBER = 20;
     private com.google.protobuf.ByteString attachData_;
     /**
-     * <code>optional bytes attach_data = 20;</code>
-     */
-    public boolean hasAttachData() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
-    }
-    /**
-     * <code>optional bytes attach_data = 20;</code>
+     * <code>bytes attach_data = 20;</code>
      */
     public com.google.protobuf.ByteString getAttachData() {
       return attachData_;
     }
     /**
-     * <code>optional bytes attach_data = 20;</code>
+     * <code>bytes attach_data = 20;</code>
      */
     private void setAttachData(com.google.protobuf.ByteString value) {
       if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000008;
+  
       attachData_ = value;
     }
     /**
-     * <code>optional bytes attach_data = 20;</code>
+     * <code>bytes attach_data = 20;</code>
      */
     private void clearAttachData() {
-      bitField0_ = (bitField0_ & ~0x00000008);
+      
       attachData_ = getDefaultInstance().getAttachData();
     }
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+      if (userId_ != 0) {
         output.writeUInt32(1, userId_);
       }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+      if (sessionType_ != com.mogujie.tt.protobuf.IMBaseDefine.SessionType.SESSION_TYPE_UNIVERSAL.getNumber()) {
         output.writeEnum(2, sessionType_);
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+      if (sessionId_ != 0) {
         output.writeUInt32(3, sessionId_);
       }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+      if (!attachData_.isEmpty()) {
         output.writeBytes(20, attachData_);
       }
       unknownFields.writeTo(output);
@@ -6647,19 +5836,19 @@ public final class IMMessage {
       if (size != -1) return size;
 
       size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+      if (userId_ != 0) {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt32Size(1, userId_);
       }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+      if (sessionType_ != com.mogujie.tt.protobuf.IMBaseDefine.SessionType.SESSION_TYPE_UNIVERSAL.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(2, sessionType_);
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+      if (sessionId_ != 0) {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt32Size(3, sessionId_);
       }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+      if (!attachData_.isEmpty()) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(20, attachData_);
       }
@@ -6768,17 +5957,7 @@ public final class IMMessage {
        *cmd id: 		0x030b
        * </pre>
        *
-       * <code>required uint32 user_id = 1;</code>
-       */
-      public boolean hasUserId() {
-        return instance.hasUserId();
-      }
-      /**
-       * <pre>
-       *cmd id: 		0x030b
-       * </pre>
-       *
-       * <code>required uint32 user_id = 1;</code>
+       * <code>uint32 user_id = 1;</code>
        */
       public int getUserId() {
         return instance.getUserId();
@@ -6788,7 +5967,7 @@ public final class IMMessage {
        *cmd id: 		0x030b
        * </pre>
        *
-       * <code>required uint32 user_id = 1;</code>
+       * <code>uint32 user_id = 1;</code>
        */
       public Builder setUserId(int value) {
         copyOnWrite();
@@ -6800,7 +5979,7 @@ public final class IMMessage {
        *cmd id: 		0x030b
        * </pre>
        *
-       * <code>required uint32 user_id = 1;</code>
+       * <code>uint32 user_id = 1;</code>
        */
       public Builder clearUserId() {
         copyOnWrite();
@@ -6809,19 +5988,27 @@ public final class IMMessage {
       }
 
       /**
-       * <code>required .IM.BaseDefine.SessionType session_type = 2;</code>
+       * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
        */
-      public boolean hasSessionType() {
-        return instance.hasSessionType();
+      public int getSessionTypeValue() {
+        return instance.getSessionTypeValue();
       }
       /**
-       * <code>required .IM.BaseDefine.SessionType session_type = 2;</code>
+       * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
+       */
+      public Builder setSessionTypeValue(int value) {
+        copyOnWrite();
+        instance.setSessionTypeValue(value);
+        return this;
+      }
+      /**
+       * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
        */
       public com.mogujie.tt.protobuf.IMBaseDefine.SessionType getSessionType() {
         return instance.getSessionType();
       }
       /**
-       * <code>required .IM.BaseDefine.SessionType session_type = 2;</code>
+       * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
        */
       public Builder setSessionType(com.mogujie.tt.protobuf.IMBaseDefine.SessionType value) {
         copyOnWrite();
@@ -6829,7 +6016,7 @@ public final class IMMessage {
         return this;
       }
       /**
-       * <code>required .IM.BaseDefine.SessionType session_type = 2;</code>
+       * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
        */
       public Builder clearSessionType() {
         copyOnWrite();
@@ -6838,19 +6025,13 @@ public final class IMMessage {
       }
 
       /**
-       * <code>required uint32 session_id = 3;</code>
-       */
-      public boolean hasSessionId() {
-        return instance.hasSessionId();
-      }
-      /**
-       * <code>required uint32 session_id = 3;</code>
+       * <code>uint32 session_id = 3;</code>
        */
       public int getSessionId() {
         return instance.getSessionId();
       }
       /**
-       * <code>required uint32 session_id = 3;</code>
+       * <code>uint32 session_id = 3;</code>
        */
       public Builder setSessionId(int value) {
         copyOnWrite();
@@ -6858,7 +6039,7 @@ public final class IMMessage {
         return this;
       }
       /**
-       * <code>required uint32 session_id = 3;</code>
+       * <code>uint32 session_id = 3;</code>
        */
       public Builder clearSessionId() {
         copyOnWrite();
@@ -6867,19 +6048,13 @@ public final class IMMessage {
       }
 
       /**
-       * <code>optional bytes attach_data = 20;</code>
-       */
-      public boolean hasAttachData() {
-        return instance.hasAttachData();
-      }
-      /**
-       * <code>optional bytes attach_data = 20;</code>
+       * <code>bytes attach_data = 20;</code>
        */
       public com.google.protobuf.ByteString getAttachData() {
         return instance.getAttachData();
       }
       /**
-       * <code>optional bytes attach_data = 20;</code>
+       * <code>bytes attach_data = 20;</code>
        */
       public Builder setAttachData(com.google.protobuf.ByteString value) {
         copyOnWrite();
@@ -6887,7 +6062,7 @@ public final class IMMessage {
         return this;
       }
       /**
-       * <code>optional bytes attach_data = 20;</code>
+       * <code>bytes attach_data = 20;</code>
        */
       public Builder clearAttachData() {
         copyOnWrite();
@@ -6897,7 +6072,6 @@ public final class IMMessage {
 
       // @@protoc_insertion_point(builder_scope:IM.Message.IMGetLatestMsgIdReq)
     }
-    private byte memoizedIsInitialized = 2;
     @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
     protected final java.lang.Object dynamicMethod(
         com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
@@ -6907,22 +6081,7 @@ public final class IMMessage {
           return new com.mogujie.tt.protobuf.IMMessage.IMGetLatestMsgIdReq();
         }
         case IS_INITIALIZED: {
-          byte isInitialized = memoizedIsInitialized;
-          if (isInitialized == 1) return DEFAULT_INSTANCE;
-          if (isInitialized == 0) return null;
-
-          boolean shouldMemoize = ((Boolean) arg0).booleanValue();
-          if (!hasUserId()) {
-            return null;
-          }
-          if (!hasSessionType()) {
-            return null;
-          }
-          if (!hasSessionId()) {
-            return null;
-          }
           return DEFAULT_INSTANCE;
-
         }
         case MAKE_IMMUTABLE: {
           return null;
@@ -6933,20 +6092,15 @@ public final class IMMessage {
         case VISIT: {
           Visitor visitor = (Visitor) arg0;
           com.mogujie.tt.protobuf.IMMessage.IMGetLatestMsgIdReq other = (com.mogujie.tt.protobuf.IMMessage.IMGetLatestMsgIdReq) arg1;
-          userId_ = visitor.visitInt(
-              hasUserId(), userId_,
-              other.hasUserId(), other.userId_);
-          sessionType_ = visitor.visitInt(hasSessionType(), sessionType_,
-              other.hasSessionType(), other.sessionType_);
-          sessionId_ = visitor.visitInt(
-              hasSessionId(), sessionId_,
-              other.hasSessionId(), other.sessionId_);
-          attachData_ = visitor.visitByteString(
-              hasAttachData(), attachData_,
-              other.hasAttachData(), other.attachData_);
+          userId_ = visitor.visitInt(userId_ != 0, userId_,
+              other.userId_ != 0, other.userId_);
+          sessionType_ = visitor.visitInt(sessionType_ != 0, sessionType_,    other.sessionType_ != 0, other.sessionType_);
+          sessionId_ = visitor.visitInt(sessionId_ != 0, sessionId_,
+              other.sessionId_ != 0, other.sessionId_);
+          attachData_ = visitor.visitByteString(attachData_ != com.google.protobuf.ByteString.EMPTY, attachData_,
+              other.attachData_ != com.google.protobuf.ByteString.EMPTY, other.attachData_);
           if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
               .INSTANCE) {
-            bitField0_ |= other.bitField0_;
           }
           return this;
         }
@@ -6973,28 +6127,23 @@ public final class IMMessage {
                   break;
                 }
                 case 8: {
-                  bitField0_ |= 0x00000001;
+
                   userId_ = input.readUInt32();
                   break;
                 }
                 case 16: {
                   int rawValue = input.readEnum();
-                  com.mogujie.tt.protobuf.IMBaseDefine.SessionType value = com.mogujie.tt.protobuf.IMBaseDefine.SessionType.forNumber(rawValue);
-                  if (value == null) {
-                    super.mergeVarintField(2, rawValue);
-                  } else {
-                    bitField0_ |= 0x00000002;
-                    sessionType_ = rawValue;
-                  }
+
+                  sessionType_ = rawValue;
                   break;
                 }
                 case 24: {
-                  bitField0_ |= 0x00000004;
+
                   sessionId_ = input.readUInt32();
                   break;
                 }
                 case 162: {
-                  bitField0_ |= 0x00000008;
+
                   attachData_ = input.readBytes();
                   break;
                 }
@@ -7023,10 +6172,9 @@ public final class IMMessage {
           return PARSER;
       }
       case GET_MEMOIZED_IS_INITIALIZED: {
-        return memoizedIsInitialized;
+        return (byte) 1;
       }
       case SET_MEMOIZED_IS_INITIALIZED: {
-        memoizedIsInitialized = (byte) (arg0 == null ? 0 : 1);
         return null;
       }
       }
@@ -7061,51 +6209,31 @@ public final class IMMessage {
      *cmd id:		0x030c
      * </pre>
      *
-     * <code>required uint32 user_id = 1;</code>
-     */
-    boolean hasUserId();
-    /**
-     * <pre>
-     *cmd id:		0x030c
-     * </pre>
-     *
-     * <code>required uint32 user_id = 1;</code>
+     * <code>uint32 user_id = 1;</code>
      */
     int getUserId();
 
     /**
-     * <code>required .IM.BaseDefine.SessionType session_type = 2;</code>
+     * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
      */
-    boolean hasSessionType();
+    int getSessionTypeValue();
     /**
-     * <code>required .IM.BaseDefine.SessionType session_type = 2;</code>
+     * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
      */
     com.mogujie.tt.protobuf.IMBaseDefine.SessionType getSessionType();
 
     /**
-     * <code>required uint32 session_id = 3;</code>
-     */
-    boolean hasSessionId();
-    /**
-     * <code>required uint32 session_id = 3;</code>
+     * <code>uint32 session_id = 3;</code>
      */
     int getSessionId();
 
     /**
-     * <code>required uint32 latest_msg_id = 4;</code>
-     */
-    boolean hasLatestMsgId();
-    /**
-     * <code>required uint32 latest_msg_id = 4;</code>
+     * <code>uint32 latest_msg_id = 4;</code>
      */
     int getLatestMsgId();
 
     /**
-     * <code>optional bytes attach_data = 20;</code>
-     */
-    boolean hasAttachData();
-    /**
-     * <code>optional bytes attach_data = 20;</code>
+     * <code>bytes attach_data = 20;</code>
      */
     com.google.protobuf.ByteString getAttachData();
   }
@@ -7118,10 +6246,8 @@ public final class IMMessage {
       // @@protoc_insertion_point(message_implements:IM.Message.IMGetLatestMsgIdRsp)
       IMGetLatestMsgIdRspOrBuilder {
     private IMGetLatestMsgIdRsp() {
-      sessionType_ = 1;
       attachData_ = com.google.protobuf.ByteString.EMPTY;
     }
-    private int bitField0_;
     public static final int USER_ID_FIELD_NUMBER = 1;
     private int userId_;
     /**
@@ -7129,17 +6255,7 @@ public final class IMMessage {
      *cmd id:		0x030c
      * </pre>
      *
-     * <code>required uint32 user_id = 1;</code>
-     */
-    public boolean hasUserId() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <pre>
-     *cmd id:		0x030c
-     * </pre>
-     *
-     * <code>required uint32 user_id = 1;</code>
+     * <code>uint32 user_id = 1;</code>
      */
     public int getUserId() {
       return userId_;
@@ -7149,10 +6265,10 @@ public final class IMMessage {
      *cmd id:		0x030c
      * </pre>
      *
-     * <code>required uint32 user_id = 1;</code>
+     * <code>uint32 user_id = 1;</code>
      */
     private void setUserId(int value) {
-      bitField0_ |= 0x00000001;
+      
       userId_ = value;
     }
     /**
@@ -7160,151 +6276,139 @@ public final class IMMessage {
      *cmd id:		0x030c
      * </pre>
      *
-     * <code>required uint32 user_id = 1;</code>
+     * <code>uint32 user_id = 1;</code>
      */
     private void clearUserId() {
-      bitField0_ = (bitField0_ & ~0x00000001);
+      
       userId_ = 0;
     }
 
     public static final int SESSION_TYPE_FIELD_NUMBER = 2;
     private int sessionType_;
     /**
-     * <code>required .IM.BaseDefine.SessionType session_type = 2;</code>
+     * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
      */
-    public boolean hasSessionType() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
+    public int getSessionTypeValue() {
+      return sessionType_;
     }
     /**
-     * <code>required .IM.BaseDefine.SessionType session_type = 2;</code>
+     * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
      */
     public com.mogujie.tt.protobuf.IMBaseDefine.SessionType getSessionType() {
       com.mogujie.tt.protobuf.IMBaseDefine.SessionType result = com.mogujie.tt.protobuf.IMBaseDefine.SessionType.forNumber(sessionType_);
-      return result == null ? com.mogujie.tt.protobuf.IMBaseDefine.SessionType.SESSION_TYPE_SINGLE : result;
+      return result == null ? com.mogujie.tt.protobuf.IMBaseDefine.SessionType.UNRECOGNIZED : result;
     }
     /**
-     * <code>required .IM.BaseDefine.SessionType session_type = 2;</code>
+     * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
+     */
+    private void setSessionTypeValue(int value) {
+        sessionType_ = value;
+    }
+    /**
+     * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
      */
     private void setSessionType(com.mogujie.tt.protobuf.IMBaseDefine.SessionType value) {
       if (value == null) {
         throw new NullPointerException();
       }
-      bitField0_ |= 0x00000002;
+      
       sessionType_ = value.getNumber();
     }
     /**
-     * <code>required .IM.BaseDefine.SessionType session_type = 2;</code>
+     * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
      */
     private void clearSessionType() {
-      bitField0_ = (bitField0_ & ~0x00000002);
-      sessionType_ = 1;
+      
+      sessionType_ = 0;
     }
 
     public static final int SESSION_ID_FIELD_NUMBER = 3;
     private int sessionId_;
     /**
-     * <code>required uint32 session_id = 3;</code>
-     */
-    public boolean hasSessionId() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    /**
-     * <code>required uint32 session_id = 3;</code>
+     * <code>uint32 session_id = 3;</code>
      */
     public int getSessionId() {
       return sessionId_;
     }
     /**
-     * <code>required uint32 session_id = 3;</code>
+     * <code>uint32 session_id = 3;</code>
      */
     private void setSessionId(int value) {
-      bitField0_ |= 0x00000004;
+      
       sessionId_ = value;
     }
     /**
-     * <code>required uint32 session_id = 3;</code>
+     * <code>uint32 session_id = 3;</code>
      */
     private void clearSessionId() {
-      bitField0_ = (bitField0_ & ~0x00000004);
+      
       sessionId_ = 0;
     }
 
     public static final int LATEST_MSG_ID_FIELD_NUMBER = 4;
     private int latestMsgId_;
     /**
-     * <code>required uint32 latest_msg_id = 4;</code>
-     */
-    public boolean hasLatestMsgId() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
-    }
-    /**
-     * <code>required uint32 latest_msg_id = 4;</code>
+     * <code>uint32 latest_msg_id = 4;</code>
      */
     public int getLatestMsgId() {
       return latestMsgId_;
     }
     /**
-     * <code>required uint32 latest_msg_id = 4;</code>
+     * <code>uint32 latest_msg_id = 4;</code>
      */
     private void setLatestMsgId(int value) {
-      bitField0_ |= 0x00000008;
+      
       latestMsgId_ = value;
     }
     /**
-     * <code>required uint32 latest_msg_id = 4;</code>
+     * <code>uint32 latest_msg_id = 4;</code>
      */
     private void clearLatestMsgId() {
-      bitField0_ = (bitField0_ & ~0x00000008);
+      
       latestMsgId_ = 0;
     }
 
     public static final int ATTACH_DATA_FIELD_NUMBER = 20;
     private com.google.protobuf.ByteString attachData_;
     /**
-     * <code>optional bytes attach_data = 20;</code>
-     */
-    public boolean hasAttachData() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
-    }
-    /**
-     * <code>optional bytes attach_data = 20;</code>
+     * <code>bytes attach_data = 20;</code>
      */
     public com.google.protobuf.ByteString getAttachData() {
       return attachData_;
     }
     /**
-     * <code>optional bytes attach_data = 20;</code>
+     * <code>bytes attach_data = 20;</code>
      */
     private void setAttachData(com.google.protobuf.ByteString value) {
       if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000010;
+  
       attachData_ = value;
     }
     /**
-     * <code>optional bytes attach_data = 20;</code>
+     * <code>bytes attach_data = 20;</code>
      */
     private void clearAttachData() {
-      bitField0_ = (bitField0_ & ~0x00000010);
+      
       attachData_ = getDefaultInstance().getAttachData();
     }
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+      if (userId_ != 0) {
         output.writeUInt32(1, userId_);
       }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+      if (sessionType_ != com.mogujie.tt.protobuf.IMBaseDefine.SessionType.SESSION_TYPE_UNIVERSAL.getNumber()) {
         output.writeEnum(2, sessionType_);
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+      if (sessionId_ != 0) {
         output.writeUInt32(3, sessionId_);
       }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+      if (latestMsgId_ != 0) {
         output.writeUInt32(4, latestMsgId_);
       }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+      if (!attachData_.isEmpty()) {
         output.writeBytes(20, attachData_);
       }
       unknownFields.writeTo(output);
@@ -7315,23 +6419,23 @@ public final class IMMessage {
       if (size != -1) return size;
 
       size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+      if (userId_ != 0) {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt32Size(1, userId_);
       }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+      if (sessionType_ != com.mogujie.tt.protobuf.IMBaseDefine.SessionType.SESSION_TYPE_UNIVERSAL.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(2, sessionType_);
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+      if (sessionId_ != 0) {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt32Size(3, sessionId_);
       }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+      if (latestMsgId_ != 0) {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt32Size(4, latestMsgId_);
       }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+      if (!attachData_.isEmpty()) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(20, attachData_);
       }
@@ -7440,17 +6544,7 @@ public final class IMMessage {
        *cmd id:		0x030c
        * </pre>
        *
-       * <code>required uint32 user_id = 1;</code>
-       */
-      public boolean hasUserId() {
-        return instance.hasUserId();
-      }
-      /**
-       * <pre>
-       *cmd id:		0x030c
-       * </pre>
-       *
-       * <code>required uint32 user_id = 1;</code>
+       * <code>uint32 user_id = 1;</code>
        */
       public int getUserId() {
         return instance.getUserId();
@@ -7460,7 +6554,7 @@ public final class IMMessage {
        *cmd id:		0x030c
        * </pre>
        *
-       * <code>required uint32 user_id = 1;</code>
+       * <code>uint32 user_id = 1;</code>
        */
       public Builder setUserId(int value) {
         copyOnWrite();
@@ -7472,7 +6566,7 @@ public final class IMMessage {
        *cmd id:		0x030c
        * </pre>
        *
-       * <code>required uint32 user_id = 1;</code>
+       * <code>uint32 user_id = 1;</code>
        */
       public Builder clearUserId() {
         copyOnWrite();
@@ -7481,19 +6575,27 @@ public final class IMMessage {
       }
 
       /**
-       * <code>required .IM.BaseDefine.SessionType session_type = 2;</code>
+       * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
        */
-      public boolean hasSessionType() {
-        return instance.hasSessionType();
+      public int getSessionTypeValue() {
+        return instance.getSessionTypeValue();
       }
       /**
-       * <code>required .IM.BaseDefine.SessionType session_type = 2;</code>
+       * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
+       */
+      public Builder setSessionTypeValue(int value) {
+        copyOnWrite();
+        instance.setSessionTypeValue(value);
+        return this;
+      }
+      /**
+       * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
        */
       public com.mogujie.tt.protobuf.IMBaseDefine.SessionType getSessionType() {
         return instance.getSessionType();
       }
       /**
-       * <code>required .IM.BaseDefine.SessionType session_type = 2;</code>
+       * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
        */
       public Builder setSessionType(com.mogujie.tt.protobuf.IMBaseDefine.SessionType value) {
         copyOnWrite();
@@ -7501,7 +6603,7 @@ public final class IMMessage {
         return this;
       }
       /**
-       * <code>required .IM.BaseDefine.SessionType session_type = 2;</code>
+       * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
        */
       public Builder clearSessionType() {
         copyOnWrite();
@@ -7510,19 +6612,13 @@ public final class IMMessage {
       }
 
       /**
-       * <code>required uint32 session_id = 3;</code>
-       */
-      public boolean hasSessionId() {
-        return instance.hasSessionId();
-      }
-      /**
-       * <code>required uint32 session_id = 3;</code>
+       * <code>uint32 session_id = 3;</code>
        */
       public int getSessionId() {
         return instance.getSessionId();
       }
       /**
-       * <code>required uint32 session_id = 3;</code>
+       * <code>uint32 session_id = 3;</code>
        */
       public Builder setSessionId(int value) {
         copyOnWrite();
@@ -7530,7 +6626,7 @@ public final class IMMessage {
         return this;
       }
       /**
-       * <code>required uint32 session_id = 3;</code>
+       * <code>uint32 session_id = 3;</code>
        */
       public Builder clearSessionId() {
         copyOnWrite();
@@ -7539,19 +6635,13 @@ public final class IMMessage {
       }
 
       /**
-       * <code>required uint32 latest_msg_id = 4;</code>
-       */
-      public boolean hasLatestMsgId() {
-        return instance.hasLatestMsgId();
-      }
-      /**
-       * <code>required uint32 latest_msg_id = 4;</code>
+       * <code>uint32 latest_msg_id = 4;</code>
        */
       public int getLatestMsgId() {
         return instance.getLatestMsgId();
       }
       /**
-       * <code>required uint32 latest_msg_id = 4;</code>
+       * <code>uint32 latest_msg_id = 4;</code>
        */
       public Builder setLatestMsgId(int value) {
         copyOnWrite();
@@ -7559,7 +6649,7 @@ public final class IMMessage {
         return this;
       }
       /**
-       * <code>required uint32 latest_msg_id = 4;</code>
+       * <code>uint32 latest_msg_id = 4;</code>
        */
       public Builder clearLatestMsgId() {
         copyOnWrite();
@@ -7568,19 +6658,13 @@ public final class IMMessage {
       }
 
       /**
-       * <code>optional bytes attach_data = 20;</code>
-       */
-      public boolean hasAttachData() {
-        return instance.hasAttachData();
-      }
-      /**
-       * <code>optional bytes attach_data = 20;</code>
+       * <code>bytes attach_data = 20;</code>
        */
       public com.google.protobuf.ByteString getAttachData() {
         return instance.getAttachData();
       }
       /**
-       * <code>optional bytes attach_data = 20;</code>
+       * <code>bytes attach_data = 20;</code>
        */
       public Builder setAttachData(com.google.protobuf.ByteString value) {
         copyOnWrite();
@@ -7588,7 +6672,7 @@ public final class IMMessage {
         return this;
       }
       /**
-       * <code>optional bytes attach_data = 20;</code>
+       * <code>bytes attach_data = 20;</code>
        */
       public Builder clearAttachData() {
         copyOnWrite();
@@ -7598,7 +6682,6 @@ public final class IMMessage {
 
       // @@protoc_insertion_point(builder_scope:IM.Message.IMGetLatestMsgIdRsp)
     }
-    private byte memoizedIsInitialized = 2;
     @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
     protected final java.lang.Object dynamicMethod(
         com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
@@ -7608,25 +6691,7 @@ public final class IMMessage {
           return new com.mogujie.tt.protobuf.IMMessage.IMGetLatestMsgIdRsp();
         }
         case IS_INITIALIZED: {
-          byte isInitialized = memoizedIsInitialized;
-          if (isInitialized == 1) return DEFAULT_INSTANCE;
-          if (isInitialized == 0) return null;
-
-          boolean shouldMemoize = ((Boolean) arg0).booleanValue();
-          if (!hasUserId()) {
-            return null;
-          }
-          if (!hasSessionType()) {
-            return null;
-          }
-          if (!hasSessionId()) {
-            return null;
-          }
-          if (!hasLatestMsgId()) {
-            return null;
-          }
           return DEFAULT_INSTANCE;
-
         }
         case MAKE_IMMUTABLE: {
           return null;
@@ -7637,23 +6702,17 @@ public final class IMMessage {
         case VISIT: {
           Visitor visitor = (Visitor) arg0;
           com.mogujie.tt.protobuf.IMMessage.IMGetLatestMsgIdRsp other = (com.mogujie.tt.protobuf.IMMessage.IMGetLatestMsgIdRsp) arg1;
-          userId_ = visitor.visitInt(
-              hasUserId(), userId_,
-              other.hasUserId(), other.userId_);
-          sessionType_ = visitor.visitInt(hasSessionType(), sessionType_,
-              other.hasSessionType(), other.sessionType_);
-          sessionId_ = visitor.visitInt(
-              hasSessionId(), sessionId_,
-              other.hasSessionId(), other.sessionId_);
-          latestMsgId_ = visitor.visitInt(
-              hasLatestMsgId(), latestMsgId_,
-              other.hasLatestMsgId(), other.latestMsgId_);
-          attachData_ = visitor.visitByteString(
-              hasAttachData(), attachData_,
-              other.hasAttachData(), other.attachData_);
+          userId_ = visitor.visitInt(userId_ != 0, userId_,
+              other.userId_ != 0, other.userId_);
+          sessionType_ = visitor.visitInt(sessionType_ != 0, sessionType_,    other.sessionType_ != 0, other.sessionType_);
+          sessionId_ = visitor.visitInt(sessionId_ != 0, sessionId_,
+              other.sessionId_ != 0, other.sessionId_);
+          latestMsgId_ = visitor.visitInt(latestMsgId_ != 0, latestMsgId_,
+              other.latestMsgId_ != 0, other.latestMsgId_);
+          attachData_ = visitor.visitByteString(attachData_ != com.google.protobuf.ByteString.EMPTY, attachData_,
+              other.attachData_ != com.google.protobuf.ByteString.EMPTY, other.attachData_);
           if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
               .INSTANCE) {
-            bitField0_ |= other.bitField0_;
           }
           return this;
         }
@@ -7680,33 +6739,28 @@ public final class IMMessage {
                   break;
                 }
                 case 8: {
-                  bitField0_ |= 0x00000001;
+
                   userId_ = input.readUInt32();
                   break;
                 }
                 case 16: {
                   int rawValue = input.readEnum();
-                  com.mogujie.tt.protobuf.IMBaseDefine.SessionType value = com.mogujie.tt.protobuf.IMBaseDefine.SessionType.forNumber(rawValue);
-                  if (value == null) {
-                    super.mergeVarintField(2, rawValue);
-                  } else {
-                    bitField0_ |= 0x00000002;
-                    sessionType_ = rawValue;
-                  }
+
+                  sessionType_ = rawValue;
                   break;
                 }
                 case 24: {
-                  bitField0_ |= 0x00000004;
+
                   sessionId_ = input.readUInt32();
                   break;
                 }
                 case 32: {
-                  bitField0_ |= 0x00000008;
+
                   latestMsgId_ = input.readUInt32();
                   break;
                 }
                 case 162: {
-                  bitField0_ |= 0x00000010;
+
                   attachData_ = input.readBytes();
                   break;
                 }
@@ -7735,10 +6789,9 @@ public final class IMMessage {
           return PARSER;
       }
       case GET_MEMOIZED_IS_INITIALIZED: {
-        return memoizedIsInitialized;
+        return (byte) 1;
       }
       case SET_MEMOIZED_IS_INITIALIZED: {
-        memoizedIsInitialized = (byte) (arg0 == null ? 0 : 1);
         return null;
       }
       }
@@ -7773,33 +6826,21 @@ public final class IMMessage {
      *cmd id: 		0x030d
      * </pre>
      *
-     * <code>required uint32 user_id = 1;</code>
-     */
-    boolean hasUserId();
-    /**
-     * <pre>
-     *cmd id: 		0x030d
-     * </pre>
-     *
-     * <code>required uint32 user_id = 1;</code>
+     * <code>uint32 user_id = 1;</code>
      */
     int getUserId();
 
     /**
-     * <code>required .IM.BaseDefine.SessionType session_type = 2;</code>
+     * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
      */
-    boolean hasSessionType();
+    int getSessionTypeValue();
     /**
-     * <code>required .IM.BaseDefine.SessionType session_type = 2;</code>
+     * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
      */
     com.mogujie.tt.protobuf.IMBaseDefine.SessionType getSessionType();
 
     /**
-     * <code>required uint32 session_id = 3;</code>
-     */
-    boolean hasSessionId();
-    /**
-     * <code>required uint32 session_id = 3;</code>
+     * <code>uint32 session_id = 3;</code>
      */
     int getSessionId();
 
@@ -7817,11 +6858,7 @@ public final class IMMessage {
     int getMsgIdList(int index);
 
     /**
-     * <code>optional bytes attach_data = 20;</code>
-     */
-    boolean hasAttachData();
-    /**
-     * <code>optional bytes attach_data = 20;</code>
+     * <code>bytes attach_data = 20;</code>
      */
     com.google.protobuf.ByteString getAttachData();
   }
@@ -7834,7 +6871,6 @@ public final class IMMessage {
       // @@protoc_insertion_point(message_implements:IM.Message.IMGetMsgByIdReq)
       IMGetMsgByIdReqOrBuilder {
     private IMGetMsgByIdReq() {
-      sessionType_ = 1;
       msgIdList_ = emptyIntList();
       attachData_ = com.google.protobuf.ByteString.EMPTY;
     }
@@ -7846,17 +6882,7 @@ public final class IMMessage {
      *cmd id: 		0x030d
      * </pre>
      *
-     * <code>required uint32 user_id = 1;</code>
-     */
-    public boolean hasUserId() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <pre>
-     *cmd id: 		0x030d
-     * </pre>
-     *
-     * <code>required uint32 user_id = 1;</code>
+     * <code>uint32 user_id = 1;</code>
      */
     public int getUserId() {
       return userId_;
@@ -7866,10 +6892,10 @@ public final class IMMessage {
      *cmd id: 		0x030d
      * </pre>
      *
-     * <code>required uint32 user_id = 1;</code>
+     * <code>uint32 user_id = 1;</code>
      */
     private void setUserId(int value) {
-      bitField0_ |= 0x00000001;
+      
       userId_ = value;
     }
     /**
@@ -7877,72 +6903,72 @@ public final class IMMessage {
      *cmd id: 		0x030d
      * </pre>
      *
-     * <code>required uint32 user_id = 1;</code>
+     * <code>uint32 user_id = 1;</code>
      */
     private void clearUserId() {
-      bitField0_ = (bitField0_ & ~0x00000001);
+      
       userId_ = 0;
     }
 
     public static final int SESSION_TYPE_FIELD_NUMBER = 2;
     private int sessionType_;
     /**
-     * <code>required .IM.BaseDefine.SessionType session_type = 2;</code>
+     * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
      */
-    public boolean hasSessionType() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
+    public int getSessionTypeValue() {
+      return sessionType_;
     }
     /**
-     * <code>required .IM.BaseDefine.SessionType session_type = 2;</code>
+     * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
      */
     public com.mogujie.tt.protobuf.IMBaseDefine.SessionType getSessionType() {
       com.mogujie.tt.protobuf.IMBaseDefine.SessionType result = com.mogujie.tt.protobuf.IMBaseDefine.SessionType.forNumber(sessionType_);
-      return result == null ? com.mogujie.tt.protobuf.IMBaseDefine.SessionType.SESSION_TYPE_SINGLE : result;
+      return result == null ? com.mogujie.tt.protobuf.IMBaseDefine.SessionType.UNRECOGNIZED : result;
     }
     /**
-     * <code>required .IM.BaseDefine.SessionType session_type = 2;</code>
+     * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
+     */
+    private void setSessionTypeValue(int value) {
+        sessionType_ = value;
+    }
+    /**
+     * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
      */
     private void setSessionType(com.mogujie.tt.protobuf.IMBaseDefine.SessionType value) {
       if (value == null) {
         throw new NullPointerException();
       }
-      bitField0_ |= 0x00000002;
+      
       sessionType_ = value.getNumber();
     }
     /**
-     * <code>required .IM.BaseDefine.SessionType session_type = 2;</code>
+     * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
      */
     private void clearSessionType() {
-      bitField0_ = (bitField0_ & ~0x00000002);
-      sessionType_ = 1;
+      
+      sessionType_ = 0;
     }
 
     public static final int SESSION_ID_FIELD_NUMBER = 3;
     private int sessionId_;
     /**
-     * <code>required uint32 session_id = 3;</code>
-     */
-    public boolean hasSessionId() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    /**
-     * <code>required uint32 session_id = 3;</code>
+     * <code>uint32 session_id = 3;</code>
      */
     public int getSessionId() {
       return sessionId_;
     }
     /**
-     * <code>required uint32 session_id = 3;</code>
+     * <code>uint32 session_id = 3;</code>
      */
     private void setSessionId(int value) {
-      bitField0_ |= 0x00000004;
+      
       sessionId_ = value;
     }
     /**
-     * <code>required uint32 session_id = 3;</code>
+     * <code>uint32 session_id = 3;</code>
      */
     private void clearSessionId() {
-      bitField0_ = (bitField0_ & ~0x00000004);
+      
       sessionId_ = 0;
     }
 
@@ -7967,6 +6993,7 @@ public final class IMMessage {
     public int getMsgIdList(int index) {
       return msgIdList_.getInt(index);
     }
+    private int msgIdListMemoizedSerializedSize = -1;
     private void ensureMsgIdListIsMutable() {
       if (!msgIdList_.isModifiable()) {
         msgIdList_ =
@@ -8007,50 +7034,49 @@ public final class IMMessage {
     public static final int ATTACH_DATA_FIELD_NUMBER = 20;
     private com.google.protobuf.ByteString attachData_;
     /**
-     * <code>optional bytes attach_data = 20;</code>
-     */
-    public boolean hasAttachData() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
-    }
-    /**
-     * <code>optional bytes attach_data = 20;</code>
+     * <code>bytes attach_data = 20;</code>
      */
     public com.google.protobuf.ByteString getAttachData() {
       return attachData_;
     }
     /**
-     * <code>optional bytes attach_data = 20;</code>
+     * <code>bytes attach_data = 20;</code>
      */
     private void setAttachData(com.google.protobuf.ByteString value) {
       if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000008;
+  
       attachData_ = value;
     }
     /**
-     * <code>optional bytes attach_data = 20;</code>
+     * <code>bytes attach_data = 20;</code>
      */
     private void clearAttachData() {
-      bitField0_ = (bitField0_ & ~0x00000008);
+      
       attachData_ = getDefaultInstance().getAttachData();
     }
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+      getSerializedSize();
+      if (userId_ != 0) {
         output.writeUInt32(1, userId_);
       }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+      if (sessionType_ != com.mogujie.tt.protobuf.IMBaseDefine.SessionType.SESSION_TYPE_UNIVERSAL.getNumber()) {
         output.writeEnum(2, sessionType_);
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+      if (sessionId_ != 0) {
         output.writeUInt32(3, sessionId_);
       }
-      for (int i = 0; i < msgIdList_.size(); i++) {
-        output.writeUInt32(4, msgIdList_.getInt(i));
+      if (getMsgIdListList().size() > 0) {
+        output.writeUInt32NoTag(34);
+        output.writeUInt32NoTag(msgIdListMemoizedSerializedSize);
       }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+      for (int i = 0; i < msgIdList_.size(); i++) {
+        output.writeUInt32NoTag(msgIdList_.getInt(i));
+      }
+      if (!attachData_.isEmpty()) {
         output.writeBytes(20, attachData_);
       }
       unknownFields.writeTo(output);
@@ -8061,15 +7087,15 @@ public final class IMMessage {
       if (size != -1) return size;
 
       size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+      if (userId_ != 0) {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt32Size(1, userId_);
       }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+      if (sessionType_ != com.mogujie.tt.protobuf.IMBaseDefine.SessionType.SESSION_TYPE_UNIVERSAL.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(2, sessionType_);
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+      if (sessionId_ != 0) {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt32Size(3, sessionId_);
       }
@@ -8080,9 +7106,14 @@ public final class IMMessage {
             .computeUInt32SizeNoTag(msgIdList_.getInt(i));
         }
         size += dataSize;
-        size += 1 * getMsgIdListList().size();
+        if (!getMsgIdListList().isEmpty()) {
+          size += 1;
+          size += com.google.protobuf.CodedOutputStream
+              .computeInt32SizeNoTag(dataSize);
+        }
+        msgIdListMemoizedSerializedSize = dataSize;
       }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+      if (!attachData_.isEmpty()) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(20, attachData_);
       }
@@ -8191,17 +7222,7 @@ public final class IMMessage {
        *cmd id: 		0x030d
        * </pre>
        *
-       * <code>required uint32 user_id = 1;</code>
-       */
-      public boolean hasUserId() {
-        return instance.hasUserId();
-      }
-      /**
-       * <pre>
-       *cmd id: 		0x030d
-       * </pre>
-       *
-       * <code>required uint32 user_id = 1;</code>
+       * <code>uint32 user_id = 1;</code>
        */
       public int getUserId() {
         return instance.getUserId();
@@ -8211,7 +7232,7 @@ public final class IMMessage {
        *cmd id: 		0x030d
        * </pre>
        *
-       * <code>required uint32 user_id = 1;</code>
+       * <code>uint32 user_id = 1;</code>
        */
       public Builder setUserId(int value) {
         copyOnWrite();
@@ -8223,7 +7244,7 @@ public final class IMMessage {
        *cmd id: 		0x030d
        * </pre>
        *
-       * <code>required uint32 user_id = 1;</code>
+       * <code>uint32 user_id = 1;</code>
        */
       public Builder clearUserId() {
         copyOnWrite();
@@ -8232,19 +7253,27 @@ public final class IMMessage {
       }
 
       /**
-       * <code>required .IM.BaseDefine.SessionType session_type = 2;</code>
+       * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
        */
-      public boolean hasSessionType() {
-        return instance.hasSessionType();
+      public int getSessionTypeValue() {
+        return instance.getSessionTypeValue();
       }
       /**
-       * <code>required .IM.BaseDefine.SessionType session_type = 2;</code>
+       * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
+       */
+      public Builder setSessionTypeValue(int value) {
+        copyOnWrite();
+        instance.setSessionTypeValue(value);
+        return this;
+      }
+      /**
+       * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
        */
       public com.mogujie.tt.protobuf.IMBaseDefine.SessionType getSessionType() {
         return instance.getSessionType();
       }
       /**
-       * <code>required .IM.BaseDefine.SessionType session_type = 2;</code>
+       * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
        */
       public Builder setSessionType(com.mogujie.tt.protobuf.IMBaseDefine.SessionType value) {
         copyOnWrite();
@@ -8252,7 +7281,7 @@ public final class IMMessage {
         return this;
       }
       /**
-       * <code>required .IM.BaseDefine.SessionType session_type = 2;</code>
+       * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
        */
       public Builder clearSessionType() {
         copyOnWrite();
@@ -8261,19 +7290,13 @@ public final class IMMessage {
       }
 
       /**
-       * <code>required uint32 session_id = 3;</code>
-       */
-      public boolean hasSessionId() {
-        return instance.hasSessionId();
-      }
-      /**
-       * <code>required uint32 session_id = 3;</code>
+       * <code>uint32 session_id = 3;</code>
        */
       public int getSessionId() {
         return instance.getSessionId();
       }
       /**
-       * <code>required uint32 session_id = 3;</code>
+       * <code>uint32 session_id = 3;</code>
        */
       public Builder setSessionId(int value) {
         copyOnWrite();
@@ -8281,7 +7304,7 @@ public final class IMMessage {
         return this;
       }
       /**
-       * <code>required uint32 session_id = 3;</code>
+       * <code>uint32 session_id = 3;</code>
        */
       public Builder clearSessionId() {
         copyOnWrite();
@@ -8345,19 +7368,13 @@ public final class IMMessage {
       }
 
       /**
-       * <code>optional bytes attach_data = 20;</code>
-       */
-      public boolean hasAttachData() {
-        return instance.hasAttachData();
-      }
-      /**
-       * <code>optional bytes attach_data = 20;</code>
+       * <code>bytes attach_data = 20;</code>
        */
       public com.google.protobuf.ByteString getAttachData() {
         return instance.getAttachData();
       }
       /**
-       * <code>optional bytes attach_data = 20;</code>
+       * <code>bytes attach_data = 20;</code>
        */
       public Builder setAttachData(com.google.protobuf.ByteString value) {
         copyOnWrite();
@@ -8365,7 +7382,7 @@ public final class IMMessage {
         return this;
       }
       /**
-       * <code>optional bytes attach_data = 20;</code>
+       * <code>bytes attach_data = 20;</code>
        */
       public Builder clearAttachData() {
         copyOnWrite();
@@ -8375,7 +7392,6 @@ public final class IMMessage {
 
       // @@protoc_insertion_point(builder_scope:IM.Message.IMGetMsgByIdReq)
     }
-    private byte memoizedIsInitialized = 2;
     @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
     protected final java.lang.Object dynamicMethod(
         com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
@@ -8385,22 +7401,7 @@ public final class IMMessage {
           return new com.mogujie.tt.protobuf.IMMessage.IMGetMsgByIdReq();
         }
         case IS_INITIALIZED: {
-          byte isInitialized = memoizedIsInitialized;
-          if (isInitialized == 1) return DEFAULT_INSTANCE;
-          if (isInitialized == 0) return null;
-
-          boolean shouldMemoize = ((Boolean) arg0).booleanValue();
-          if (!hasUserId()) {
-            return null;
-          }
-          if (!hasSessionType()) {
-            return null;
-          }
-          if (!hasSessionId()) {
-            return null;
-          }
           return DEFAULT_INSTANCE;
-
         }
         case MAKE_IMMUTABLE: {
           msgIdList_.makeImmutable();
@@ -8412,18 +7413,14 @@ public final class IMMessage {
         case VISIT: {
           Visitor visitor = (Visitor) arg0;
           com.mogujie.tt.protobuf.IMMessage.IMGetMsgByIdReq other = (com.mogujie.tt.protobuf.IMMessage.IMGetMsgByIdReq) arg1;
-          userId_ = visitor.visitInt(
-              hasUserId(), userId_,
-              other.hasUserId(), other.userId_);
-          sessionType_ = visitor.visitInt(hasSessionType(), sessionType_,
-              other.hasSessionType(), other.sessionType_);
-          sessionId_ = visitor.visitInt(
-              hasSessionId(), sessionId_,
-              other.hasSessionId(), other.sessionId_);
+          userId_ = visitor.visitInt(userId_ != 0, userId_,
+              other.userId_ != 0, other.userId_);
+          sessionType_ = visitor.visitInt(sessionType_ != 0, sessionType_,    other.sessionType_ != 0, other.sessionType_);
+          sessionId_ = visitor.visitInt(sessionId_ != 0, sessionId_,
+              other.sessionId_ != 0, other.sessionId_);
           msgIdList_= visitor.visitIntList(msgIdList_, other.msgIdList_);
-          attachData_ = visitor.visitByteString(
-              hasAttachData(), attachData_,
-              other.hasAttachData(), other.attachData_);
+          attachData_ = visitor.visitByteString(attachData_ != com.google.protobuf.ByteString.EMPTY, attachData_,
+              other.attachData_ != com.google.protobuf.ByteString.EMPTY, other.attachData_);
           if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
               .INSTANCE) {
             bitField0_ |= other.bitField0_;
@@ -8453,23 +7450,18 @@ public final class IMMessage {
                   break;
                 }
                 case 8: {
-                  bitField0_ |= 0x00000001;
+
                   userId_ = input.readUInt32();
                   break;
                 }
                 case 16: {
                   int rawValue = input.readEnum();
-                  com.mogujie.tt.protobuf.IMBaseDefine.SessionType value = com.mogujie.tt.protobuf.IMBaseDefine.SessionType.forNumber(rawValue);
-                  if (value == null) {
-                    super.mergeVarintField(2, rawValue);
-                  } else {
-                    bitField0_ |= 0x00000002;
-                    sessionType_ = rawValue;
-                  }
+
+                  sessionType_ = rawValue;
                   break;
                 }
                 case 24: {
-                  bitField0_ |= 0x00000004;
+
                   sessionId_ = input.readUInt32();
                   break;
                 }
@@ -8495,7 +7487,7 @@ public final class IMMessage {
                   break;
                 }
                 case 162: {
-                  bitField0_ |= 0x00000008;
+
                   attachData_ = input.readBytes();
                   break;
                 }
@@ -8524,10 +7516,9 @@ public final class IMMessage {
           return PARSER;
       }
       case GET_MEMOIZED_IS_INITIALIZED: {
-        return memoizedIsInitialized;
+        return (byte) 1;
       }
       case SET_MEMOIZED_IS_INITIALIZED: {
-        memoizedIsInitialized = (byte) (arg0 == null ? 0 : 1);
         return null;
       }
       }
@@ -8562,33 +7553,21 @@ public final class IMMessage {
      *cmd id:		0x030e
      * </pre>
      *
-     * <code>required uint32 user_id = 1;</code>
-     */
-    boolean hasUserId();
-    /**
-     * <pre>
-     *cmd id:		0x030e
-     * </pre>
-     *
-     * <code>required uint32 user_id = 1;</code>
+     * <code>uint32 user_id = 1;</code>
      */
     int getUserId();
 
     /**
-     * <code>required .IM.BaseDefine.SessionType session_type = 2;</code>
+     * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
      */
-    boolean hasSessionType();
+    int getSessionTypeValue();
     /**
-     * <code>required .IM.BaseDefine.SessionType session_type = 2;</code>
+     * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
      */
     com.mogujie.tt.protobuf.IMBaseDefine.SessionType getSessionType();
 
     /**
-     * <code>required uint32 session_id = 3;</code>
-     */
-    boolean hasSessionId();
-    /**
-     * <code>required uint32 session_id = 3;</code>
+     * <code>uint32 session_id = 3;</code>
      */
     int getSessionId();
 
@@ -8607,11 +7586,7 @@ public final class IMMessage {
     int getMsgListCount();
 
     /**
-     * <code>optional bytes attach_data = 20;</code>
-     */
-    boolean hasAttachData();
-    /**
-     * <code>optional bytes attach_data = 20;</code>
+     * <code>bytes attach_data = 20;</code>
      */
     com.google.protobuf.ByteString getAttachData();
   }
@@ -8624,7 +7599,6 @@ public final class IMMessage {
       // @@protoc_insertion_point(message_implements:IM.Message.IMGetMsgByIdRsp)
       IMGetMsgByIdRspOrBuilder {
     private IMGetMsgByIdRsp() {
-      sessionType_ = 1;
       msgList_ = emptyProtobufList();
       attachData_ = com.google.protobuf.ByteString.EMPTY;
     }
@@ -8636,17 +7610,7 @@ public final class IMMessage {
      *cmd id:		0x030e
      * </pre>
      *
-     * <code>required uint32 user_id = 1;</code>
-     */
-    public boolean hasUserId() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <pre>
-     *cmd id:		0x030e
-     * </pre>
-     *
-     * <code>required uint32 user_id = 1;</code>
+     * <code>uint32 user_id = 1;</code>
      */
     public int getUserId() {
       return userId_;
@@ -8656,10 +7620,10 @@ public final class IMMessage {
      *cmd id:		0x030e
      * </pre>
      *
-     * <code>required uint32 user_id = 1;</code>
+     * <code>uint32 user_id = 1;</code>
      */
     private void setUserId(int value) {
-      bitField0_ |= 0x00000001;
+      
       userId_ = value;
     }
     /**
@@ -8667,72 +7631,72 @@ public final class IMMessage {
      *cmd id:		0x030e
      * </pre>
      *
-     * <code>required uint32 user_id = 1;</code>
+     * <code>uint32 user_id = 1;</code>
      */
     private void clearUserId() {
-      bitField0_ = (bitField0_ & ~0x00000001);
+      
       userId_ = 0;
     }
 
     public static final int SESSION_TYPE_FIELD_NUMBER = 2;
     private int sessionType_;
     /**
-     * <code>required .IM.BaseDefine.SessionType session_type = 2;</code>
+     * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
      */
-    public boolean hasSessionType() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
+    public int getSessionTypeValue() {
+      return sessionType_;
     }
     /**
-     * <code>required .IM.BaseDefine.SessionType session_type = 2;</code>
+     * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
      */
     public com.mogujie.tt.protobuf.IMBaseDefine.SessionType getSessionType() {
       com.mogujie.tt.protobuf.IMBaseDefine.SessionType result = com.mogujie.tt.protobuf.IMBaseDefine.SessionType.forNumber(sessionType_);
-      return result == null ? com.mogujie.tt.protobuf.IMBaseDefine.SessionType.SESSION_TYPE_SINGLE : result;
+      return result == null ? com.mogujie.tt.protobuf.IMBaseDefine.SessionType.UNRECOGNIZED : result;
     }
     /**
-     * <code>required .IM.BaseDefine.SessionType session_type = 2;</code>
+     * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
+     */
+    private void setSessionTypeValue(int value) {
+        sessionType_ = value;
+    }
+    /**
+     * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
      */
     private void setSessionType(com.mogujie.tt.protobuf.IMBaseDefine.SessionType value) {
       if (value == null) {
         throw new NullPointerException();
       }
-      bitField0_ |= 0x00000002;
+      
       sessionType_ = value.getNumber();
     }
     /**
-     * <code>required .IM.BaseDefine.SessionType session_type = 2;</code>
+     * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
      */
     private void clearSessionType() {
-      bitField0_ = (bitField0_ & ~0x00000002);
-      sessionType_ = 1;
+      
+      sessionType_ = 0;
     }
 
     public static final int SESSION_ID_FIELD_NUMBER = 3;
     private int sessionId_;
     /**
-     * <code>required uint32 session_id = 3;</code>
-     */
-    public boolean hasSessionId() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    /**
-     * <code>required uint32 session_id = 3;</code>
+     * <code>uint32 session_id = 3;</code>
      */
     public int getSessionId() {
       return sessionId_;
     }
     /**
-     * <code>required uint32 session_id = 3;</code>
+     * <code>uint32 session_id = 3;</code>
      */
     private void setSessionId(int value) {
-      bitField0_ |= 0x00000004;
+      
       sessionId_ = value;
     }
     /**
-     * <code>required uint32 session_id = 3;</code>
+     * <code>uint32 session_id = 3;</code>
      */
     private void clearSessionId() {
-      bitField0_ = (bitField0_ & ~0x00000004);
+      
       sessionId_ = 0;
     }
 
@@ -8859,50 +7823,44 @@ public final class IMMessage {
     public static final int ATTACH_DATA_FIELD_NUMBER = 20;
     private com.google.protobuf.ByteString attachData_;
     /**
-     * <code>optional bytes attach_data = 20;</code>
-     */
-    public boolean hasAttachData() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
-    }
-    /**
-     * <code>optional bytes attach_data = 20;</code>
+     * <code>bytes attach_data = 20;</code>
      */
     public com.google.protobuf.ByteString getAttachData() {
       return attachData_;
     }
     /**
-     * <code>optional bytes attach_data = 20;</code>
+     * <code>bytes attach_data = 20;</code>
      */
     private void setAttachData(com.google.protobuf.ByteString value) {
       if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000008;
+  
       attachData_ = value;
     }
     /**
-     * <code>optional bytes attach_data = 20;</code>
+     * <code>bytes attach_data = 20;</code>
      */
     private void clearAttachData() {
-      bitField0_ = (bitField0_ & ~0x00000008);
+      
       attachData_ = getDefaultInstance().getAttachData();
     }
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+      if (userId_ != 0) {
         output.writeUInt32(1, userId_);
       }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+      if (sessionType_ != com.mogujie.tt.protobuf.IMBaseDefine.SessionType.SESSION_TYPE_UNIVERSAL.getNumber()) {
         output.writeEnum(2, sessionType_);
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+      if (sessionId_ != 0) {
         output.writeUInt32(3, sessionId_);
       }
       for (int i = 0; i < msgList_.size(); i++) {
         output.writeMessage(4, msgList_.get(i));
       }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+      if (!attachData_.isEmpty()) {
         output.writeBytes(20, attachData_);
       }
       unknownFields.writeTo(output);
@@ -8913,15 +7871,15 @@ public final class IMMessage {
       if (size != -1) return size;
 
       size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+      if (userId_ != 0) {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt32Size(1, userId_);
       }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+      if (sessionType_ != com.mogujie.tt.protobuf.IMBaseDefine.SessionType.SESSION_TYPE_UNIVERSAL.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(2, sessionType_);
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+      if (sessionId_ != 0) {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt32Size(3, sessionId_);
       }
@@ -8929,7 +7887,7 @@ public final class IMMessage {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(4, msgList_.get(i));
       }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+      if (!attachData_.isEmpty()) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(20, attachData_);
       }
@@ -9038,17 +7996,7 @@ public final class IMMessage {
        *cmd id:		0x030e
        * </pre>
        *
-       * <code>required uint32 user_id = 1;</code>
-       */
-      public boolean hasUserId() {
-        return instance.hasUserId();
-      }
-      /**
-       * <pre>
-       *cmd id:		0x030e
-       * </pre>
-       *
-       * <code>required uint32 user_id = 1;</code>
+       * <code>uint32 user_id = 1;</code>
        */
       public int getUserId() {
         return instance.getUserId();
@@ -9058,7 +8006,7 @@ public final class IMMessage {
        *cmd id:		0x030e
        * </pre>
        *
-       * <code>required uint32 user_id = 1;</code>
+       * <code>uint32 user_id = 1;</code>
        */
       public Builder setUserId(int value) {
         copyOnWrite();
@@ -9070,7 +8018,7 @@ public final class IMMessage {
        *cmd id:		0x030e
        * </pre>
        *
-       * <code>required uint32 user_id = 1;</code>
+       * <code>uint32 user_id = 1;</code>
        */
       public Builder clearUserId() {
         copyOnWrite();
@@ -9079,19 +8027,27 @@ public final class IMMessage {
       }
 
       /**
-       * <code>required .IM.BaseDefine.SessionType session_type = 2;</code>
+       * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
        */
-      public boolean hasSessionType() {
-        return instance.hasSessionType();
+      public int getSessionTypeValue() {
+        return instance.getSessionTypeValue();
       }
       /**
-       * <code>required .IM.BaseDefine.SessionType session_type = 2;</code>
+       * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
+       */
+      public Builder setSessionTypeValue(int value) {
+        copyOnWrite();
+        instance.setSessionTypeValue(value);
+        return this;
+      }
+      /**
+       * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
        */
       public com.mogujie.tt.protobuf.IMBaseDefine.SessionType getSessionType() {
         return instance.getSessionType();
       }
       /**
-       * <code>required .IM.BaseDefine.SessionType session_type = 2;</code>
+       * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
        */
       public Builder setSessionType(com.mogujie.tt.protobuf.IMBaseDefine.SessionType value) {
         copyOnWrite();
@@ -9099,7 +8055,7 @@ public final class IMMessage {
         return this;
       }
       /**
-       * <code>required .IM.BaseDefine.SessionType session_type = 2;</code>
+       * <code>.IM.BaseDefine.SessionType session_type = 2;</code>
        */
       public Builder clearSessionType() {
         copyOnWrite();
@@ -9108,19 +8064,13 @@ public final class IMMessage {
       }
 
       /**
-       * <code>required uint32 session_id = 3;</code>
-       */
-      public boolean hasSessionId() {
-        return instance.hasSessionId();
-      }
-      /**
-       * <code>required uint32 session_id = 3;</code>
+       * <code>uint32 session_id = 3;</code>
        */
       public int getSessionId() {
         return instance.getSessionId();
       }
       /**
-       * <code>required uint32 session_id = 3;</code>
+       * <code>uint32 session_id = 3;</code>
        */
       public Builder setSessionId(int value) {
         copyOnWrite();
@@ -9128,7 +8078,7 @@ public final class IMMessage {
         return this;
       }
       /**
-       * <code>required uint32 session_id = 3;</code>
+       * <code>uint32 session_id = 3;</code>
        */
       public Builder clearSessionId() {
         copyOnWrite();
@@ -9234,19 +8184,13 @@ public final class IMMessage {
       }
 
       /**
-       * <code>optional bytes attach_data = 20;</code>
-       */
-      public boolean hasAttachData() {
-        return instance.hasAttachData();
-      }
-      /**
-       * <code>optional bytes attach_data = 20;</code>
+       * <code>bytes attach_data = 20;</code>
        */
       public com.google.protobuf.ByteString getAttachData() {
         return instance.getAttachData();
       }
       /**
-       * <code>optional bytes attach_data = 20;</code>
+       * <code>bytes attach_data = 20;</code>
        */
       public Builder setAttachData(com.google.protobuf.ByteString value) {
         copyOnWrite();
@@ -9254,7 +8198,7 @@ public final class IMMessage {
         return this;
       }
       /**
-       * <code>optional bytes attach_data = 20;</code>
+       * <code>bytes attach_data = 20;</code>
        */
       public Builder clearAttachData() {
         copyOnWrite();
@@ -9264,7 +8208,6 @@ public final class IMMessage {
 
       // @@protoc_insertion_point(builder_scope:IM.Message.IMGetMsgByIdRsp)
     }
-    private byte memoizedIsInitialized = 2;
     @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
     protected final java.lang.Object dynamicMethod(
         com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
@@ -9274,27 +8217,7 @@ public final class IMMessage {
           return new com.mogujie.tt.protobuf.IMMessage.IMGetMsgByIdRsp();
         }
         case IS_INITIALIZED: {
-          byte isInitialized = memoizedIsInitialized;
-          if (isInitialized == 1) return DEFAULT_INSTANCE;
-          if (isInitialized == 0) return null;
-
-          boolean shouldMemoize = ((Boolean) arg0).booleanValue();
-          if (!hasUserId()) {
-            return null;
-          }
-          if (!hasSessionType()) {
-            return null;
-          }
-          if (!hasSessionId()) {
-            return null;
-          }
-          for (int i = 0; i < getMsgListCount(); i++) {
-            if (!getMsgList(i).isInitialized()) {
-              return null;
-            }
-          }
           return DEFAULT_INSTANCE;
-
         }
         case MAKE_IMMUTABLE: {
           msgList_.makeImmutable();
@@ -9306,18 +8229,14 @@ public final class IMMessage {
         case VISIT: {
           Visitor visitor = (Visitor) arg0;
           com.mogujie.tt.protobuf.IMMessage.IMGetMsgByIdRsp other = (com.mogujie.tt.protobuf.IMMessage.IMGetMsgByIdRsp) arg1;
-          userId_ = visitor.visitInt(
-              hasUserId(), userId_,
-              other.hasUserId(), other.userId_);
-          sessionType_ = visitor.visitInt(hasSessionType(), sessionType_,
-              other.hasSessionType(), other.sessionType_);
-          sessionId_ = visitor.visitInt(
-              hasSessionId(), sessionId_,
-              other.hasSessionId(), other.sessionId_);
+          userId_ = visitor.visitInt(userId_ != 0, userId_,
+              other.userId_ != 0, other.userId_);
+          sessionType_ = visitor.visitInt(sessionType_ != 0, sessionType_,    other.sessionType_ != 0, other.sessionType_);
+          sessionId_ = visitor.visitInt(sessionId_ != 0, sessionId_,
+              other.sessionId_ != 0, other.sessionId_);
           msgList_= visitor.visitList(msgList_, other.msgList_);
-          attachData_ = visitor.visitByteString(
-              hasAttachData(), attachData_,
-              other.hasAttachData(), other.attachData_);
+          attachData_ = visitor.visitByteString(attachData_ != com.google.protobuf.ByteString.EMPTY, attachData_,
+              other.attachData_ != com.google.protobuf.ByteString.EMPTY, other.attachData_);
           if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
               .INSTANCE) {
             bitField0_ |= other.bitField0_;
@@ -9347,23 +8266,18 @@ public final class IMMessage {
                   break;
                 }
                 case 8: {
-                  bitField0_ |= 0x00000001;
+
                   userId_ = input.readUInt32();
                   break;
                 }
                 case 16: {
                   int rawValue = input.readEnum();
-                  com.mogujie.tt.protobuf.IMBaseDefine.SessionType value = com.mogujie.tt.protobuf.IMBaseDefine.SessionType.forNumber(rawValue);
-                  if (value == null) {
-                    super.mergeVarintField(2, rawValue);
-                  } else {
-                    bitField0_ |= 0x00000002;
-                    sessionType_ = rawValue;
-                  }
+
+                  sessionType_ = rawValue;
                   break;
                 }
                 case 24: {
-                  bitField0_ |= 0x00000004;
+
                   sessionId_ = input.readUInt32();
                   break;
                 }
@@ -9377,7 +8291,7 @@ public final class IMMessage {
                   break;
                 }
                 case 162: {
-                  bitField0_ |= 0x00000008;
+
                   attachData_ = input.readBytes();
                   break;
                 }
@@ -9406,10 +8320,9 @@ public final class IMMessage {
           return PARSER;
       }
       case GET_MEMOIZED_IS_INITIALIZED: {
-        return memoizedIsInitialized;
+        return (byte) 1;
       }
       case SET_MEMOIZED_IS_INITIALIZED: {
-        memoizedIsInitialized = (byte) (arg0 == null ? 0 : 1);
         return null;
       }
       }

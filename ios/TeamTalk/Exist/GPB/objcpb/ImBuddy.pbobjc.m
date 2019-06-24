@@ -38,7 +38,7 @@ static GPBFileDescriptor *ImBuddyRoot_FileDescriptor(void) {
   if (!descriptor) {
     GPB_DEBUG_CHECK_RUNTIME_VERSIONS();
     descriptor = [[GPBFileDescriptor alloc] initWithPackage:@"IM.Buddy"
-                                                     syntax:GPBFileSyntaxProto2];
+                                                     syntax:GPBFileSyntaxProto3];
   }
   return descriptor;
 }
@@ -47,9 +47,9 @@ static GPBFileDescriptor *ImBuddyRoot_FileDescriptor(void) {
 
 @implementation IMRecentContactSessionReq
 
-@dynamic hasUserId, userId;
-@dynamic hasLatestUpdateTime, latestUpdateTime;
-@dynamic hasAttachData, attachData;
+@dynamic userId;
+@dynamic latestUpdateTime;
+@dynamic attachData;
 
 typedef struct IMRecentContactSessionReq__storage_ {
   uint32_t _has_storage_[1];
@@ -70,7 +70,7 @@ typedef struct IMRecentContactSessionReq__storage_ {
         .number = IMRecentContactSessionReq_FieldNumber_UserId,
         .hasIndex = 0,
         .offset = (uint32_t)offsetof(IMRecentContactSessionReq__storage_, userId),
-        .flags = GPBFieldRequired,
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt32,
       },
       {
@@ -79,7 +79,7 @@ typedef struct IMRecentContactSessionReq__storage_ {
         .number = IMRecentContactSessionReq_FieldNumber_LatestUpdateTime,
         .hasIndex = 1,
         .offset = (uint32_t)offsetof(IMRecentContactSessionReq__storage_, latestUpdateTime),
-        .flags = GPBFieldRequired,
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt32,
       },
       {
@@ -112,9 +112,9 @@ typedef struct IMRecentContactSessionReq__storage_ {
 
 @implementation IMRecentContactSessionRsp
 
-@dynamic hasUserId, userId;
+@dynamic userId;
 @dynamic contactSessionListArray, contactSessionListArray_Count;
-@dynamic hasAttachData, attachData;
+@dynamic attachData;
 
 typedef struct IMRecentContactSessionRsp__storage_ {
   uint32_t _has_storage_[1];
@@ -135,7 +135,7 @@ typedef struct IMRecentContactSessionRsp__storage_ {
         .number = IMRecentContactSessionRsp_FieldNumber_UserId,
         .hasIndex = 0,
         .offset = (uint32_t)offsetof(IMRecentContactSessionRsp__storage_, userId),
-        .flags = GPBFieldRequired,
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt32,
       },
       {
@@ -196,7 +196,7 @@ typedef struct IMUserStatNotify__storage_ {
         .number = IMUserStatNotify_FieldNumber_UserStat,
         .hasIndex = 0,
         .offset = (uint32_t)offsetof(IMUserStatNotify__storage_, userStat),
-        .flags = GPBFieldRequired,
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
       },
     };
@@ -220,9 +220,9 @@ typedef struct IMUserStatNotify__storage_ {
 
 @implementation IMUsersInfoReq
 
-@dynamic hasUserId, userId;
+@dynamic userId;
 @dynamic userIdListArray, userIdListArray_Count;
-@dynamic hasAttachData, attachData;
+@dynamic attachData;
 
 typedef struct IMUsersInfoReq__storage_ {
   uint32_t _has_storage_[1];
@@ -243,7 +243,7 @@ typedef struct IMUsersInfoReq__storage_ {
         .number = IMUsersInfoReq_FieldNumber_UserId,
         .hasIndex = 0,
         .offset = (uint32_t)offsetof(IMUsersInfoReq__storage_, userId),
-        .flags = GPBFieldRequired,
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt32,
       },
       {
@@ -252,7 +252,7 @@ typedef struct IMUsersInfoReq__storage_ {
         .number = IMUsersInfoReq_FieldNumber_UserIdListArray,
         .hasIndex = GPBNoHasBit,
         .offset = (uint32_t)offsetof(IMUsersInfoReq__storage_, userIdListArray),
-        .flags = GPBFieldRepeated,
+        .flags = (GPBFieldFlags)(GPBFieldRepeated | GPBFieldPacked),
         .dataType = GPBDataTypeUInt32,
       },
       {
@@ -285,9 +285,9 @@ typedef struct IMUsersInfoReq__storage_ {
 
 @implementation IMUsersInfoRsp
 
-@dynamic hasUserId, userId;
+@dynamic userId;
 @dynamic userInfoListArray, userInfoListArray_Count;
-@dynamic hasAttachData, attachData;
+@dynamic attachData;
 
 typedef struct IMUsersInfoRsp__storage_ {
   uint32_t _has_storage_[1];
@@ -308,7 +308,7 @@ typedef struct IMUsersInfoRsp__storage_ {
         .number = IMUsersInfoRsp_FieldNumber_UserId,
         .hasIndex = 0,
         .offset = (uint32_t)offsetof(IMUsersInfoRsp__storage_, userId),
-        .flags = GPBFieldRequired,
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt32,
       },
       {
@@ -350,10 +350,10 @@ typedef struct IMUsersInfoRsp__storage_ {
 
 @implementation IMRemoveSessionReq
 
-@dynamic hasUserId, userId;
-@dynamic hasSessionType, sessionType;
-@dynamic hasSessionId, sessionId;
-@dynamic hasAttachData, attachData;
+@dynamic userId;
+@dynamic sessionType;
+@dynamic sessionId;
+@dynamic attachData;
 
 typedef struct IMRemoveSessionReq__storage_ {
   uint32_t _has_storage_[1];
@@ -368,46 +368,42 @@ typedef struct IMRemoveSessionReq__storage_ {
 + (GPBDescriptor *)descriptor {
   static GPBDescriptor *descriptor = nil;
   if (!descriptor) {
-    static GPBMessageFieldDescriptionWithDefault fields[] = {
+    static GPBMessageFieldDescription fields[] = {
       {
-        .defaultValue.valueUInt32 = 0U,
-        .core.name = "userId",
-        .core.dataTypeSpecific.className = NULL,
-        .core.number = IMRemoveSessionReq_FieldNumber_UserId,
-        .core.hasIndex = 0,
-        .core.offset = (uint32_t)offsetof(IMRemoveSessionReq__storage_, userId),
-        .core.flags = GPBFieldRequired,
-        .core.dataType = GPBDataTypeUInt32,
+        .name = "userId",
+        .dataTypeSpecific.className = NULL,
+        .number = IMRemoveSessionReq_FieldNumber_UserId,
+        .hasIndex = 0,
+        .offset = (uint32_t)offsetof(IMRemoveSessionReq__storage_, userId),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeUInt32,
       },
       {
-        .defaultValue.valueEnum = SessionType_SessionTypeSingle,
-        .core.name = "sessionType",
-        .core.dataTypeSpecific.enumDescFunc = SessionType_EnumDescriptor,
-        .core.number = IMRemoveSessionReq_FieldNumber_SessionType,
-        .core.hasIndex = 1,
-        .core.offset = (uint32_t)offsetof(IMRemoveSessionReq__storage_, sessionType),
-        .core.flags = (GPBFieldFlags)(GPBFieldRequired | GPBFieldHasEnumDescriptor),
-        .core.dataType = GPBDataTypeEnum,
+        .name = "sessionType",
+        .dataTypeSpecific.enumDescFunc = SessionType_EnumDescriptor,
+        .number = IMRemoveSessionReq_FieldNumber_SessionType,
+        .hasIndex = 1,
+        .offset = (uint32_t)offsetof(IMRemoveSessionReq__storage_, sessionType),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldHasEnumDescriptor),
+        .dataType = GPBDataTypeEnum,
       },
       {
-        .defaultValue.valueUInt32 = 0U,
-        .core.name = "sessionId",
-        .core.dataTypeSpecific.className = NULL,
-        .core.number = IMRemoveSessionReq_FieldNumber_SessionId,
-        .core.hasIndex = 2,
-        .core.offset = (uint32_t)offsetof(IMRemoveSessionReq__storage_, sessionId),
-        .core.flags = GPBFieldRequired,
-        .core.dataType = GPBDataTypeUInt32,
+        .name = "sessionId",
+        .dataTypeSpecific.className = NULL,
+        .number = IMRemoveSessionReq_FieldNumber_SessionId,
+        .hasIndex = 2,
+        .offset = (uint32_t)offsetof(IMRemoveSessionReq__storage_, sessionId),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeUInt32,
       },
       {
-        .defaultValue.valueData = nil,
-        .core.name = "attachData",
-        .core.dataTypeSpecific.className = NULL,
-        .core.number = IMRemoveSessionReq_FieldNumber_AttachData,
-        .core.hasIndex = 3,
-        .core.offset = (uint32_t)offsetof(IMRemoveSessionReq__storage_, attachData),
-        .core.flags = GPBFieldOptional,
-        .core.dataType = GPBDataTypeBytes,
+        .name = "attachData",
+        .dataTypeSpecific.className = NULL,
+        .number = IMRemoveSessionReq_FieldNumber_AttachData,
+        .hasIndex = 3,
+        .offset = (uint32_t)offsetof(IMRemoveSessionReq__storage_, attachData),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeBytes,
       },
     };
     GPBDescriptor *localDescriptor =
@@ -415,9 +411,9 @@ typedef struct IMRemoveSessionReq__storage_ {
                                      rootClass:[ImBuddyRoot class]
                                           file:ImBuddyRoot_FileDescriptor()
                                         fields:fields
-                                    fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescriptionWithDefault))
+                                    fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(IMRemoveSessionReq__storage_)
-                                         flags:GPBDescriptorInitializationFlag_FieldsWithDefault];
+                                         flags:GPBDescriptorInitializationFlag_None];
     NSAssert(descriptor == nil, @"Startup recursed!");
     descriptor = localDescriptor;
   }
@@ -426,15 +422,27 @@ typedef struct IMRemoveSessionReq__storage_ {
 
 @end
 
+int32_t IMRemoveSessionReq_SessionType_RawValue(IMRemoveSessionReq *message) {
+  GPBDescriptor *descriptor = [IMRemoveSessionReq descriptor];
+  GPBFieldDescriptor *field = [descriptor fieldWithNumber:IMRemoveSessionReq_FieldNumber_SessionType];
+  return GPBGetMessageInt32Field(message, field);
+}
+
+void SetIMRemoveSessionReq_SessionType_RawValue(IMRemoveSessionReq *message, int32_t value) {
+  GPBDescriptor *descriptor = [IMRemoveSessionReq descriptor];
+  GPBFieldDescriptor *field = [descriptor fieldWithNumber:IMRemoveSessionReq_FieldNumber_SessionType];
+  GPBSetInt32IvarWithFieldInternal(message, field, value, descriptor.file.syntax);
+}
+
 #pragma mark - IMRemoveSessionRsp
 
 @implementation IMRemoveSessionRsp
 
-@dynamic hasUserId, userId;
-@dynamic hasResultCode, resultCode;
-@dynamic hasSessionType, sessionType;
-@dynamic hasSessionId, sessionId;
-@dynamic hasAttachData, attachData;
+@dynamic userId;
+@dynamic resultCode;
+@dynamic sessionType;
+@dynamic sessionId;
+@dynamic attachData;
 
 typedef struct IMRemoveSessionRsp__storage_ {
   uint32_t _has_storage_[1];
@@ -450,56 +458,51 @@ typedef struct IMRemoveSessionRsp__storage_ {
 + (GPBDescriptor *)descriptor {
   static GPBDescriptor *descriptor = nil;
   if (!descriptor) {
-    static GPBMessageFieldDescriptionWithDefault fields[] = {
+    static GPBMessageFieldDescription fields[] = {
       {
-        .defaultValue.valueUInt32 = 0U,
-        .core.name = "userId",
-        .core.dataTypeSpecific.className = NULL,
-        .core.number = IMRemoveSessionRsp_FieldNumber_UserId,
-        .core.hasIndex = 0,
-        .core.offset = (uint32_t)offsetof(IMRemoveSessionRsp__storage_, userId),
-        .core.flags = GPBFieldRequired,
-        .core.dataType = GPBDataTypeUInt32,
+        .name = "userId",
+        .dataTypeSpecific.className = NULL,
+        .number = IMRemoveSessionRsp_FieldNumber_UserId,
+        .hasIndex = 0,
+        .offset = (uint32_t)offsetof(IMRemoveSessionRsp__storage_, userId),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeUInt32,
       },
       {
-        .defaultValue.valueUInt32 = 0U,
-        .core.name = "resultCode",
-        .core.dataTypeSpecific.className = NULL,
-        .core.number = IMRemoveSessionRsp_FieldNumber_ResultCode,
-        .core.hasIndex = 1,
-        .core.offset = (uint32_t)offsetof(IMRemoveSessionRsp__storage_, resultCode),
-        .core.flags = GPBFieldRequired,
-        .core.dataType = GPBDataTypeUInt32,
+        .name = "resultCode",
+        .dataTypeSpecific.className = NULL,
+        .number = IMRemoveSessionRsp_FieldNumber_ResultCode,
+        .hasIndex = 1,
+        .offset = (uint32_t)offsetof(IMRemoveSessionRsp__storage_, resultCode),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeUInt32,
       },
       {
-        .defaultValue.valueEnum = SessionType_SessionTypeSingle,
-        .core.name = "sessionType",
-        .core.dataTypeSpecific.enumDescFunc = SessionType_EnumDescriptor,
-        .core.number = IMRemoveSessionRsp_FieldNumber_SessionType,
-        .core.hasIndex = 2,
-        .core.offset = (uint32_t)offsetof(IMRemoveSessionRsp__storage_, sessionType),
-        .core.flags = (GPBFieldFlags)(GPBFieldRequired | GPBFieldHasEnumDescriptor),
-        .core.dataType = GPBDataTypeEnum,
+        .name = "sessionType",
+        .dataTypeSpecific.enumDescFunc = SessionType_EnumDescriptor,
+        .number = IMRemoveSessionRsp_FieldNumber_SessionType,
+        .hasIndex = 2,
+        .offset = (uint32_t)offsetof(IMRemoveSessionRsp__storage_, sessionType),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldHasEnumDescriptor),
+        .dataType = GPBDataTypeEnum,
       },
       {
-        .defaultValue.valueUInt32 = 0U,
-        .core.name = "sessionId",
-        .core.dataTypeSpecific.className = NULL,
-        .core.number = IMRemoveSessionRsp_FieldNumber_SessionId,
-        .core.hasIndex = 3,
-        .core.offset = (uint32_t)offsetof(IMRemoveSessionRsp__storage_, sessionId),
-        .core.flags = GPBFieldRequired,
-        .core.dataType = GPBDataTypeUInt32,
+        .name = "sessionId",
+        .dataTypeSpecific.className = NULL,
+        .number = IMRemoveSessionRsp_FieldNumber_SessionId,
+        .hasIndex = 3,
+        .offset = (uint32_t)offsetof(IMRemoveSessionRsp__storage_, sessionId),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeUInt32,
       },
       {
-        .defaultValue.valueData = nil,
-        .core.name = "attachData",
-        .core.dataTypeSpecific.className = NULL,
-        .core.number = IMRemoveSessionRsp_FieldNumber_AttachData,
-        .core.hasIndex = 4,
-        .core.offset = (uint32_t)offsetof(IMRemoveSessionRsp__storage_, attachData),
-        .core.flags = GPBFieldOptional,
-        .core.dataType = GPBDataTypeBytes,
+        .name = "attachData",
+        .dataTypeSpecific.className = NULL,
+        .number = IMRemoveSessionRsp_FieldNumber_AttachData,
+        .hasIndex = 4,
+        .offset = (uint32_t)offsetof(IMRemoveSessionRsp__storage_, attachData),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeBytes,
       },
     };
     GPBDescriptor *localDescriptor =
@@ -507,9 +510,9 @@ typedef struct IMRemoveSessionRsp__storage_ {
                                      rootClass:[ImBuddyRoot class]
                                           file:ImBuddyRoot_FileDescriptor()
                                         fields:fields
-                                    fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescriptionWithDefault))
+                                    fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(IMRemoveSessionRsp__storage_)
-                                         flags:GPBDescriptorInitializationFlag_FieldsWithDefault];
+                                         flags:GPBDescriptorInitializationFlag_None];
     NSAssert(descriptor == nil, @"Startup recursed!");
     descriptor = localDescriptor;
   }
@@ -518,13 +521,25 @@ typedef struct IMRemoveSessionRsp__storage_ {
 
 @end
 
+int32_t IMRemoveSessionRsp_SessionType_RawValue(IMRemoveSessionRsp *message) {
+  GPBDescriptor *descriptor = [IMRemoveSessionRsp descriptor];
+  GPBFieldDescriptor *field = [descriptor fieldWithNumber:IMRemoveSessionRsp_FieldNumber_SessionType];
+  return GPBGetMessageInt32Field(message, field);
+}
+
+void SetIMRemoveSessionRsp_SessionType_RawValue(IMRemoveSessionRsp *message, int32_t value) {
+  GPBDescriptor *descriptor = [IMRemoveSessionRsp descriptor];
+  GPBFieldDescriptor *field = [descriptor fieldWithNumber:IMRemoveSessionRsp_FieldNumber_SessionType];
+  GPBSetInt32IvarWithFieldInternal(message, field, value, descriptor.file.syntax);
+}
+
 #pragma mark - IMAllUserReq
 
 @implementation IMAllUserReq
 
-@dynamic hasUserId, userId;
-@dynamic hasLatestUpdateTime, latestUpdateTime;
-@dynamic hasAttachData, attachData;
+@dynamic userId;
+@dynamic latestUpdateTime;
+@dynamic attachData;
 
 typedef struct IMAllUserReq__storage_ {
   uint32_t _has_storage_[1];
@@ -545,7 +560,7 @@ typedef struct IMAllUserReq__storage_ {
         .number = IMAllUserReq_FieldNumber_UserId,
         .hasIndex = 0,
         .offset = (uint32_t)offsetof(IMAllUserReq__storage_, userId),
-        .flags = GPBFieldRequired,
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt32,
       },
       {
@@ -554,7 +569,7 @@ typedef struct IMAllUserReq__storage_ {
         .number = IMAllUserReq_FieldNumber_LatestUpdateTime,
         .hasIndex = 1,
         .offset = (uint32_t)offsetof(IMAllUserReq__storage_, latestUpdateTime),
-        .flags = GPBFieldRequired,
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt32,
       },
       {
@@ -587,10 +602,10 @@ typedef struct IMAllUserReq__storage_ {
 
 @implementation IMAllUserRsp
 
-@dynamic hasUserId, userId;
-@dynamic hasLatestUpdateTime, latestUpdateTime;
+@dynamic userId;
+@dynamic latestUpdateTime;
 @dynamic userListArray, userListArray_Count;
-@dynamic hasAttachData, attachData;
+@dynamic attachData;
 
 typedef struct IMAllUserRsp__storage_ {
   uint32_t _has_storage_[1];
@@ -612,7 +627,7 @@ typedef struct IMAllUserRsp__storage_ {
         .number = IMAllUserRsp_FieldNumber_UserId,
         .hasIndex = 0,
         .offset = (uint32_t)offsetof(IMAllUserRsp__storage_, userId),
-        .flags = GPBFieldRequired,
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt32,
       },
       {
@@ -621,7 +636,7 @@ typedef struct IMAllUserRsp__storage_ {
         .number = IMAllUserRsp_FieldNumber_LatestUpdateTime,
         .hasIndex = 1,
         .offset = (uint32_t)offsetof(IMAllUserRsp__storage_, latestUpdateTime),
-        .flags = GPBFieldRequired,
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt32,
       },
       {
@@ -663,9 +678,9 @@ typedef struct IMAllUserRsp__storage_ {
 
 @implementation IMUsersStatReq
 
-@dynamic hasUserId, userId;
+@dynamic userId;
 @dynamic userIdListArray, userIdListArray_Count;
-@dynamic hasAttachData, attachData;
+@dynamic attachData;
 
 typedef struct IMUsersStatReq__storage_ {
   uint32_t _has_storage_[1];
@@ -686,7 +701,7 @@ typedef struct IMUsersStatReq__storage_ {
         .number = IMUsersStatReq_FieldNumber_UserId,
         .hasIndex = 0,
         .offset = (uint32_t)offsetof(IMUsersStatReq__storage_, userId),
-        .flags = GPBFieldRequired,
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt32,
       },
       {
@@ -695,7 +710,7 @@ typedef struct IMUsersStatReq__storage_ {
         .number = IMUsersStatReq_FieldNumber_UserIdListArray,
         .hasIndex = GPBNoHasBit,
         .offset = (uint32_t)offsetof(IMUsersStatReq__storage_, userIdListArray),
-        .flags = GPBFieldRepeated,
+        .flags = (GPBFieldFlags)(GPBFieldRepeated | GPBFieldPacked),
         .dataType = GPBDataTypeUInt32,
       },
       {
@@ -728,9 +743,9 @@ typedef struct IMUsersStatReq__storage_ {
 
 @implementation IMUsersStatRsp
 
-@dynamic hasUserId, userId;
+@dynamic userId;
 @dynamic userStatListArray, userStatListArray_Count;
-@dynamic hasAttachData, attachData;
+@dynamic attachData;
 
 typedef struct IMUsersStatRsp__storage_ {
   uint32_t _has_storage_[1];
@@ -751,7 +766,7 @@ typedef struct IMUsersStatRsp__storage_ {
         .number = IMUsersStatRsp_FieldNumber_UserId,
         .hasIndex = 0,
         .offset = (uint32_t)offsetof(IMUsersStatRsp__storage_, userId),
-        .flags = GPBFieldRequired,
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt32,
       },
       {
@@ -793,9 +808,9 @@ typedef struct IMUsersStatRsp__storage_ {
 
 @implementation IMChangeAvatarReq
 
-@dynamic hasUserId, userId;
-@dynamic hasAvatarURL, avatarURL;
-@dynamic hasAttachData, attachData;
+@dynamic userId;
+@dynamic avatarURL;
+@dynamic attachData;
 
 typedef struct IMChangeAvatarReq__storage_ {
   uint32_t _has_storage_[1];
@@ -816,7 +831,7 @@ typedef struct IMChangeAvatarReq__storage_ {
         .number = IMChangeAvatarReq_FieldNumber_UserId,
         .hasIndex = 0,
         .offset = (uint32_t)offsetof(IMChangeAvatarReq__storage_, userId),
-        .flags = GPBFieldRequired,
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt32,
       },
       {
@@ -825,7 +840,7 @@ typedef struct IMChangeAvatarReq__storage_ {
         .number = IMChangeAvatarReq_FieldNumber_AvatarURL,
         .hasIndex = 1,
         .offset = (uint32_t)offsetof(IMChangeAvatarReq__storage_, avatarURL),
-        .flags = (GPBFieldFlags)(GPBFieldRequired | GPBFieldTextFormatNameCustom),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom),
         .dataType = GPBDataTypeString,
       },
       {
@@ -863,9 +878,9 @@ typedef struct IMChangeAvatarReq__storage_ {
 
 @implementation IMChangeAvatarRsp
 
-@dynamic hasUserId, userId;
-@dynamic hasResultCode, resultCode;
-@dynamic hasAttachData, attachData;
+@dynamic userId;
+@dynamic resultCode;
+@dynamic attachData;
 
 typedef struct IMChangeAvatarRsp__storage_ {
   uint32_t _has_storage_[1];
@@ -886,7 +901,7 @@ typedef struct IMChangeAvatarRsp__storage_ {
         .number = IMChangeAvatarRsp_FieldNumber_UserId,
         .hasIndex = 0,
         .offset = (uint32_t)offsetof(IMChangeAvatarRsp__storage_, userId),
-        .flags = GPBFieldRequired,
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt32,
       },
       {
@@ -895,7 +910,7 @@ typedef struct IMChangeAvatarRsp__storage_ {
         .number = IMChangeAvatarRsp_FieldNumber_ResultCode,
         .hasIndex = 1,
         .offset = (uint32_t)offsetof(IMChangeAvatarRsp__storage_, resultCode),
-        .flags = GPBFieldRequired,
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt32,
       },
       {
@@ -928,8 +943,8 @@ typedef struct IMChangeAvatarRsp__storage_ {
 
 @implementation IMPCLoginStatusNotify
 
-@dynamic hasUserId, userId;
-@dynamic hasLoginStat, loginStat;
+@dynamic userId;
+@dynamic loginStat;
 
 typedef struct IMPCLoginStatusNotify__storage_ {
   uint32_t _has_storage_[1];
@@ -942,26 +957,24 @@ typedef struct IMPCLoginStatusNotify__storage_ {
 + (GPBDescriptor *)descriptor {
   static GPBDescriptor *descriptor = nil;
   if (!descriptor) {
-    static GPBMessageFieldDescriptionWithDefault fields[] = {
+    static GPBMessageFieldDescription fields[] = {
       {
-        .defaultValue.valueUInt32 = 0U,
-        .core.name = "userId",
-        .core.dataTypeSpecific.className = NULL,
-        .core.number = IMPCLoginStatusNotify_FieldNumber_UserId,
-        .core.hasIndex = 0,
-        .core.offset = (uint32_t)offsetof(IMPCLoginStatusNotify__storage_, userId),
-        .core.flags = GPBFieldRequired,
-        .core.dataType = GPBDataTypeUInt32,
+        .name = "userId",
+        .dataTypeSpecific.className = NULL,
+        .number = IMPCLoginStatusNotify_FieldNumber_UserId,
+        .hasIndex = 0,
+        .offset = (uint32_t)offsetof(IMPCLoginStatusNotify__storage_, userId),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeUInt32,
       },
       {
-        .defaultValue.valueEnum = UserStatType_UserStatusOnline,
-        .core.name = "loginStat",
-        .core.dataTypeSpecific.enumDescFunc = UserStatType_EnumDescriptor,
-        .core.number = IMPCLoginStatusNotify_FieldNumber_LoginStat,
-        .core.hasIndex = 1,
-        .core.offset = (uint32_t)offsetof(IMPCLoginStatusNotify__storage_, loginStat),
-        .core.flags = (GPBFieldFlags)(GPBFieldRequired | GPBFieldHasEnumDescriptor),
-        .core.dataType = GPBDataTypeEnum,
+        .name = "loginStat",
+        .dataTypeSpecific.enumDescFunc = UserStatType_EnumDescriptor,
+        .number = IMPCLoginStatusNotify_FieldNumber_LoginStat,
+        .hasIndex = 1,
+        .offset = (uint32_t)offsetof(IMPCLoginStatusNotify__storage_, loginStat),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldHasEnumDescriptor),
+        .dataType = GPBDataTypeEnum,
       },
     };
     GPBDescriptor *localDescriptor =
@@ -969,9 +982,9 @@ typedef struct IMPCLoginStatusNotify__storage_ {
                                      rootClass:[ImBuddyRoot class]
                                           file:ImBuddyRoot_FileDescriptor()
                                         fields:fields
-                                    fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescriptionWithDefault))
+                                    fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(IMPCLoginStatusNotify__storage_)
-                                         flags:GPBDescriptorInitializationFlag_FieldsWithDefault];
+                                         flags:GPBDescriptorInitializationFlag_None];
     NSAssert(descriptor == nil, @"Startup recursed!");
     descriptor = localDescriptor;
   }
@@ -980,13 +993,25 @@ typedef struct IMPCLoginStatusNotify__storage_ {
 
 @end
 
+int32_t IMPCLoginStatusNotify_LoginStat_RawValue(IMPCLoginStatusNotify *message) {
+  GPBDescriptor *descriptor = [IMPCLoginStatusNotify descriptor];
+  GPBFieldDescriptor *field = [descriptor fieldWithNumber:IMPCLoginStatusNotify_FieldNumber_LoginStat];
+  return GPBGetMessageInt32Field(message, field);
+}
+
+void SetIMPCLoginStatusNotify_LoginStat_RawValue(IMPCLoginStatusNotify *message, int32_t value) {
+  GPBDescriptor *descriptor = [IMPCLoginStatusNotify descriptor];
+  GPBFieldDescriptor *field = [descriptor fieldWithNumber:IMPCLoginStatusNotify_FieldNumber_LoginStat];
+  GPBSetInt32IvarWithFieldInternal(message, field, value, descriptor.file.syntax);
+}
+
 #pragma mark - IMRemoveSessionNotify
 
 @implementation IMRemoveSessionNotify
 
-@dynamic hasUserId, userId;
-@dynamic hasSessionType, sessionType;
-@dynamic hasSessionId, sessionId;
+@dynamic userId;
+@dynamic sessionType;
+@dynamic sessionId;
 
 typedef struct IMRemoveSessionNotify__storage_ {
   uint32_t _has_storage_[1];
@@ -1000,36 +1025,33 @@ typedef struct IMRemoveSessionNotify__storage_ {
 + (GPBDescriptor *)descriptor {
   static GPBDescriptor *descriptor = nil;
   if (!descriptor) {
-    static GPBMessageFieldDescriptionWithDefault fields[] = {
+    static GPBMessageFieldDescription fields[] = {
       {
-        .defaultValue.valueUInt32 = 0U,
-        .core.name = "userId",
-        .core.dataTypeSpecific.className = NULL,
-        .core.number = IMRemoveSessionNotify_FieldNumber_UserId,
-        .core.hasIndex = 0,
-        .core.offset = (uint32_t)offsetof(IMRemoveSessionNotify__storage_, userId),
-        .core.flags = GPBFieldRequired,
-        .core.dataType = GPBDataTypeUInt32,
+        .name = "userId",
+        .dataTypeSpecific.className = NULL,
+        .number = IMRemoveSessionNotify_FieldNumber_UserId,
+        .hasIndex = 0,
+        .offset = (uint32_t)offsetof(IMRemoveSessionNotify__storage_, userId),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeUInt32,
       },
       {
-        .defaultValue.valueEnum = SessionType_SessionTypeSingle,
-        .core.name = "sessionType",
-        .core.dataTypeSpecific.enumDescFunc = SessionType_EnumDescriptor,
-        .core.number = IMRemoveSessionNotify_FieldNumber_SessionType,
-        .core.hasIndex = 1,
-        .core.offset = (uint32_t)offsetof(IMRemoveSessionNotify__storage_, sessionType),
-        .core.flags = (GPBFieldFlags)(GPBFieldRequired | GPBFieldHasEnumDescriptor),
-        .core.dataType = GPBDataTypeEnum,
+        .name = "sessionType",
+        .dataTypeSpecific.enumDescFunc = SessionType_EnumDescriptor,
+        .number = IMRemoveSessionNotify_FieldNumber_SessionType,
+        .hasIndex = 1,
+        .offset = (uint32_t)offsetof(IMRemoveSessionNotify__storage_, sessionType),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldHasEnumDescriptor),
+        .dataType = GPBDataTypeEnum,
       },
       {
-        .defaultValue.valueUInt32 = 0U,
-        .core.name = "sessionId",
-        .core.dataTypeSpecific.className = NULL,
-        .core.number = IMRemoveSessionNotify_FieldNumber_SessionId,
-        .core.hasIndex = 2,
-        .core.offset = (uint32_t)offsetof(IMRemoveSessionNotify__storage_, sessionId),
-        .core.flags = GPBFieldRequired,
-        .core.dataType = GPBDataTypeUInt32,
+        .name = "sessionId",
+        .dataTypeSpecific.className = NULL,
+        .number = IMRemoveSessionNotify_FieldNumber_SessionId,
+        .hasIndex = 2,
+        .offset = (uint32_t)offsetof(IMRemoveSessionNotify__storage_, sessionId),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeUInt32,
       },
     };
     GPBDescriptor *localDescriptor =
@@ -1037,9 +1059,9 @@ typedef struct IMRemoveSessionNotify__storage_ {
                                      rootClass:[ImBuddyRoot class]
                                           file:ImBuddyRoot_FileDescriptor()
                                         fields:fields
-                                    fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescriptionWithDefault))
+                                    fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(IMRemoveSessionNotify__storage_)
-                                         flags:GPBDescriptorInitializationFlag_FieldsWithDefault];
+                                         flags:GPBDescriptorInitializationFlag_None];
     NSAssert(descriptor == nil, @"Startup recursed!");
     descriptor = localDescriptor;
   }
@@ -1048,13 +1070,25 @@ typedef struct IMRemoveSessionNotify__storage_ {
 
 @end
 
+int32_t IMRemoveSessionNotify_SessionType_RawValue(IMRemoveSessionNotify *message) {
+  GPBDescriptor *descriptor = [IMRemoveSessionNotify descriptor];
+  GPBFieldDescriptor *field = [descriptor fieldWithNumber:IMRemoveSessionNotify_FieldNumber_SessionType];
+  return GPBGetMessageInt32Field(message, field);
+}
+
+void SetIMRemoveSessionNotify_SessionType_RawValue(IMRemoveSessionNotify *message, int32_t value) {
+  GPBDescriptor *descriptor = [IMRemoveSessionNotify descriptor];
+  GPBFieldDescriptor *field = [descriptor fieldWithNumber:IMRemoveSessionNotify_FieldNumber_SessionType];
+  GPBSetInt32IvarWithFieldInternal(message, field, value, descriptor.file.syntax);
+}
+
 #pragma mark - IMDepartmentReq
 
 @implementation IMDepartmentReq
 
-@dynamic hasUserId, userId;
-@dynamic hasLatestUpdateTime, latestUpdateTime;
-@dynamic hasAttachData, attachData;
+@dynamic userId;
+@dynamic latestUpdateTime;
+@dynamic attachData;
 
 typedef struct IMDepartmentReq__storage_ {
   uint32_t _has_storage_[1];
@@ -1075,7 +1109,7 @@ typedef struct IMDepartmentReq__storage_ {
         .number = IMDepartmentReq_FieldNumber_UserId,
         .hasIndex = 0,
         .offset = (uint32_t)offsetof(IMDepartmentReq__storage_, userId),
-        .flags = GPBFieldRequired,
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt32,
       },
       {
@@ -1084,7 +1118,7 @@ typedef struct IMDepartmentReq__storage_ {
         .number = IMDepartmentReq_FieldNumber_LatestUpdateTime,
         .hasIndex = 1,
         .offset = (uint32_t)offsetof(IMDepartmentReq__storage_, latestUpdateTime),
-        .flags = GPBFieldRequired,
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt32,
       },
       {
@@ -1117,10 +1151,10 @@ typedef struct IMDepartmentReq__storage_ {
 
 @implementation IMDepartmentRsp
 
-@dynamic hasUserId, userId;
-@dynamic hasLatestUpdateTime, latestUpdateTime;
+@dynamic userId;
+@dynamic latestUpdateTime;
 @dynamic deptListArray, deptListArray_Count;
-@dynamic hasAttachData, attachData;
+@dynamic attachData;
 
 typedef struct IMDepartmentRsp__storage_ {
   uint32_t _has_storage_[1];
@@ -1142,7 +1176,7 @@ typedef struct IMDepartmentRsp__storage_ {
         .number = IMDepartmentRsp_FieldNumber_UserId,
         .hasIndex = 0,
         .offset = (uint32_t)offsetof(IMDepartmentRsp__storage_, userId),
-        .flags = GPBFieldRequired,
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt32,
       },
       {
@@ -1151,7 +1185,7 @@ typedef struct IMDepartmentRsp__storage_ {
         .number = IMDepartmentRsp_FieldNumber_LatestUpdateTime,
         .hasIndex = 1,
         .offset = (uint32_t)offsetof(IMDepartmentRsp__storage_, latestUpdateTime),
-        .flags = GPBFieldRequired,
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt32,
       },
       {
@@ -1193,8 +1227,8 @@ typedef struct IMDepartmentRsp__storage_ {
 
 @implementation IMAvatarChangedNotify
 
-@dynamic hasChangedUserId, changedUserId;
-@dynamic hasAvatarURL, avatarURL;
+@dynamic changedUserId;
+@dynamic avatarURL;
 
 typedef struct IMAvatarChangedNotify__storage_ {
   uint32_t _has_storage_[1];
@@ -1214,7 +1248,7 @@ typedef struct IMAvatarChangedNotify__storage_ {
         .number = IMAvatarChangedNotify_FieldNumber_ChangedUserId,
         .hasIndex = 0,
         .offset = (uint32_t)offsetof(IMAvatarChangedNotify__storage_, changedUserId),
-        .flags = GPBFieldRequired,
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt32,
       },
       {
@@ -1223,7 +1257,7 @@ typedef struct IMAvatarChangedNotify__storage_ {
         .number = IMAvatarChangedNotify_FieldNumber_AvatarURL,
         .hasIndex = 1,
         .offset = (uint32_t)offsetof(IMAvatarChangedNotify__storage_, avatarURL),
-        .flags = (GPBFieldFlags)(GPBFieldRequired | GPBFieldTextFormatNameCustom),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom),
         .dataType = GPBDataTypeString,
       },
     };
@@ -1252,9 +1286,9 @@ typedef struct IMAvatarChangedNotify__storage_ {
 
 @implementation IMChangeSignInfoReq
 
-@dynamic hasUserId, userId;
-@dynamic hasSignInfo, signInfo;
-@dynamic hasAttachData, attachData;
+@dynamic userId;
+@dynamic signInfo;
+@dynamic attachData;
 
 typedef struct IMChangeSignInfoReq__storage_ {
   uint32_t _has_storage_[1];
@@ -1275,7 +1309,7 @@ typedef struct IMChangeSignInfoReq__storage_ {
         .number = IMChangeSignInfoReq_FieldNumber_UserId,
         .hasIndex = 0,
         .offset = (uint32_t)offsetof(IMChangeSignInfoReq__storage_, userId),
-        .flags = GPBFieldRequired,
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt32,
       },
       {
@@ -1284,7 +1318,7 @@ typedef struct IMChangeSignInfoReq__storage_ {
         .number = IMChangeSignInfoReq_FieldNumber_SignInfo,
         .hasIndex = 1,
         .offset = (uint32_t)offsetof(IMChangeSignInfoReq__storage_, signInfo),
-        .flags = GPBFieldRequired,
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
       },
       {
@@ -1317,10 +1351,10 @@ typedef struct IMChangeSignInfoReq__storage_ {
 
 @implementation IMChangeSignInfoRsp
 
-@dynamic hasUserId, userId;
-@dynamic hasResultCode, resultCode;
-@dynamic hasSignInfo, signInfo;
-@dynamic hasAttachData, attachData;
+@dynamic userId;
+@dynamic resultCode;
+@dynamic signInfo;
+@dynamic attachData;
 
 typedef struct IMChangeSignInfoRsp__storage_ {
   uint32_t _has_storage_[1];
@@ -1342,7 +1376,7 @@ typedef struct IMChangeSignInfoRsp__storage_ {
         .number = IMChangeSignInfoRsp_FieldNumber_UserId,
         .hasIndex = 0,
         .offset = (uint32_t)offsetof(IMChangeSignInfoRsp__storage_, userId),
-        .flags = GPBFieldRequired,
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt32,
       },
       {
@@ -1351,7 +1385,7 @@ typedef struct IMChangeSignInfoRsp__storage_ {
         .number = IMChangeSignInfoRsp_FieldNumber_ResultCode,
         .hasIndex = 1,
         .offset = (uint32_t)offsetof(IMChangeSignInfoRsp__storage_, resultCode),
-        .flags = GPBFieldRequired,
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt32,
       },
       {
@@ -1393,8 +1427,8 @@ typedef struct IMChangeSignInfoRsp__storage_ {
 
 @implementation IMSignInfoChangedNotify
 
-@dynamic hasChangedUserId, changedUserId;
-@dynamic hasSignInfo, signInfo;
+@dynamic changedUserId;
+@dynamic signInfo;
 
 typedef struct IMSignInfoChangedNotify__storage_ {
   uint32_t _has_storage_[1];
@@ -1414,7 +1448,7 @@ typedef struct IMSignInfoChangedNotify__storage_ {
         .number = IMSignInfoChangedNotify_FieldNumber_ChangedUserId,
         .hasIndex = 0,
         .offset = (uint32_t)offsetof(IMSignInfoChangedNotify__storage_, changedUserId),
-        .flags = GPBFieldRequired,
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt32,
       },
       {
@@ -1423,7 +1457,7 @@ typedef struct IMSignInfoChangedNotify__storage_ {
         .number = IMSignInfoChangedNotify_FieldNumber_SignInfo,
         .hasIndex = 1,
         .offset = (uint32_t)offsetof(IMSignInfoChangedNotify__storage_, signInfo),
-        .flags = GPBFieldRequired,
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
       },
     };

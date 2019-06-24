@@ -238,10 +238,16 @@ void CDBServConn::_HandleMsgClient(CImPdu *pPdu)
     }
 
     uint32_t msg_id = 0;
+// MOD_S by Spider-Man@2019/6/24  修改替换proto2不支持的方法
+    msg_id = msg.msg_id();
+#if 0
     if(msg.has_msg_id())
     {
        msg_id = msg.msg_id();
     }
+
+#endif
+// MOD_E by Spider-Man@2019/6/24
 
 //--------------------
     CDbAttachData attach_data((uchar_t*)msg.attach_data().c_str(), msg.attach_data().length());
@@ -281,9 +287,14 @@ void CDBServConn::_HandleCreateGroupRsp(CImPdu *pPdu)
     string group_name = msg.group_name();
     uint32_t result_code = msg.result_code();
     uint32_t group_id = 0;
+// MOD_S by Spider-Man@2019/6/24  修改替换proto2不支持的方法
+    group_id = msg.group_id();
+#if 0
     if (msg.has_group_id()) {
         group_id = msg.group_id();
     }
+#endif
+// MOD_E by Spider-Man@2019/6/24
     CDbAttachData attach_data((uchar_t*)msg.attach_data().c_str(), msg.attach_data().length());
     uint32_t http_handle = attach_data.GetHandle();
     CHttpConn* pHttpConn = FindHttpConnByHandle(http_handle);

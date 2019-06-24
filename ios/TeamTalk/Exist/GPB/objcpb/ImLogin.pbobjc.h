@@ -73,19 +73,25 @@ typedef GPB_ENUM(IMMsgServRsp_FieldNumber) {
 /** cmd id:		0x0102 */
 @property(nonatomic, readwrite) enum ResultType resultCode;
 
-@property(nonatomic, readwrite) BOOL hasResultCode;
 @property(nonatomic, readwrite, copy, null_resettable) NSString *priorIp;
-/** Test to see if @c priorIp has been set. */
-@property(nonatomic, readwrite) BOOL hasPriorIp;
 
 @property(nonatomic, readwrite, copy, null_resettable) NSString *backipIp;
-/** Test to see if @c backipIp has been set. */
-@property(nonatomic, readwrite) BOOL hasBackipIp;
 
 @property(nonatomic, readwrite) uint32_t port;
 
-@property(nonatomic, readwrite) BOOL hasPort;
 @end
+
+/**
+ * Fetches the raw value of a @c IMMsgServRsp's @c resultCode property, even
+ * if the value was not defined by the enum at the time the code was generated.
+ **/
+int32_t IMMsgServRsp_ResultCode_RawValue(IMMsgServRsp *message);
+/**
+ * Sets the raw value of an @c IMMsgServRsp's @c resultCode property, allowing
+ * it to be set to a value that was not defined by the enum at the time the code
+ * was generated.
+ **/
+void SetIMMsgServRsp_ResultCode_RawValue(IMMsgServRsp *message, int32_t value);
 
 #pragma mark - IMLoginReq
 
@@ -101,24 +107,40 @@ typedef GPB_ENUM(IMLoginReq_FieldNumber) {
 
 /** cmd id:		0x0103 */
 @property(nonatomic, readwrite, copy, null_resettable) NSString *userName;
-/** Test to see if @c userName has been set. */
-@property(nonatomic, readwrite) BOOL hasUserName;
 
 @property(nonatomic, readwrite, copy, null_resettable) NSString *password;
-/** Test to see if @c password has been set. */
-@property(nonatomic, readwrite) BOOL hasPassword;
 
 @property(nonatomic, readwrite) enum UserStatType onlineStatus;
 
-@property(nonatomic, readwrite) BOOL hasOnlineStatus;
 @property(nonatomic, readwrite) enum ClientType clientType;
 
-@property(nonatomic, readwrite) BOOL hasClientType;
 @property(nonatomic, readwrite, copy, null_resettable) NSString *clientVersion;
-/** Test to see if @c clientVersion has been set. */
-@property(nonatomic, readwrite) BOOL hasClientVersion;
 
 @end
+
+/**
+ * Fetches the raw value of a @c IMLoginReq's @c onlineStatus property, even
+ * if the value was not defined by the enum at the time the code was generated.
+ **/
+int32_t IMLoginReq_OnlineStatus_RawValue(IMLoginReq *message);
+/**
+ * Sets the raw value of an @c IMLoginReq's @c onlineStatus property, allowing
+ * it to be set to a value that was not defined by the enum at the time the code
+ * was generated.
+ **/
+void SetIMLoginReq_OnlineStatus_RawValue(IMLoginReq *message, int32_t value);
+
+/**
+ * Fetches the raw value of a @c IMLoginReq's @c clientType property, even
+ * if the value was not defined by the enum at the time the code was generated.
+ **/
+int32_t IMLoginReq_ClientType_RawValue(IMLoginReq *message);
+/**
+ * Sets the raw value of an @c IMLoginReq's @c clientType property, allowing
+ * it to be set to a value that was not defined by the enum at the time the code
+ * was generated.
+ **/
+void SetIMLoginReq_ClientType_RawValue(IMLoginReq *message, int32_t value);
 
 #pragma mark - IMLoginRes
 
@@ -135,22 +157,41 @@ typedef GPB_ENUM(IMLoginRes_FieldNumber) {
 /** cmd id:		0x0104 */
 @property(nonatomic, readwrite) uint32_t serverTime;
 
-@property(nonatomic, readwrite) BOOL hasServerTime;
 @property(nonatomic, readwrite) enum ResultType resultCode;
 
-@property(nonatomic, readwrite) BOOL hasResultCode;
 @property(nonatomic, readwrite, copy, null_resettable) NSString *resultString;
-/** Test to see if @c resultString has been set. */
-@property(nonatomic, readwrite) BOOL hasResultString;
 
 @property(nonatomic, readwrite) enum UserStatType onlineStatus;
 
-@property(nonatomic, readwrite) BOOL hasOnlineStatus;
 @property(nonatomic, readwrite, strong, null_resettable) UserInfo *userInfo;
 /** Test to see if @c userInfo has been set. */
 @property(nonatomic, readwrite) BOOL hasUserInfo;
 
 @end
+
+/**
+ * Fetches the raw value of a @c IMLoginRes's @c resultCode property, even
+ * if the value was not defined by the enum at the time the code was generated.
+ **/
+int32_t IMLoginRes_ResultCode_RawValue(IMLoginRes *message);
+/**
+ * Sets the raw value of an @c IMLoginRes's @c resultCode property, allowing
+ * it to be set to a value that was not defined by the enum at the time the code
+ * was generated.
+ **/
+void SetIMLoginRes_ResultCode_RawValue(IMLoginRes *message, int32_t value);
+
+/**
+ * Fetches the raw value of a @c IMLoginRes's @c onlineStatus property, even
+ * if the value was not defined by the enum at the time the code was generated.
+ **/
+int32_t IMLoginRes_OnlineStatus_RawValue(IMLoginRes *message);
+/**
+ * Sets the raw value of an @c IMLoginRes's @c onlineStatus property, allowing
+ * it to be set to a value that was not defined by the enum at the time the code
+ * was generated.
+ **/
+void SetIMLoginRes_OnlineStatus_RawValue(IMLoginRes *message, int32_t value);
 
 #pragma mark - IMLogoutReq
 
@@ -172,7 +213,6 @@ typedef GPB_ENUM(IMLogoutRsp_FieldNumber) {
 /** cmd id:		0x0106 */
 @property(nonatomic, readwrite) uint32_t resultCode;
 
-@property(nonatomic, readwrite) BOOL hasResultCode;
 @end
 
 #pragma mark - IMKickUser
@@ -187,11 +227,21 @@ typedef GPB_ENUM(IMKickUser_FieldNumber) {
 /** cmd id:		0x0107 */
 @property(nonatomic, readwrite) uint32_t userId;
 
-@property(nonatomic, readwrite) BOOL hasUserId;
 @property(nonatomic, readwrite) enum KickReasonType kickReason;
 
-@property(nonatomic, readwrite) BOOL hasKickReason;
 @end
+
+/**
+ * Fetches the raw value of a @c IMKickUser's @c kickReason property, even
+ * if the value was not defined by the enum at the time the code was generated.
+ **/
+int32_t IMKickUser_KickReason_RawValue(IMKickUser *message);
+/**
+ * Sets the raw value of an @c IMKickUser's @c kickReason property, allowing
+ * it to be set to a value that was not defined by the enum at the time the code
+ * was generated.
+ **/
+void SetIMKickUser_KickReason_RawValue(IMKickUser *message, int32_t value);
 
 #pragma mark - IMDeviceTokenReq
 
@@ -207,19 +257,25 @@ typedef GPB_ENUM(IMDeviceTokenReq_FieldNumber) {
 /** cmd id:		0x0108 */
 @property(nonatomic, readwrite) uint32_t userId;
 
-@property(nonatomic, readwrite) BOOL hasUserId;
 @property(nonatomic, readwrite, copy, null_resettable) NSString *deviceToken;
-/** Test to see if @c deviceToken has been set. */
-@property(nonatomic, readwrite) BOOL hasDeviceToken;
 
 @property(nonatomic, readwrite) enum ClientType clientType;
 
-@property(nonatomic, readwrite) BOOL hasClientType;
 @property(nonatomic, readwrite, copy, null_resettable) NSData *attachData;
-/** Test to see if @c attachData has been set. */
-@property(nonatomic, readwrite) BOOL hasAttachData;
 
 @end
+
+/**
+ * Fetches the raw value of a @c IMDeviceTokenReq's @c clientType property, even
+ * if the value was not defined by the enum at the time the code was generated.
+ **/
+int32_t IMDeviceTokenReq_ClientType_RawValue(IMDeviceTokenReq *message);
+/**
+ * Sets the raw value of an @c IMDeviceTokenReq's @c clientType property, allowing
+ * it to be set to a value that was not defined by the enum at the time the code
+ * was generated.
+ **/
+void SetIMDeviceTokenReq_ClientType_RawValue(IMDeviceTokenReq *message, int32_t value);
 
 #pragma mark - IMDeviceTokenRsp
 
@@ -233,10 +289,7 @@ typedef GPB_ENUM(IMDeviceTokenRsp_FieldNumber) {
 /** cmd id: 		0x0109 */
 @property(nonatomic, readwrite) uint32_t userId;
 
-@property(nonatomic, readwrite) BOOL hasUserId;
 @property(nonatomic, readwrite, copy, null_resettable) NSData *attachData;
-/** Test to see if @c attachData has been set. */
-@property(nonatomic, readwrite) BOOL hasAttachData;
 
 @end
 
@@ -254,7 +307,6 @@ typedef GPB_ENUM(IMKickPCClientReq_FieldNumber) {
 /** cmd id:		0x010a */
 @property(nonatomic, readwrite) uint32_t userId;
 
-@property(nonatomic, readwrite) BOOL hasUserId;
 @end
 
 #pragma mark - IMKickPCClientRsp
@@ -269,10 +321,8 @@ typedef GPB_ENUM(IMKickPCClientRsp_FieldNumber) {
 /** cmd id: 		0x010b */
 @property(nonatomic, readwrite) uint32_t userId;
 
-@property(nonatomic, readwrite) BOOL hasUserId;
 @property(nonatomic, readwrite) uint32_t resultCode;
 
-@property(nonatomic, readwrite) BOOL hasResultCode;
 @end
 
 #pragma mark - IMPushShieldReq
@@ -291,15 +341,11 @@ typedef GPB_ENUM(IMPushShieldReq_FieldNumber) {
 /** cmd id:			0x010c */
 @property(nonatomic, readwrite) uint32_t userId;
 
-@property(nonatomic, readwrite) BOOL hasUserId;
 /** 1:开启，0：关闭 */
 @property(nonatomic, readwrite) uint32_t shieldStatus;
 
-@property(nonatomic, readwrite) BOOL hasShieldStatus;
 /** 服务端用，客户端不用设置 */
 @property(nonatomic, readwrite, copy, null_resettable) NSData *attachData;
-/** Test to see if @c attachData has been set. */
-@property(nonatomic, readwrite) BOOL hasAttachData;
 
 @end
 
@@ -317,19 +363,14 @@ typedef GPB_ENUM(IMPushShieldRsp_FieldNumber) {
 /** cmd id:			0x010d */
 @property(nonatomic, readwrite) uint32_t userId;
 
-@property(nonatomic, readwrite) BOOL hasUserId;
 /** 值： 0:successed 1:failed */
 @property(nonatomic, readwrite) uint32_t resultCode;
 
-@property(nonatomic, readwrite) BOOL hasResultCode;
 /** 值： 如果result_code值为0(successed)，则shield_status值设置， 1:开启， 0:关闭 */
 @property(nonatomic, readwrite) uint32_t shieldStatus;
 
-@property(nonatomic, readwrite) BOOL hasShieldStatus;
 /** 服务端用，客户端不用设置 */
 @property(nonatomic, readwrite, copy, null_resettable) NSData *attachData;
-/** Test to see if @c attachData has been set. */
-@property(nonatomic, readwrite) BOOL hasAttachData;
 
 @end
 
@@ -349,11 +390,8 @@ typedef GPB_ENUM(IMQueryPushShieldReq_FieldNumber) {
 /** cmd id:			0x010e */
 @property(nonatomic, readwrite) uint32_t userId;
 
-@property(nonatomic, readwrite) BOOL hasUserId;
 /** 服务端用，客户端不用设置 */
 @property(nonatomic, readwrite, copy, null_resettable) NSData *attachData;
-/** Test to see if @c attachData has been set. */
-@property(nonatomic, readwrite) BOOL hasAttachData;
 
 @end
 
@@ -371,18 +409,13 @@ typedef GPB_ENUM(IMQueryPushShieldRsp_FieldNumber) {
 /** cmd id:			0x010f */
 @property(nonatomic, readwrite) uint32_t userId;
 
-@property(nonatomic, readwrite) BOOL hasUserId;
 /** 值： 0:successed 1:failed */
 @property(nonatomic, readwrite) uint32_t resultCode;
 
-@property(nonatomic, readwrite) BOOL hasResultCode;
 /** 值： 如果result_code值为0(successed)，则shield_status值设置， 1:开启， 0:关闭 */
 @property(nonatomic, readwrite) uint32_t shieldStatus;
 
-@property(nonatomic, readwrite) BOOL hasShieldStatus;
 @property(nonatomic, readwrite, copy, null_resettable) NSData *attachData;
-/** Test to see if @c attachData has been set. */
-@property(nonatomic, readwrite) BOOL hasAttachData;
 
 @end
 

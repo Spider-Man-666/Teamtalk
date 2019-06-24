@@ -61,10 +61,7 @@ typedef GPB_ENUM(IMNormalGroupListReq_FieldNumber) {
 /** cmd id:			0x0401 */
 @property(nonatomic, readwrite) uint32_t userId;
 
-@property(nonatomic, readwrite) BOOL hasUserId;
 @property(nonatomic, readwrite, copy, null_resettable) NSData *attachData;
-/** Test to see if @c attachData has been set. */
-@property(nonatomic, readwrite) BOOL hasAttachData;
 
 @end
 
@@ -81,14 +78,11 @@ typedef GPB_ENUM(IMNormalGroupListRsp_FieldNumber) {
 /** cmd id:			0x0402 */
 @property(nonatomic, readwrite) uint32_t userId;
 
-@property(nonatomic, readwrite) BOOL hasUserId;
 @property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<GroupVersionInfo*> *groupVersionListArray;
 /** The number of items in @c groupVersionListArray without causing the array to be created. */
 @property(nonatomic, readonly) NSUInteger groupVersionListArray_Count;
 
 @property(nonatomic, readwrite, copy, null_resettable) NSData *attachData;
-/** Test to see if @c attachData has been set. */
-@property(nonatomic, readwrite) BOOL hasAttachData;
 
 @end
 
@@ -105,14 +99,11 @@ typedef GPB_ENUM(IMGroupInfoListReq_FieldNumber) {
 /** cmd id:			0x0403 */
 @property(nonatomic, readwrite) uint32_t userId;
 
-@property(nonatomic, readwrite) BOOL hasUserId;
 @property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<GroupVersionInfo*> *groupVersionListArray;
 /** The number of items in @c groupVersionListArray without causing the array to be created. */
 @property(nonatomic, readonly) NSUInteger groupVersionListArray_Count;
 
 @property(nonatomic, readwrite, copy, null_resettable) NSData *attachData;
-/** Test to see if @c attachData has been set. */
-@property(nonatomic, readwrite) BOOL hasAttachData;
 
 @end
 
@@ -129,14 +120,11 @@ typedef GPB_ENUM(IMGroupInfoListRsp_FieldNumber) {
 /** cmd id:			0x0404 */
 @property(nonatomic, readwrite) uint32_t userId;
 
-@property(nonatomic, readwrite) BOOL hasUserId;
 @property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<GroupInfo*> *groupInfoListArray;
 /** The number of items in @c groupInfoListArray without causing the array to be created. */
 @property(nonatomic, readonly) NSUInteger groupInfoListArray_Count;
 
 @property(nonatomic, readwrite, copy, null_resettable) NSData *attachData;
-/** Test to see if @c attachData has been set. */
-@property(nonatomic, readwrite) BOOL hasAttachData;
 
 @end
 
@@ -156,28 +144,32 @@ typedef GPB_ENUM(IMGroupCreateReq_FieldNumber) {
 /** cmd id:			0x0405 */
 @property(nonatomic, readwrite) uint32_t userId;
 
-@property(nonatomic, readwrite) BOOL hasUserId;
-/** 默认是创建临时群，且客户端只能创建临时群 */
+/** IM.BaseDefine.GroupType group_type = 2 [default = GROUP_TYPE_TMP];		//默认是创建临时群，且客户端只能创建临时群 */
 @property(nonatomic, readwrite) enum GroupType groupType;
 
-@property(nonatomic, readwrite) BOOL hasGroupType;
 @property(nonatomic, readwrite, copy, null_resettable) NSString *groupName;
-/** Test to see if @c groupName has been set. */
-@property(nonatomic, readwrite) BOOL hasGroupName;
 
 @property(nonatomic, readwrite, copy, null_resettable) NSString *groupAvatar;
-/** Test to see if @c groupAvatar has been set. */
-@property(nonatomic, readwrite) BOOL hasGroupAvatar;
 
 @property(nonatomic, readwrite, strong, null_resettable) GPBUInt32Array *memberIdListArray;
 /** The number of items in @c memberIdListArray without causing the array to be created. */
 @property(nonatomic, readonly) NSUInteger memberIdListArray_Count;
 
 @property(nonatomic, readwrite, copy, null_resettable) NSData *attachData;
-/** Test to see if @c attachData has been set. */
-@property(nonatomic, readwrite) BOOL hasAttachData;
 
 @end
+
+/**
+ * Fetches the raw value of a @c IMGroupCreateReq's @c groupType property, even
+ * if the value was not defined by the enum at the time the code was generated.
+ **/
+int32_t IMGroupCreateReq_GroupType_RawValue(IMGroupCreateReq *message);
+/**
+ * Sets the raw value of an @c IMGroupCreateReq's @c groupType property, allowing
+ * it to be set to a value that was not defined by the enum at the time the code
+ * was generated.
+ **/
+void SetIMGroupCreateReq_GroupType_RawValue(IMGroupCreateReq *message, int32_t value);
 
 #pragma mark - IMGroupCreateRsp
 
@@ -195,24 +187,17 @@ typedef GPB_ENUM(IMGroupCreateRsp_FieldNumber) {
 /** cmd id:			0x0406 */
 @property(nonatomic, readwrite) uint32_t userId;
 
-@property(nonatomic, readwrite) BOOL hasUserId;
 @property(nonatomic, readwrite) uint32_t resultCode;
 
-@property(nonatomic, readwrite) BOOL hasResultCode;
 @property(nonatomic, readwrite) uint32_t groupId;
 
-@property(nonatomic, readwrite) BOOL hasGroupId;
 @property(nonatomic, readwrite, copy, null_resettable) NSString *groupName;
-/** Test to see if @c groupName has been set. */
-@property(nonatomic, readwrite) BOOL hasGroupName;
 
 @property(nonatomic, readwrite, strong, null_resettable) GPBUInt32Array *userIdListArray;
 /** The number of items in @c userIdListArray without causing the array to be created. */
 @property(nonatomic, readonly) NSUInteger userIdListArray_Count;
 
 @property(nonatomic, readwrite, copy, null_resettable) NSData *attachData;
-/** Test to see if @c attachData has been set. */
-@property(nonatomic, readwrite) BOOL hasAttachData;
 
 @end
 
@@ -231,22 +216,29 @@ typedef GPB_ENUM(IMGroupChangeMemberReq_FieldNumber) {
 /** cmd id:			0x0407 */
 @property(nonatomic, readwrite) uint32_t userId;
 
-@property(nonatomic, readwrite) BOOL hasUserId;
 @property(nonatomic, readwrite) enum GroupModifyType changeType;
 
-@property(nonatomic, readwrite) BOOL hasChangeType;
 @property(nonatomic, readwrite) uint32_t groupId;
 
-@property(nonatomic, readwrite) BOOL hasGroupId;
 @property(nonatomic, readwrite, strong, null_resettable) GPBUInt32Array *memberIdListArray;
 /** The number of items in @c memberIdListArray without causing the array to be created. */
 @property(nonatomic, readonly) NSUInteger memberIdListArray_Count;
 
 @property(nonatomic, readwrite, copy, null_resettable) NSData *attachData;
-/** Test to see if @c attachData has been set. */
-@property(nonatomic, readwrite) BOOL hasAttachData;
 
 @end
+
+/**
+ * Fetches the raw value of a @c IMGroupChangeMemberReq's @c changeType property, even
+ * if the value was not defined by the enum at the time the code was generated.
+ **/
+int32_t IMGroupChangeMemberReq_ChangeType_RawValue(IMGroupChangeMemberReq *message);
+/**
+ * Sets the raw value of an @c IMGroupChangeMemberReq's @c changeType property, allowing
+ * it to be set to a value that was not defined by the enum at the time the code
+ * was generated.
+ **/
+void SetIMGroupChangeMemberReq_ChangeType_RawValue(IMGroupChangeMemberReq *message, int32_t value);
 
 #pragma mark - IMGroupChangeMemberRsp
 
@@ -265,16 +257,12 @@ typedef GPB_ENUM(IMGroupChangeMemberRsp_FieldNumber) {
 /** cmd id:			0x0408 */
 @property(nonatomic, readwrite) uint32_t userId;
 
-@property(nonatomic, readwrite) BOOL hasUserId;
 @property(nonatomic, readwrite) enum GroupModifyType changeType;
 
-@property(nonatomic, readwrite) BOOL hasChangeType;
 @property(nonatomic, readwrite) uint32_t resultCode;
 
-@property(nonatomic, readwrite) BOOL hasResultCode;
 @property(nonatomic, readwrite) uint32_t groupId;
 
-@property(nonatomic, readwrite) BOOL hasGroupId;
 /** 现有的成员id */
 @property(nonatomic, readwrite, strong, null_resettable) GPBUInt32Array *curUserIdListArray;
 /** The number of items in @c curUserIdListArray without causing the array to be created. */
@@ -286,10 +274,20 @@ typedef GPB_ENUM(IMGroupChangeMemberRsp_FieldNumber) {
 @property(nonatomic, readonly) NSUInteger chgUserIdListArray_Count;
 
 @property(nonatomic, readwrite, copy, null_resettable) NSData *attachData;
-/** Test to see if @c attachData has been set. */
-@property(nonatomic, readwrite) BOOL hasAttachData;
 
 @end
+
+/**
+ * Fetches the raw value of a @c IMGroupChangeMemberRsp's @c changeType property, even
+ * if the value was not defined by the enum at the time the code was generated.
+ **/
+int32_t IMGroupChangeMemberRsp_ChangeType_RawValue(IMGroupChangeMemberRsp *message);
+/**
+ * Sets the raw value of an @c IMGroupChangeMemberRsp's @c changeType property, allowing
+ * it to be set to a value that was not defined by the enum at the time the code
+ * was generated.
+ **/
+void SetIMGroupChangeMemberRsp_ChangeType_RawValue(IMGroupChangeMemberRsp *message, int32_t value);
 
 #pragma mark - IMGroupShieldReq
 
@@ -305,16 +303,11 @@ typedef GPB_ENUM(IMGroupShieldReq_FieldNumber) {
 /** cmd id:			0x0409 */
 @property(nonatomic, readwrite) uint32_t userId;
 
-@property(nonatomic, readwrite) BOOL hasUserId;
 @property(nonatomic, readwrite) uint32_t groupId;
 
-@property(nonatomic, readwrite) BOOL hasGroupId;
 @property(nonatomic, readwrite) uint32_t shieldStatus;
 
-@property(nonatomic, readwrite) BOOL hasShieldStatus;
 @property(nonatomic, readwrite, copy, null_resettable) NSData *attachData;
-/** Test to see if @c attachData has been set. */
-@property(nonatomic, readwrite) BOOL hasAttachData;
 
 @end
 
@@ -332,17 +325,12 @@ typedef GPB_ENUM(IMGroupShieldRsp_FieldNumber) {
 /** cmd id:			0x040a */
 @property(nonatomic, readwrite) uint32_t userId;
 
-@property(nonatomic, readwrite) BOOL hasUserId;
 @property(nonatomic, readwrite) uint32_t groupId;
 
-@property(nonatomic, readwrite) BOOL hasGroupId;
 /** 0:successed 1:failed */
 @property(nonatomic, readwrite) uint32_t resultCode;
 
-@property(nonatomic, readwrite) BOOL hasResultCode;
 @property(nonatomic, readwrite, copy, null_resettable) NSData *attachData;
-/** Test to see if @c attachData has been set. */
-@property(nonatomic, readwrite) BOOL hasAttachData;
 
 @end
 
@@ -361,13 +349,10 @@ typedef GPB_ENUM(IMGroupChangeMemberNotify_FieldNumber) {
 /** cmd id: 			0x040b */
 @property(nonatomic, readwrite) uint32_t userId;
 
-@property(nonatomic, readwrite) BOOL hasUserId;
 @property(nonatomic, readwrite) enum GroupModifyType changeType;
 
-@property(nonatomic, readwrite) BOOL hasChangeType;
 @property(nonatomic, readwrite) uint32_t groupId;
 
-@property(nonatomic, readwrite) BOOL hasGroupId;
 /** 现有的成员id */
 @property(nonatomic, readwrite, strong, null_resettable) GPBUInt32Array *curUserIdListArray;
 /** The number of items in @c curUserIdListArray without causing the array to be created. */
@@ -379,6 +364,18 @@ typedef GPB_ENUM(IMGroupChangeMemberNotify_FieldNumber) {
 @property(nonatomic, readonly) NSUInteger chgUserIdListArray_Count;
 
 @end
+
+/**
+ * Fetches the raw value of a @c IMGroupChangeMemberNotify's @c changeType property, even
+ * if the value was not defined by the enum at the time the code was generated.
+ **/
+int32_t IMGroupChangeMemberNotify_ChangeType_RawValue(IMGroupChangeMemberNotify *message);
+/**
+ * Sets the raw value of an @c IMGroupChangeMemberNotify's @c changeType property, allowing
+ * it to be set to a value that was not defined by the enum at the time the code
+ * was generated.
+ **/
+void SetIMGroupChangeMemberNotify_ChangeType_RawValue(IMGroupChangeMemberNotify *message, int32_t value);
 
 NS_ASSUME_NONNULL_END
 

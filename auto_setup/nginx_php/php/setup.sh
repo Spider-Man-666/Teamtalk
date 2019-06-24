@@ -6,7 +6,12 @@
 # setup php
 
 PHP=php-5.6.6
-PHP_DOWNLOAD_PATH=http://cn2.php.net/distributions/$PHP.tar.gz
+
+# MOD_S by Spider-Man@2019/6/24 修改php下载地址
+#PHP_DOWNLOAD_PATH=http://cn2.php.net/distributions/$PHP.tar.gz
+PHP_DOWNLOAD_PATH=http://ftp.ntu.edu.tw/php/distributions//$PHP.tar.gz
+# MOD_E by Spider-Man@2019/6/24
+
 INSTALL_DIR=/usr/local/php5
 
 PHP_FPM_CONF=php-fpm.conf

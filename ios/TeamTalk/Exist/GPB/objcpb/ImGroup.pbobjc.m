@@ -38,7 +38,7 @@ static GPBFileDescriptor *ImGroupRoot_FileDescriptor(void) {
   if (!descriptor) {
     GPB_DEBUG_CHECK_RUNTIME_VERSIONS();
     descriptor = [[GPBFileDescriptor alloc] initWithPackage:@"IM.Group"
-                                                     syntax:GPBFileSyntaxProto2];
+                                                     syntax:GPBFileSyntaxProto3];
   }
   return descriptor;
 }
@@ -47,8 +47,8 @@ static GPBFileDescriptor *ImGroupRoot_FileDescriptor(void) {
 
 @implementation IMNormalGroupListReq
 
-@dynamic hasUserId, userId;
-@dynamic hasAttachData, attachData;
+@dynamic userId;
+@dynamic attachData;
 
 typedef struct IMNormalGroupListReq__storage_ {
   uint32_t _has_storage_[1];
@@ -68,7 +68,7 @@ typedef struct IMNormalGroupListReq__storage_ {
         .number = IMNormalGroupListReq_FieldNumber_UserId,
         .hasIndex = 0,
         .offset = (uint32_t)offsetof(IMNormalGroupListReq__storage_, userId),
-        .flags = GPBFieldRequired,
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt32,
       },
       {
@@ -101,9 +101,9 @@ typedef struct IMNormalGroupListReq__storage_ {
 
 @implementation IMNormalGroupListRsp
 
-@dynamic hasUserId, userId;
+@dynamic userId;
 @dynamic groupVersionListArray, groupVersionListArray_Count;
-@dynamic hasAttachData, attachData;
+@dynamic attachData;
 
 typedef struct IMNormalGroupListRsp__storage_ {
   uint32_t _has_storage_[1];
@@ -124,7 +124,7 @@ typedef struct IMNormalGroupListRsp__storage_ {
         .number = IMNormalGroupListRsp_FieldNumber_UserId,
         .hasIndex = 0,
         .offset = (uint32_t)offsetof(IMNormalGroupListRsp__storage_, userId),
-        .flags = GPBFieldRequired,
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt32,
       },
       {
@@ -166,9 +166,9 @@ typedef struct IMNormalGroupListRsp__storage_ {
 
 @implementation IMGroupInfoListReq
 
-@dynamic hasUserId, userId;
+@dynamic userId;
 @dynamic groupVersionListArray, groupVersionListArray_Count;
-@dynamic hasAttachData, attachData;
+@dynamic attachData;
 
 typedef struct IMGroupInfoListReq__storage_ {
   uint32_t _has_storage_[1];
@@ -189,7 +189,7 @@ typedef struct IMGroupInfoListReq__storage_ {
         .number = IMGroupInfoListReq_FieldNumber_UserId,
         .hasIndex = 0,
         .offset = (uint32_t)offsetof(IMGroupInfoListReq__storage_, userId),
-        .flags = GPBFieldRequired,
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt32,
       },
       {
@@ -231,9 +231,9 @@ typedef struct IMGroupInfoListReq__storage_ {
 
 @implementation IMGroupInfoListRsp
 
-@dynamic hasUserId, userId;
+@dynamic userId;
 @dynamic groupInfoListArray, groupInfoListArray_Count;
-@dynamic hasAttachData, attachData;
+@dynamic attachData;
 
 typedef struct IMGroupInfoListRsp__storage_ {
   uint32_t _has_storage_[1];
@@ -254,7 +254,7 @@ typedef struct IMGroupInfoListRsp__storage_ {
         .number = IMGroupInfoListRsp_FieldNumber_UserId,
         .hasIndex = 0,
         .offset = (uint32_t)offsetof(IMGroupInfoListRsp__storage_, userId),
-        .flags = GPBFieldRequired,
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt32,
       },
       {
@@ -296,12 +296,12 @@ typedef struct IMGroupInfoListRsp__storage_ {
 
 @implementation IMGroupCreateReq
 
-@dynamic hasUserId, userId;
-@dynamic hasGroupType, groupType;
-@dynamic hasGroupName, groupName;
-@dynamic hasGroupAvatar, groupAvatar;
+@dynamic userId;
+@dynamic groupType;
+@dynamic groupName;
+@dynamic groupAvatar;
 @dynamic memberIdListArray, memberIdListArray_Count;
-@dynamic hasAttachData, attachData;
+@dynamic attachData;
 
 typedef struct IMGroupCreateReq__storage_ {
   uint32_t _has_storage_[1];
@@ -318,66 +318,60 @@ typedef struct IMGroupCreateReq__storage_ {
 + (GPBDescriptor *)descriptor {
   static GPBDescriptor *descriptor = nil;
   if (!descriptor) {
-    static GPBMessageFieldDescriptionWithDefault fields[] = {
+    static GPBMessageFieldDescription fields[] = {
       {
-        .defaultValue.valueUInt32 = 0U,
-        .core.name = "userId",
-        .core.dataTypeSpecific.className = NULL,
-        .core.number = IMGroupCreateReq_FieldNumber_UserId,
-        .core.hasIndex = 0,
-        .core.offset = (uint32_t)offsetof(IMGroupCreateReq__storage_, userId),
-        .core.flags = GPBFieldRequired,
-        .core.dataType = GPBDataTypeUInt32,
+        .name = "userId",
+        .dataTypeSpecific.className = NULL,
+        .number = IMGroupCreateReq_FieldNumber_UserId,
+        .hasIndex = 0,
+        .offset = (uint32_t)offsetof(IMGroupCreateReq__storage_, userId),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeUInt32,
       },
       {
-        .defaultValue.valueEnum = GroupType_GroupTypeTmp,
-        .core.name = "groupType",
-        .core.dataTypeSpecific.enumDescFunc = GroupType_EnumDescriptor,
-        .core.number = IMGroupCreateReq_FieldNumber_GroupType,
-        .core.hasIndex = 1,
-        .core.offset = (uint32_t)offsetof(IMGroupCreateReq__storage_, groupType),
-        .core.flags = (GPBFieldFlags)(GPBFieldRequired | GPBFieldHasDefaultValue | GPBFieldHasEnumDescriptor),
-        .core.dataType = GPBDataTypeEnum,
+        .name = "groupType",
+        .dataTypeSpecific.enumDescFunc = GroupType_EnumDescriptor,
+        .number = IMGroupCreateReq_FieldNumber_GroupType,
+        .hasIndex = 1,
+        .offset = (uint32_t)offsetof(IMGroupCreateReq__storage_, groupType),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldHasEnumDescriptor),
+        .dataType = GPBDataTypeEnum,
       },
       {
-        .defaultValue.valueString = nil,
-        .core.name = "groupName",
-        .core.dataTypeSpecific.className = NULL,
-        .core.number = IMGroupCreateReq_FieldNumber_GroupName,
-        .core.hasIndex = 2,
-        .core.offset = (uint32_t)offsetof(IMGroupCreateReq__storage_, groupName),
-        .core.flags = GPBFieldRequired,
-        .core.dataType = GPBDataTypeString,
+        .name = "groupName",
+        .dataTypeSpecific.className = NULL,
+        .number = IMGroupCreateReq_FieldNumber_GroupName,
+        .hasIndex = 2,
+        .offset = (uint32_t)offsetof(IMGroupCreateReq__storage_, groupName),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeString,
       },
       {
-        .defaultValue.valueString = nil,
-        .core.name = "groupAvatar",
-        .core.dataTypeSpecific.className = NULL,
-        .core.number = IMGroupCreateReq_FieldNumber_GroupAvatar,
-        .core.hasIndex = 3,
-        .core.offset = (uint32_t)offsetof(IMGroupCreateReq__storage_, groupAvatar),
-        .core.flags = GPBFieldRequired,
-        .core.dataType = GPBDataTypeString,
+        .name = "groupAvatar",
+        .dataTypeSpecific.className = NULL,
+        .number = IMGroupCreateReq_FieldNumber_GroupAvatar,
+        .hasIndex = 3,
+        .offset = (uint32_t)offsetof(IMGroupCreateReq__storage_, groupAvatar),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeString,
       },
       {
-        .defaultValue.valueMessage = nil,
-        .core.name = "memberIdListArray",
-        .core.dataTypeSpecific.className = NULL,
-        .core.number = IMGroupCreateReq_FieldNumber_MemberIdListArray,
-        .core.hasIndex = GPBNoHasBit,
-        .core.offset = (uint32_t)offsetof(IMGroupCreateReq__storage_, memberIdListArray),
-        .core.flags = GPBFieldRepeated,
-        .core.dataType = GPBDataTypeUInt32,
+        .name = "memberIdListArray",
+        .dataTypeSpecific.className = NULL,
+        .number = IMGroupCreateReq_FieldNumber_MemberIdListArray,
+        .hasIndex = GPBNoHasBit,
+        .offset = (uint32_t)offsetof(IMGroupCreateReq__storage_, memberIdListArray),
+        .flags = (GPBFieldFlags)(GPBFieldRepeated | GPBFieldPacked),
+        .dataType = GPBDataTypeUInt32,
       },
       {
-        .defaultValue.valueData = nil,
-        .core.name = "attachData",
-        .core.dataTypeSpecific.className = NULL,
-        .core.number = IMGroupCreateReq_FieldNumber_AttachData,
-        .core.hasIndex = 4,
-        .core.offset = (uint32_t)offsetof(IMGroupCreateReq__storage_, attachData),
-        .core.flags = GPBFieldOptional,
-        .core.dataType = GPBDataTypeBytes,
+        .name = "attachData",
+        .dataTypeSpecific.className = NULL,
+        .number = IMGroupCreateReq_FieldNumber_AttachData,
+        .hasIndex = 4,
+        .offset = (uint32_t)offsetof(IMGroupCreateReq__storage_, attachData),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeBytes,
       },
     };
     GPBDescriptor *localDescriptor =
@@ -385,9 +379,9 @@ typedef struct IMGroupCreateReq__storage_ {
                                      rootClass:[ImGroupRoot class]
                                           file:ImGroupRoot_FileDescriptor()
                                         fields:fields
-                                    fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescriptionWithDefault))
+                                    fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(IMGroupCreateReq__storage_)
-                                         flags:GPBDescriptorInitializationFlag_FieldsWithDefault];
+                                         flags:GPBDescriptorInitializationFlag_None];
     NSAssert(descriptor == nil, @"Startup recursed!");
     descriptor = localDescriptor;
   }
@@ -396,16 +390,28 @@ typedef struct IMGroupCreateReq__storage_ {
 
 @end
 
+int32_t IMGroupCreateReq_GroupType_RawValue(IMGroupCreateReq *message) {
+  GPBDescriptor *descriptor = [IMGroupCreateReq descriptor];
+  GPBFieldDescriptor *field = [descriptor fieldWithNumber:IMGroupCreateReq_FieldNumber_GroupType];
+  return GPBGetMessageInt32Field(message, field);
+}
+
+void SetIMGroupCreateReq_GroupType_RawValue(IMGroupCreateReq *message, int32_t value) {
+  GPBDescriptor *descriptor = [IMGroupCreateReq descriptor];
+  GPBFieldDescriptor *field = [descriptor fieldWithNumber:IMGroupCreateReq_FieldNumber_GroupType];
+  GPBSetInt32IvarWithFieldInternal(message, field, value, descriptor.file.syntax);
+}
+
 #pragma mark - IMGroupCreateRsp
 
 @implementation IMGroupCreateRsp
 
-@dynamic hasUserId, userId;
-@dynamic hasResultCode, resultCode;
-@dynamic hasGroupId, groupId;
-@dynamic hasGroupName, groupName;
+@dynamic userId;
+@dynamic resultCode;
+@dynamic groupId;
+@dynamic groupName;
 @dynamic userIdListArray, userIdListArray_Count;
-@dynamic hasAttachData, attachData;
+@dynamic attachData;
 
 typedef struct IMGroupCreateRsp__storage_ {
   uint32_t _has_storage_[1];
@@ -429,7 +435,7 @@ typedef struct IMGroupCreateRsp__storage_ {
         .number = IMGroupCreateRsp_FieldNumber_UserId,
         .hasIndex = 0,
         .offset = (uint32_t)offsetof(IMGroupCreateRsp__storage_, userId),
-        .flags = GPBFieldRequired,
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt32,
       },
       {
@@ -438,7 +444,7 @@ typedef struct IMGroupCreateRsp__storage_ {
         .number = IMGroupCreateRsp_FieldNumber_ResultCode,
         .hasIndex = 1,
         .offset = (uint32_t)offsetof(IMGroupCreateRsp__storage_, resultCode),
-        .flags = GPBFieldRequired,
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt32,
       },
       {
@@ -456,7 +462,7 @@ typedef struct IMGroupCreateRsp__storage_ {
         .number = IMGroupCreateRsp_FieldNumber_GroupName,
         .hasIndex = 3,
         .offset = (uint32_t)offsetof(IMGroupCreateRsp__storage_, groupName),
-        .flags = GPBFieldRequired,
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
       },
       {
@@ -465,7 +471,7 @@ typedef struct IMGroupCreateRsp__storage_ {
         .number = IMGroupCreateRsp_FieldNumber_UserIdListArray,
         .hasIndex = GPBNoHasBit,
         .offset = (uint32_t)offsetof(IMGroupCreateRsp__storage_, userIdListArray),
-        .flags = GPBFieldRepeated,
+        .flags = (GPBFieldFlags)(GPBFieldRepeated | GPBFieldPacked),
         .dataType = GPBDataTypeUInt32,
       },
       {
@@ -498,11 +504,11 @@ typedef struct IMGroupCreateRsp__storage_ {
 
 @implementation IMGroupChangeMemberReq
 
-@dynamic hasUserId, userId;
-@dynamic hasChangeType, changeType;
-@dynamic hasGroupId, groupId;
+@dynamic userId;
+@dynamic changeType;
+@dynamic groupId;
 @dynamic memberIdListArray, memberIdListArray_Count;
-@dynamic hasAttachData, attachData;
+@dynamic attachData;
 
 typedef struct IMGroupChangeMemberReq__storage_ {
   uint32_t _has_storage_[1];
@@ -518,56 +524,51 @@ typedef struct IMGroupChangeMemberReq__storage_ {
 + (GPBDescriptor *)descriptor {
   static GPBDescriptor *descriptor = nil;
   if (!descriptor) {
-    static GPBMessageFieldDescriptionWithDefault fields[] = {
+    static GPBMessageFieldDescription fields[] = {
       {
-        .defaultValue.valueUInt32 = 0U,
-        .core.name = "userId",
-        .core.dataTypeSpecific.className = NULL,
-        .core.number = IMGroupChangeMemberReq_FieldNumber_UserId,
-        .core.hasIndex = 0,
-        .core.offset = (uint32_t)offsetof(IMGroupChangeMemberReq__storage_, userId),
-        .core.flags = GPBFieldRequired,
-        .core.dataType = GPBDataTypeUInt32,
+        .name = "userId",
+        .dataTypeSpecific.className = NULL,
+        .number = IMGroupChangeMemberReq_FieldNumber_UserId,
+        .hasIndex = 0,
+        .offset = (uint32_t)offsetof(IMGroupChangeMemberReq__storage_, userId),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeUInt32,
       },
       {
-        .defaultValue.valueEnum = GroupModifyType_GroupModifyTypeAdd,
-        .core.name = "changeType",
-        .core.dataTypeSpecific.enumDescFunc = GroupModifyType_EnumDescriptor,
-        .core.number = IMGroupChangeMemberReq_FieldNumber_ChangeType,
-        .core.hasIndex = 1,
-        .core.offset = (uint32_t)offsetof(IMGroupChangeMemberReq__storage_, changeType),
-        .core.flags = (GPBFieldFlags)(GPBFieldRequired | GPBFieldHasEnumDescriptor),
-        .core.dataType = GPBDataTypeEnum,
+        .name = "changeType",
+        .dataTypeSpecific.enumDescFunc = GroupModifyType_EnumDescriptor,
+        .number = IMGroupChangeMemberReq_FieldNumber_ChangeType,
+        .hasIndex = 1,
+        .offset = (uint32_t)offsetof(IMGroupChangeMemberReq__storage_, changeType),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldHasEnumDescriptor),
+        .dataType = GPBDataTypeEnum,
       },
       {
-        .defaultValue.valueUInt32 = 0U,
-        .core.name = "groupId",
-        .core.dataTypeSpecific.className = NULL,
-        .core.number = IMGroupChangeMemberReq_FieldNumber_GroupId,
-        .core.hasIndex = 2,
-        .core.offset = (uint32_t)offsetof(IMGroupChangeMemberReq__storage_, groupId),
-        .core.flags = GPBFieldRequired,
-        .core.dataType = GPBDataTypeUInt32,
+        .name = "groupId",
+        .dataTypeSpecific.className = NULL,
+        .number = IMGroupChangeMemberReq_FieldNumber_GroupId,
+        .hasIndex = 2,
+        .offset = (uint32_t)offsetof(IMGroupChangeMemberReq__storage_, groupId),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeUInt32,
       },
       {
-        .defaultValue.valueMessage = nil,
-        .core.name = "memberIdListArray",
-        .core.dataTypeSpecific.className = NULL,
-        .core.number = IMGroupChangeMemberReq_FieldNumber_MemberIdListArray,
-        .core.hasIndex = GPBNoHasBit,
-        .core.offset = (uint32_t)offsetof(IMGroupChangeMemberReq__storage_, memberIdListArray),
-        .core.flags = GPBFieldRepeated,
-        .core.dataType = GPBDataTypeUInt32,
+        .name = "memberIdListArray",
+        .dataTypeSpecific.className = NULL,
+        .number = IMGroupChangeMemberReq_FieldNumber_MemberIdListArray,
+        .hasIndex = GPBNoHasBit,
+        .offset = (uint32_t)offsetof(IMGroupChangeMemberReq__storage_, memberIdListArray),
+        .flags = (GPBFieldFlags)(GPBFieldRepeated | GPBFieldPacked),
+        .dataType = GPBDataTypeUInt32,
       },
       {
-        .defaultValue.valueData = nil,
-        .core.name = "attachData",
-        .core.dataTypeSpecific.className = NULL,
-        .core.number = IMGroupChangeMemberReq_FieldNumber_AttachData,
-        .core.hasIndex = 3,
-        .core.offset = (uint32_t)offsetof(IMGroupChangeMemberReq__storage_, attachData),
-        .core.flags = GPBFieldOptional,
-        .core.dataType = GPBDataTypeBytes,
+        .name = "attachData",
+        .dataTypeSpecific.className = NULL,
+        .number = IMGroupChangeMemberReq_FieldNumber_AttachData,
+        .hasIndex = 3,
+        .offset = (uint32_t)offsetof(IMGroupChangeMemberReq__storage_, attachData),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeBytes,
       },
     };
     GPBDescriptor *localDescriptor =
@@ -575,9 +576,9 @@ typedef struct IMGroupChangeMemberReq__storage_ {
                                      rootClass:[ImGroupRoot class]
                                           file:ImGroupRoot_FileDescriptor()
                                         fields:fields
-                                    fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescriptionWithDefault))
+                                    fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(IMGroupChangeMemberReq__storage_)
-                                         flags:GPBDescriptorInitializationFlag_FieldsWithDefault];
+                                         flags:GPBDescriptorInitializationFlag_None];
     NSAssert(descriptor == nil, @"Startup recursed!");
     descriptor = localDescriptor;
   }
@@ -586,17 +587,29 @@ typedef struct IMGroupChangeMemberReq__storage_ {
 
 @end
 
+int32_t IMGroupChangeMemberReq_ChangeType_RawValue(IMGroupChangeMemberReq *message) {
+  GPBDescriptor *descriptor = [IMGroupChangeMemberReq descriptor];
+  GPBFieldDescriptor *field = [descriptor fieldWithNumber:IMGroupChangeMemberReq_FieldNumber_ChangeType];
+  return GPBGetMessageInt32Field(message, field);
+}
+
+void SetIMGroupChangeMemberReq_ChangeType_RawValue(IMGroupChangeMemberReq *message, int32_t value) {
+  GPBDescriptor *descriptor = [IMGroupChangeMemberReq descriptor];
+  GPBFieldDescriptor *field = [descriptor fieldWithNumber:IMGroupChangeMemberReq_FieldNumber_ChangeType];
+  GPBSetInt32IvarWithFieldInternal(message, field, value, descriptor.file.syntax);
+}
+
 #pragma mark - IMGroupChangeMemberRsp
 
 @implementation IMGroupChangeMemberRsp
 
-@dynamic hasUserId, userId;
-@dynamic hasChangeType, changeType;
-@dynamic hasResultCode, resultCode;
-@dynamic hasGroupId, groupId;
+@dynamic userId;
+@dynamic changeType;
+@dynamic resultCode;
+@dynamic groupId;
 @dynamic curUserIdListArray, curUserIdListArray_Count;
 @dynamic chgUserIdListArray, chgUserIdListArray_Count;
-@dynamic hasAttachData, attachData;
+@dynamic attachData;
 
 typedef struct IMGroupChangeMemberRsp__storage_ {
   uint32_t _has_storage_[1];
@@ -614,76 +627,69 @@ typedef struct IMGroupChangeMemberRsp__storage_ {
 + (GPBDescriptor *)descriptor {
   static GPBDescriptor *descriptor = nil;
   if (!descriptor) {
-    static GPBMessageFieldDescriptionWithDefault fields[] = {
+    static GPBMessageFieldDescription fields[] = {
       {
-        .defaultValue.valueUInt32 = 0U,
-        .core.name = "userId",
-        .core.dataTypeSpecific.className = NULL,
-        .core.number = IMGroupChangeMemberRsp_FieldNumber_UserId,
-        .core.hasIndex = 0,
-        .core.offset = (uint32_t)offsetof(IMGroupChangeMemberRsp__storage_, userId),
-        .core.flags = GPBFieldRequired,
-        .core.dataType = GPBDataTypeUInt32,
+        .name = "userId",
+        .dataTypeSpecific.className = NULL,
+        .number = IMGroupChangeMemberRsp_FieldNumber_UserId,
+        .hasIndex = 0,
+        .offset = (uint32_t)offsetof(IMGroupChangeMemberRsp__storage_, userId),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeUInt32,
       },
       {
-        .defaultValue.valueEnum = GroupModifyType_GroupModifyTypeAdd,
-        .core.name = "changeType",
-        .core.dataTypeSpecific.enumDescFunc = GroupModifyType_EnumDescriptor,
-        .core.number = IMGroupChangeMemberRsp_FieldNumber_ChangeType,
-        .core.hasIndex = 1,
-        .core.offset = (uint32_t)offsetof(IMGroupChangeMemberRsp__storage_, changeType),
-        .core.flags = (GPBFieldFlags)(GPBFieldRequired | GPBFieldHasEnumDescriptor),
-        .core.dataType = GPBDataTypeEnum,
+        .name = "changeType",
+        .dataTypeSpecific.enumDescFunc = GroupModifyType_EnumDescriptor,
+        .number = IMGroupChangeMemberRsp_FieldNumber_ChangeType,
+        .hasIndex = 1,
+        .offset = (uint32_t)offsetof(IMGroupChangeMemberRsp__storage_, changeType),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldHasEnumDescriptor),
+        .dataType = GPBDataTypeEnum,
       },
       {
-        .defaultValue.valueUInt32 = 0U,
-        .core.name = "resultCode",
-        .core.dataTypeSpecific.className = NULL,
-        .core.number = IMGroupChangeMemberRsp_FieldNumber_ResultCode,
-        .core.hasIndex = 2,
-        .core.offset = (uint32_t)offsetof(IMGroupChangeMemberRsp__storage_, resultCode),
-        .core.flags = GPBFieldRequired,
-        .core.dataType = GPBDataTypeUInt32,
+        .name = "resultCode",
+        .dataTypeSpecific.className = NULL,
+        .number = IMGroupChangeMemberRsp_FieldNumber_ResultCode,
+        .hasIndex = 2,
+        .offset = (uint32_t)offsetof(IMGroupChangeMemberRsp__storage_, resultCode),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeUInt32,
       },
       {
-        .defaultValue.valueUInt32 = 0U,
-        .core.name = "groupId",
-        .core.dataTypeSpecific.className = NULL,
-        .core.number = IMGroupChangeMemberRsp_FieldNumber_GroupId,
-        .core.hasIndex = 3,
-        .core.offset = (uint32_t)offsetof(IMGroupChangeMemberRsp__storage_, groupId),
-        .core.flags = GPBFieldRequired,
-        .core.dataType = GPBDataTypeUInt32,
+        .name = "groupId",
+        .dataTypeSpecific.className = NULL,
+        .number = IMGroupChangeMemberRsp_FieldNumber_GroupId,
+        .hasIndex = 3,
+        .offset = (uint32_t)offsetof(IMGroupChangeMemberRsp__storage_, groupId),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeUInt32,
       },
       {
-        .defaultValue.valueMessage = nil,
-        .core.name = "curUserIdListArray",
-        .core.dataTypeSpecific.className = NULL,
-        .core.number = IMGroupChangeMemberRsp_FieldNumber_CurUserIdListArray,
-        .core.hasIndex = GPBNoHasBit,
-        .core.offset = (uint32_t)offsetof(IMGroupChangeMemberRsp__storage_, curUserIdListArray),
-        .core.flags = GPBFieldRepeated,
-        .core.dataType = GPBDataTypeUInt32,
+        .name = "curUserIdListArray",
+        .dataTypeSpecific.className = NULL,
+        .number = IMGroupChangeMemberRsp_FieldNumber_CurUserIdListArray,
+        .hasIndex = GPBNoHasBit,
+        .offset = (uint32_t)offsetof(IMGroupChangeMemberRsp__storage_, curUserIdListArray),
+        .flags = (GPBFieldFlags)(GPBFieldRepeated | GPBFieldPacked),
+        .dataType = GPBDataTypeUInt32,
       },
       {
-        .defaultValue.valueMessage = nil,
-        .core.name = "chgUserIdListArray",
-        .core.dataTypeSpecific.className = NULL,
-        .core.number = IMGroupChangeMemberRsp_FieldNumber_ChgUserIdListArray,
-        .core.hasIndex = GPBNoHasBit,
-        .core.offset = (uint32_t)offsetof(IMGroupChangeMemberRsp__storage_, chgUserIdListArray),
-        .core.flags = GPBFieldRepeated,
-        .core.dataType = GPBDataTypeUInt32,
+        .name = "chgUserIdListArray",
+        .dataTypeSpecific.className = NULL,
+        .number = IMGroupChangeMemberRsp_FieldNumber_ChgUserIdListArray,
+        .hasIndex = GPBNoHasBit,
+        .offset = (uint32_t)offsetof(IMGroupChangeMemberRsp__storage_, chgUserIdListArray),
+        .flags = (GPBFieldFlags)(GPBFieldRepeated | GPBFieldPacked),
+        .dataType = GPBDataTypeUInt32,
       },
       {
-        .defaultValue.valueData = nil,
-        .core.name = "attachData",
-        .core.dataTypeSpecific.className = NULL,
-        .core.number = IMGroupChangeMemberRsp_FieldNumber_AttachData,
-        .core.hasIndex = 4,
-        .core.offset = (uint32_t)offsetof(IMGroupChangeMemberRsp__storage_, attachData),
-        .core.flags = GPBFieldOptional,
-        .core.dataType = GPBDataTypeBytes,
+        .name = "attachData",
+        .dataTypeSpecific.className = NULL,
+        .number = IMGroupChangeMemberRsp_FieldNumber_AttachData,
+        .hasIndex = 4,
+        .offset = (uint32_t)offsetof(IMGroupChangeMemberRsp__storage_, attachData),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeBytes,
       },
     };
     GPBDescriptor *localDescriptor =
@@ -691,9 +697,9 @@ typedef struct IMGroupChangeMemberRsp__storage_ {
                                      rootClass:[ImGroupRoot class]
                                           file:ImGroupRoot_FileDescriptor()
                                         fields:fields
-                                    fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescriptionWithDefault))
+                                    fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(IMGroupChangeMemberRsp__storage_)
-                                         flags:GPBDescriptorInitializationFlag_FieldsWithDefault];
+                                         flags:GPBDescriptorInitializationFlag_None];
     NSAssert(descriptor == nil, @"Startup recursed!");
     descriptor = localDescriptor;
   }
@@ -702,14 +708,26 @@ typedef struct IMGroupChangeMemberRsp__storage_ {
 
 @end
 
+int32_t IMGroupChangeMemberRsp_ChangeType_RawValue(IMGroupChangeMemberRsp *message) {
+  GPBDescriptor *descriptor = [IMGroupChangeMemberRsp descriptor];
+  GPBFieldDescriptor *field = [descriptor fieldWithNumber:IMGroupChangeMemberRsp_FieldNumber_ChangeType];
+  return GPBGetMessageInt32Field(message, field);
+}
+
+void SetIMGroupChangeMemberRsp_ChangeType_RawValue(IMGroupChangeMemberRsp *message, int32_t value) {
+  GPBDescriptor *descriptor = [IMGroupChangeMemberRsp descriptor];
+  GPBFieldDescriptor *field = [descriptor fieldWithNumber:IMGroupChangeMemberRsp_FieldNumber_ChangeType];
+  GPBSetInt32IvarWithFieldInternal(message, field, value, descriptor.file.syntax);
+}
+
 #pragma mark - IMGroupShieldReq
 
 @implementation IMGroupShieldReq
 
-@dynamic hasUserId, userId;
-@dynamic hasGroupId, groupId;
-@dynamic hasShieldStatus, shieldStatus;
-@dynamic hasAttachData, attachData;
+@dynamic userId;
+@dynamic groupId;
+@dynamic shieldStatus;
+@dynamic attachData;
 
 typedef struct IMGroupShieldReq__storage_ {
   uint32_t _has_storage_[1];
@@ -731,7 +749,7 @@ typedef struct IMGroupShieldReq__storage_ {
         .number = IMGroupShieldReq_FieldNumber_UserId,
         .hasIndex = 0,
         .offset = (uint32_t)offsetof(IMGroupShieldReq__storage_, userId),
-        .flags = GPBFieldRequired,
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt32,
       },
       {
@@ -740,7 +758,7 @@ typedef struct IMGroupShieldReq__storage_ {
         .number = IMGroupShieldReq_FieldNumber_GroupId,
         .hasIndex = 1,
         .offset = (uint32_t)offsetof(IMGroupShieldReq__storage_, groupId),
-        .flags = GPBFieldRequired,
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt32,
       },
       {
@@ -749,7 +767,7 @@ typedef struct IMGroupShieldReq__storage_ {
         .number = IMGroupShieldReq_FieldNumber_ShieldStatus,
         .hasIndex = 2,
         .offset = (uint32_t)offsetof(IMGroupShieldReq__storage_, shieldStatus),
-        .flags = GPBFieldRequired,
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt32,
       },
       {
@@ -782,10 +800,10 @@ typedef struct IMGroupShieldReq__storage_ {
 
 @implementation IMGroupShieldRsp
 
-@dynamic hasUserId, userId;
-@dynamic hasGroupId, groupId;
-@dynamic hasResultCode, resultCode;
-@dynamic hasAttachData, attachData;
+@dynamic userId;
+@dynamic groupId;
+@dynamic resultCode;
+@dynamic attachData;
 
 typedef struct IMGroupShieldRsp__storage_ {
   uint32_t _has_storage_[1];
@@ -807,7 +825,7 @@ typedef struct IMGroupShieldRsp__storage_ {
         .number = IMGroupShieldRsp_FieldNumber_UserId,
         .hasIndex = 0,
         .offset = (uint32_t)offsetof(IMGroupShieldRsp__storage_, userId),
-        .flags = GPBFieldRequired,
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt32,
       },
       {
@@ -816,7 +834,7 @@ typedef struct IMGroupShieldRsp__storage_ {
         .number = IMGroupShieldRsp_FieldNumber_GroupId,
         .hasIndex = 1,
         .offset = (uint32_t)offsetof(IMGroupShieldRsp__storage_, groupId),
-        .flags = GPBFieldRequired,
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt32,
       },
       {
@@ -825,7 +843,7 @@ typedef struct IMGroupShieldRsp__storage_ {
         .number = IMGroupShieldRsp_FieldNumber_ResultCode,
         .hasIndex = 2,
         .offset = (uint32_t)offsetof(IMGroupShieldRsp__storage_, resultCode),
-        .flags = GPBFieldRequired,
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt32,
       },
       {
@@ -858,9 +876,9 @@ typedef struct IMGroupShieldRsp__storage_ {
 
 @implementation IMGroupChangeMemberNotify
 
-@dynamic hasUserId, userId;
-@dynamic hasChangeType, changeType;
-@dynamic hasGroupId, groupId;
+@dynamic userId;
+@dynamic changeType;
+@dynamic groupId;
 @dynamic curUserIdListArray, curUserIdListArray_Count;
 @dynamic chgUserIdListArray, chgUserIdListArray_Count;
 
@@ -878,56 +896,51 @@ typedef struct IMGroupChangeMemberNotify__storage_ {
 + (GPBDescriptor *)descriptor {
   static GPBDescriptor *descriptor = nil;
   if (!descriptor) {
-    static GPBMessageFieldDescriptionWithDefault fields[] = {
+    static GPBMessageFieldDescription fields[] = {
       {
-        .defaultValue.valueUInt32 = 0U,
-        .core.name = "userId",
-        .core.dataTypeSpecific.className = NULL,
-        .core.number = IMGroupChangeMemberNotify_FieldNumber_UserId,
-        .core.hasIndex = 0,
-        .core.offset = (uint32_t)offsetof(IMGroupChangeMemberNotify__storage_, userId),
-        .core.flags = GPBFieldRequired,
-        .core.dataType = GPBDataTypeUInt32,
+        .name = "userId",
+        .dataTypeSpecific.className = NULL,
+        .number = IMGroupChangeMemberNotify_FieldNumber_UserId,
+        .hasIndex = 0,
+        .offset = (uint32_t)offsetof(IMGroupChangeMemberNotify__storage_, userId),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeUInt32,
       },
       {
-        .defaultValue.valueEnum = GroupModifyType_GroupModifyTypeAdd,
-        .core.name = "changeType",
-        .core.dataTypeSpecific.enumDescFunc = GroupModifyType_EnumDescriptor,
-        .core.number = IMGroupChangeMemberNotify_FieldNumber_ChangeType,
-        .core.hasIndex = 1,
-        .core.offset = (uint32_t)offsetof(IMGroupChangeMemberNotify__storage_, changeType),
-        .core.flags = (GPBFieldFlags)(GPBFieldRequired | GPBFieldHasEnumDescriptor),
-        .core.dataType = GPBDataTypeEnum,
+        .name = "changeType",
+        .dataTypeSpecific.enumDescFunc = GroupModifyType_EnumDescriptor,
+        .number = IMGroupChangeMemberNotify_FieldNumber_ChangeType,
+        .hasIndex = 1,
+        .offset = (uint32_t)offsetof(IMGroupChangeMemberNotify__storage_, changeType),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldHasEnumDescriptor),
+        .dataType = GPBDataTypeEnum,
       },
       {
-        .defaultValue.valueUInt32 = 0U,
-        .core.name = "groupId",
-        .core.dataTypeSpecific.className = NULL,
-        .core.number = IMGroupChangeMemberNotify_FieldNumber_GroupId,
-        .core.hasIndex = 2,
-        .core.offset = (uint32_t)offsetof(IMGroupChangeMemberNotify__storage_, groupId),
-        .core.flags = GPBFieldRequired,
-        .core.dataType = GPBDataTypeUInt32,
+        .name = "groupId",
+        .dataTypeSpecific.className = NULL,
+        .number = IMGroupChangeMemberNotify_FieldNumber_GroupId,
+        .hasIndex = 2,
+        .offset = (uint32_t)offsetof(IMGroupChangeMemberNotify__storage_, groupId),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeUInt32,
       },
       {
-        .defaultValue.valueMessage = nil,
-        .core.name = "curUserIdListArray",
-        .core.dataTypeSpecific.className = NULL,
-        .core.number = IMGroupChangeMemberNotify_FieldNumber_CurUserIdListArray,
-        .core.hasIndex = GPBNoHasBit,
-        .core.offset = (uint32_t)offsetof(IMGroupChangeMemberNotify__storage_, curUserIdListArray),
-        .core.flags = GPBFieldRepeated,
-        .core.dataType = GPBDataTypeUInt32,
+        .name = "curUserIdListArray",
+        .dataTypeSpecific.className = NULL,
+        .number = IMGroupChangeMemberNotify_FieldNumber_CurUserIdListArray,
+        .hasIndex = GPBNoHasBit,
+        .offset = (uint32_t)offsetof(IMGroupChangeMemberNotify__storage_, curUserIdListArray),
+        .flags = (GPBFieldFlags)(GPBFieldRepeated | GPBFieldPacked),
+        .dataType = GPBDataTypeUInt32,
       },
       {
-        .defaultValue.valueMessage = nil,
-        .core.name = "chgUserIdListArray",
-        .core.dataTypeSpecific.className = NULL,
-        .core.number = IMGroupChangeMemberNotify_FieldNumber_ChgUserIdListArray,
-        .core.hasIndex = GPBNoHasBit,
-        .core.offset = (uint32_t)offsetof(IMGroupChangeMemberNotify__storage_, chgUserIdListArray),
-        .core.flags = GPBFieldRepeated,
-        .core.dataType = GPBDataTypeUInt32,
+        .name = "chgUserIdListArray",
+        .dataTypeSpecific.className = NULL,
+        .number = IMGroupChangeMemberNotify_FieldNumber_ChgUserIdListArray,
+        .hasIndex = GPBNoHasBit,
+        .offset = (uint32_t)offsetof(IMGroupChangeMemberNotify__storage_, chgUserIdListArray),
+        .flags = (GPBFieldFlags)(GPBFieldRepeated | GPBFieldPacked),
+        .dataType = GPBDataTypeUInt32,
       },
     };
     GPBDescriptor *localDescriptor =
@@ -935,9 +948,9 @@ typedef struct IMGroupChangeMemberNotify__storage_ {
                                      rootClass:[ImGroupRoot class]
                                           file:ImGroupRoot_FileDescriptor()
                                         fields:fields
-                                    fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescriptionWithDefault))
+                                    fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(IMGroupChangeMemberNotify__storage_)
-                                         flags:GPBDescriptorInitializationFlag_FieldsWithDefault];
+                                         flags:GPBDescriptorInitializationFlag_None];
     NSAssert(descriptor == nil, @"Startup recursed!");
     descriptor = localDescriptor;
   }
@@ -945,6 +958,18 @@ typedef struct IMGroupChangeMemberNotify__storage_ {
 }
 
 @end
+
+int32_t IMGroupChangeMemberNotify_ChangeType_RawValue(IMGroupChangeMemberNotify *message) {
+  GPBDescriptor *descriptor = [IMGroupChangeMemberNotify descriptor];
+  GPBFieldDescriptor *field = [descriptor fieldWithNumber:IMGroupChangeMemberNotify_FieldNumber_ChangeType];
+  return GPBGetMessageInt32Field(message, field);
+}
+
+void SetIMGroupChangeMemberNotify_ChangeType_RawValue(IMGroupChangeMemberNotify *message, int32_t value) {
+  GPBDescriptor *descriptor = [IMGroupChangeMemberNotify descriptor];
+  GPBFieldDescriptor *field = [descriptor fieldWithNumber:IMGroupChangeMemberNotify_FieldNumber_ChangeType];
+  GPBSetInt32IvarWithFieldInternal(message, field, value, descriptor.file.syntax);
+}
 
 
 #pragma clang diagnostic pop

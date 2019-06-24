@@ -38,7 +38,7 @@ static GPBFileDescriptor *ImLoginRoot_FileDescriptor(void) {
   if (!descriptor) {
     GPB_DEBUG_CHECK_RUNTIME_VERSIONS();
     descriptor = [[GPBFileDescriptor alloc] initWithPackage:@"IM.Login"
-                                                     syntax:GPBFileSyntaxProto2];
+                                                     syntax:GPBFileSyntaxProto3];
   }
   return descriptor;
 }
@@ -77,10 +77,10 @@ typedef struct IMMsgServReq__storage_ {
 
 @implementation IMMsgServRsp
 
-@dynamic hasResultCode, resultCode;
-@dynamic hasPriorIp, priorIp;
-@dynamic hasBackipIp, backipIp;
-@dynamic hasPort, port;
+@dynamic resultCode;
+@dynamic priorIp;
+@dynamic backipIp;
+@dynamic port;
 
 typedef struct IMMsgServRsp__storage_ {
   uint32_t _has_storage_[1];
@@ -102,7 +102,7 @@ typedef struct IMMsgServRsp__storage_ {
         .number = IMMsgServRsp_FieldNumber_ResultCode,
         .hasIndex = 0,
         .offset = (uint32_t)offsetof(IMMsgServRsp__storage_, resultCode),
-        .flags = (GPBFieldFlags)(GPBFieldRequired | GPBFieldHasEnumDescriptor),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldHasEnumDescriptor),
         .dataType = GPBDataTypeEnum,
       },
       {
@@ -149,15 +149,27 @@ typedef struct IMMsgServRsp__storage_ {
 
 @end
 
+int32_t IMMsgServRsp_ResultCode_RawValue(IMMsgServRsp *message) {
+  GPBDescriptor *descriptor = [IMMsgServRsp descriptor];
+  GPBFieldDescriptor *field = [descriptor fieldWithNumber:IMMsgServRsp_FieldNumber_ResultCode];
+  return GPBGetMessageInt32Field(message, field);
+}
+
+void SetIMMsgServRsp_ResultCode_RawValue(IMMsgServRsp *message, int32_t value) {
+  GPBDescriptor *descriptor = [IMMsgServRsp descriptor];
+  GPBFieldDescriptor *field = [descriptor fieldWithNumber:IMMsgServRsp_FieldNumber_ResultCode];
+  GPBSetInt32IvarWithFieldInternal(message, field, value, descriptor.file.syntax);
+}
+
 #pragma mark - IMLoginReq
 
 @implementation IMLoginReq
 
-@dynamic hasUserName, userName;
-@dynamic hasPassword, password;
-@dynamic hasOnlineStatus, onlineStatus;
-@dynamic hasClientType, clientType;
-@dynamic hasClientVersion, clientVersion;
+@dynamic userName;
+@dynamic password;
+@dynamic onlineStatus;
+@dynamic clientType;
+@dynamic clientVersion;
 
 typedef struct IMLoginReq__storage_ {
   uint32_t _has_storage_[1];
@@ -173,56 +185,51 @@ typedef struct IMLoginReq__storage_ {
 + (GPBDescriptor *)descriptor {
   static GPBDescriptor *descriptor = nil;
   if (!descriptor) {
-    static GPBMessageFieldDescriptionWithDefault fields[] = {
+    static GPBMessageFieldDescription fields[] = {
       {
-        .defaultValue.valueString = nil,
-        .core.name = "userName",
-        .core.dataTypeSpecific.className = NULL,
-        .core.number = IMLoginReq_FieldNumber_UserName,
-        .core.hasIndex = 0,
-        .core.offset = (uint32_t)offsetof(IMLoginReq__storage_, userName),
-        .core.flags = GPBFieldRequired,
-        .core.dataType = GPBDataTypeString,
+        .name = "userName",
+        .dataTypeSpecific.className = NULL,
+        .number = IMLoginReq_FieldNumber_UserName,
+        .hasIndex = 0,
+        .offset = (uint32_t)offsetof(IMLoginReq__storage_, userName),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeString,
       },
       {
-        .defaultValue.valueString = nil,
-        .core.name = "password",
-        .core.dataTypeSpecific.className = NULL,
-        .core.number = IMLoginReq_FieldNumber_Password,
-        .core.hasIndex = 1,
-        .core.offset = (uint32_t)offsetof(IMLoginReq__storage_, password),
-        .core.flags = GPBFieldRequired,
-        .core.dataType = GPBDataTypeString,
+        .name = "password",
+        .dataTypeSpecific.className = NULL,
+        .number = IMLoginReq_FieldNumber_Password,
+        .hasIndex = 1,
+        .offset = (uint32_t)offsetof(IMLoginReq__storage_, password),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeString,
       },
       {
-        .defaultValue.valueEnum = UserStatType_UserStatusOnline,
-        .core.name = "onlineStatus",
-        .core.dataTypeSpecific.enumDescFunc = UserStatType_EnumDescriptor,
-        .core.number = IMLoginReq_FieldNumber_OnlineStatus,
-        .core.hasIndex = 2,
-        .core.offset = (uint32_t)offsetof(IMLoginReq__storage_, onlineStatus),
-        .core.flags = (GPBFieldFlags)(GPBFieldRequired | GPBFieldHasEnumDescriptor),
-        .core.dataType = GPBDataTypeEnum,
+        .name = "onlineStatus",
+        .dataTypeSpecific.enumDescFunc = UserStatType_EnumDescriptor,
+        .number = IMLoginReq_FieldNumber_OnlineStatus,
+        .hasIndex = 2,
+        .offset = (uint32_t)offsetof(IMLoginReq__storage_, onlineStatus),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldHasEnumDescriptor),
+        .dataType = GPBDataTypeEnum,
       },
       {
-        .defaultValue.valueEnum = ClientType_ClientTypeWindows,
-        .core.name = "clientType",
-        .core.dataTypeSpecific.enumDescFunc = ClientType_EnumDescriptor,
-        .core.number = IMLoginReq_FieldNumber_ClientType,
-        .core.hasIndex = 3,
-        .core.offset = (uint32_t)offsetof(IMLoginReq__storage_, clientType),
-        .core.flags = (GPBFieldFlags)(GPBFieldRequired | GPBFieldHasEnumDescriptor),
-        .core.dataType = GPBDataTypeEnum,
+        .name = "clientType",
+        .dataTypeSpecific.enumDescFunc = ClientType_EnumDescriptor,
+        .number = IMLoginReq_FieldNumber_ClientType,
+        .hasIndex = 3,
+        .offset = (uint32_t)offsetof(IMLoginReq__storage_, clientType),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldHasEnumDescriptor),
+        .dataType = GPBDataTypeEnum,
       },
       {
-        .defaultValue.valueString = nil,
-        .core.name = "clientVersion",
-        .core.dataTypeSpecific.className = NULL,
-        .core.number = IMLoginReq_FieldNumber_ClientVersion,
-        .core.hasIndex = 4,
-        .core.offset = (uint32_t)offsetof(IMLoginReq__storage_, clientVersion),
-        .core.flags = GPBFieldOptional,
-        .core.dataType = GPBDataTypeString,
+        .name = "clientVersion",
+        .dataTypeSpecific.className = NULL,
+        .number = IMLoginReq_FieldNumber_ClientVersion,
+        .hasIndex = 4,
+        .offset = (uint32_t)offsetof(IMLoginReq__storage_, clientVersion),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeString,
       },
     };
     GPBDescriptor *localDescriptor =
@@ -230,9 +237,9 @@ typedef struct IMLoginReq__storage_ {
                                      rootClass:[ImLoginRoot class]
                                           file:ImLoginRoot_FileDescriptor()
                                         fields:fields
-                                    fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescriptionWithDefault))
+                                    fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(IMLoginReq__storage_)
-                                         flags:GPBDescriptorInitializationFlag_FieldsWithDefault];
+                                         flags:GPBDescriptorInitializationFlag_None];
     NSAssert(descriptor == nil, @"Startup recursed!");
     descriptor = localDescriptor;
   }
@@ -241,14 +248,38 @@ typedef struct IMLoginReq__storage_ {
 
 @end
 
+int32_t IMLoginReq_OnlineStatus_RawValue(IMLoginReq *message) {
+  GPBDescriptor *descriptor = [IMLoginReq descriptor];
+  GPBFieldDescriptor *field = [descriptor fieldWithNumber:IMLoginReq_FieldNumber_OnlineStatus];
+  return GPBGetMessageInt32Field(message, field);
+}
+
+void SetIMLoginReq_OnlineStatus_RawValue(IMLoginReq *message, int32_t value) {
+  GPBDescriptor *descriptor = [IMLoginReq descriptor];
+  GPBFieldDescriptor *field = [descriptor fieldWithNumber:IMLoginReq_FieldNumber_OnlineStatus];
+  GPBSetInt32IvarWithFieldInternal(message, field, value, descriptor.file.syntax);
+}
+
+int32_t IMLoginReq_ClientType_RawValue(IMLoginReq *message) {
+  GPBDescriptor *descriptor = [IMLoginReq descriptor];
+  GPBFieldDescriptor *field = [descriptor fieldWithNumber:IMLoginReq_FieldNumber_ClientType];
+  return GPBGetMessageInt32Field(message, field);
+}
+
+void SetIMLoginReq_ClientType_RawValue(IMLoginReq *message, int32_t value) {
+  GPBDescriptor *descriptor = [IMLoginReq descriptor];
+  GPBFieldDescriptor *field = [descriptor fieldWithNumber:IMLoginReq_FieldNumber_ClientType];
+  GPBSetInt32IvarWithFieldInternal(message, field, value, descriptor.file.syntax);
+}
+
 #pragma mark - IMLoginRes
 
 @implementation IMLoginRes
 
-@dynamic hasServerTime, serverTime;
-@dynamic hasResultCode, resultCode;
-@dynamic hasResultString, resultString;
-@dynamic hasOnlineStatus, onlineStatus;
+@dynamic serverTime;
+@dynamic resultCode;
+@dynamic resultString;
+@dynamic onlineStatus;
 @dynamic hasUserInfo, userInfo;
 
 typedef struct IMLoginRes__storage_ {
@@ -265,56 +296,51 @@ typedef struct IMLoginRes__storage_ {
 + (GPBDescriptor *)descriptor {
   static GPBDescriptor *descriptor = nil;
   if (!descriptor) {
-    static GPBMessageFieldDescriptionWithDefault fields[] = {
+    static GPBMessageFieldDescription fields[] = {
       {
-        .defaultValue.valueUInt32 = 0U,
-        .core.name = "serverTime",
-        .core.dataTypeSpecific.className = NULL,
-        .core.number = IMLoginRes_FieldNumber_ServerTime,
-        .core.hasIndex = 0,
-        .core.offset = (uint32_t)offsetof(IMLoginRes__storage_, serverTime),
-        .core.flags = GPBFieldRequired,
-        .core.dataType = GPBDataTypeUInt32,
+        .name = "serverTime",
+        .dataTypeSpecific.className = NULL,
+        .number = IMLoginRes_FieldNumber_ServerTime,
+        .hasIndex = 0,
+        .offset = (uint32_t)offsetof(IMLoginRes__storage_, serverTime),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeUInt32,
       },
       {
-        .defaultValue.valueEnum = ResultType_RefuseReasonNone,
-        .core.name = "resultCode",
-        .core.dataTypeSpecific.enumDescFunc = ResultType_EnumDescriptor,
-        .core.number = IMLoginRes_FieldNumber_ResultCode,
-        .core.hasIndex = 1,
-        .core.offset = (uint32_t)offsetof(IMLoginRes__storage_, resultCode),
-        .core.flags = (GPBFieldFlags)(GPBFieldRequired | GPBFieldHasEnumDescriptor),
-        .core.dataType = GPBDataTypeEnum,
+        .name = "resultCode",
+        .dataTypeSpecific.enumDescFunc = ResultType_EnumDescriptor,
+        .number = IMLoginRes_FieldNumber_ResultCode,
+        .hasIndex = 1,
+        .offset = (uint32_t)offsetof(IMLoginRes__storage_, resultCode),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldHasEnumDescriptor),
+        .dataType = GPBDataTypeEnum,
       },
       {
-        .defaultValue.valueString = nil,
-        .core.name = "resultString",
-        .core.dataTypeSpecific.className = NULL,
-        .core.number = IMLoginRes_FieldNumber_ResultString,
-        .core.hasIndex = 2,
-        .core.offset = (uint32_t)offsetof(IMLoginRes__storage_, resultString),
-        .core.flags = GPBFieldOptional,
-        .core.dataType = GPBDataTypeString,
+        .name = "resultString",
+        .dataTypeSpecific.className = NULL,
+        .number = IMLoginRes_FieldNumber_ResultString,
+        .hasIndex = 2,
+        .offset = (uint32_t)offsetof(IMLoginRes__storage_, resultString),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeString,
       },
       {
-        .defaultValue.valueEnum = UserStatType_UserStatusOnline,
-        .core.name = "onlineStatus",
-        .core.dataTypeSpecific.enumDescFunc = UserStatType_EnumDescriptor,
-        .core.number = IMLoginRes_FieldNumber_OnlineStatus,
-        .core.hasIndex = 3,
-        .core.offset = (uint32_t)offsetof(IMLoginRes__storage_, onlineStatus),
-        .core.flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldHasEnumDescriptor),
-        .core.dataType = GPBDataTypeEnum,
+        .name = "onlineStatus",
+        .dataTypeSpecific.enumDescFunc = UserStatType_EnumDescriptor,
+        .number = IMLoginRes_FieldNumber_OnlineStatus,
+        .hasIndex = 3,
+        .offset = (uint32_t)offsetof(IMLoginRes__storage_, onlineStatus),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldHasEnumDescriptor),
+        .dataType = GPBDataTypeEnum,
       },
       {
-        .defaultValue.valueMessage = nil,
-        .core.name = "userInfo",
-        .core.dataTypeSpecific.className = GPBStringifySymbol(UserInfo),
-        .core.number = IMLoginRes_FieldNumber_UserInfo,
-        .core.hasIndex = 4,
-        .core.offset = (uint32_t)offsetof(IMLoginRes__storage_, userInfo),
-        .core.flags = GPBFieldOptional,
-        .core.dataType = GPBDataTypeMessage,
+        .name = "userInfo",
+        .dataTypeSpecific.className = GPBStringifySymbol(UserInfo),
+        .number = IMLoginRes_FieldNumber_UserInfo,
+        .hasIndex = 4,
+        .offset = (uint32_t)offsetof(IMLoginRes__storage_, userInfo),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeMessage,
       },
     };
     GPBDescriptor *localDescriptor =
@@ -322,9 +348,9 @@ typedef struct IMLoginRes__storage_ {
                                      rootClass:[ImLoginRoot class]
                                           file:ImLoginRoot_FileDescriptor()
                                         fields:fields
-                                    fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescriptionWithDefault))
+                                    fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(IMLoginRes__storage_)
-                                         flags:GPBDescriptorInitializationFlag_FieldsWithDefault];
+                                         flags:GPBDescriptorInitializationFlag_None];
     NSAssert(descriptor == nil, @"Startup recursed!");
     descriptor = localDescriptor;
   }
@@ -332,6 +358,30 @@ typedef struct IMLoginRes__storage_ {
 }
 
 @end
+
+int32_t IMLoginRes_ResultCode_RawValue(IMLoginRes *message) {
+  GPBDescriptor *descriptor = [IMLoginRes descriptor];
+  GPBFieldDescriptor *field = [descriptor fieldWithNumber:IMLoginRes_FieldNumber_ResultCode];
+  return GPBGetMessageInt32Field(message, field);
+}
+
+void SetIMLoginRes_ResultCode_RawValue(IMLoginRes *message, int32_t value) {
+  GPBDescriptor *descriptor = [IMLoginRes descriptor];
+  GPBFieldDescriptor *field = [descriptor fieldWithNumber:IMLoginRes_FieldNumber_ResultCode];
+  GPBSetInt32IvarWithFieldInternal(message, field, value, descriptor.file.syntax);
+}
+
+int32_t IMLoginRes_OnlineStatus_RawValue(IMLoginRes *message) {
+  GPBDescriptor *descriptor = [IMLoginRes descriptor];
+  GPBFieldDescriptor *field = [descriptor fieldWithNumber:IMLoginRes_FieldNumber_OnlineStatus];
+  return GPBGetMessageInt32Field(message, field);
+}
+
+void SetIMLoginRes_OnlineStatus_RawValue(IMLoginRes *message, int32_t value) {
+  GPBDescriptor *descriptor = [IMLoginRes descriptor];
+  GPBFieldDescriptor *field = [descriptor fieldWithNumber:IMLoginRes_FieldNumber_OnlineStatus];
+  GPBSetInt32IvarWithFieldInternal(message, field, value, descriptor.file.syntax);
+}
 
 #pragma mark - IMLogoutReq
 
@@ -367,7 +417,7 @@ typedef struct IMLogoutReq__storage_ {
 
 @implementation IMLogoutRsp
 
-@dynamic hasResultCode, resultCode;
+@dynamic resultCode;
 
 typedef struct IMLogoutRsp__storage_ {
   uint32_t _has_storage_[1];
@@ -386,7 +436,7 @@ typedef struct IMLogoutRsp__storage_ {
         .number = IMLogoutRsp_FieldNumber_ResultCode,
         .hasIndex = 0,
         .offset = (uint32_t)offsetof(IMLogoutRsp__storage_, resultCode),
-        .flags = GPBFieldRequired,
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt32,
       },
     };
@@ -410,8 +460,8 @@ typedef struct IMLogoutRsp__storage_ {
 
 @implementation IMKickUser
 
-@dynamic hasUserId, userId;
-@dynamic hasKickReason, kickReason;
+@dynamic userId;
+@dynamic kickReason;
 
 typedef struct IMKickUser__storage_ {
   uint32_t _has_storage_[1];
@@ -424,26 +474,24 @@ typedef struct IMKickUser__storage_ {
 + (GPBDescriptor *)descriptor {
   static GPBDescriptor *descriptor = nil;
   if (!descriptor) {
-    static GPBMessageFieldDescriptionWithDefault fields[] = {
+    static GPBMessageFieldDescription fields[] = {
       {
-        .defaultValue.valueUInt32 = 0U,
-        .core.name = "userId",
-        .core.dataTypeSpecific.className = NULL,
-        .core.number = IMKickUser_FieldNumber_UserId,
-        .core.hasIndex = 0,
-        .core.offset = (uint32_t)offsetof(IMKickUser__storage_, userId),
-        .core.flags = GPBFieldRequired,
-        .core.dataType = GPBDataTypeUInt32,
+        .name = "userId",
+        .dataTypeSpecific.className = NULL,
+        .number = IMKickUser_FieldNumber_UserId,
+        .hasIndex = 0,
+        .offset = (uint32_t)offsetof(IMKickUser__storage_, userId),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeUInt32,
       },
       {
-        .defaultValue.valueEnum = KickReasonType_KickReasonDuplicateUser,
-        .core.name = "kickReason",
-        .core.dataTypeSpecific.enumDescFunc = KickReasonType_EnumDescriptor,
-        .core.number = IMKickUser_FieldNumber_KickReason,
-        .core.hasIndex = 1,
-        .core.offset = (uint32_t)offsetof(IMKickUser__storage_, kickReason),
-        .core.flags = (GPBFieldFlags)(GPBFieldRequired | GPBFieldHasEnumDescriptor),
-        .core.dataType = GPBDataTypeEnum,
+        .name = "kickReason",
+        .dataTypeSpecific.enumDescFunc = KickReasonType_EnumDescriptor,
+        .number = IMKickUser_FieldNumber_KickReason,
+        .hasIndex = 1,
+        .offset = (uint32_t)offsetof(IMKickUser__storage_, kickReason),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldHasEnumDescriptor),
+        .dataType = GPBDataTypeEnum,
       },
     };
     GPBDescriptor *localDescriptor =
@@ -451,9 +499,9 @@ typedef struct IMKickUser__storage_ {
                                      rootClass:[ImLoginRoot class]
                                           file:ImLoginRoot_FileDescriptor()
                                         fields:fields
-                                    fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescriptionWithDefault))
+                                    fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(IMKickUser__storage_)
-                                         flags:GPBDescriptorInitializationFlag_FieldsWithDefault];
+                                         flags:GPBDescriptorInitializationFlag_None];
     NSAssert(descriptor == nil, @"Startup recursed!");
     descriptor = localDescriptor;
   }
@@ -462,14 +510,26 @@ typedef struct IMKickUser__storage_ {
 
 @end
 
+int32_t IMKickUser_KickReason_RawValue(IMKickUser *message) {
+  GPBDescriptor *descriptor = [IMKickUser descriptor];
+  GPBFieldDescriptor *field = [descriptor fieldWithNumber:IMKickUser_FieldNumber_KickReason];
+  return GPBGetMessageInt32Field(message, field);
+}
+
+void SetIMKickUser_KickReason_RawValue(IMKickUser *message, int32_t value) {
+  GPBDescriptor *descriptor = [IMKickUser descriptor];
+  GPBFieldDescriptor *field = [descriptor fieldWithNumber:IMKickUser_FieldNumber_KickReason];
+  GPBSetInt32IvarWithFieldInternal(message, field, value, descriptor.file.syntax);
+}
+
 #pragma mark - IMDeviceTokenReq
 
 @implementation IMDeviceTokenReq
 
-@dynamic hasUserId, userId;
-@dynamic hasDeviceToken, deviceToken;
-@dynamic hasClientType, clientType;
-@dynamic hasAttachData, attachData;
+@dynamic userId;
+@dynamic deviceToken;
+@dynamic clientType;
+@dynamic attachData;
 
 typedef struct IMDeviceTokenReq__storage_ {
   uint32_t _has_storage_[1];
@@ -484,46 +544,42 @@ typedef struct IMDeviceTokenReq__storage_ {
 + (GPBDescriptor *)descriptor {
   static GPBDescriptor *descriptor = nil;
   if (!descriptor) {
-    static GPBMessageFieldDescriptionWithDefault fields[] = {
+    static GPBMessageFieldDescription fields[] = {
       {
-        .defaultValue.valueUInt32 = 0U,
-        .core.name = "userId",
-        .core.dataTypeSpecific.className = NULL,
-        .core.number = IMDeviceTokenReq_FieldNumber_UserId,
-        .core.hasIndex = 0,
-        .core.offset = (uint32_t)offsetof(IMDeviceTokenReq__storage_, userId),
-        .core.flags = GPBFieldRequired,
-        .core.dataType = GPBDataTypeUInt32,
+        .name = "userId",
+        .dataTypeSpecific.className = NULL,
+        .number = IMDeviceTokenReq_FieldNumber_UserId,
+        .hasIndex = 0,
+        .offset = (uint32_t)offsetof(IMDeviceTokenReq__storage_, userId),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeUInt32,
       },
       {
-        .defaultValue.valueString = nil,
-        .core.name = "deviceToken",
-        .core.dataTypeSpecific.className = NULL,
-        .core.number = IMDeviceTokenReq_FieldNumber_DeviceToken,
-        .core.hasIndex = 1,
-        .core.offset = (uint32_t)offsetof(IMDeviceTokenReq__storage_, deviceToken),
-        .core.flags = GPBFieldRequired,
-        .core.dataType = GPBDataTypeString,
+        .name = "deviceToken",
+        .dataTypeSpecific.className = NULL,
+        .number = IMDeviceTokenReq_FieldNumber_DeviceToken,
+        .hasIndex = 1,
+        .offset = (uint32_t)offsetof(IMDeviceTokenReq__storage_, deviceToken),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeString,
       },
       {
-        .defaultValue.valueEnum = ClientType_ClientTypeWindows,
-        .core.name = "clientType",
-        .core.dataTypeSpecific.enumDescFunc = ClientType_EnumDescriptor,
-        .core.number = IMDeviceTokenReq_FieldNumber_ClientType,
-        .core.hasIndex = 2,
-        .core.offset = (uint32_t)offsetof(IMDeviceTokenReq__storage_, clientType),
-        .core.flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldHasEnumDescriptor),
-        .core.dataType = GPBDataTypeEnum,
+        .name = "clientType",
+        .dataTypeSpecific.enumDescFunc = ClientType_EnumDescriptor,
+        .number = IMDeviceTokenReq_FieldNumber_ClientType,
+        .hasIndex = 2,
+        .offset = (uint32_t)offsetof(IMDeviceTokenReq__storage_, clientType),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldHasEnumDescriptor),
+        .dataType = GPBDataTypeEnum,
       },
       {
-        .defaultValue.valueData = nil,
-        .core.name = "attachData",
-        .core.dataTypeSpecific.className = NULL,
-        .core.number = IMDeviceTokenReq_FieldNumber_AttachData,
-        .core.hasIndex = 3,
-        .core.offset = (uint32_t)offsetof(IMDeviceTokenReq__storage_, attachData),
-        .core.flags = GPBFieldOptional,
-        .core.dataType = GPBDataTypeBytes,
+        .name = "attachData",
+        .dataTypeSpecific.className = NULL,
+        .number = IMDeviceTokenReq_FieldNumber_AttachData,
+        .hasIndex = 3,
+        .offset = (uint32_t)offsetof(IMDeviceTokenReq__storage_, attachData),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeBytes,
       },
     };
     GPBDescriptor *localDescriptor =
@@ -531,9 +587,9 @@ typedef struct IMDeviceTokenReq__storage_ {
                                      rootClass:[ImLoginRoot class]
                                           file:ImLoginRoot_FileDescriptor()
                                         fields:fields
-                                    fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescriptionWithDefault))
+                                    fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(IMDeviceTokenReq__storage_)
-                                         flags:GPBDescriptorInitializationFlag_FieldsWithDefault];
+                                         flags:GPBDescriptorInitializationFlag_None];
     NSAssert(descriptor == nil, @"Startup recursed!");
     descriptor = localDescriptor;
   }
@@ -542,12 +598,24 @@ typedef struct IMDeviceTokenReq__storage_ {
 
 @end
 
+int32_t IMDeviceTokenReq_ClientType_RawValue(IMDeviceTokenReq *message) {
+  GPBDescriptor *descriptor = [IMDeviceTokenReq descriptor];
+  GPBFieldDescriptor *field = [descriptor fieldWithNumber:IMDeviceTokenReq_FieldNumber_ClientType];
+  return GPBGetMessageInt32Field(message, field);
+}
+
+void SetIMDeviceTokenReq_ClientType_RawValue(IMDeviceTokenReq *message, int32_t value) {
+  GPBDescriptor *descriptor = [IMDeviceTokenReq descriptor];
+  GPBFieldDescriptor *field = [descriptor fieldWithNumber:IMDeviceTokenReq_FieldNumber_ClientType];
+  GPBSetInt32IvarWithFieldInternal(message, field, value, descriptor.file.syntax);
+}
+
 #pragma mark - IMDeviceTokenRsp
 
 @implementation IMDeviceTokenRsp
 
-@dynamic hasUserId, userId;
-@dynamic hasAttachData, attachData;
+@dynamic userId;
+@dynamic attachData;
 
 typedef struct IMDeviceTokenRsp__storage_ {
   uint32_t _has_storage_[1];
@@ -567,7 +635,7 @@ typedef struct IMDeviceTokenRsp__storage_ {
         .number = IMDeviceTokenRsp_FieldNumber_UserId,
         .hasIndex = 0,
         .offset = (uint32_t)offsetof(IMDeviceTokenRsp__storage_, userId),
-        .flags = GPBFieldRequired,
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt32,
       },
       {
@@ -600,7 +668,7 @@ typedef struct IMDeviceTokenRsp__storage_ {
 
 @implementation IMKickPCClientReq
 
-@dynamic hasUserId, userId;
+@dynamic userId;
 
 typedef struct IMKickPCClientReq__storage_ {
   uint32_t _has_storage_[1];
@@ -619,7 +687,7 @@ typedef struct IMKickPCClientReq__storage_ {
         .number = IMKickPCClientReq_FieldNumber_UserId,
         .hasIndex = 0,
         .offset = (uint32_t)offsetof(IMKickPCClientReq__storage_, userId),
-        .flags = GPBFieldRequired,
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt32,
       },
     };
@@ -643,8 +711,8 @@ typedef struct IMKickPCClientReq__storage_ {
 
 @implementation IMKickPCClientRsp
 
-@dynamic hasUserId, userId;
-@dynamic hasResultCode, resultCode;
+@dynamic userId;
+@dynamic resultCode;
 
 typedef struct IMKickPCClientRsp__storage_ {
   uint32_t _has_storage_[1];
@@ -664,7 +732,7 @@ typedef struct IMKickPCClientRsp__storage_ {
         .number = IMKickPCClientRsp_FieldNumber_UserId,
         .hasIndex = 0,
         .offset = (uint32_t)offsetof(IMKickPCClientRsp__storage_, userId),
-        .flags = GPBFieldRequired,
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt32,
       },
       {
@@ -673,7 +741,7 @@ typedef struct IMKickPCClientRsp__storage_ {
         .number = IMKickPCClientRsp_FieldNumber_ResultCode,
         .hasIndex = 1,
         .offset = (uint32_t)offsetof(IMKickPCClientRsp__storage_, resultCode),
-        .flags = GPBFieldRequired,
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt32,
       },
     };
@@ -697,9 +765,9 @@ typedef struct IMKickPCClientRsp__storage_ {
 
 @implementation IMPushShieldReq
 
-@dynamic hasUserId, userId;
-@dynamic hasShieldStatus, shieldStatus;
-@dynamic hasAttachData, attachData;
+@dynamic userId;
+@dynamic shieldStatus;
+@dynamic attachData;
 
 typedef struct IMPushShieldReq__storage_ {
   uint32_t _has_storage_[1];
@@ -720,7 +788,7 @@ typedef struct IMPushShieldReq__storage_ {
         .number = IMPushShieldReq_FieldNumber_UserId,
         .hasIndex = 0,
         .offset = (uint32_t)offsetof(IMPushShieldReq__storage_, userId),
-        .flags = GPBFieldRequired,
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt32,
       },
       {
@@ -729,7 +797,7 @@ typedef struct IMPushShieldReq__storage_ {
         .number = IMPushShieldReq_FieldNumber_ShieldStatus,
         .hasIndex = 1,
         .offset = (uint32_t)offsetof(IMPushShieldReq__storage_, shieldStatus),
-        .flags = GPBFieldRequired,
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt32,
       },
       {
@@ -762,10 +830,10 @@ typedef struct IMPushShieldReq__storage_ {
 
 @implementation IMPushShieldRsp
 
-@dynamic hasUserId, userId;
-@dynamic hasResultCode, resultCode;
-@dynamic hasShieldStatus, shieldStatus;
-@dynamic hasAttachData, attachData;
+@dynamic userId;
+@dynamic resultCode;
+@dynamic shieldStatus;
+@dynamic attachData;
 
 typedef struct IMPushShieldRsp__storage_ {
   uint32_t _has_storage_[1];
@@ -787,7 +855,7 @@ typedef struct IMPushShieldRsp__storage_ {
         .number = IMPushShieldRsp_FieldNumber_UserId,
         .hasIndex = 0,
         .offset = (uint32_t)offsetof(IMPushShieldRsp__storage_, userId),
-        .flags = GPBFieldRequired,
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt32,
       },
       {
@@ -796,7 +864,7 @@ typedef struct IMPushShieldRsp__storage_ {
         .number = IMPushShieldRsp_FieldNumber_ResultCode,
         .hasIndex = 1,
         .offset = (uint32_t)offsetof(IMPushShieldRsp__storage_, resultCode),
-        .flags = GPBFieldRequired,
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt32,
       },
       {
@@ -838,8 +906,8 @@ typedef struct IMPushShieldRsp__storage_ {
 
 @implementation IMQueryPushShieldReq
 
-@dynamic hasUserId, userId;
-@dynamic hasAttachData, attachData;
+@dynamic userId;
+@dynamic attachData;
 
 typedef struct IMQueryPushShieldReq__storage_ {
   uint32_t _has_storage_[1];
@@ -859,7 +927,7 @@ typedef struct IMQueryPushShieldReq__storage_ {
         .number = IMQueryPushShieldReq_FieldNumber_UserId,
         .hasIndex = 0,
         .offset = (uint32_t)offsetof(IMQueryPushShieldReq__storage_, userId),
-        .flags = GPBFieldRequired,
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt32,
       },
       {
@@ -892,10 +960,10 @@ typedef struct IMQueryPushShieldReq__storage_ {
 
 @implementation IMQueryPushShieldRsp
 
-@dynamic hasUserId, userId;
-@dynamic hasResultCode, resultCode;
-@dynamic hasShieldStatus, shieldStatus;
-@dynamic hasAttachData, attachData;
+@dynamic userId;
+@dynamic resultCode;
+@dynamic shieldStatus;
+@dynamic attachData;
 
 typedef struct IMQueryPushShieldRsp__storage_ {
   uint32_t _has_storage_[1];
@@ -917,7 +985,7 @@ typedef struct IMQueryPushShieldRsp__storage_ {
         .number = IMQueryPushShieldRsp_FieldNumber_UserId,
         .hasIndex = 0,
         .offset = (uint32_t)offsetof(IMQueryPushShieldRsp__storage_, userId),
-        .flags = GPBFieldRequired,
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt32,
       },
       {
@@ -926,7 +994,7 @@ typedef struct IMQueryPushShieldRsp__storage_ {
         .number = IMQueryPushShieldRsp_FieldNumber_ResultCode,
         .hasIndex = 1,
         .offset = (uint32_t)offsetof(IMQueryPushShieldRsp__storage_, resultCode),
-        .flags = GPBFieldRequired,
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt32,
       },
       {

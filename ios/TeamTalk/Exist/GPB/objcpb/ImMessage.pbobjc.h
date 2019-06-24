@@ -69,29 +69,32 @@ typedef GPB_ENUM(IMMsgData_FieldNumber) {
 /** cmd id:		0x0301 */
 @property(nonatomic, readwrite) uint32_t fromUserId;
 
-@property(nonatomic, readwrite) BOOL hasFromUserId;
 /** 消息接受方 */
 @property(nonatomic, readwrite) uint32_t toSessionId;
 
-@property(nonatomic, readwrite) BOOL hasToSessionId;
 @property(nonatomic, readwrite) uint32_t msgId;
 
-@property(nonatomic, readwrite) BOOL hasMsgId;
 @property(nonatomic, readwrite) uint32_t createTime;
 
-@property(nonatomic, readwrite) BOOL hasCreateTime;
 @property(nonatomic, readwrite) enum MsgType msgType;
 
-@property(nonatomic, readwrite) BOOL hasMsgType;
 @property(nonatomic, readwrite, copy, null_resettable) NSData *msgData;
-/** Test to see if @c msgData has been set. */
-@property(nonatomic, readwrite) BOOL hasMsgData;
 
 @property(nonatomic, readwrite, copy, null_resettable) NSData *attachData;
-/** Test to see if @c attachData has been set. */
-@property(nonatomic, readwrite) BOOL hasAttachData;
 
 @end
+
+/**
+ * Fetches the raw value of a @c IMMsgData's @c msgType property, even
+ * if the value was not defined by the enum at the time the code was generated.
+ **/
+int32_t IMMsgData_MsgType_RawValue(IMMsgData *message);
+/**
+ * Sets the raw value of an @c IMMsgData's @c msgType property, allowing
+ * it to be set to a value that was not defined by the enum at the time the code
+ * was generated.
+ **/
+void SetIMMsgData_MsgType_RawValue(IMMsgData *message, int32_t value);
 
 #pragma mark - IMMsgDataAck
 
@@ -107,17 +110,25 @@ typedef GPB_ENUM(IMMsgDataAck_FieldNumber) {
 /** cmd id:		0x0302 */
 @property(nonatomic, readwrite) uint32_t userId;
 
-@property(nonatomic, readwrite) BOOL hasUserId;
 @property(nonatomic, readwrite) uint32_t sessionId;
 
-@property(nonatomic, readwrite) BOOL hasSessionId;
 @property(nonatomic, readwrite) uint32_t msgId;
 
-@property(nonatomic, readwrite) BOOL hasMsgId;
 @property(nonatomic, readwrite) enum SessionType sessionType;
 
-@property(nonatomic, readwrite) BOOL hasSessionType;
 @end
+
+/**
+ * Fetches the raw value of a @c IMMsgDataAck's @c sessionType property, even
+ * if the value was not defined by the enum at the time the code was generated.
+ **/
+int32_t IMMsgDataAck_SessionType_RawValue(IMMsgDataAck *message);
+/**
+ * Sets the raw value of an @c IMMsgDataAck's @c sessionType property, allowing
+ * it to be set to a value that was not defined by the enum at the time the code
+ * was generated.
+ **/
+void SetIMMsgDataAck_SessionType_RawValue(IMMsgDataAck *message, int32_t value);
 
 #pragma mark - IMMsgDataReadAck
 
@@ -133,17 +144,25 @@ typedef GPB_ENUM(IMMsgDataReadAck_FieldNumber) {
 /** cmd id:		0x0303 */
 @property(nonatomic, readwrite) uint32_t userId;
 
-@property(nonatomic, readwrite) BOOL hasUserId;
 @property(nonatomic, readwrite) uint32_t sessionId;
 
-@property(nonatomic, readwrite) BOOL hasSessionId;
 @property(nonatomic, readwrite) uint32_t msgId;
 
-@property(nonatomic, readwrite) BOOL hasMsgId;
 @property(nonatomic, readwrite) enum SessionType sessionType;
 
-@property(nonatomic, readwrite) BOOL hasSessionType;
 @end
+
+/**
+ * Fetches the raw value of a @c IMMsgDataReadAck's @c sessionType property, even
+ * if the value was not defined by the enum at the time the code was generated.
+ **/
+int32_t IMMsgDataReadAck_SessionType_RawValue(IMMsgDataReadAck *message);
+/**
+ * Sets the raw value of an @c IMMsgDataReadAck's @c sessionType property, allowing
+ * it to be set to a value that was not defined by the enum at the time the code
+ * was generated.
+ **/
+void SetIMMsgDataReadAck_SessionType_RawValue(IMMsgDataReadAck *message, int32_t value);
 
 #pragma mark - IMMsgDataReadNotify
 
@@ -159,17 +178,25 @@ typedef GPB_ENUM(IMMsgDataReadNotify_FieldNumber) {
 /** cmd id:		0x0304 */
 @property(nonatomic, readwrite) uint32_t userId;
 
-@property(nonatomic, readwrite) BOOL hasUserId;
 @property(nonatomic, readwrite) uint32_t sessionId;
 
-@property(nonatomic, readwrite) BOOL hasSessionId;
 @property(nonatomic, readwrite) uint32_t msgId;
 
-@property(nonatomic, readwrite) BOOL hasMsgId;
 @property(nonatomic, readwrite) enum SessionType sessionType;
 
-@property(nonatomic, readwrite) BOOL hasSessionType;
 @end
+
+/**
+ * Fetches the raw value of a @c IMMsgDataReadNotify's @c sessionType property, even
+ * if the value was not defined by the enum at the time the code was generated.
+ **/
+int32_t IMMsgDataReadNotify_SessionType_RawValue(IMMsgDataReadNotify *message);
+/**
+ * Sets the raw value of an @c IMMsgDataReadNotify's @c sessionType property, allowing
+ * it to be set to a value that was not defined by the enum at the time the code
+ * was generated.
+ **/
+void SetIMMsgDataReadNotify_SessionType_RawValue(IMMsgDataReadNotify *message, int32_t value);
 
 #pragma mark - IMClientTimeReq
 
@@ -191,7 +218,6 @@ typedef GPB_ENUM(IMClientTimeRsp_FieldNumber) {
 /** cmd id:		0x0306 */
 @property(nonatomic, readwrite) uint32_t serverTime;
 
-@property(nonatomic, readwrite) BOOL hasServerTime;
 @end
 
 #pragma mark - IMUnreadMsgCntReq
@@ -206,10 +232,7 @@ typedef GPB_ENUM(IMUnreadMsgCntReq_FieldNumber) {
 /** cmd id:		0x0307 */
 @property(nonatomic, readwrite) uint32_t userId;
 
-@property(nonatomic, readwrite) BOOL hasUserId;
 @property(nonatomic, readwrite, copy, null_resettable) NSData *attachData;
-/** Test to see if @c attachData has been set. */
-@property(nonatomic, readwrite) BOOL hasAttachData;
 
 @end
 
@@ -227,17 +250,13 @@ typedef GPB_ENUM(IMUnreadMsgCntRsp_FieldNumber) {
 /** cmd id:		0x0308 */
 @property(nonatomic, readwrite) uint32_t userId;
 
-@property(nonatomic, readwrite) BOOL hasUserId;
 @property(nonatomic, readwrite) uint32_t totalCnt;
 
-@property(nonatomic, readwrite) BOOL hasTotalCnt;
 @property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<UnreadInfo*> *unreadinfoListArray;
 /** The number of items in @c unreadinfoListArray without causing the array to be created. */
 @property(nonatomic, readonly) NSUInteger unreadinfoListArray_Count;
 
 @property(nonatomic, readwrite, copy, null_resettable) NSData *attachData;
-/** Test to see if @c attachData has been set. */
-@property(nonatomic, readwrite) BOOL hasAttachData;
 
 @end
 
@@ -257,24 +276,29 @@ typedef GPB_ENUM(IMGetMsgListReq_FieldNumber) {
 /** cmd id:		0x0309 */
 @property(nonatomic, readwrite) uint32_t userId;
 
-@property(nonatomic, readwrite) BOOL hasUserId;
 @property(nonatomic, readwrite) enum SessionType sessionType;
 
-@property(nonatomic, readwrite) BOOL hasSessionType;
 @property(nonatomic, readwrite) uint32_t sessionId;
 
-@property(nonatomic, readwrite) BOOL hasSessionId;
 @property(nonatomic, readwrite) uint32_t msgIdBegin;
 
-@property(nonatomic, readwrite) BOOL hasMsgIdBegin;
 @property(nonatomic, readwrite) uint32_t msgCnt;
 
-@property(nonatomic, readwrite) BOOL hasMsgCnt;
 @property(nonatomic, readwrite, copy, null_resettable) NSData *attachData;
-/** Test to see if @c attachData has been set. */
-@property(nonatomic, readwrite) BOOL hasAttachData;
 
 @end
+
+/**
+ * Fetches the raw value of a @c IMGetMsgListReq's @c sessionType property, even
+ * if the value was not defined by the enum at the time the code was generated.
+ **/
+int32_t IMGetMsgListReq_SessionType_RawValue(IMGetMsgListReq *message);
+/**
+ * Sets the raw value of an @c IMGetMsgListReq's @c sessionType property, allowing
+ * it to be set to a value that was not defined by the enum at the time the code
+ * was generated.
+ **/
+void SetIMGetMsgListReq_SessionType_RawValue(IMGetMsgListReq *message, int32_t value);
 
 #pragma mark - IMGetMsgListRsp
 
@@ -297,25 +321,31 @@ typedef GPB_ENUM(IMGetMsgListRsp_FieldNumber) {
 /** cmd id:		0x030a */
 @property(nonatomic, readwrite) uint32_t userId;
 
-@property(nonatomic, readwrite) BOOL hasUserId;
 @property(nonatomic, readwrite) enum SessionType sessionType;
 
-@property(nonatomic, readwrite) BOOL hasSessionType;
 @property(nonatomic, readwrite) uint32_t sessionId;
 
-@property(nonatomic, readwrite) BOOL hasSessionId;
 @property(nonatomic, readwrite) uint32_t msgIdBegin;
 
-@property(nonatomic, readwrite) BOOL hasMsgIdBegin;
 @property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<MsgInfo*> *msgListArray;
 /** The number of items in @c msgListArray without causing the array to be created. */
 @property(nonatomic, readonly) NSUInteger msgListArray_Count;
 
 @property(nonatomic, readwrite, copy, null_resettable) NSData *attachData;
-/** Test to see if @c attachData has been set. */
-@property(nonatomic, readwrite) BOOL hasAttachData;
 
 @end
+
+/**
+ * Fetches the raw value of a @c IMGetMsgListRsp's @c sessionType property, even
+ * if the value was not defined by the enum at the time the code was generated.
+ **/
+int32_t IMGetMsgListRsp_SessionType_RawValue(IMGetMsgListRsp *message);
+/**
+ * Sets the raw value of an @c IMGetMsgListRsp's @c sessionType property, allowing
+ * it to be set to a value that was not defined by the enum at the time the code
+ * was generated.
+ **/
+void SetIMGetMsgListRsp_SessionType_RawValue(IMGetMsgListRsp *message, int32_t value);
 
 #pragma mark - IMGetLatestMsgIdReq
 
@@ -331,18 +361,25 @@ typedef GPB_ENUM(IMGetLatestMsgIdReq_FieldNumber) {
 /** cmd id: 		0x030b */
 @property(nonatomic, readwrite) uint32_t userId;
 
-@property(nonatomic, readwrite) BOOL hasUserId;
 @property(nonatomic, readwrite) enum SessionType sessionType;
 
-@property(nonatomic, readwrite) BOOL hasSessionType;
 @property(nonatomic, readwrite) uint32_t sessionId;
 
-@property(nonatomic, readwrite) BOOL hasSessionId;
 @property(nonatomic, readwrite, copy, null_resettable) NSData *attachData;
-/** Test to see if @c attachData has been set. */
-@property(nonatomic, readwrite) BOOL hasAttachData;
 
 @end
+
+/**
+ * Fetches the raw value of a @c IMGetLatestMsgIdReq's @c sessionType property, even
+ * if the value was not defined by the enum at the time the code was generated.
+ **/
+int32_t IMGetLatestMsgIdReq_SessionType_RawValue(IMGetLatestMsgIdReq *message);
+/**
+ * Sets the raw value of an @c IMGetLatestMsgIdReq's @c sessionType property, allowing
+ * it to be set to a value that was not defined by the enum at the time the code
+ * was generated.
+ **/
+void SetIMGetLatestMsgIdReq_SessionType_RawValue(IMGetLatestMsgIdReq *message, int32_t value);
 
 #pragma mark - IMGetLatestMsgIdRsp
 
@@ -359,21 +396,27 @@ typedef GPB_ENUM(IMGetLatestMsgIdRsp_FieldNumber) {
 /** cmd id:		0x030c */
 @property(nonatomic, readwrite) uint32_t userId;
 
-@property(nonatomic, readwrite) BOOL hasUserId;
 @property(nonatomic, readwrite) enum SessionType sessionType;
 
-@property(nonatomic, readwrite) BOOL hasSessionType;
 @property(nonatomic, readwrite) uint32_t sessionId;
 
-@property(nonatomic, readwrite) BOOL hasSessionId;
 @property(nonatomic, readwrite) uint32_t latestMsgId;
 
-@property(nonatomic, readwrite) BOOL hasLatestMsgId;
 @property(nonatomic, readwrite, copy, null_resettable) NSData *attachData;
-/** Test to see if @c attachData has been set. */
-@property(nonatomic, readwrite) BOOL hasAttachData;
 
 @end
+
+/**
+ * Fetches the raw value of a @c IMGetLatestMsgIdRsp's @c sessionType property, even
+ * if the value was not defined by the enum at the time the code was generated.
+ **/
+int32_t IMGetLatestMsgIdRsp_SessionType_RawValue(IMGetLatestMsgIdRsp *message);
+/**
+ * Sets the raw value of an @c IMGetLatestMsgIdRsp's @c sessionType property, allowing
+ * it to be set to a value that was not defined by the enum at the time the code
+ * was generated.
+ **/
+void SetIMGetLatestMsgIdRsp_SessionType_RawValue(IMGetLatestMsgIdRsp *message, int32_t value);
 
 #pragma mark - IMGetMsgByIdReq
 
@@ -390,22 +433,29 @@ typedef GPB_ENUM(IMGetMsgByIdReq_FieldNumber) {
 /** cmd id: 		0x030d */
 @property(nonatomic, readwrite) uint32_t userId;
 
-@property(nonatomic, readwrite) BOOL hasUserId;
 @property(nonatomic, readwrite) enum SessionType sessionType;
 
-@property(nonatomic, readwrite) BOOL hasSessionType;
 @property(nonatomic, readwrite) uint32_t sessionId;
 
-@property(nonatomic, readwrite) BOOL hasSessionId;
 @property(nonatomic, readwrite, strong, null_resettable) GPBUInt32Array *msgIdListArray;
 /** The number of items in @c msgIdListArray without causing the array to be created. */
 @property(nonatomic, readonly) NSUInteger msgIdListArray_Count;
 
 @property(nonatomic, readwrite, copy, null_resettable) NSData *attachData;
-/** Test to see if @c attachData has been set. */
-@property(nonatomic, readwrite) BOOL hasAttachData;
 
 @end
+
+/**
+ * Fetches the raw value of a @c IMGetMsgByIdReq's @c sessionType property, even
+ * if the value was not defined by the enum at the time the code was generated.
+ **/
+int32_t IMGetMsgByIdReq_SessionType_RawValue(IMGetMsgByIdReq *message);
+/**
+ * Sets the raw value of an @c IMGetMsgByIdReq's @c sessionType property, allowing
+ * it to be set to a value that was not defined by the enum at the time the code
+ * was generated.
+ **/
+void SetIMGetMsgByIdReq_SessionType_RawValue(IMGetMsgByIdReq *message, int32_t value);
 
 #pragma mark - IMGetMsgByIdRsp
 
@@ -422,22 +472,29 @@ typedef GPB_ENUM(IMGetMsgByIdRsp_FieldNumber) {
 /** cmd id:		0x030e */
 @property(nonatomic, readwrite) uint32_t userId;
 
-@property(nonatomic, readwrite) BOOL hasUserId;
 @property(nonatomic, readwrite) enum SessionType sessionType;
 
-@property(nonatomic, readwrite) BOOL hasSessionType;
 @property(nonatomic, readwrite) uint32_t sessionId;
 
-@property(nonatomic, readwrite) BOOL hasSessionId;
 @property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<MsgInfo*> *msgListArray;
 /** The number of items in @c msgListArray without causing the array to be created. */
 @property(nonatomic, readonly) NSUInteger msgListArray_Count;
 
 @property(nonatomic, readwrite, copy, null_resettable) NSData *attachData;
-/** Test to see if @c attachData has been set. */
-@property(nonatomic, readwrite) BOOL hasAttachData;
 
 @end
+
+/**
+ * Fetches the raw value of a @c IMGetMsgByIdRsp's @c sessionType property, even
+ * if the value was not defined by the enum at the time the code was generated.
+ **/
+int32_t IMGetMsgByIdRsp_SessionType_RawValue(IMGetMsgByIdRsp *message);
+/**
+ * Sets the raw value of an @c IMGetMsgByIdRsp's @c sessionType property, allowing
+ * it to be set to a value that was not defined by the enum at the time the code
+ * was generated.
+ **/
+void SetIMGetMsgByIdRsp_SessionType_RawValue(IMGetMsgByIdRsp *message, int32_t value);
 
 NS_ASSUME_NONNULL_END
 

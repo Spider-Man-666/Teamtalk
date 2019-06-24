@@ -37,7 +37,7 @@ static GPBFileDescriptor *ImSwitchServiceRoot_FileDescriptor(void) {
   if (!descriptor) {
     GPB_DEBUG_CHECK_RUNTIME_VERSIONS();
     descriptor = [[GPBFileDescriptor alloc] initWithPackage:@"IM.SwitchService"
-                                                     syntax:GPBFileSyntaxProto2];
+                                                     syntax:GPBFileSyntaxProto3];
   }
   return descriptor;
 }
@@ -46,9 +46,9 @@ static GPBFileDescriptor *ImSwitchServiceRoot_FileDescriptor(void) {
 
 @implementation IMP2PCmdMsg
 
-@dynamic hasFromUserId, fromUserId;
-@dynamic hasToUserId, toUserId;
-@dynamic hasCmdMsgData, cmdMsgData;
+@dynamic fromUserId;
+@dynamic toUserId;
+@dynamic cmdMsgData;
 
 typedef struct IMP2PCmdMsg__storage_ {
   uint32_t _has_storage_[1];
@@ -69,7 +69,7 @@ typedef struct IMP2PCmdMsg__storage_ {
         .number = IMP2PCmdMsg_FieldNumber_FromUserId,
         .hasIndex = 0,
         .offset = (uint32_t)offsetof(IMP2PCmdMsg__storage_, fromUserId),
-        .flags = GPBFieldRequired,
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt32,
       },
       {
@@ -78,7 +78,7 @@ typedef struct IMP2PCmdMsg__storage_ {
         .number = IMP2PCmdMsg_FieldNumber_ToUserId,
         .hasIndex = 1,
         .offset = (uint32_t)offsetof(IMP2PCmdMsg__storage_, toUserId),
-        .flags = GPBFieldRequired,
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt32,
       },
       {
@@ -87,7 +87,7 @@ typedef struct IMP2PCmdMsg__storage_ {
         .number = IMP2PCmdMsg_FieldNumber_CmdMsgData,
         .hasIndex = 2,
         .offset = (uint32_t)offsetof(IMP2PCmdMsg__storage_, cmdMsgData),
-        .flags = GPBFieldRequired,
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
       },
     };

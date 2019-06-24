@@ -63,15 +63,23 @@ typedef GPB_ENUM(IMFileLoginReq_FieldNumber) {
 /** cmd id:	0x0501 */
 @property(nonatomic, readwrite) uint32_t userId;
 
-@property(nonatomic, readwrite) BOOL hasUserId;
 @property(nonatomic, readwrite, copy, null_resettable) NSString *taskId;
-/** Test to see if @c taskId has been set. */
-@property(nonatomic, readwrite) BOOL hasTaskId;
 
 @property(nonatomic, readwrite) enum ClientFileRole fileRole;
 
-@property(nonatomic, readwrite) BOOL hasFileRole;
 @end
+
+/**
+ * Fetches the raw value of a @c IMFileLoginReq's @c fileRole property, even
+ * if the value was not defined by the enum at the time the code was generated.
+ **/
+int32_t IMFileLoginReq_FileRole_RawValue(IMFileLoginReq *message);
+/**
+ * Sets the raw value of an @c IMFileLoginReq's @c fileRole property, allowing
+ * it to be set to a value that was not defined by the enum at the time the code
+ * was generated.
+ **/
+void SetIMFileLoginReq_FileRole_RawValue(IMFileLoginReq *message, int32_t value);
 
 #pragma mark - IMFileLoginRsp
 
@@ -85,10 +93,7 @@ typedef GPB_ENUM(IMFileLoginRsp_FieldNumber) {
 /** cmd id:	0x0502 */
 @property(nonatomic, readwrite) uint32_t resultCode;
 
-@property(nonatomic, readwrite) BOOL hasResultCode;
 @property(nonatomic, readwrite, copy, null_resettable) NSString *taskId;
-/** Test to see if @c taskId has been set. */
-@property(nonatomic, readwrite) BOOL hasTaskId;
 
 @end
 
@@ -105,15 +110,23 @@ typedef GPB_ENUM(IMFileState_FieldNumber) {
 /** cmd id: 	0x0503 */
 @property(nonatomic, readwrite) enum ClientFileState state;
 
-@property(nonatomic, readwrite) BOOL hasState;
 @property(nonatomic, readwrite, copy, null_resettable) NSString *taskId;
-/** Test to see if @c taskId has been set. */
-@property(nonatomic, readwrite) BOOL hasTaskId;
 
 @property(nonatomic, readwrite) uint32_t userId;
 
-@property(nonatomic, readwrite) BOOL hasUserId;
 @end
+
+/**
+ * Fetches the raw value of a @c IMFileState's @c state property, even
+ * if the value was not defined by the enum at the time the code was generated.
+ **/
+int32_t IMFileState_State_RawValue(IMFileState *message);
+/**
+ * Sets the raw value of an @c IMFileState's @c state property, allowing
+ * it to be set to a value that was not defined by the enum at the time the code
+ * was generated.
+ **/
+void SetIMFileState_State_RawValue(IMFileState *message, int32_t value);
 
 #pragma mark - IMFilePullDataReq
 
@@ -129,22 +142,28 @@ typedef GPB_ENUM(IMFilePullDataReq_FieldNumber) {
 
 /** cmd id:	0x0504 */
 @property(nonatomic, readwrite, copy, null_resettable) NSString *taskId;
-/** Test to see if @c taskId has been set. */
-@property(nonatomic, readwrite) BOOL hasTaskId;
 
 @property(nonatomic, readwrite) uint32_t userId;
 
-@property(nonatomic, readwrite) BOOL hasUserId;
 @property(nonatomic, readwrite) enum TransferFileType transMode;
 
-@property(nonatomic, readwrite) BOOL hasTransMode;
 @property(nonatomic, readwrite) uint32_t offset;
 
-@property(nonatomic, readwrite) BOOL hasOffset;
 @property(nonatomic, readwrite) uint32_t dataSize;
 
-@property(nonatomic, readwrite) BOOL hasDataSize;
 @end
+
+/**
+ * Fetches the raw value of a @c IMFilePullDataReq's @c transMode property, even
+ * if the value was not defined by the enum at the time the code was generated.
+ **/
+int32_t IMFilePullDataReq_TransMode_RawValue(IMFilePullDataReq *message);
+/**
+ * Sets the raw value of an @c IMFilePullDataReq's @c transMode property, allowing
+ * it to be set to a value that was not defined by the enum at the time the code
+ * was generated.
+ **/
+void SetIMFilePullDataReq_TransMode_RawValue(IMFilePullDataReq *message, int32_t value);
 
 #pragma mark - IMFilePullDataRsp
 
@@ -161,20 +180,13 @@ typedef GPB_ENUM(IMFilePullDataRsp_FieldNumber) {
 /** cmd id: 	0x0505 */
 @property(nonatomic, readwrite) uint32_t resultCode;
 
-@property(nonatomic, readwrite) BOOL hasResultCode;
 @property(nonatomic, readwrite, copy, null_resettable) NSString *taskId;
-/** Test to see if @c taskId has been set. */
-@property(nonatomic, readwrite) BOOL hasTaskId;
 
 @property(nonatomic, readwrite) uint32_t userId;
 
-@property(nonatomic, readwrite) BOOL hasUserId;
 @property(nonatomic, readwrite) uint32_t offset;
 
-@property(nonatomic, readwrite) BOOL hasOffset;
 @property(nonatomic, readwrite, copy, null_resettable) NSData *fileData;
-/** Test to see if @c fileData has been set. */
-@property(nonatomic, readwrite) BOOL hasFileData;
 
 @end
 
@@ -193,21 +205,27 @@ typedef GPB_ENUM(IMFileReq_FieldNumber) {
 /** cmd id: 	0x0506 */
 @property(nonatomic, readwrite) uint32_t fromUserId;
 
-@property(nonatomic, readwrite) BOOL hasFromUserId;
 @property(nonatomic, readwrite) uint32_t toUserId;
 
-@property(nonatomic, readwrite) BOOL hasToUserId;
 @property(nonatomic, readwrite, copy, null_resettable) NSString *fileName;
-/** Test to see if @c fileName has been set. */
-@property(nonatomic, readwrite) BOOL hasFileName;
 
 @property(nonatomic, readwrite) uint32_t fileSize;
 
-@property(nonatomic, readwrite) BOOL hasFileSize;
 @property(nonatomic, readwrite) enum TransferFileType transMode;
 
-@property(nonatomic, readwrite) BOOL hasTransMode;
 @end
+
+/**
+ * Fetches the raw value of a @c IMFileReq's @c transMode property, even
+ * if the value was not defined by the enum at the time the code was generated.
+ **/
+int32_t IMFileReq_TransMode_RawValue(IMFileReq *message);
+/**
+ * Sets the raw value of an @c IMFileReq's @c transMode property, allowing
+ * it to be set to a value that was not defined by the enum at the time the code
+ * was generated.
+ **/
+void SetIMFileReq_TransMode_RawValue(IMFileReq *message, int32_t value);
 
 #pragma mark - IMFileRsp
 
@@ -226,20 +244,13 @@ typedef GPB_ENUM(IMFileRsp_FieldNumber) {
 /** cmd id: 	0x0507 */
 @property(nonatomic, readwrite) uint32_t resultCode;
 
-@property(nonatomic, readwrite) BOOL hasResultCode;
 @property(nonatomic, readwrite) uint32_t fromUserId;
 
-@property(nonatomic, readwrite) BOOL hasFromUserId;
 @property(nonatomic, readwrite) uint32_t toUserId;
 
-@property(nonatomic, readwrite) BOOL hasToUserId;
 @property(nonatomic, readwrite, copy, null_resettable) NSString *fileName;
-/** Test to see if @c fileName has been set. */
-@property(nonatomic, readwrite) BOOL hasFileName;
 
 @property(nonatomic, readwrite, copy, null_resettable) NSString *taskId;
-/** Test to see if @c taskId has been set. */
-@property(nonatomic, readwrite) BOOL hasTaskId;
 
 @property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<IpAddr*> *ipAddrListArray;
 /** The number of items in @c ipAddrListArray without causing the array to be created. */
@@ -247,8 +258,19 @@ typedef GPB_ENUM(IMFileRsp_FieldNumber) {
 
 @property(nonatomic, readwrite) enum TransferFileType transMode;
 
-@property(nonatomic, readwrite) BOOL hasTransMode;
 @end
+
+/**
+ * Fetches the raw value of a @c IMFileRsp's @c transMode property, even
+ * if the value was not defined by the enum at the time the code was generated.
+ **/
+int32_t IMFileRsp_TransMode_RawValue(IMFileRsp *message);
+/**
+ * Sets the raw value of an @c IMFileRsp's @c transMode property, allowing
+ * it to be set to a value that was not defined by the enum at the time the code
+ * was generated.
+ **/
+void SetIMFileRsp_TransMode_RawValue(IMFileRsp *message, int32_t value);
 
 #pragma mark - IMFileNotify
 
@@ -268,20 +290,13 @@ typedef GPB_ENUM(IMFileNotify_FieldNumber) {
 /** cmd id: 	0x0508 */
 @property(nonatomic, readwrite) uint32_t fromUserId;
 
-@property(nonatomic, readwrite) BOOL hasFromUserId;
 @property(nonatomic, readwrite) uint32_t toUserId;
 
-@property(nonatomic, readwrite) BOOL hasToUserId;
 @property(nonatomic, readwrite, copy, null_resettable) NSString *fileName;
-/** Test to see if @c fileName has been set. */
-@property(nonatomic, readwrite) BOOL hasFileName;
 
 @property(nonatomic, readwrite) uint32_t fileSize;
 
-@property(nonatomic, readwrite) BOOL hasFileSize;
 @property(nonatomic, readwrite, copy, null_resettable) NSString *taskId;
-/** Test to see if @c taskId has been set. */
-@property(nonatomic, readwrite) BOOL hasTaskId;
 
 @property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<IpAddr*> *ipAddrListArray;
 /** The number of items in @c ipAddrListArray without causing the array to be created. */
@@ -289,12 +304,22 @@ typedef GPB_ENUM(IMFileNotify_FieldNumber) {
 
 @property(nonatomic, readwrite) enum TransferFileType transMode;
 
-@property(nonatomic, readwrite) BOOL hasTransMode;
 /** 1:True 0:False */
 @property(nonatomic, readwrite) uint32_t offlineReady;
 
-@property(nonatomic, readwrite) BOOL hasOfflineReady;
 @end
+
+/**
+ * Fetches the raw value of a @c IMFileNotify's @c transMode property, even
+ * if the value was not defined by the enum at the time the code was generated.
+ **/
+int32_t IMFileNotify_TransMode_RawValue(IMFileNotify *message);
+/**
+ * Sets the raw value of an @c IMFileNotify's @c transMode property, allowing
+ * it to be set to a value that was not defined by the enum at the time the code
+ * was generated.
+ **/
+void SetIMFileNotify_TransMode_RawValue(IMFileNotify *message, int32_t value);
 
 #pragma mark - IMFileHasOfflineReq
 
@@ -308,10 +333,7 @@ typedef GPB_ENUM(IMFileHasOfflineReq_FieldNumber) {
 /** cmd id: 	0x0509 */
 @property(nonatomic, readwrite) uint32_t userId;
 
-@property(nonatomic, readwrite) BOOL hasUserId;
 @property(nonatomic, readwrite, copy, null_resettable) NSData *attachData;
-/** Test to see if @c attachData has been set. */
-@property(nonatomic, readwrite) BOOL hasAttachData;
 
 @end
 
@@ -329,7 +351,6 @@ typedef GPB_ENUM(IMFileHasOfflineRsp_FieldNumber) {
 /** cmd id:	0x050a */
 @property(nonatomic, readwrite) uint32_t userId;
 
-@property(nonatomic, readwrite) BOOL hasUserId;
 @property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<OfflineFileInfo*> *offlineFileListArray;
 /** The number of items in @c offlineFileListArray without causing the array to be created. */
 @property(nonatomic, readonly) NSUInteger offlineFileListArray_Count;
@@ -339,8 +360,6 @@ typedef GPB_ENUM(IMFileHasOfflineRsp_FieldNumber) {
 @property(nonatomic, readonly) NSUInteger ipAddrListArray_Count;
 
 @property(nonatomic, readwrite, copy, null_resettable) NSData *attachData;
-/** Test to see if @c attachData has been set. */
-@property(nonatomic, readwrite) BOOL hasAttachData;
 
 @end
 
@@ -359,21 +378,14 @@ typedef GPB_ENUM(IMFileAddOfflineReq_FieldNumber) {
 /** cmd id:	0x050b */
 @property(nonatomic, readwrite) uint32_t fromUserId;
 
-@property(nonatomic, readwrite) BOOL hasFromUserId;
 @property(nonatomic, readwrite) uint32_t toUserId;
 
-@property(nonatomic, readwrite) BOOL hasToUserId;
 @property(nonatomic, readwrite, copy, null_resettable) NSString *taskId;
-/** Test to see if @c taskId has been set. */
-@property(nonatomic, readwrite) BOOL hasTaskId;
 
 @property(nonatomic, readwrite, copy, null_resettable) NSString *fileName;
-/** Test to see if @c fileName has been set. */
-@property(nonatomic, readwrite) BOOL hasFileName;
 
 @property(nonatomic, readwrite) uint32_t fileSize;
 
-@property(nonatomic, readwrite) BOOL hasFileSize;
 @end
 
 #pragma mark - IMFileDelOfflineReq
@@ -389,13 +401,9 @@ typedef GPB_ENUM(IMFileDelOfflineReq_FieldNumber) {
 /** cmd id:	0x050c */
 @property(nonatomic, readwrite) uint32_t fromUserId;
 
-@property(nonatomic, readwrite) BOOL hasFromUserId;
 @property(nonatomic, readwrite) uint32_t toUserId;
 
-@property(nonatomic, readwrite) BOOL hasToUserId;
 @property(nonatomic, readwrite, copy, null_resettable) NSString *taskId;
-/** Test to see if @c taskId has been set. */
-@property(nonatomic, readwrite) BOOL hasTaskId;
 
 @end
 

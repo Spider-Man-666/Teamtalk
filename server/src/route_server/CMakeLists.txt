@@ -28,5 +28,7 @@ LINK_DIRECTORIES(./ ../base ${SLOG_LIB_DIR} ${PB_LIB_DIR} ${OPENSSL_LIB_DIR})
 #ADD_XXXX必须在TARGET_LINK_LIBRARIES前面，否则会报错
 #ADD_LIBRARY(${PROJECTNAME} SHARED/STATIC ${SRC_LIST})
 ADD_EXECUTABLE(route_server ${SRC_LIST})
-
-TARGET_LINK_LIBRARIES(route_server base slog protobuf-lite pthread ssl crypto)
+# MOD_S by Spider-Man@2019/6/24 将protobuf2 升级为protobuf3,因为protobuf3的文件编译，不在支持lite模式，所以这里要修改链接库
+#TARGET_LINK_LIBRARIES(route_server base slog protobuf-lite pthread ssl crypto)
+TARGET_LINK_LIBRARIES(route_server base slog protobuf pthread ssl crypto)
+# MOD_E by Spider-Man@2019/6/24

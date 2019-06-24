@@ -64,13 +64,9 @@ typedef GPB_ENUM(IMRecentContactSessionReq_FieldNumber) {
 /** cmd id:		0x0201 */
 @property(nonatomic, readwrite) uint32_t userId;
 
-@property(nonatomic, readwrite) BOOL hasUserId;
 @property(nonatomic, readwrite) uint32_t latestUpdateTime;
 
-@property(nonatomic, readwrite) BOOL hasLatestUpdateTime;
 @property(nonatomic, readwrite, copy, null_resettable) NSData *attachData;
-/** Test to see if @c attachData has been set. */
-@property(nonatomic, readwrite) BOOL hasAttachData;
 
 @end
 
@@ -87,14 +83,11 @@ typedef GPB_ENUM(IMRecentContactSessionRsp_FieldNumber) {
 /** cmd id:		0x0202 */
 @property(nonatomic, readwrite) uint32_t userId;
 
-@property(nonatomic, readwrite) BOOL hasUserId;
 @property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<ContactSessionInfo*> *contactSessionListArray;
 /** The number of items in @c contactSessionListArray without causing the array to be created. */
 @property(nonatomic, readonly) NSUInteger contactSessionListArray_Count;
 
 @property(nonatomic, readwrite, copy, null_resettable) NSData *attachData;
-/** Test to see if @c attachData has been set. */
-@property(nonatomic, readwrite) BOOL hasAttachData;
 
 @end
 
@@ -126,14 +119,11 @@ typedef GPB_ENUM(IMUsersInfoReq_FieldNumber) {
 /** cmd id:		0x0204 */
 @property(nonatomic, readwrite) uint32_t userId;
 
-@property(nonatomic, readwrite) BOOL hasUserId;
 @property(nonatomic, readwrite, strong, null_resettable) GPBUInt32Array *userIdListArray;
 /** The number of items in @c userIdListArray without causing the array to be created. */
 @property(nonatomic, readonly) NSUInteger userIdListArray_Count;
 
 @property(nonatomic, readwrite, copy, null_resettable) NSData *attachData;
-/** Test to see if @c attachData has been set. */
-@property(nonatomic, readwrite) BOOL hasAttachData;
 
 @end
 
@@ -150,14 +140,11 @@ typedef GPB_ENUM(IMUsersInfoRsp_FieldNumber) {
 /** cmd id:		0x0205 */
 @property(nonatomic, readwrite) uint32_t userId;
 
-@property(nonatomic, readwrite) BOOL hasUserId;
 @property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<UserInfo*> *userInfoListArray;
 /** The number of items in @c userInfoListArray without causing the array to be created. */
 @property(nonatomic, readonly) NSUInteger userInfoListArray_Count;
 
 @property(nonatomic, readwrite, copy, null_resettable) NSData *attachData;
-/** Test to see if @c attachData has been set. */
-@property(nonatomic, readwrite) BOOL hasAttachData;
 
 @end
 
@@ -175,18 +162,25 @@ typedef GPB_ENUM(IMRemoveSessionReq_FieldNumber) {
 /** cmd id:		0x0206 */
 @property(nonatomic, readwrite) uint32_t userId;
 
-@property(nonatomic, readwrite) BOOL hasUserId;
 @property(nonatomic, readwrite) enum SessionType sessionType;
 
-@property(nonatomic, readwrite) BOOL hasSessionType;
 @property(nonatomic, readwrite) uint32_t sessionId;
 
-@property(nonatomic, readwrite) BOOL hasSessionId;
 @property(nonatomic, readwrite, copy, null_resettable) NSData *attachData;
-/** Test to see if @c attachData has been set. */
-@property(nonatomic, readwrite) BOOL hasAttachData;
 
 @end
+
+/**
+ * Fetches the raw value of a @c IMRemoveSessionReq's @c sessionType property, even
+ * if the value was not defined by the enum at the time the code was generated.
+ **/
+int32_t IMRemoveSessionReq_SessionType_RawValue(IMRemoveSessionReq *message);
+/**
+ * Sets the raw value of an @c IMRemoveSessionReq's @c sessionType property, allowing
+ * it to be set to a value that was not defined by the enum at the time the code
+ * was generated.
+ **/
+void SetIMRemoveSessionReq_SessionType_RawValue(IMRemoveSessionReq *message, int32_t value);
 
 #pragma mark - IMRemoveSessionRsp
 
@@ -203,21 +197,27 @@ typedef GPB_ENUM(IMRemoveSessionRsp_FieldNumber) {
 /** cmd id:		0x0207 */
 @property(nonatomic, readwrite) uint32_t userId;
 
-@property(nonatomic, readwrite) BOOL hasUserId;
 @property(nonatomic, readwrite) uint32_t resultCode;
 
-@property(nonatomic, readwrite) BOOL hasResultCode;
 @property(nonatomic, readwrite) enum SessionType sessionType;
 
-@property(nonatomic, readwrite) BOOL hasSessionType;
 @property(nonatomic, readwrite) uint32_t sessionId;
 
-@property(nonatomic, readwrite) BOOL hasSessionId;
 @property(nonatomic, readwrite, copy, null_resettable) NSData *attachData;
-/** Test to see if @c attachData has been set. */
-@property(nonatomic, readwrite) BOOL hasAttachData;
 
 @end
+
+/**
+ * Fetches the raw value of a @c IMRemoveSessionRsp's @c sessionType property, even
+ * if the value was not defined by the enum at the time the code was generated.
+ **/
+int32_t IMRemoveSessionRsp_SessionType_RawValue(IMRemoveSessionRsp *message);
+/**
+ * Sets the raw value of an @c IMRemoveSessionRsp's @c sessionType property, allowing
+ * it to be set to a value that was not defined by the enum at the time the code
+ * was generated.
+ **/
+void SetIMRemoveSessionRsp_SessionType_RawValue(IMRemoveSessionRsp *message, int32_t value);
 
 #pragma mark - IMAllUserReq
 
@@ -232,13 +232,9 @@ typedef GPB_ENUM(IMAllUserReq_FieldNumber) {
 /** cmd id:		0x0208 */
 @property(nonatomic, readwrite) uint32_t userId;
 
-@property(nonatomic, readwrite) BOOL hasUserId;
 @property(nonatomic, readwrite) uint32_t latestUpdateTime;
 
-@property(nonatomic, readwrite) BOOL hasLatestUpdateTime;
 @property(nonatomic, readwrite, copy, null_resettable) NSData *attachData;
-/** Test to see if @c attachData has been set. */
-@property(nonatomic, readwrite) BOOL hasAttachData;
 
 @end
 
@@ -256,17 +252,13 @@ typedef GPB_ENUM(IMAllUserRsp_FieldNumber) {
 /** cmd id:		0x0209 */
 @property(nonatomic, readwrite) uint32_t userId;
 
-@property(nonatomic, readwrite) BOOL hasUserId;
 @property(nonatomic, readwrite) uint32_t latestUpdateTime;
 
-@property(nonatomic, readwrite) BOOL hasLatestUpdateTime;
 @property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<UserInfo*> *userListArray;
 /** The number of items in @c userListArray without causing the array to be created. */
 @property(nonatomic, readonly) NSUInteger userListArray_Count;
 
 @property(nonatomic, readwrite, copy, null_resettable) NSData *attachData;
-/** Test to see if @c attachData has been set. */
-@property(nonatomic, readwrite) BOOL hasAttachData;
 
 @end
 
@@ -283,14 +275,11 @@ typedef GPB_ENUM(IMUsersStatReq_FieldNumber) {
 /** cmd id:		0x020a */
 @property(nonatomic, readwrite) uint32_t userId;
 
-@property(nonatomic, readwrite) BOOL hasUserId;
 @property(nonatomic, readwrite, strong, null_resettable) GPBUInt32Array *userIdListArray;
 /** The number of items in @c userIdListArray without causing the array to be created. */
 @property(nonatomic, readonly) NSUInteger userIdListArray_Count;
 
 @property(nonatomic, readwrite, copy, null_resettable) NSData *attachData;
-/** Test to see if @c attachData has been set. */
-@property(nonatomic, readwrite) BOOL hasAttachData;
 
 @end
 
@@ -307,14 +296,11 @@ typedef GPB_ENUM(IMUsersStatRsp_FieldNumber) {
 /** cmd id:		0x020b */
 @property(nonatomic, readwrite) uint32_t userId;
 
-@property(nonatomic, readwrite) BOOL hasUserId;
 @property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<UserStat*> *userStatListArray;
 /** The number of items in @c userStatListArray without causing the array to be created. */
 @property(nonatomic, readonly) NSUInteger userStatListArray_Count;
 
 @property(nonatomic, readwrite, copy, null_resettable) NSData *attachData;
-/** Test to see if @c attachData has been set. */
-@property(nonatomic, readwrite) BOOL hasAttachData;
 
 @end
 
@@ -331,14 +317,9 @@ typedef GPB_ENUM(IMChangeAvatarReq_FieldNumber) {
 /** cmd id:		0x020c */
 @property(nonatomic, readwrite) uint32_t userId;
 
-@property(nonatomic, readwrite) BOOL hasUserId;
 @property(nonatomic, readwrite, copy, null_resettable) NSString *avatarURL;
-/** Test to see if @c avatarURL has been set. */
-@property(nonatomic, readwrite) BOOL hasAvatarURL;
 
 @property(nonatomic, readwrite, copy, null_resettable) NSData *attachData;
-/** Test to see if @c attachData has been set. */
-@property(nonatomic, readwrite) BOOL hasAttachData;
 
 @end
 
@@ -355,13 +336,9 @@ typedef GPB_ENUM(IMChangeAvatarRsp_FieldNumber) {
 /** cmd id:		0x020d */
 @property(nonatomic, readwrite) uint32_t userId;
 
-@property(nonatomic, readwrite) BOOL hasUserId;
 @property(nonatomic, readwrite) uint32_t resultCode;
 
-@property(nonatomic, readwrite) BOOL hasResultCode;
 @property(nonatomic, readwrite, copy, null_resettable) NSData *attachData;
-/** Test to see if @c attachData has been set. */
-@property(nonatomic, readwrite) BOOL hasAttachData;
 
 @end
 
@@ -380,11 +357,21 @@ typedef GPB_ENUM(IMPCLoginStatusNotify_FieldNumber) {
 /** cmd id:		0x020e */
 @property(nonatomic, readwrite) uint32_t userId;
 
-@property(nonatomic, readwrite) BOOL hasUserId;
 @property(nonatomic, readwrite) enum UserStatType loginStat;
 
-@property(nonatomic, readwrite) BOOL hasLoginStat;
 @end
+
+/**
+ * Fetches the raw value of a @c IMPCLoginStatusNotify's @c loginStat property, even
+ * if the value was not defined by the enum at the time the code was generated.
+ **/
+int32_t IMPCLoginStatusNotify_LoginStat_RawValue(IMPCLoginStatusNotify *message);
+/**
+ * Sets the raw value of an @c IMPCLoginStatusNotify's @c loginStat property, allowing
+ * it to be set to a value that was not defined by the enum at the time the code
+ * was generated.
+ **/
+void SetIMPCLoginStatusNotify_LoginStat_RawValue(IMPCLoginStatusNotify *message, int32_t value);
 
 #pragma mark - IMRemoveSessionNotify
 
@@ -399,14 +386,23 @@ typedef GPB_ENUM(IMRemoveSessionNotify_FieldNumber) {
 /** cmd id:		0x020f */
 @property(nonatomic, readwrite) uint32_t userId;
 
-@property(nonatomic, readwrite) BOOL hasUserId;
 @property(nonatomic, readwrite) enum SessionType sessionType;
 
-@property(nonatomic, readwrite) BOOL hasSessionType;
 @property(nonatomic, readwrite) uint32_t sessionId;
 
-@property(nonatomic, readwrite) BOOL hasSessionId;
 @end
+
+/**
+ * Fetches the raw value of a @c IMRemoveSessionNotify's @c sessionType property, even
+ * if the value was not defined by the enum at the time the code was generated.
+ **/
+int32_t IMRemoveSessionNotify_SessionType_RawValue(IMRemoveSessionNotify *message);
+/**
+ * Sets the raw value of an @c IMRemoveSessionNotify's @c sessionType property, allowing
+ * it to be set to a value that was not defined by the enum at the time the code
+ * was generated.
+ **/
+void SetIMRemoveSessionNotify_SessionType_RawValue(IMRemoveSessionNotify *message, int32_t value);
 
 #pragma mark - IMDepartmentReq
 
@@ -421,13 +417,9 @@ typedef GPB_ENUM(IMDepartmentReq_FieldNumber) {
 /** cmd id:		0x0210 */
 @property(nonatomic, readwrite) uint32_t userId;
 
-@property(nonatomic, readwrite) BOOL hasUserId;
 @property(nonatomic, readwrite) uint32_t latestUpdateTime;
 
-@property(nonatomic, readwrite) BOOL hasLatestUpdateTime;
 @property(nonatomic, readwrite, copy, null_resettable) NSData *attachData;
-/** Test to see if @c attachData has been set. */
-@property(nonatomic, readwrite) BOOL hasAttachData;
 
 @end
 
@@ -445,17 +437,13 @@ typedef GPB_ENUM(IMDepartmentRsp_FieldNumber) {
 /** cmd id:		0x0211 */
 @property(nonatomic, readwrite) uint32_t userId;
 
-@property(nonatomic, readwrite) BOOL hasUserId;
 @property(nonatomic, readwrite) uint32_t latestUpdateTime;
 
-@property(nonatomic, readwrite) BOOL hasLatestUpdateTime;
 @property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<DepartInfo*> *deptListArray;
 /** The number of items in @c deptListArray without causing the array to be created. */
 @property(nonatomic, readonly) NSUInteger deptListArray_Count;
 
 @property(nonatomic, readwrite, copy, null_resettable) NSData *attachData;
-/** Test to see if @c attachData has been set. */
-@property(nonatomic, readwrite) BOOL hasAttachData;
 
 @end
 
@@ -471,10 +459,7 @@ typedef GPB_ENUM(IMAvatarChangedNotify_FieldNumber) {
 /** cmd id:		0x02012 */
 @property(nonatomic, readwrite) uint32_t changedUserId;
 
-@property(nonatomic, readwrite) BOOL hasChangedUserId;
 @property(nonatomic, readwrite, copy, null_resettable) NSString *avatarURL;
-/** Test to see if @c avatarURL has been set. */
-@property(nonatomic, readwrite) BOOL hasAvatarURL;
 
 @end
 
@@ -493,14 +478,9 @@ typedef GPB_ENUM(IMChangeSignInfoReq_FieldNumber) {
 
 @property(nonatomic, readwrite) uint32_t userId;
 
-@property(nonatomic, readwrite) BOOL hasUserId;
 @property(nonatomic, readwrite, copy, null_resettable) NSString *signInfo;
-/** Test to see if @c signInfo has been set. */
-@property(nonatomic, readwrite) BOOL hasSignInfo;
 
 @property(nonatomic, readwrite, copy, null_resettable) NSData *attachData;
-/** Test to see if @c attachData has been set. */
-@property(nonatomic, readwrite) BOOL hasAttachData;
 
 @end
 
@@ -518,18 +498,12 @@ typedef GPB_ENUM(IMChangeSignInfoRsp_FieldNumber) {
 /** cmd id:		0x0214 */
 @property(nonatomic, readwrite) uint32_t userId;
 
-@property(nonatomic, readwrite) BOOL hasUserId;
 @property(nonatomic, readwrite) uint32_t resultCode;
 
-@property(nonatomic, readwrite) BOOL hasResultCode;
 /** 此字段服务端用，客户端直接忽略 */
 @property(nonatomic, readwrite, copy, null_resettable) NSString *signInfo;
-/** Test to see if @c signInfo has been set. */
-@property(nonatomic, readwrite) BOOL hasSignInfo;
 
 @property(nonatomic, readwrite, copy, null_resettable) NSData *attachData;
-/** Test to see if @c attachData has been set. */
-@property(nonatomic, readwrite) BOOL hasAttachData;
 
 @end
 
@@ -548,10 +522,7 @@ typedef GPB_ENUM(IMSignInfoChangedNotify_FieldNumber) {
 /** cmd id:		0x0215 */
 @property(nonatomic, readwrite) uint32_t changedUserId;
 
-@property(nonatomic, readwrite) BOOL hasChangedUserId;
 @property(nonatomic, readwrite, copy, null_resettable) NSString *signInfo;
-/** Test to see if @c signInfo has been set. */
-@property(nonatomic, readwrite) BOOL hasSignInfo;
 
 @end
 

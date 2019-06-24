@@ -362,11 +362,10 @@ IMFileLoginReq::IMFileLoginReq()
 IMFileLoginReq::IMFileLoginReq(const IMFileLoginReq& from)
   : ::google::protobuf::MessageLite(),
       _internal_metadata_(NULL),
-      _has_bits_(from._has_bits_),
       _cached_size_(0) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   task_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.has_task_id()) {
+  if (from.task_id().size() > 0) {
     task_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.task_id_);
   }
   ::memcpy(&user_id_, &from.user_id_,
@@ -376,10 +375,11 @@ IMFileLoginReq::IMFileLoginReq(const IMFileLoginReq& from)
 }
 
 void IMFileLoginReq::SharedCtor() {
-  _cached_size_ = 0;
   task_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  user_id_ = 0u;
-  file_role_ = 1;
+  ::memset(&user_id_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&file_role_) -
+      reinterpret_cast<char*>(&user_id_)) + sizeof(file_role_));
+  _cached_size_ = 0;
 }
 
 IMFileLoginReq::~IMFileLoginReq() {
@@ -415,16 +415,10 @@ void IMFileLoginReq::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 0x00000001u) {
-    GOOGLE_DCHECK(!task_id_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()));
-    (*task_id_.UnsafeRawStringPointer())->clear();
-  }
-  if (cached_has_bits & 6u) {
-    user_id_ = 0u;
-    file_role_ = 1;
-  }
-  _has_bits_.Clear();
+  task_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::memset(&user_id_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&file_role_) -
+      reinterpret_cast<char*>(&user_id_)) + sizeof(file_role_));
   _internal_metadata_.Clear();
 }
 
@@ -444,11 +438,11 @@ bool IMFileLoginReq::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required uint32 user_id = 1;
+      // uint32 user_id = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
-          set_has_user_id();
+
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &user_id_)));
@@ -458,19 +452,23 @@ bool IMFileLoginReq::MergePartialFromCodedStream(
         break;
       }
 
-      // required string task_id = 2;
+      // string task_id = 2;
       case 2: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_task_id()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->task_id().data(), static_cast<int>(this->task_id().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "IM.File.IMFileLoginReq.task_id"));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // required .IM.BaseDefine.ClientFileRole file_role = 3;
+      // .IM.BaseDefine.ClientFileRole file_role = 3;
       case 3: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(24u /* 24 & 0xFF */)) {
@@ -478,13 +476,7 @@ bool IMFileLoginReq::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
                  input, &value)));
-          if (::IM::BaseDefine::ClientFileRole_IsValid(value)) {
-            set_file_role(static_cast< ::IM::BaseDefine::ClientFileRole >(value));
-          } else {
-            unknown_fields_stream.WriteVarint32(24u);
-            unknown_fields_stream.WriteVarint32(
-                static_cast< ::google::protobuf::uint32>(value));
-          }
+          set_file_role(static_cast< ::IM::BaseDefine::ClientFileRole >(value));
         } else {
           goto handle_unusual;
         }
@@ -517,79 +509,58 @@ void IMFileLoginReq::SerializeWithCachedSizes(
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  cached_has_bits = _has_bits_[0];
-  // required uint32 user_id = 1;
-  if (cached_has_bits & 0x00000002u) {
+  // uint32 user_id = 1;
+  if (this->user_id() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(1, this->user_id(), output);
   }
 
-  // required string task_id = 2;
-  if (cached_has_bits & 0x00000001u) {
+  // string task_id = 2;
+  if (this->task_id().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->task_id().data(), static_cast<int>(this->task_id().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "IM.File.IMFileLoginReq.task_id");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       2, this->task_id(), output);
   }
 
-  // required .IM.BaseDefine.ClientFileRole file_role = 3;
-  if (cached_has_bits & 0x00000004u) {
+  // .IM.BaseDefine.ClientFileRole file_role = 3;
+  if (this->file_role() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       3, this->file_role(), output);
   }
 
-  output->WriteRaw(_internal_metadata_.unknown_fields().data(),
-                   static_cast<int>(_internal_metadata_.unknown_fields().size()));
+  output->WriteRaw((::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).data(),
+                   static_cast<int>((::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).size()));
   // @@protoc_insertion_point(serialize_end:IM.File.IMFileLoginReq)
 }
 
-size_t IMFileLoginReq::RequiredFieldsByteSizeFallback() const {
-// @@protoc_insertion_point(required_fields_byte_size_fallback_start:IM.File.IMFileLoginReq)
-  size_t total_size = 0;
-
-  if (has_task_id()) {
-    // required string task_id = 2;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->task_id());
-  }
-
-  if (has_user_id()) {
-    // required uint32 user_id = 1;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->user_id());
-  }
-
-  if (has_file_role()) {
-    // required .IM.BaseDefine.ClientFileRole file_role = 3;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::EnumSize(this->file_role());
-  }
-
-  return total_size;
-}
 size_t IMFileLoginReq::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:IM.File.IMFileLoginReq)
   size_t total_size = 0;
 
-  total_size += _internal_metadata_.unknown_fields().size();
+  total_size += (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).size();
 
-  if (((_has_bits_[0] & 0x00000007) ^ 0x00000007) == 0) {  // All required fields are present.
-    // required string task_id = 2;
+  // string task_id = 2;
+  if (this->task_id().size() > 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
         this->task_id());
+  }
 
-    // required uint32 user_id = 1;
+  // uint32 user_id = 1;
+  if (this->user_id() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::UInt32Size(
         this->user_id());
+  }
 
-    // required .IM.BaseDefine.ClientFileRole file_role = 3;
+  // .IM.BaseDefine.ClientFileRole file_role = 3;
+  if (this->file_role() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::EnumSize(this->file_role());
-
-  } else {
-    total_size += RequiredFieldsByteSizeFallback();
   }
+
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = cached_size;
@@ -609,19 +580,15 @@ void IMFileLoginReq::MergeFrom(const IMFileLoginReq& from) {
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  cached_has_bits = from._has_bits_[0];
-  if (cached_has_bits & 7u) {
-    if (cached_has_bits & 0x00000001u) {
-      set_has_task_id();
-      task_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.task_id_);
-    }
-    if (cached_has_bits & 0x00000002u) {
-      user_id_ = from.user_id_;
-    }
-    if (cached_has_bits & 0x00000004u) {
-      file_role_ = from.file_role_;
-    }
-    _has_bits_[0] |= cached_has_bits;
+  if (from.task_id().size() > 0) {
+
+    task_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.task_id_);
+  }
+  if (from.user_id() != 0) {
+    set_user_id(from.user_id());
+  }
+  if (from.file_role() != 0) {
+    set_file_role(from.file_role());
   }
 }
 
@@ -633,7 +600,6 @@ void IMFileLoginReq::CopyFrom(const IMFileLoginReq& from) {
 }
 
 bool IMFileLoginReq::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
   return true;
 }
 
@@ -646,7 +612,6 @@ void IMFileLoginReq::InternalSwap(IMFileLoginReq* other) {
   task_id_.Swap(&other->task_id_);
   swap(user_id_, other->user_id_);
   swap(file_role_, other->file_role_);
-  swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   swap(_cached_size_, other->_cached_size_);
 }
@@ -676,11 +641,10 @@ IMFileLoginRsp::IMFileLoginRsp()
 IMFileLoginRsp::IMFileLoginRsp(const IMFileLoginRsp& from)
   : ::google::protobuf::MessageLite(),
       _internal_metadata_(NULL),
-      _has_bits_(from._has_bits_),
       _cached_size_(0) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   task_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.has_task_id()) {
+  if (from.task_id().size() > 0) {
     task_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.task_id_);
   }
   result_code_ = from.result_code_;
@@ -688,9 +652,9 @@ IMFileLoginRsp::IMFileLoginRsp(const IMFileLoginRsp& from)
 }
 
 void IMFileLoginRsp::SharedCtor() {
-  _cached_size_ = 0;
   task_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   result_code_ = 0u;
+  _cached_size_ = 0;
 }
 
 IMFileLoginRsp::~IMFileLoginRsp() {
@@ -726,13 +690,8 @@ void IMFileLoginRsp::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 0x00000001u) {
-    GOOGLE_DCHECK(!task_id_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()));
-    (*task_id_.UnsafeRawStringPointer())->clear();
-  }
+  task_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   result_code_ = 0u;
-  _has_bits_.Clear();
   _internal_metadata_.Clear();
 }
 
@@ -752,11 +711,11 @@ bool IMFileLoginRsp::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required uint32 result_code = 1;
+      // uint32 result_code = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
-          set_has_result_code();
+
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &result_code_)));
@@ -766,12 +725,16 @@ bool IMFileLoginRsp::MergePartialFromCodedStream(
         break;
       }
 
-      // required string task_id = 2;
+      // string task_id = 2;
       case 2: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_task_id()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->task_id().data(), static_cast<int>(this->task_id().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "IM.File.IMFileLoginRsp.task_id"));
         } else {
           goto handle_unusual;
         }
@@ -804,63 +767,46 @@ void IMFileLoginRsp::SerializeWithCachedSizes(
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  cached_has_bits = _has_bits_[0];
-  // required uint32 result_code = 1;
-  if (cached_has_bits & 0x00000002u) {
+  // uint32 result_code = 1;
+  if (this->result_code() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(1, this->result_code(), output);
   }
 
-  // required string task_id = 2;
-  if (cached_has_bits & 0x00000001u) {
+  // string task_id = 2;
+  if (this->task_id().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->task_id().data(), static_cast<int>(this->task_id().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "IM.File.IMFileLoginRsp.task_id");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       2, this->task_id(), output);
   }
 
-  output->WriteRaw(_internal_metadata_.unknown_fields().data(),
-                   static_cast<int>(_internal_metadata_.unknown_fields().size()));
+  output->WriteRaw((::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).data(),
+                   static_cast<int>((::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).size()));
   // @@protoc_insertion_point(serialize_end:IM.File.IMFileLoginRsp)
 }
 
-size_t IMFileLoginRsp::RequiredFieldsByteSizeFallback() const {
-// @@protoc_insertion_point(required_fields_byte_size_fallback_start:IM.File.IMFileLoginRsp)
-  size_t total_size = 0;
-
-  if (has_task_id()) {
-    // required string task_id = 2;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->task_id());
-  }
-
-  if (has_result_code()) {
-    // required uint32 result_code = 1;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->result_code());
-  }
-
-  return total_size;
-}
 size_t IMFileLoginRsp::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:IM.File.IMFileLoginRsp)
   size_t total_size = 0;
 
-  total_size += _internal_metadata_.unknown_fields().size();
+  total_size += (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).size();
 
-  if (((_has_bits_[0] & 0x00000003) ^ 0x00000003) == 0) {  // All required fields are present.
-    // required string task_id = 2;
+  // string task_id = 2;
+  if (this->task_id().size() > 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
         this->task_id());
+  }
 
-    // required uint32 result_code = 1;
+  // uint32 result_code = 1;
+  if (this->result_code() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::UInt32Size(
         this->result_code());
-
-  } else {
-    total_size += RequiredFieldsByteSizeFallback();
   }
+
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = cached_size;
@@ -880,16 +826,12 @@ void IMFileLoginRsp::MergeFrom(const IMFileLoginRsp& from) {
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  cached_has_bits = from._has_bits_[0];
-  if (cached_has_bits & 3u) {
-    if (cached_has_bits & 0x00000001u) {
-      set_has_task_id();
-      task_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.task_id_);
-    }
-    if (cached_has_bits & 0x00000002u) {
-      result_code_ = from.result_code_;
-    }
-    _has_bits_[0] |= cached_has_bits;
+  if (from.task_id().size() > 0) {
+
+    task_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.task_id_);
+  }
+  if (from.result_code() != 0) {
+    set_result_code(from.result_code());
   }
 }
 
@@ -901,7 +843,6 @@ void IMFileLoginRsp::CopyFrom(const IMFileLoginRsp& from) {
 }
 
 bool IMFileLoginRsp::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
   return true;
 }
 
@@ -913,7 +854,6 @@ void IMFileLoginRsp::InternalSwap(IMFileLoginRsp* other) {
   using std::swap;
   task_id_.Swap(&other->task_id_);
   swap(result_code_, other->result_code_);
-  swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   swap(_cached_size_, other->_cached_size_);
 }
@@ -944,11 +884,10 @@ IMFileState::IMFileState()
 IMFileState::IMFileState(const IMFileState& from)
   : ::google::protobuf::MessageLite(),
       _internal_metadata_(NULL),
-      _has_bits_(from._has_bits_),
       _cached_size_(0) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   task_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.has_task_id()) {
+  if (from.task_id().size() > 0) {
     task_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.task_id_);
   }
   ::memcpy(&state_, &from.state_,
@@ -958,11 +897,11 @@ IMFileState::IMFileState(const IMFileState& from)
 }
 
 void IMFileState::SharedCtor() {
-  _cached_size_ = 0;
   task_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(&state_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&user_id_) -
       reinterpret_cast<char*>(&state_)) + sizeof(user_id_));
+  _cached_size_ = 0;
 }
 
 IMFileState::~IMFileState() {
@@ -998,17 +937,10 @@ void IMFileState::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 0x00000001u) {
-    GOOGLE_DCHECK(!task_id_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()));
-    (*task_id_.UnsafeRawStringPointer())->clear();
-  }
-  if (cached_has_bits & 6u) {
-    ::memset(&state_, 0, static_cast<size_t>(
-        reinterpret_cast<char*>(&user_id_) -
-        reinterpret_cast<char*>(&state_)) + sizeof(user_id_));
-  }
-  _has_bits_.Clear();
+  task_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::memset(&state_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&user_id_) -
+      reinterpret_cast<char*>(&state_)) + sizeof(user_id_));
   _internal_metadata_.Clear();
 }
 
@@ -1028,7 +960,7 @@ bool IMFileState::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required .IM.BaseDefine.ClientFileState state = 1;
+      // .IM.BaseDefine.ClientFileState state = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
@@ -1036,36 +968,34 @@ bool IMFileState::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
                  input, &value)));
-          if (::IM::BaseDefine::ClientFileState_IsValid(value)) {
-            set_state(static_cast< ::IM::BaseDefine::ClientFileState >(value));
-          } else {
-            unknown_fields_stream.WriteVarint32(8u);
-            unknown_fields_stream.WriteVarint32(
-                static_cast< ::google::protobuf::uint32>(value));
-          }
+          set_state(static_cast< ::IM::BaseDefine::ClientFileState >(value));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // required string task_id = 2;
+      // string task_id = 2;
       case 2: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_task_id()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->task_id().data(), static_cast<int>(this->task_id().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "IM.File.IMFileState.task_id"));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // required uint32 user_id = 3;
+      // uint32 user_id = 3;
       case 3: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(24u /* 24 & 0xFF */)) {
-          set_has_user_id();
+
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &user_id_)));
@@ -1101,79 +1031,58 @@ void IMFileState::SerializeWithCachedSizes(
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  cached_has_bits = _has_bits_[0];
-  // required .IM.BaseDefine.ClientFileState state = 1;
-  if (cached_has_bits & 0x00000002u) {
+  // .IM.BaseDefine.ClientFileState state = 1;
+  if (this->state() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       1, this->state(), output);
   }
 
-  // required string task_id = 2;
-  if (cached_has_bits & 0x00000001u) {
+  // string task_id = 2;
+  if (this->task_id().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->task_id().data(), static_cast<int>(this->task_id().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "IM.File.IMFileState.task_id");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       2, this->task_id(), output);
   }
 
-  // required uint32 user_id = 3;
-  if (cached_has_bits & 0x00000004u) {
+  // uint32 user_id = 3;
+  if (this->user_id() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(3, this->user_id(), output);
   }
 
-  output->WriteRaw(_internal_metadata_.unknown_fields().data(),
-                   static_cast<int>(_internal_metadata_.unknown_fields().size()));
+  output->WriteRaw((::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).data(),
+                   static_cast<int>((::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).size()));
   // @@protoc_insertion_point(serialize_end:IM.File.IMFileState)
 }
 
-size_t IMFileState::RequiredFieldsByteSizeFallback() const {
-// @@protoc_insertion_point(required_fields_byte_size_fallback_start:IM.File.IMFileState)
-  size_t total_size = 0;
-
-  if (has_task_id()) {
-    // required string task_id = 2;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->task_id());
-  }
-
-  if (has_state()) {
-    // required .IM.BaseDefine.ClientFileState state = 1;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::EnumSize(this->state());
-  }
-
-  if (has_user_id()) {
-    // required uint32 user_id = 3;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->user_id());
-  }
-
-  return total_size;
-}
 size_t IMFileState::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:IM.File.IMFileState)
   size_t total_size = 0;
 
-  total_size += _internal_metadata_.unknown_fields().size();
+  total_size += (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).size();
 
-  if (((_has_bits_[0] & 0x00000007) ^ 0x00000007) == 0) {  // All required fields are present.
-    // required string task_id = 2;
+  // string task_id = 2;
+  if (this->task_id().size() > 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
         this->task_id());
+  }
 
-    // required .IM.BaseDefine.ClientFileState state = 1;
+  // .IM.BaseDefine.ClientFileState state = 1;
+  if (this->state() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::EnumSize(this->state());
+  }
 
-    // required uint32 user_id = 3;
+  // uint32 user_id = 3;
+  if (this->user_id() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::UInt32Size(
         this->user_id());
-
-  } else {
-    total_size += RequiredFieldsByteSizeFallback();
   }
+
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = cached_size;
@@ -1193,19 +1102,15 @@ void IMFileState::MergeFrom(const IMFileState& from) {
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  cached_has_bits = from._has_bits_[0];
-  if (cached_has_bits & 7u) {
-    if (cached_has_bits & 0x00000001u) {
-      set_has_task_id();
-      task_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.task_id_);
-    }
-    if (cached_has_bits & 0x00000002u) {
-      state_ = from.state_;
-    }
-    if (cached_has_bits & 0x00000004u) {
-      user_id_ = from.user_id_;
-    }
-    _has_bits_[0] |= cached_has_bits;
+  if (from.task_id().size() > 0) {
+
+    task_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.task_id_);
+  }
+  if (from.state() != 0) {
+    set_state(from.state());
+  }
+  if (from.user_id() != 0) {
+    set_user_id(from.user_id());
   }
 }
 
@@ -1217,7 +1122,6 @@ void IMFileState::CopyFrom(const IMFileState& from) {
 }
 
 bool IMFileState::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
   return true;
 }
 
@@ -1230,7 +1134,6 @@ void IMFileState::InternalSwap(IMFileState* other) {
   task_id_.Swap(&other->task_id_);
   swap(state_, other->state_);
   swap(user_id_, other->user_id_);
-  swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   swap(_cached_size_, other->_cached_size_);
 }
@@ -1263,26 +1166,24 @@ IMFilePullDataReq::IMFilePullDataReq()
 IMFilePullDataReq::IMFilePullDataReq(const IMFilePullDataReq& from)
   : ::google::protobuf::MessageLite(),
       _internal_metadata_(NULL),
-      _has_bits_(from._has_bits_),
       _cached_size_(0) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   task_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.has_task_id()) {
+  if (from.task_id().size() > 0) {
     task_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.task_id_);
   }
   ::memcpy(&user_id_, &from.user_id_,
-    static_cast<size_t>(reinterpret_cast<char*>(&trans_mode_) -
-    reinterpret_cast<char*>(&user_id_)) + sizeof(trans_mode_));
+    static_cast<size_t>(reinterpret_cast<char*>(&data_size_) -
+    reinterpret_cast<char*>(&user_id_)) + sizeof(data_size_));
   // @@protoc_insertion_point(copy_constructor:IM.File.IMFilePullDataReq)
 }
 
 void IMFilePullDataReq::SharedCtor() {
-  _cached_size_ = 0;
   task_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(&user_id_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&data_size_) -
       reinterpret_cast<char*>(&user_id_)) + sizeof(data_size_));
-  trans_mode_ = 1;
+  _cached_size_ = 0;
 }
 
 IMFilePullDataReq::~IMFilePullDataReq() {
@@ -1318,18 +1219,10 @@ void IMFilePullDataReq::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 0x00000001u) {
-    GOOGLE_DCHECK(!task_id_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()));
-    (*task_id_.UnsafeRawStringPointer())->clear();
-  }
-  if (cached_has_bits & 30u) {
-    ::memset(&user_id_, 0, static_cast<size_t>(
-        reinterpret_cast<char*>(&data_size_) -
-        reinterpret_cast<char*>(&user_id_)) + sizeof(data_size_));
-    trans_mode_ = 1;
-  }
-  _has_bits_.Clear();
+  task_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::memset(&user_id_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&data_size_) -
+      reinterpret_cast<char*>(&user_id_)) + sizeof(data_size_));
   _internal_metadata_.Clear();
 }
 
@@ -1349,23 +1242,27 @@ bool IMFilePullDataReq::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required string task_id = 1;
+      // string task_id = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_task_id()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->task_id().data(), static_cast<int>(this->task_id().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "IM.File.IMFilePullDataReq.task_id"));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // required uint32 user_id = 2;
+      // uint32 user_id = 2;
       case 2: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
-          set_has_user_id();
+
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &user_id_)));
@@ -1375,7 +1272,7 @@ bool IMFilePullDataReq::MergePartialFromCodedStream(
         break;
       }
 
-      // required .IM.BaseDefine.TransferFileType trans_mode = 3;
+      // .IM.BaseDefine.TransferFileType trans_mode = 3;
       case 3: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(24u /* 24 & 0xFF */)) {
@@ -1383,24 +1280,18 @@ bool IMFilePullDataReq::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
                  input, &value)));
-          if (::IM::BaseDefine::TransferFileType_IsValid(value)) {
-            set_trans_mode(static_cast< ::IM::BaseDefine::TransferFileType >(value));
-          } else {
-            unknown_fields_stream.WriteVarint32(24u);
-            unknown_fields_stream.WriteVarint32(
-                static_cast< ::google::protobuf::uint32>(value));
-          }
+          set_trans_mode(static_cast< ::IM::BaseDefine::TransferFileType >(value));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // required uint32 offset = 4;
+      // uint32 offset = 4;
       case 4: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(32u /* 32 & 0xFF */)) {
-          set_has_offset();
+
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &offset_)));
@@ -1410,11 +1301,11 @@ bool IMFilePullDataReq::MergePartialFromCodedStream(
         break;
       }
 
-      // required uint32 data_size = 5;
+      // uint32 data_size = 5;
       case 5: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(40u /* 40 & 0xFF */)) {
-          set_has_data_size();
+
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &data_size_)));
@@ -1450,113 +1341,82 @@ void IMFilePullDataReq::SerializeWithCachedSizes(
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  cached_has_bits = _has_bits_[0];
-  // required string task_id = 1;
-  if (cached_has_bits & 0x00000001u) {
+  // string task_id = 1;
+  if (this->task_id().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->task_id().data(), static_cast<int>(this->task_id().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "IM.File.IMFilePullDataReq.task_id");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       1, this->task_id(), output);
   }
 
-  // required uint32 user_id = 2;
-  if (cached_has_bits & 0x00000002u) {
+  // uint32 user_id = 2;
+  if (this->user_id() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(2, this->user_id(), output);
   }
 
-  // required .IM.BaseDefine.TransferFileType trans_mode = 3;
-  if (cached_has_bits & 0x00000010u) {
+  // .IM.BaseDefine.TransferFileType trans_mode = 3;
+  if (this->trans_mode() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       3, this->trans_mode(), output);
   }
 
-  // required uint32 offset = 4;
-  if (cached_has_bits & 0x00000004u) {
+  // uint32 offset = 4;
+  if (this->offset() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(4, this->offset(), output);
   }
 
-  // required uint32 data_size = 5;
-  if (cached_has_bits & 0x00000008u) {
+  // uint32 data_size = 5;
+  if (this->data_size() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(5, this->data_size(), output);
   }
 
-  output->WriteRaw(_internal_metadata_.unknown_fields().data(),
-                   static_cast<int>(_internal_metadata_.unknown_fields().size()));
+  output->WriteRaw((::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).data(),
+                   static_cast<int>((::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).size()));
   // @@protoc_insertion_point(serialize_end:IM.File.IMFilePullDataReq)
 }
 
-size_t IMFilePullDataReq::RequiredFieldsByteSizeFallback() const {
-// @@protoc_insertion_point(required_fields_byte_size_fallback_start:IM.File.IMFilePullDataReq)
-  size_t total_size = 0;
-
-  if (has_task_id()) {
-    // required string task_id = 1;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->task_id());
-  }
-
-  if (has_user_id()) {
-    // required uint32 user_id = 2;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->user_id());
-  }
-
-  if (has_offset()) {
-    // required uint32 offset = 4;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->offset());
-  }
-
-  if (has_data_size()) {
-    // required uint32 data_size = 5;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->data_size());
-  }
-
-  if (has_trans_mode()) {
-    // required .IM.BaseDefine.TransferFileType trans_mode = 3;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::EnumSize(this->trans_mode());
-  }
-
-  return total_size;
-}
 size_t IMFilePullDataReq::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:IM.File.IMFilePullDataReq)
   size_t total_size = 0;
 
-  total_size += _internal_metadata_.unknown_fields().size();
+  total_size += (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).size();
 
-  if (((_has_bits_[0] & 0x0000001f) ^ 0x0000001f) == 0) {  // All required fields are present.
-    // required string task_id = 1;
+  // string task_id = 1;
+  if (this->task_id().size() > 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
         this->task_id());
+  }
 
-    // required uint32 user_id = 2;
+  // uint32 user_id = 2;
+  if (this->user_id() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::UInt32Size(
         this->user_id());
+  }
 
-    // required uint32 offset = 4;
+  // .IM.BaseDefine.TransferFileType trans_mode = 3;
+  if (this->trans_mode() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::EnumSize(this->trans_mode());
+  }
+
+  // uint32 offset = 4;
+  if (this->offset() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::UInt32Size(
         this->offset());
+  }
 
-    // required uint32 data_size = 5;
+  // uint32 data_size = 5;
+  if (this->data_size() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::UInt32Size(
         this->data_size());
-
-    // required .IM.BaseDefine.TransferFileType trans_mode = 3;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::EnumSize(this->trans_mode());
-
-  } else {
-    total_size += RequiredFieldsByteSizeFallback();
   }
+
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = cached_size;
@@ -1576,25 +1436,21 @@ void IMFilePullDataReq::MergeFrom(const IMFilePullDataReq& from) {
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  cached_has_bits = from._has_bits_[0];
-  if (cached_has_bits & 31u) {
-    if (cached_has_bits & 0x00000001u) {
-      set_has_task_id();
-      task_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.task_id_);
-    }
-    if (cached_has_bits & 0x00000002u) {
-      user_id_ = from.user_id_;
-    }
-    if (cached_has_bits & 0x00000004u) {
-      offset_ = from.offset_;
-    }
-    if (cached_has_bits & 0x00000008u) {
-      data_size_ = from.data_size_;
-    }
-    if (cached_has_bits & 0x00000010u) {
-      trans_mode_ = from.trans_mode_;
-    }
-    _has_bits_[0] |= cached_has_bits;
+  if (from.task_id().size() > 0) {
+
+    task_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.task_id_);
+  }
+  if (from.user_id() != 0) {
+    set_user_id(from.user_id());
+  }
+  if (from.trans_mode() != 0) {
+    set_trans_mode(from.trans_mode());
+  }
+  if (from.offset() != 0) {
+    set_offset(from.offset());
+  }
+  if (from.data_size() != 0) {
+    set_data_size(from.data_size());
   }
 }
 
@@ -1606,7 +1462,6 @@ void IMFilePullDataReq::CopyFrom(const IMFilePullDataReq& from) {
 }
 
 bool IMFilePullDataReq::IsInitialized() const {
-  if ((_has_bits_[0] & 0x0000001f) != 0x0000001f) return false;
   return true;
 }
 
@@ -1618,10 +1473,9 @@ void IMFilePullDataReq::InternalSwap(IMFilePullDataReq* other) {
   using std::swap;
   task_id_.Swap(&other->task_id_);
   swap(user_id_, other->user_id_);
+  swap(trans_mode_, other->trans_mode_);
   swap(offset_, other->offset_);
   swap(data_size_, other->data_size_);
-  swap(trans_mode_, other->trans_mode_);
-  swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   swap(_cached_size_, other->_cached_size_);
 }
@@ -1654,15 +1508,14 @@ IMFilePullDataRsp::IMFilePullDataRsp()
 IMFilePullDataRsp::IMFilePullDataRsp(const IMFilePullDataRsp& from)
   : ::google::protobuf::MessageLite(),
       _internal_metadata_(NULL),
-      _has_bits_(from._has_bits_),
       _cached_size_(0) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   task_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.has_task_id()) {
+  if (from.task_id().size() > 0) {
     task_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.task_id_);
   }
   file_data_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.has_file_data()) {
+  if (from.file_data().size() > 0) {
     file_data_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.file_data_);
   }
   ::memcpy(&result_code_, &from.result_code_,
@@ -1672,12 +1525,12 @@ IMFilePullDataRsp::IMFilePullDataRsp(const IMFilePullDataRsp& from)
 }
 
 void IMFilePullDataRsp::SharedCtor() {
-  _cached_size_ = 0;
   task_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   file_data_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(&result_code_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&offset_) -
       reinterpret_cast<char*>(&result_code_)) + sizeof(offset_));
+  _cached_size_ = 0;
 }
 
 IMFilePullDataRsp::~IMFilePullDataRsp() {
@@ -1714,23 +1567,11 @@ void IMFilePullDataRsp::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 3u) {
-    if (cached_has_bits & 0x00000001u) {
-      GOOGLE_DCHECK(!task_id_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()));
-      (*task_id_.UnsafeRawStringPointer())->clear();
-    }
-    if (cached_has_bits & 0x00000002u) {
-      GOOGLE_DCHECK(!file_data_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()));
-      (*file_data_.UnsafeRawStringPointer())->clear();
-    }
-  }
-  if (cached_has_bits & 28u) {
-    ::memset(&result_code_, 0, static_cast<size_t>(
-        reinterpret_cast<char*>(&offset_) -
-        reinterpret_cast<char*>(&result_code_)) + sizeof(offset_));
-  }
-  _has_bits_.Clear();
+  task_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  file_data_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::memset(&result_code_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&offset_) -
+      reinterpret_cast<char*>(&result_code_)) + sizeof(offset_));
   _internal_metadata_.Clear();
 }
 
@@ -1750,11 +1591,11 @@ bool IMFilePullDataRsp::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required uint32 result_code = 1;
+      // uint32 result_code = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
-          set_has_result_code();
+
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &result_code_)));
@@ -1764,23 +1605,27 @@ bool IMFilePullDataRsp::MergePartialFromCodedStream(
         break;
       }
 
-      // required string task_id = 2;
+      // string task_id = 2;
       case 2: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_task_id()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->task_id().data(), static_cast<int>(this->task_id().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "IM.File.IMFilePullDataRsp.task_id"));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // required uint32 user_id = 3;
+      // uint32 user_id = 3;
       case 3: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(24u /* 24 & 0xFF */)) {
-          set_has_user_id();
+
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &user_id_)));
@@ -1790,11 +1635,11 @@ bool IMFilePullDataRsp::MergePartialFromCodedStream(
         break;
       }
 
-      // required uint32 offset = 4;
+      // uint32 offset = 4;
       case 4: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(32u /* 32 & 0xFF */)) {
-          set_has_offset();
+
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &offset_)));
@@ -1804,7 +1649,7 @@ bool IMFilePullDataRsp::MergePartialFromCodedStream(
         break;
       }
 
-      // required bytes file_data = 5;
+      // bytes file_data = 5;
       case 5: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(42u /* 42 & 0xFF */)) {
@@ -1842,115 +1687,83 @@ void IMFilePullDataRsp::SerializeWithCachedSizes(
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  cached_has_bits = _has_bits_[0];
-  // required uint32 result_code = 1;
-  if (cached_has_bits & 0x00000004u) {
+  // uint32 result_code = 1;
+  if (this->result_code() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(1, this->result_code(), output);
   }
 
-  // required string task_id = 2;
-  if (cached_has_bits & 0x00000001u) {
+  // string task_id = 2;
+  if (this->task_id().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->task_id().data(), static_cast<int>(this->task_id().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "IM.File.IMFilePullDataRsp.task_id");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       2, this->task_id(), output);
   }
 
-  // required uint32 user_id = 3;
-  if (cached_has_bits & 0x00000008u) {
+  // uint32 user_id = 3;
+  if (this->user_id() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(3, this->user_id(), output);
   }
 
-  // required uint32 offset = 4;
-  if (cached_has_bits & 0x00000010u) {
+  // uint32 offset = 4;
+  if (this->offset() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(4, this->offset(), output);
   }
 
-  // required bytes file_data = 5;
-  if (cached_has_bits & 0x00000002u) {
+  // bytes file_data = 5;
+  if (this->file_data().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
       5, this->file_data(), output);
   }
 
-  output->WriteRaw(_internal_metadata_.unknown_fields().data(),
-                   static_cast<int>(_internal_metadata_.unknown_fields().size()));
+  output->WriteRaw((::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).data(),
+                   static_cast<int>((::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).size()));
   // @@protoc_insertion_point(serialize_end:IM.File.IMFilePullDataRsp)
 }
 
-size_t IMFilePullDataRsp::RequiredFieldsByteSizeFallback() const {
-// @@protoc_insertion_point(required_fields_byte_size_fallback_start:IM.File.IMFilePullDataRsp)
-  size_t total_size = 0;
-
-  if (has_task_id()) {
-    // required string task_id = 2;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->task_id());
-  }
-
-  if (has_file_data()) {
-    // required bytes file_data = 5;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::BytesSize(
-        this->file_data());
-  }
-
-  if (has_result_code()) {
-    // required uint32 result_code = 1;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->result_code());
-  }
-
-  if (has_user_id()) {
-    // required uint32 user_id = 3;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->user_id());
-  }
-
-  if (has_offset()) {
-    // required uint32 offset = 4;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->offset());
-  }
-
-  return total_size;
-}
 size_t IMFilePullDataRsp::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:IM.File.IMFilePullDataRsp)
   size_t total_size = 0;
 
-  total_size += _internal_metadata_.unknown_fields().size();
+  total_size += (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).size();
 
-  if (((_has_bits_[0] & 0x0000001f) ^ 0x0000001f) == 0) {  // All required fields are present.
-    // required string task_id = 2;
+  // string task_id = 2;
+  if (this->task_id().size() > 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
         this->task_id());
+  }
 
-    // required bytes file_data = 5;
+  // bytes file_data = 5;
+  if (this->file_data().size() > 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::BytesSize(
         this->file_data());
+  }
 
-    // required uint32 result_code = 1;
+  // uint32 result_code = 1;
+  if (this->result_code() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::UInt32Size(
         this->result_code());
+  }
 
-    // required uint32 user_id = 3;
+  // uint32 user_id = 3;
+  if (this->user_id() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::UInt32Size(
         this->user_id());
+  }
 
-    // required uint32 offset = 4;
+  // uint32 offset = 4;
+  if (this->offset() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::UInt32Size(
         this->offset());
-
-  } else {
-    total_size += RequiredFieldsByteSizeFallback();
   }
+
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = cached_size;
@@ -1970,26 +1783,22 @@ void IMFilePullDataRsp::MergeFrom(const IMFilePullDataRsp& from) {
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  cached_has_bits = from._has_bits_[0];
-  if (cached_has_bits & 31u) {
-    if (cached_has_bits & 0x00000001u) {
-      set_has_task_id();
-      task_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.task_id_);
-    }
-    if (cached_has_bits & 0x00000002u) {
-      set_has_file_data();
-      file_data_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.file_data_);
-    }
-    if (cached_has_bits & 0x00000004u) {
-      result_code_ = from.result_code_;
-    }
-    if (cached_has_bits & 0x00000008u) {
-      user_id_ = from.user_id_;
-    }
-    if (cached_has_bits & 0x00000010u) {
-      offset_ = from.offset_;
-    }
-    _has_bits_[0] |= cached_has_bits;
+  if (from.task_id().size() > 0) {
+
+    task_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.task_id_);
+  }
+  if (from.file_data().size() > 0) {
+
+    file_data_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.file_data_);
+  }
+  if (from.result_code() != 0) {
+    set_result_code(from.result_code());
+  }
+  if (from.user_id() != 0) {
+    set_user_id(from.user_id());
+  }
+  if (from.offset() != 0) {
+    set_offset(from.offset());
   }
 }
 
@@ -2001,7 +1810,6 @@ void IMFilePullDataRsp::CopyFrom(const IMFilePullDataRsp& from) {
 }
 
 bool IMFilePullDataRsp::IsInitialized() const {
-  if ((_has_bits_[0] & 0x0000001f) != 0x0000001f) return false;
   return true;
 }
 
@@ -2016,7 +1824,6 @@ void IMFilePullDataRsp::InternalSwap(IMFilePullDataRsp* other) {
   swap(result_code_, other->result_code_);
   swap(user_id_, other->user_id_);
   swap(offset_, other->offset_);
-  swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   swap(_cached_size_, other->_cached_size_);
 }
@@ -2049,11 +1856,10 @@ IMFileReq::IMFileReq()
 IMFileReq::IMFileReq(const IMFileReq& from)
   : ::google::protobuf::MessageLite(),
       _internal_metadata_(NULL),
-      _has_bits_(from._has_bits_),
       _cached_size_(0) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   file_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.has_file_name()) {
+  if (from.file_name().size() > 0) {
     file_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.file_name_);
   }
   ::memcpy(&from_user_id_, &from.from_user_id_,
@@ -2063,12 +1869,11 @@ IMFileReq::IMFileReq(const IMFileReq& from)
 }
 
 void IMFileReq::SharedCtor() {
-  _cached_size_ = 0;
   file_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(&from_user_id_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&file_size_) -
-      reinterpret_cast<char*>(&from_user_id_)) + sizeof(file_size_));
-  trans_mode_ = 1;
+      reinterpret_cast<char*>(&trans_mode_) -
+      reinterpret_cast<char*>(&from_user_id_)) + sizeof(trans_mode_));
+  _cached_size_ = 0;
 }
 
 IMFileReq::~IMFileReq() {
@@ -2104,18 +1909,10 @@ void IMFileReq::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 0x00000001u) {
-    GOOGLE_DCHECK(!file_name_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()));
-    (*file_name_.UnsafeRawStringPointer())->clear();
-  }
-  if (cached_has_bits & 30u) {
-    ::memset(&from_user_id_, 0, static_cast<size_t>(
-        reinterpret_cast<char*>(&file_size_) -
-        reinterpret_cast<char*>(&from_user_id_)) + sizeof(file_size_));
-    trans_mode_ = 1;
-  }
-  _has_bits_.Clear();
+  file_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::memset(&from_user_id_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&trans_mode_) -
+      reinterpret_cast<char*>(&from_user_id_)) + sizeof(trans_mode_));
   _internal_metadata_.Clear();
 }
 
@@ -2135,11 +1932,11 @@ bool IMFileReq::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required uint32 from_user_id = 1;
+      // uint32 from_user_id = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
-          set_has_from_user_id();
+
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &from_user_id_)));
@@ -2149,11 +1946,11 @@ bool IMFileReq::MergePartialFromCodedStream(
         break;
       }
 
-      // required uint32 to_user_id = 2;
+      // uint32 to_user_id = 2;
       case 2: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
-          set_has_to_user_id();
+
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &to_user_id_)));
@@ -2163,23 +1960,27 @@ bool IMFileReq::MergePartialFromCodedStream(
         break;
       }
 
-      // required string file_name = 3;
+      // string file_name = 3;
       case 3: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_file_name()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->file_name().data(), static_cast<int>(this->file_name().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "IM.File.IMFileReq.file_name"));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // required uint32 file_size = 4;
+      // uint32 file_size = 4;
       case 4: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(32u /* 32 & 0xFF */)) {
-          set_has_file_size();
+
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &file_size_)));
@@ -2189,7 +1990,7 @@ bool IMFileReq::MergePartialFromCodedStream(
         break;
       }
 
-      // required .IM.BaseDefine.TransferFileType trans_mode = 5;
+      // .IM.BaseDefine.TransferFileType trans_mode = 5;
       case 5: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(40u /* 40 & 0xFF */)) {
@@ -2197,13 +1998,7 @@ bool IMFileReq::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
                  input, &value)));
-          if (::IM::BaseDefine::TransferFileType_IsValid(value)) {
-            set_trans_mode(static_cast< ::IM::BaseDefine::TransferFileType >(value));
-          } else {
-            unknown_fields_stream.WriteVarint32(40u);
-            unknown_fields_stream.WriteVarint32(
-                static_cast< ::google::protobuf::uint32>(value));
-          }
+          set_trans_mode(static_cast< ::IM::BaseDefine::TransferFileType >(value));
         } else {
           goto handle_unusual;
         }
@@ -2236,113 +2031,82 @@ void IMFileReq::SerializeWithCachedSizes(
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  cached_has_bits = _has_bits_[0];
-  // required uint32 from_user_id = 1;
-  if (cached_has_bits & 0x00000002u) {
+  // uint32 from_user_id = 1;
+  if (this->from_user_id() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(1, this->from_user_id(), output);
   }
 
-  // required uint32 to_user_id = 2;
-  if (cached_has_bits & 0x00000004u) {
+  // uint32 to_user_id = 2;
+  if (this->to_user_id() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(2, this->to_user_id(), output);
   }
 
-  // required string file_name = 3;
-  if (cached_has_bits & 0x00000001u) {
+  // string file_name = 3;
+  if (this->file_name().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->file_name().data(), static_cast<int>(this->file_name().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "IM.File.IMFileReq.file_name");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       3, this->file_name(), output);
   }
 
-  // required uint32 file_size = 4;
-  if (cached_has_bits & 0x00000008u) {
+  // uint32 file_size = 4;
+  if (this->file_size() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(4, this->file_size(), output);
   }
 
-  // required .IM.BaseDefine.TransferFileType trans_mode = 5;
-  if (cached_has_bits & 0x00000010u) {
+  // .IM.BaseDefine.TransferFileType trans_mode = 5;
+  if (this->trans_mode() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       5, this->trans_mode(), output);
   }
 
-  output->WriteRaw(_internal_metadata_.unknown_fields().data(),
-                   static_cast<int>(_internal_metadata_.unknown_fields().size()));
+  output->WriteRaw((::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).data(),
+                   static_cast<int>((::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).size()));
   // @@protoc_insertion_point(serialize_end:IM.File.IMFileReq)
 }
 
-size_t IMFileReq::RequiredFieldsByteSizeFallback() const {
-// @@protoc_insertion_point(required_fields_byte_size_fallback_start:IM.File.IMFileReq)
-  size_t total_size = 0;
-
-  if (has_file_name()) {
-    // required string file_name = 3;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->file_name());
-  }
-
-  if (has_from_user_id()) {
-    // required uint32 from_user_id = 1;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->from_user_id());
-  }
-
-  if (has_to_user_id()) {
-    // required uint32 to_user_id = 2;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->to_user_id());
-  }
-
-  if (has_file_size()) {
-    // required uint32 file_size = 4;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->file_size());
-  }
-
-  if (has_trans_mode()) {
-    // required .IM.BaseDefine.TransferFileType trans_mode = 5;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::EnumSize(this->trans_mode());
-  }
-
-  return total_size;
-}
 size_t IMFileReq::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:IM.File.IMFileReq)
   size_t total_size = 0;
 
-  total_size += _internal_metadata_.unknown_fields().size();
+  total_size += (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).size();
 
-  if (((_has_bits_[0] & 0x0000001f) ^ 0x0000001f) == 0) {  // All required fields are present.
-    // required string file_name = 3;
+  // string file_name = 3;
+  if (this->file_name().size() > 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
         this->file_name());
+  }
 
-    // required uint32 from_user_id = 1;
+  // uint32 from_user_id = 1;
+  if (this->from_user_id() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::UInt32Size(
         this->from_user_id());
+  }
 
-    // required uint32 to_user_id = 2;
+  // uint32 to_user_id = 2;
+  if (this->to_user_id() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::UInt32Size(
         this->to_user_id());
+  }
 
-    // required uint32 file_size = 4;
+  // uint32 file_size = 4;
+  if (this->file_size() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::UInt32Size(
         this->file_size());
+  }
 
-    // required .IM.BaseDefine.TransferFileType trans_mode = 5;
+  // .IM.BaseDefine.TransferFileType trans_mode = 5;
+  if (this->trans_mode() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::EnumSize(this->trans_mode());
-
-  } else {
-    total_size += RequiredFieldsByteSizeFallback();
   }
+
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = cached_size;
@@ -2362,25 +2126,21 @@ void IMFileReq::MergeFrom(const IMFileReq& from) {
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  cached_has_bits = from._has_bits_[0];
-  if (cached_has_bits & 31u) {
-    if (cached_has_bits & 0x00000001u) {
-      set_has_file_name();
-      file_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.file_name_);
-    }
-    if (cached_has_bits & 0x00000002u) {
-      from_user_id_ = from.from_user_id_;
-    }
-    if (cached_has_bits & 0x00000004u) {
-      to_user_id_ = from.to_user_id_;
-    }
-    if (cached_has_bits & 0x00000008u) {
-      file_size_ = from.file_size_;
-    }
-    if (cached_has_bits & 0x00000010u) {
-      trans_mode_ = from.trans_mode_;
-    }
-    _has_bits_[0] |= cached_has_bits;
+  if (from.file_name().size() > 0) {
+
+    file_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.file_name_);
+  }
+  if (from.from_user_id() != 0) {
+    set_from_user_id(from.from_user_id());
+  }
+  if (from.to_user_id() != 0) {
+    set_to_user_id(from.to_user_id());
+  }
+  if (from.file_size() != 0) {
+    set_file_size(from.file_size());
+  }
+  if (from.trans_mode() != 0) {
+    set_trans_mode(from.trans_mode());
   }
 }
 
@@ -2392,7 +2152,6 @@ void IMFileReq::CopyFrom(const IMFileReq& from) {
 }
 
 bool IMFileReq::IsInitialized() const {
-  if ((_has_bits_[0] & 0x0000001f) != 0x0000001f) return false;
   return true;
 }
 
@@ -2407,7 +2166,6 @@ void IMFileReq::InternalSwap(IMFileReq* other) {
   swap(to_user_id_, other->to_user_id_);
   swap(file_size_, other->file_size_);
   swap(trans_mode_, other->trans_mode_);
-  swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   swap(_cached_size_, other->_cached_size_);
 }
@@ -2445,16 +2203,15 @@ IMFileRsp::IMFileRsp()
 IMFileRsp::IMFileRsp(const IMFileRsp& from)
   : ::google::protobuf::MessageLite(),
       _internal_metadata_(NULL),
-      _has_bits_(from._has_bits_),
-      _cached_size_(0),
-      ip_addr_list_(from.ip_addr_list_) {
+      ip_addr_list_(from.ip_addr_list_),
+      _cached_size_(0) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   file_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.has_file_name()) {
+  if (from.file_name().size() > 0) {
     file_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.file_name_);
   }
   task_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.has_task_id()) {
+  if (from.task_id().size() > 0) {
     task_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.task_id_);
   }
   ::memcpy(&result_code_, &from.result_code_,
@@ -2464,13 +2221,12 @@ IMFileRsp::IMFileRsp(const IMFileRsp& from)
 }
 
 void IMFileRsp::SharedCtor() {
-  _cached_size_ = 0;
   file_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   task_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(&result_code_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&to_user_id_) -
-      reinterpret_cast<char*>(&result_code_)) + sizeof(to_user_id_));
-  trans_mode_ = 1;
+      reinterpret_cast<char*>(&trans_mode_) -
+      reinterpret_cast<char*>(&result_code_)) + sizeof(trans_mode_));
+  _cached_size_ = 0;
 }
 
 IMFileRsp::~IMFileRsp() {
@@ -2508,24 +2264,11 @@ void IMFileRsp::Clear() {
   (void) cached_has_bits;
 
   ip_addr_list_.Clear();
-  cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 3u) {
-    if (cached_has_bits & 0x00000001u) {
-      GOOGLE_DCHECK(!file_name_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()));
-      (*file_name_.UnsafeRawStringPointer())->clear();
-    }
-    if (cached_has_bits & 0x00000002u) {
-      GOOGLE_DCHECK(!task_id_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()));
-      (*task_id_.UnsafeRawStringPointer())->clear();
-    }
-  }
-  if (cached_has_bits & 60u) {
-    ::memset(&result_code_, 0, static_cast<size_t>(
-        reinterpret_cast<char*>(&to_user_id_) -
-        reinterpret_cast<char*>(&result_code_)) + sizeof(to_user_id_));
-    trans_mode_ = 1;
-  }
-  _has_bits_.Clear();
+  file_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  task_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::memset(&result_code_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&trans_mode_) -
+      reinterpret_cast<char*>(&result_code_)) + sizeof(trans_mode_));
   _internal_metadata_.Clear();
 }
 
@@ -2545,11 +2288,11 @@ bool IMFileRsp::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required uint32 result_code = 1;
+      // uint32 result_code = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
-          set_has_result_code();
+
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &result_code_)));
@@ -2559,11 +2302,11 @@ bool IMFileRsp::MergePartialFromCodedStream(
         break;
       }
 
-      // required uint32 from_user_id = 2;
+      // uint32 from_user_id = 2;
       case 2: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
-          set_has_from_user_id();
+
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &from_user_id_)));
@@ -2573,11 +2316,11 @@ bool IMFileRsp::MergePartialFromCodedStream(
         break;
       }
 
-      // required uint32 to_user_id = 3;
+      // uint32 to_user_id = 3;
       case 3: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(24u /* 24 & 0xFF */)) {
-          set_has_to_user_id();
+
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &to_user_id_)));
@@ -2587,24 +2330,32 @@ bool IMFileRsp::MergePartialFromCodedStream(
         break;
       }
 
-      // required string file_name = 4;
+      // string file_name = 4;
       case 4: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(34u /* 34 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_file_name()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->file_name().data(), static_cast<int>(this->file_name().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "IM.File.IMFileRsp.file_name"));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // required string task_id = 5;
+      // string task_id = 5;
       case 5: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(42u /* 42 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_task_id()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->task_id().data(), static_cast<int>(this->task_id().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "IM.File.IMFileRsp.task_id"));
         } else {
           goto handle_unusual;
         }
@@ -2622,7 +2373,7 @@ bool IMFileRsp::MergePartialFromCodedStream(
         break;
       }
 
-      // required .IM.BaseDefine.TransferFileType trans_mode = 7;
+      // .IM.BaseDefine.TransferFileType trans_mode = 7;
       case 7: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(56u /* 56 & 0xFF */)) {
@@ -2630,13 +2381,7 @@ bool IMFileRsp::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
                  input, &value)));
-          if (::IM::BaseDefine::TransferFileType_IsValid(value)) {
-            set_trans_mode(static_cast< ::IM::BaseDefine::TransferFileType >(value));
-          } else {
-            unknown_fields_stream.WriteVarint32(56u);
-            unknown_fields_stream.WriteVarint32(
-                static_cast< ::google::protobuf::uint32>(value));
-          }
+          set_trans_mode(static_cast< ::IM::BaseDefine::TransferFileType >(value));
         } else {
           goto handle_unusual;
         }
@@ -2669,30 +2414,37 @@ void IMFileRsp::SerializeWithCachedSizes(
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  cached_has_bits = _has_bits_[0];
-  // required uint32 result_code = 1;
-  if (cached_has_bits & 0x00000004u) {
+  // uint32 result_code = 1;
+  if (this->result_code() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(1, this->result_code(), output);
   }
 
-  // required uint32 from_user_id = 2;
-  if (cached_has_bits & 0x00000008u) {
+  // uint32 from_user_id = 2;
+  if (this->from_user_id() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(2, this->from_user_id(), output);
   }
 
-  // required uint32 to_user_id = 3;
-  if (cached_has_bits & 0x00000010u) {
+  // uint32 to_user_id = 3;
+  if (this->to_user_id() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(3, this->to_user_id(), output);
   }
 
-  // required string file_name = 4;
-  if (cached_has_bits & 0x00000001u) {
+  // string file_name = 4;
+  if (this->file_name().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->file_name().data(), static_cast<int>(this->file_name().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "IM.File.IMFileRsp.file_name");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       4, this->file_name(), output);
   }
 
-  // required string task_id = 5;
-  if (cached_has_bits & 0x00000002u) {
+  // string task_id = 5;
+  if (this->task_id().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->task_id().data(), static_cast<int>(this->task_id().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "IM.File.IMFileRsp.task_id");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       5, this->task_id(), output);
   }
@@ -2700,107 +2452,27 @@ void IMFileRsp::SerializeWithCachedSizes(
   // repeated .IM.BaseDefine.IpAddr ip_addr_list = 6;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->ip_addr_list_size()); i < n; i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessage(
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       6, this->ip_addr_list(static_cast<int>(i)), output);
   }
 
-  // required .IM.BaseDefine.TransferFileType trans_mode = 7;
-  if (cached_has_bits & 0x00000020u) {
+  // .IM.BaseDefine.TransferFileType trans_mode = 7;
+  if (this->trans_mode() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       7, this->trans_mode(), output);
   }
 
-  output->WriteRaw(_internal_metadata_.unknown_fields().data(),
-                   static_cast<int>(_internal_metadata_.unknown_fields().size()));
+  output->WriteRaw((::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).data(),
+                   static_cast<int>((::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).size()));
   // @@protoc_insertion_point(serialize_end:IM.File.IMFileRsp)
 }
 
-size_t IMFileRsp::RequiredFieldsByteSizeFallback() const {
-// @@protoc_insertion_point(required_fields_byte_size_fallback_start:IM.File.IMFileRsp)
-  size_t total_size = 0;
-
-  if (has_file_name()) {
-    // required string file_name = 4;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->file_name());
-  }
-
-  if (has_task_id()) {
-    // required string task_id = 5;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->task_id());
-  }
-
-  if (has_result_code()) {
-    // required uint32 result_code = 1;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->result_code());
-  }
-
-  if (has_from_user_id()) {
-    // required uint32 from_user_id = 2;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->from_user_id());
-  }
-
-  if (has_to_user_id()) {
-    // required uint32 to_user_id = 3;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->to_user_id());
-  }
-
-  if (has_trans_mode()) {
-    // required .IM.BaseDefine.TransferFileType trans_mode = 7;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::EnumSize(this->trans_mode());
-  }
-
-  return total_size;
-}
 size_t IMFileRsp::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:IM.File.IMFileRsp)
   size_t total_size = 0;
 
-  total_size += _internal_metadata_.unknown_fields().size();
+  total_size += (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).size();
 
-  if (((_has_bits_[0] & 0x0000003f) ^ 0x0000003f) == 0) {  // All required fields are present.
-    // required string file_name = 4;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->file_name());
-
-    // required string task_id = 5;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->task_id());
-
-    // required uint32 result_code = 1;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->result_code());
-
-    // required uint32 from_user_id = 2;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->from_user_id());
-
-    // required uint32 to_user_id = 3;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->to_user_id());
-
-    // required .IM.BaseDefine.TransferFileType trans_mode = 7;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::EnumSize(this->trans_mode());
-
-  } else {
-    total_size += RequiredFieldsByteSizeFallback();
-  }
   // repeated .IM.BaseDefine.IpAddr ip_addr_list = 6;
   {
     unsigned int count = static_cast<unsigned int>(this->ip_addr_list_size());
@@ -2810,6 +2482,47 @@ size_t IMFileRsp::ByteSizeLong() const {
         ::google::protobuf::internal::WireFormatLite::MessageSize(
           this->ip_addr_list(static_cast<int>(i)));
     }
+  }
+
+  // string file_name = 4;
+  if (this->file_name().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->file_name());
+  }
+
+  // string task_id = 5;
+  if (this->task_id().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->task_id());
+  }
+
+  // uint32 result_code = 1;
+  if (this->result_code() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        this->result_code());
+  }
+
+  // uint32 from_user_id = 2;
+  if (this->from_user_id() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        this->from_user_id());
+  }
+
+  // uint32 to_user_id = 3;
+  if (this->to_user_id() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        this->to_user_id());
+  }
+
+  // .IM.BaseDefine.TransferFileType trans_mode = 7;
+  if (this->trans_mode() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::EnumSize(this->trans_mode());
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
@@ -2832,29 +2545,25 @@ void IMFileRsp::MergeFrom(const IMFileRsp& from) {
   (void) cached_has_bits;
 
   ip_addr_list_.MergeFrom(from.ip_addr_list_);
-  cached_has_bits = from._has_bits_[0];
-  if (cached_has_bits & 63u) {
-    if (cached_has_bits & 0x00000001u) {
-      set_has_file_name();
-      file_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.file_name_);
-    }
-    if (cached_has_bits & 0x00000002u) {
-      set_has_task_id();
-      task_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.task_id_);
-    }
-    if (cached_has_bits & 0x00000004u) {
-      result_code_ = from.result_code_;
-    }
-    if (cached_has_bits & 0x00000008u) {
-      from_user_id_ = from.from_user_id_;
-    }
-    if (cached_has_bits & 0x00000010u) {
-      to_user_id_ = from.to_user_id_;
-    }
-    if (cached_has_bits & 0x00000020u) {
-      trans_mode_ = from.trans_mode_;
-    }
-    _has_bits_[0] |= cached_has_bits;
+  if (from.file_name().size() > 0) {
+
+    file_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.file_name_);
+  }
+  if (from.task_id().size() > 0) {
+
+    task_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.task_id_);
+  }
+  if (from.result_code() != 0) {
+    set_result_code(from.result_code());
+  }
+  if (from.from_user_id() != 0) {
+    set_from_user_id(from.from_user_id());
+  }
+  if (from.to_user_id() != 0) {
+    set_to_user_id(from.to_user_id());
+  }
+  if (from.trans_mode() != 0) {
+    set_trans_mode(from.trans_mode());
   }
 }
 
@@ -2866,8 +2575,6 @@ void IMFileRsp::CopyFrom(const IMFileRsp& from) {
 }
 
 bool IMFileRsp::IsInitialized() const {
-  if ((_has_bits_[0] & 0x0000003f) != 0x0000003f) return false;
-  if (!::google::protobuf::internal::AllAreInitialized(this->ip_addr_list())) return false;
   return true;
 }
 
@@ -2884,7 +2591,6 @@ void IMFileRsp::InternalSwap(IMFileRsp* other) {
   swap(from_user_id_, other->from_user_id_);
   swap(to_user_id_, other->to_user_id_);
   swap(trans_mode_, other->trans_mode_);
-  swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   swap(_cached_size_, other->_cached_size_);
 }
@@ -2923,32 +2629,30 @@ IMFileNotify::IMFileNotify()
 IMFileNotify::IMFileNotify(const IMFileNotify& from)
   : ::google::protobuf::MessageLite(),
       _internal_metadata_(NULL),
-      _has_bits_(from._has_bits_),
-      _cached_size_(0),
-      ip_addr_list_(from.ip_addr_list_) {
+      ip_addr_list_(from.ip_addr_list_),
+      _cached_size_(0) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   file_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.has_file_name()) {
+  if (from.file_name().size() > 0) {
     file_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.file_name_);
   }
   task_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.has_task_id()) {
+  if (from.task_id().size() > 0) {
     task_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.task_id_);
   }
   ::memcpy(&from_user_id_, &from.from_user_id_,
-    static_cast<size_t>(reinterpret_cast<char*>(&trans_mode_) -
-    reinterpret_cast<char*>(&from_user_id_)) + sizeof(trans_mode_));
+    static_cast<size_t>(reinterpret_cast<char*>(&offline_ready_) -
+    reinterpret_cast<char*>(&from_user_id_)) + sizeof(offline_ready_));
   // @@protoc_insertion_point(copy_constructor:IM.File.IMFileNotify)
 }
 
 void IMFileNotify::SharedCtor() {
-  _cached_size_ = 0;
   file_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   task_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(&from_user_id_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&offline_ready_) -
       reinterpret_cast<char*>(&from_user_id_)) + sizeof(offline_ready_));
-  trans_mode_ = 1;
+  _cached_size_ = 0;
 }
 
 IMFileNotify::~IMFileNotify() {
@@ -2986,24 +2690,11 @@ void IMFileNotify::Clear() {
   (void) cached_has_bits;
 
   ip_addr_list_.Clear();
-  cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 3u) {
-    if (cached_has_bits & 0x00000001u) {
-      GOOGLE_DCHECK(!file_name_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()));
-      (*file_name_.UnsafeRawStringPointer())->clear();
-    }
-    if (cached_has_bits & 0x00000002u) {
-      GOOGLE_DCHECK(!task_id_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()));
-      (*task_id_.UnsafeRawStringPointer())->clear();
-    }
-  }
-  if (cached_has_bits & 124u) {
-    ::memset(&from_user_id_, 0, static_cast<size_t>(
-        reinterpret_cast<char*>(&offline_ready_) -
-        reinterpret_cast<char*>(&from_user_id_)) + sizeof(offline_ready_));
-    trans_mode_ = 1;
-  }
-  _has_bits_.Clear();
+  file_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  task_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::memset(&from_user_id_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&offline_ready_) -
+      reinterpret_cast<char*>(&from_user_id_)) + sizeof(offline_ready_));
   _internal_metadata_.Clear();
 }
 
@@ -3023,11 +2714,11 @@ bool IMFileNotify::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required uint32 from_user_id = 1;
+      // uint32 from_user_id = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
-          set_has_from_user_id();
+
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &from_user_id_)));
@@ -3037,11 +2728,11 @@ bool IMFileNotify::MergePartialFromCodedStream(
         break;
       }
 
-      // required uint32 to_user_id = 2;
+      // uint32 to_user_id = 2;
       case 2: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
-          set_has_to_user_id();
+
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &to_user_id_)));
@@ -3051,23 +2742,27 @@ bool IMFileNotify::MergePartialFromCodedStream(
         break;
       }
 
-      // required string file_name = 3;
+      // string file_name = 3;
       case 3: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_file_name()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->file_name().data(), static_cast<int>(this->file_name().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "IM.File.IMFileNotify.file_name"));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // required uint32 file_size = 4;
+      // uint32 file_size = 4;
       case 4: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(32u /* 32 & 0xFF */)) {
-          set_has_file_size();
+
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &file_size_)));
@@ -3077,12 +2772,16 @@ bool IMFileNotify::MergePartialFromCodedStream(
         break;
       }
 
-      // required string task_id = 5;
+      // string task_id = 5;
       case 5: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(42u /* 42 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_task_id()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->task_id().data(), static_cast<int>(this->task_id().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "IM.File.IMFileNotify.task_id"));
         } else {
           goto handle_unusual;
         }
@@ -3100,7 +2799,7 @@ bool IMFileNotify::MergePartialFromCodedStream(
         break;
       }
 
-      // required .IM.BaseDefine.TransferFileType trans_mode = 7;
+      // .IM.BaseDefine.TransferFileType trans_mode = 7;
       case 7: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(56u /* 56 & 0xFF */)) {
@@ -3108,24 +2807,18 @@ bool IMFileNotify::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
                  input, &value)));
-          if (::IM::BaseDefine::TransferFileType_IsValid(value)) {
-            set_trans_mode(static_cast< ::IM::BaseDefine::TransferFileType >(value));
-          } else {
-            unknown_fields_stream.WriteVarint32(56u);
-            unknown_fields_stream.WriteVarint32(
-                static_cast< ::google::protobuf::uint32>(value));
-          }
+          set_trans_mode(static_cast< ::IM::BaseDefine::TransferFileType >(value));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // required uint32 offline_ready = 8;
+      // uint32 offline_ready = 8;
       case 8: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(64u /* 64 & 0xFF */)) {
-          set_has_offline_ready();
+
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &offline_ready_)));
@@ -3161,30 +2854,37 @@ void IMFileNotify::SerializeWithCachedSizes(
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  cached_has_bits = _has_bits_[0];
-  // required uint32 from_user_id = 1;
-  if (cached_has_bits & 0x00000004u) {
+  // uint32 from_user_id = 1;
+  if (this->from_user_id() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(1, this->from_user_id(), output);
   }
 
-  // required uint32 to_user_id = 2;
-  if (cached_has_bits & 0x00000008u) {
+  // uint32 to_user_id = 2;
+  if (this->to_user_id() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(2, this->to_user_id(), output);
   }
 
-  // required string file_name = 3;
-  if (cached_has_bits & 0x00000001u) {
+  // string file_name = 3;
+  if (this->file_name().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->file_name().data(), static_cast<int>(this->file_name().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "IM.File.IMFileNotify.file_name");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       3, this->file_name(), output);
   }
 
-  // required uint32 file_size = 4;
-  if (cached_has_bits & 0x00000010u) {
+  // uint32 file_size = 4;
+  if (this->file_size() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(4, this->file_size(), output);
   }
 
-  // required string task_id = 5;
-  if (cached_has_bits & 0x00000002u) {
+  // string task_id = 5;
+  if (this->task_id().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->task_id().data(), static_cast<int>(this->task_id().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "IM.File.IMFileNotify.task_id");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       5, this->task_id(), output);
   }
@@ -3192,124 +2892,32 @@ void IMFileNotify::SerializeWithCachedSizes(
   // repeated .IM.BaseDefine.IpAddr ip_addr_list = 6;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->ip_addr_list_size()); i < n; i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessage(
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       6, this->ip_addr_list(static_cast<int>(i)), output);
   }
 
-  // required .IM.BaseDefine.TransferFileType trans_mode = 7;
-  if (cached_has_bits & 0x00000040u) {
+  // .IM.BaseDefine.TransferFileType trans_mode = 7;
+  if (this->trans_mode() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       7, this->trans_mode(), output);
   }
 
-  // required uint32 offline_ready = 8;
-  if (cached_has_bits & 0x00000020u) {
+  // uint32 offline_ready = 8;
+  if (this->offline_ready() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(8, this->offline_ready(), output);
   }
 
-  output->WriteRaw(_internal_metadata_.unknown_fields().data(),
-                   static_cast<int>(_internal_metadata_.unknown_fields().size()));
+  output->WriteRaw((::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).data(),
+                   static_cast<int>((::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).size()));
   // @@protoc_insertion_point(serialize_end:IM.File.IMFileNotify)
 }
 
-size_t IMFileNotify::RequiredFieldsByteSizeFallback() const {
-// @@protoc_insertion_point(required_fields_byte_size_fallback_start:IM.File.IMFileNotify)
-  size_t total_size = 0;
-
-  if (has_file_name()) {
-    // required string file_name = 3;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->file_name());
-  }
-
-  if (has_task_id()) {
-    // required string task_id = 5;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->task_id());
-  }
-
-  if (has_from_user_id()) {
-    // required uint32 from_user_id = 1;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->from_user_id());
-  }
-
-  if (has_to_user_id()) {
-    // required uint32 to_user_id = 2;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->to_user_id());
-  }
-
-  if (has_file_size()) {
-    // required uint32 file_size = 4;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->file_size());
-  }
-
-  if (has_offline_ready()) {
-    // required uint32 offline_ready = 8;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->offline_ready());
-  }
-
-  if (has_trans_mode()) {
-    // required .IM.BaseDefine.TransferFileType trans_mode = 7;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::EnumSize(this->trans_mode());
-  }
-
-  return total_size;
-}
 size_t IMFileNotify::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:IM.File.IMFileNotify)
   size_t total_size = 0;
 
-  total_size += _internal_metadata_.unknown_fields().size();
+  total_size += (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).size();
 
-  if (((_has_bits_[0] & 0x0000007f) ^ 0x0000007f) == 0) {  // All required fields are present.
-    // required string file_name = 3;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->file_name());
-
-    // required string task_id = 5;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->task_id());
-
-    // required uint32 from_user_id = 1;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->from_user_id());
-
-    // required uint32 to_user_id = 2;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->to_user_id());
-
-    // required uint32 file_size = 4;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->file_size());
-
-    // required uint32 offline_ready = 8;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->offline_ready());
-
-    // required .IM.BaseDefine.TransferFileType trans_mode = 7;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::EnumSize(this->trans_mode());
-
-  } else {
-    total_size += RequiredFieldsByteSizeFallback();
-  }
   // repeated .IM.BaseDefine.IpAddr ip_addr_list = 6;
   {
     unsigned int count = static_cast<unsigned int>(this->ip_addr_list_size());
@@ -3319,6 +2927,54 @@ size_t IMFileNotify::ByteSizeLong() const {
         ::google::protobuf::internal::WireFormatLite::MessageSize(
           this->ip_addr_list(static_cast<int>(i)));
     }
+  }
+
+  // string file_name = 3;
+  if (this->file_name().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->file_name());
+  }
+
+  // string task_id = 5;
+  if (this->task_id().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->task_id());
+  }
+
+  // uint32 from_user_id = 1;
+  if (this->from_user_id() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        this->from_user_id());
+  }
+
+  // uint32 to_user_id = 2;
+  if (this->to_user_id() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        this->to_user_id());
+  }
+
+  // uint32 file_size = 4;
+  if (this->file_size() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        this->file_size());
+  }
+
+  // .IM.BaseDefine.TransferFileType trans_mode = 7;
+  if (this->trans_mode() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::EnumSize(this->trans_mode());
+  }
+
+  // uint32 offline_ready = 8;
+  if (this->offline_ready() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        this->offline_ready());
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
@@ -3341,32 +2997,28 @@ void IMFileNotify::MergeFrom(const IMFileNotify& from) {
   (void) cached_has_bits;
 
   ip_addr_list_.MergeFrom(from.ip_addr_list_);
-  cached_has_bits = from._has_bits_[0];
-  if (cached_has_bits & 127u) {
-    if (cached_has_bits & 0x00000001u) {
-      set_has_file_name();
-      file_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.file_name_);
-    }
-    if (cached_has_bits & 0x00000002u) {
-      set_has_task_id();
-      task_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.task_id_);
-    }
-    if (cached_has_bits & 0x00000004u) {
-      from_user_id_ = from.from_user_id_;
-    }
-    if (cached_has_bits & 0x00000008u) {
-      to_user_id_ = from.to_user_id_;
-    }
-    if (cached_has_bits & 0x00000010u) {
-      file_size_ = from.file_size_;
-    }
-    if (cached_has_bits & 0x00000020u) {
-      offline_ready_ = from.offline_ready_;
-    }
-    if (cached_has_bits & 0x00000040u) {
-      trans_mode_ = from.trans_mode_;
-    }
-    _has_bits_[0] |= cached_has_bits;
+  if (from.file_name().size() > 0) {
+
+    file_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.file_name_);
+  }
+  if (from.task_id().size() > 0) {
+
+    task_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.task_id_);
+  }
+  if (from.from_user_id() != 0) {
+    set_from_user_id(from.from_user_id());
+  }
+  if (from.to_user_id() != 0) {
+    set_to_user_id(from.to_user_id());
+  }
+  if (from.file_size() != 0) {
+    set_file_size(from.file_size());
+  }
+  if (from.trans_mode() != 0) {
+    set_trans_mode(from.trans_mode());
+  }
+  if (from.offline_ready() != 0) {
+    set_offline_ready(from.offline_ready());
   }
 }
 
@@ -3378,8 +3030,6 @@ void IMFileNotify::CopyFrom(const IMFileNotify& from) {
 }
 
 bool IMFileNotify::IsInitialized() const {
-  if ((_has_bits_[0] & 0x0000007f) != 0x0000007f) return false;
-  if (!::google::protobuf::internal::AllAreInitialized(this->ip_addr_list())) return false;
   return true;
 }
 
@@ -3395,9 +3045,8 @@ void IMFileNotify::InternalSwap(IMFileNotify* other) {
   swap(from_user_id_, other->from_user_id_);
   swap(to_user_id_, other->to_user_id_);
   swap(file_size_, other->file_size_);
-  swap(offline_ready_, other->offline_ready_);
   swap(trans_mode_, other->trans_mode_);
-  swap(_has_bits_[0], other->_has_bits_[0]);
+  swap(offline_ready_, other->offline_ready_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   swap(_cached_size_, other->_cached_size_);
 }
@@ -3427,11 +3076,10 @@ IMFileHasOfflineReq::IMFileHasOfflineReq()
 IMFileHasOfflineReq::IMFileHasOfflineReq(const IMFileHasOfflineReq& from)
   : ::google::protobuf::MessageLite(),
       _internal_metadata_(NULL),
-      _has_bits_(from._has_bits_),
       _cached_size_(0) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   attach_data_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.has_attach_data()) {
+  if (from.attach_data().size() > 0) {
     attach_data_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.attach_data_);
   }
   user_id_ = from.user_id_;
@@ -3439,9 +3087,9 @@ IMFileHasOfflineReq::IMFileHasOfflineReq(const IMFileHasOfflineReq& from)
 }
 
 void IMFileHasOfflineReq::SharedCtor() {
-  _cached_size_ = 0;
   attach_data_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   user_id_ = 0u;
+  _cached_size_ = 0;
 }
 
 IMFileHasOfflineReq::~IMFileHasOfflineReq() {
@@ -3477,13 +3125,8 @@ void IMFileHasOfflineReq::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 0x00000001u) {
-    GOOGLE_DCHECK(!attach_data_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()));
-    (*attach_data_.UnsafeRawStringPointer())->clear();
-  }
+  attach_data_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   user_id_ = 0u;
-  _has_bits_.Clear();
   _internal_metadata_.Clear();
 }
 
@@ -3503,11 +3146,11 @@ bool IMFileHasOfflineReq::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required uint32 user_id = 1;
+      // uint32 user_id = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
-          set_has_user_id();
+
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &user_id_)));
@@ -3517,7 +3160,7 @@ bool IMFileHasOfflineReq::MergePartialFromCodedStream(
         break;
       }
 
-      // optional bytes attach_data = 20;
+      // bytes attach_data = 20;
       case 20: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(162u /* 162 & 0xFF */)) {
@@ -3555,20 +3198,19 @@ void IMFileHasOfflineReq::SerializeWithCachedSizes(
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  cached_has_bits = _has_bits_[0];
-  // required uint32 user_id = 1;
-  if (cached_has_bits & 0x00000002u) {
+  // uint32 user_id = 1;
+  if (this->user_id() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(1, this->user_id(), output);
   }
 
-  // optional bytes attach_data = 20;
-  if (cached_has_bits & 0x00000001u) {
+  // bytes attach_data = 20;
+  if (this->attach_data().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
       20, this->attach_data(), output);
   }
 
-  output->WriteRaw(_internal_metadata_.unknown_fields().data(),
-                   static_cast<int>(_internal_metadata_.unknown_fields().size()));
+  output->WriteRaw((::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).data(),
+                   static_cast<int>((::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).size()));
   // @@protoc_insertion_point(serialize_end:IM.File.IMFileHasOfflineReq)
 }
 
@@ -3576,19 +3218,20 @@ size_t IMFileHasOfflineReq::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:IM.File.IMFileHasOfflineReq)
   size_t total_size = 0;
 
-  total_size += _internal_metadata_.unknown_fields().size();
+  total_size += (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).size();
 
-  // required uint32 user_id = 1;
-  if (has_user_id()) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->user_id());
-  }
-  // optional bytes attach_data = 20;
-  if (has_attach_data()) {
+  // bytes attach_data = 20;
+  if (this->attach_data().size() > 0) {
     total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::BytesSize(
         this->attach_data());
+  }
+
+  // uint32 user_id = 1;
+  if (this->user_id() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        this->user_id());
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
@@ -3610,16 +3253,12 @@ void IMFileHasOfflineReq::MergeFrom(const IMFileHasOfflineReq& from) {
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  cached_has_bits = from._has_bits_[0];
-  if (cached_has_bits & 3u) {
-    if (cached_has_bits & 0x00000001u) {
-      set_has_attach_data();
-      attach_data_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.attach_data_);
-    }
-    if (cached_has_bits & 0x00000002u) {
-      user_id_ = from.user_id_;
-    }
-    _has_bits_[0] |= cached_has_bits;
+  if (from.attach_data().size() > 0) {
+
+    attach_data_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.attach_data_);
+  }
+  if (from.user_id() != 0) {
+    set_user_id(from.user_id());
   }
 }
 
@@ -3631,7 +3270,6 @@ void IMFileHasOfflineReq::CopyFrom(const IMFileHasOfflineReq& from) {
 }
 
 bool IMFileHasOfflineReq::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000002) != 0x00000002) return false;
   return true;
 }
 
@@ -3643,7 +3281,6 @@ void IMFileHasOfflineReq::InternalSwap(IMFileHasOfflineReq* other) {
   using std::swap;
   attach_data_.Swap(&other->attach_data_);
   swap(user_id_, other->user_id_);
-  swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   swap(_cached_size_, other->_cached_size_);
 }
@@ -3681,13 +3318,12 @@ IMFileHasOfflineRsp::IMFileHasOfflineRsp()
 IMFileHasOfflineRsp::IMFileHasOfflineRsp(const IMFileHasOfflineRsp& from)
   : ::google::protobuf::MessageLite(),
       _internal_metadata_(NULL),
-      _has_bits_(from._has_bits_),
-      _cached_size_(0),
       offline_file_list_(from.offline_file_list_),
-      ip_addr_list_(from.ip_addr_list_) {
+      ip_addr_list_(from.ip_addr_list_),
+      _cached_size_(0) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   attach_data_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.has_attach_data()) {
+  if (from.attach_data().size() > 0) {
     attach_data_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.attach_data_);
   }
   user_id_ = from.user_id_;
@@ -3695,9 +3331,9 @@ IMFileHasOfflineRsp::IMFileHasOfflineRsp(const IMFileHasOfflineRsp& from)
 }
 
 void IMFileHasOfflineRsp::SharedCtor() {
-  _cached_size_ = 0;
   attach_data_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   user_id_ = 0u;
+  _cached_size_ = 0;
 }
 
 IMFileHasOfflineRsp::~IMFileHasOfflineRsp() {
@@ -3735,13 +3371,8 @@ void IMFileHasOfflineRsp::Clear() {
 
   offline_file_list_.Clear();
   ip_addr_list_.Clear();
-  cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 0x00000001u) {
-    GOOGLE_DCHECK(!attach_data_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()));
-    (*attach_data_.UnsafeRawStringPointer())->clear();
-  }
+  attach_data_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   user_id_ = 0u;
-  _has_bits_.Clear();
   _internal_metadata_.Clear();
 }
 
@@ -3761,11 +3392,11 @@ bool IMFileHasOfflineRsp::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required uint32 user_id = 1;
+      // uint32 user_id = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
-          set_has_user_id();
+
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &user_id_)));
@@ -3797,7 +3428,7 @@ bool IMFileHasOfflineRsp::MergePartialFromCodedStream(
         break;
       }
 
-      // optional bytes attach_data = 20;
+      // bytes attach_data = 20;
       case 20: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(162u /* 162 & 0xFF */)) {
@@ -3835,34 +3466,33 @@ void IMFileHasOfflineRsp::SerializeWithCachedSizes(
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  cached_has_bits = _has_bits_[0];
-  // required uint32 user_id = 1;
-  if (cached_has_bits & 0x00000002u) {
+  // uint32 user_id = 1;
+  if (this->user_id() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(1, this->user_id(), output);
   }
 
   // repeated .IM.BaseDefine.OfflineFileInfo offline_file_list = 2;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->offline_file_list_size()); i < n; i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessage(
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       2, this->offline_file_list(static_cast<int>(i)), output);
   }
 
   // repeated .IM.BaseDefine.IpAddr ip_addr_list = 3;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->ip_addr_list_size()); i < n; i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessage(
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       3, this->ip_addr_list(static_cast<int>(i)), output);
   }
 
-  // optional bytes attach_data = 20;
-  if (cached_has_bits & 0x00000001u) {
+  // bytes attach_data = 20;
+  if (this->attach_data().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
       20, this->attach_data(), output);
   }
 
-  output->WriteRaw(_internal_metadata_.unknown_fields().data(),
-                   static_cast<int>(_internal_metadata_.unknown_fields().size()));
+  output->WriteRaw((::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).data(),
+                   static_cast<int>((::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).size()));
   // @@protoc_insertion_point(serialize_end:IM.File.IMFileHasOfflineRsp)
 }
 
@@ -3870,14 +3500,8 @@ size_t IMFileHasOfflineRsp::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:IM.File.IMFileHasOfflineRsp)
   size_t total_size = 0;
 
-  total_size += _internal_metadata_.unknown_fields().size();
+  total_size += (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).size();
 
-  // required uint32 user_id = 1;
-  if (has_user_id()) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->user_id());
-  }
   // repeated .IM.BaseDefine.OfflineFileInfo offline_file_list = 2;
   {
     unsigned int count = static_cast<unsigned int>(this->offline_file_list_size());
@@ -3900,11 +3524,18 @@ size_t IMFileHasOfflineRsp::ByteSizeLong() const {
     }
   }
 
-  // optional bytes attach_data = 20;
-  if (has_attach_data()) {
+  // bytes attach_data = 20;
+  if (this->attach_data().size() > 0) {
     total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::BytesSize(
         this->attach_data());
+  }
+
+  // uint32 user_id = 1;
+  if (this->user_id() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        this->user_id());
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
@@ -3928,16 +3559,12 @@ void IMFileHasOfflineRsp::MergeFrom(const IMFileHasOfflineRsp& from) {
 
   offline_file_list_.MergeFrom(from.offline_file_list_);
   ip_addr_list_.MergeFrom(from.ip_addr_list_);
-  cached_has_bits = from._has_bits_[0];
-  if (cached_has_bits & 3u) {
-    if (cached_has_bits & 0x00000001u) {
-      set_has_attach_data();
-      attach_data_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.attach_data_);
-    }
-    if (cached_has_bits & 0x00000002u) {
-      user_id_ = from.user_id_;
-    }
-    _has_bits_[0] |= cached_has_bits;
+  if (from.attach_data().size() > 0) {
+
+    attach_data_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.attach_data_);
+  }
+  if (from.user_id() != 0) {
+    set_user_id(from.user_id());
   }
 }
 
@@ -3949,9 +3576,6 @@ void IMFileHasOfflineRsp::CopyFrom(const IMFileHasOfflineRsp& from) {
 }
 
 bool IMFileHasOfflineRsp::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000002) != 0x00000002) return false;
-  if (!::google::protobuf::internal::AllAreInitialized(this->offline_file_list())) return false;
-  if (!::google::protobuf::internal::AllAreInitialized(this->ip_addr_list())) return false;
   return true;
 }
 
@@ -3965,7 +3589,6 @@ void IMFileHasOfflineRsp::InternalSwap(IMFileHasOfflineRsp* other) {
   ip_addr_list_.InternalSwap(&other->ip_addr_list_);
   attach_data_.Swap(&other->attach_data_);
   swap(user_id_, other->user_id_);
-  swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   swap(_cached_size_, other->_cached_size_);
 }
@@ -3998,15 +3621,14 @@ IMFileAddOfflineReq::IMFileAddOfflineReq()
 IMFileAddOfflineReq::IMFileAddOfflineReq(const IMFileAddOfflineReq& from)
   : ::google::protobuf::MessageLite(),
       _internal_metadata_(NULL),
-      _has_bits_(from._has_bits_),
       _cached_size_(0) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   task_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.has_task_id()) {
+  if (from.task_id().size() > 0) {
     task_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.task_id_);
   }
   file_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.has_file_name()) {
+  if (from.file_name().size() > 0) {
     file_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.file_name_);
   }
   ::memcpy(&from_user_id_, &from.from_user_id_,
@@ -4016,12 +3638,12 @@ IMFileAddOfflineReq::IMFileAddOfflineReq(const IMFileAddOfflineReq& from)
 }
 
 void IMFileAddOfflineReq::SharedCtor() {
-  _cached_size_ = 0;
   task_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   file_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(&from_user_id_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&file_size_) -
       reinterpret_cast<char*>(&from_user_id_)) + sizeof(file_size_));
+  _cached_size_ = 0;
 }
 
 IMFileAddOfflineReq::~IMFileAddOfflineReq() {
@@ -4058,23 +3680,11 @@ void IMFileAddOfflineReq::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 3u) {
-    if (cached_has_bits & 0x00000001u) {
-      GOOGLE_DCHECK(!task_id_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()));
-      (*task_id_.UnsafeRawStringPointer())->clear();
-    }
-    if (cached_has_bits & 0x00000002u) {
-      GOOGLE_DCHECK(!file_name_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()));
-      (*file_name_.UnsafeRawStringPointer())->clear();
-    }
-  }
-  if (cached_has_bits & 28u) {
-    ::memset(&from_user_id_, 0, static_cast<size_t>(
-        reinterpret_cast<char*>(&file_size_) -
-        reinterpret_cast<char*>(&from_user_id_)) + sizeof(file_size_));
-  }
-  _has_bits_.Clear();
+  task_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  file_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::memset(&from_user_id_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&file_size_) -
+      reinterpret_cast<char*>(&from_user_id_)) + sizeof(file_size_));
   _internal_metadata_.Clear();
 }
 
@@ -4094,11 +3704,11 @@ bool IMFileAddOfflineReq::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required uint32 from_user_id = 1;
+      // uint32 from_user_id = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
-          set_has_from_user_id();
+
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &from_user_id_)));
@@ -4108,11 +3718,11 @@ bool IMFileAddOfflineReq::MergePartialFromCodedStream(
         break;
       }
 
-      // required uint32 to_user_id = 2;
+      // uint32 to_user_id = 2;
       case 2: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
-          set_has_to_user_id();
+
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &to_user_id_)));
@@ -4122,35 +3732,43 @@ bool IMFileAddOfflineReq::MergePartialFromCodedStream(
         break;
       }
 
-      // required string task_id = 3;
+      // string task_id = 3;
       case 3: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_task_id()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->task_id().data(), static_cast<int>(this->task_id().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "IM.File.IMFileAddOfflineReq.task_id"));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // required string file_name = 4;
+      // string file_name = 4;
       case 4: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(34u /* 34 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_file_name()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->file_name().data(), static_cast<int>(this->file_name().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "IM.File.IMFileAddOfflineReq.file_name"));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // required uint32 file_size = 5;
+      // uint32 file_size = 5;
       case 5: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(40u /* 40 & 0xFF */)) {
-          set_has_file_size();
+
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &file_size_)));
@@ -4186,115 +3804,87 @@ void IMFileAddOfflineReq::SerializeWithCachedSizes(
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  cached_has_bits = _has_bits_[0];
-  // required uint32 from_user_id = 1;
-  if (cached_has_bits & 0x00000004u) {
+  // uint32 from_user_id = 1;
+  if (this->from_user_id() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(1, this->from_user_id(), output);
   }
 
-  // required uint32 to_user_id = 2;
-  if (cached_has_bits & 0x00000008u) {
+  // uint32 to_user_id = 2;
+  if (this->to_user_id() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(2, this->to_user_id(), output);
   }
 
-  // required string task_id = 3;
-  if (cached_has_bits & 0x00000001u) {
+  // string task_id = 3;
+  if (this->task_id().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->task_id().data(), static_cast<int>(this->task_id().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "IM.File.IMFileAddOfflineReq.task_id");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       3, this->task_id(), output);
   }
 
-  // required string file_name = 4;
-  if (cached_has_bits & 0x00000002u) {
+  // string file_name = 4;
+  if (this->file_name().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->file_name().data(), static_cast<int>(this->file_name().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "IM.File.IMFileAddOfflineReq.file_name");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       4, this->file_name(), output);
   }
 
-  // required uint32 file_size = 5;
-  if (cached_has_bits & 0x00000010u) {
+  // uint32 file_size = 5;
+  if (this->file_size() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(5, this->file_size(), output);
   }
 
-  output->WriteRaw(_internal_metadata_.unknown_fields().data(),
-                   static_cast<int>(_internal_metadata_.unknown_fields().size()));
+  output->WriteRaw((::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).data(),
+                   static_cast<int>((::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).size()));
   // @@protoc_insertion_point(serialize_end:IM.File.IMFileAddOfflineReq)
 }
 
-size_t IMFileAddOfflineReq::RequiredFieldsByteSizeFallback() const {
-// @@protoc_insertion_point(required_fields_byte_size_fallback_start:IM.File.IMFileAddOfflineReq)
-  size_t total_size = 0;
-
-  if (has_task_id()) {
-    // required string task_id = 3;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->task_id());
-  }
-
-  if (has_file_name()) {
-    // required string file_name = 4;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->file_name());
-  }
-
-  if (has_from_user_id()) {
-    // required uint32 from_user_id = 1;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->from_user_id());
-  }
-
-  if (has_to_user_id()) {
-    // required uint32 to_user_id = 2;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->to_user_id());
-  }
-
-  if (has_file_size()) {
-    // required uint32 file_size = 5;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->file_size());
-  }
-
-  return total_size;
-}
 size_t IMFileAddOfflineReq::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:IM.File.IMFileAddOfflineReq)
   size_t total_size = 0;
 
-  total_size += _internal_metadata_.unknown_fields().size();
+  total_size += (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).size();
 
-  if (((_has_bits_[0] & 0x0000001f) ^ 0x0000001f) == 0) {  // All required fields are present.
-    // required string task_id = 3;
+  // string task_id = 3;
+  if (this->task_id().size() > 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
         this->task_id());
+  }
 
-    // required string file_name = 4;
+  // string file_name = 4;
+  if (this->file_name().size() > 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
         this->file_name());
+  }
 
-    // required uint32 from_user_id = 1;
+  // uint32 from_user_id = 1;
+  if (this->from_user_id() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::UInt32Size(
         this->from_user_id());
+  }
 
-    // required uint32 to_user_id = 2;
+  // uint32 to_user_id = 2;
+  if (this->to_user_id() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::UInt32Size(
         this->to_user_id());
+  }
 
-    // required uint32 file_size = 5;
+  // uint32 file_size = 5;
+  if (this->file_size() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::UInt32Size(
         this->file_size());
-
-  } else {
-    total_size += RequiredFieldsByteSizeFallback();
   }
+
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = cached_size;
@@ -4314,26 +3904,22 @@ void IMFileAddOfflineReq::MergeFrom(const IMFileAddOfflineReq& from) {
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  cached_has_bits = from._has_bits_[0];
-  if (cached_has_bits & 31u) {
-    if (cached_has_bits & 0x00000001u) {
-      set_has_task_id();
-      task_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.task_id_);
-    }
-    if (cached_has_bits & 0x00000002u) {
-      set_has_file_name();
-      file_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.file_name_);
-    }
-    if (cached_has_bits & 0x00000004u) {
-      from_user_id_ = from.from_user_id_;
-    }
-    if (cached_has_bits & 0x00000008u) {
-      to_user_id_ = from.to_user_id_;
-    }
-    if (cached_has_bits & 0x00000010u) {
-      file_size_ = from.file_size_;
-    }
-    _has_bits_[0] |= cached_has_bits;
+  if (from.task_id().size() > 0) {
+
+    task_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.task_id_);
+  }
+  if (from.file_name().size() > 0) {
+
+    file_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.file_name_);
+  }
+  if (from.from_user_id() != 0) {
+    set_from_user_id(from.from_user_id());
+  }
+  if (from.to_user_id() != 0) {
+    set_to_user_id(from.to_user_id());
+  }
+  if (from.file_size() != 0) {
+    set_file_size(from.file_size());
   }
 }
 
@@ -4345,7 +3931,6 @@ void IMFileAddOfflineReq::CopyFrom(const IMFileAddOfflineReq& from) {
 }
 
 bool IMFileAddOfflineReq::IsInitialized() const {
-  if ((_has_bits_[0] & 0x0000001f) != 0x0000001f) return false;
   return true;
 }
 
@@ -4360,7 +3945,6 @@ void IMFileAddOfflineReq::InternalSwap(IMFileAddOfflineReq* other) {
   swap(from_user_id_, other->from_user_id_);
   swap(to_user_id_, other->to_user_id_);
   swap(file_size_, other->file_size_);
-  swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   swap(_cached_size_, other->_cached_size_);
 }
@@ -4391,11 +3975,10 @@ IMFileDelOfflineReq::IMFileDelOfflineReq()
 IMFileDelOfflineReq::IMFileDelOfflineReq(const IMFileDelOfflineReq& from)
   : ::google::protobuf::MessageLite(),
       _internal_metadata_(NULL),
-      _has_bits_(from._has_bits_),
       _cached_size_(0) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   task_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.has_task_id()) {
+  if (from.task_id().size() > 0) {
     task_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.task_id_);
   }
   ::memcpy(&from_user_id_, &from.from_user_id_,
@@ -4405,11 +3988,11 @@ IMFileDelOfflineReq::IMFileDelOfflineReq(const IMFileDelOfflineReq& from)
 }
 
 void IMFileDelOfflineReq::SharedCtor() {
-  _cached_size_ = 0;
   task_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(&from_user_id_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&to_user_id_) -
       reinterpret_cast<char*>(&from_user_id_)) + sizeof(to_user_id_));
+  _cached_size_ = 0;
 }
 
 IMFileDelOfflineReq::~IMFileDelOfflineReq() {
@@ -4445,17 +4028,10 @@ void IMFileDelOfflineReq::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 0x00000001u) {
-    GOOGLE_DCHECK(!task_id_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()));
-    (*task_id_.UnsafeRawStringPointer())->clear();
-  }
-  if (cached_has_bits & 6u) {
-    ::memset(&from_user_id_, 0, static_cast<size_t>(
-        reinterpret_cast<char*>(&to_user_id_) -
-        reinterpret_cast<char*>(&from_user_id_)) + sizeof(to_user_id_));
-  }
-  _has_bits_.Clear();
+  task_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::memset(&from_user_id_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&to_user_id_) -
+      reinterpret_cast<char*>(&from_user_id_)) + sizeof(to_user_id_));
   _internal_metadata_.Clear();
 }
 
@@ -4475,11 +4051,11 @@ bool IMFileDelOfflineReq::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required uint32 from_user_id = 1;
+      // uint32 from_user_id = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
-          set_has_from_user_id();
+
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &from_user_id_)));
@@ -4489,11 +4065,11 @@ bool IMFileDelOfflineReq::MergePartialFromCodedStream(
         break;
       }
 
-      // required uint32 to_user_id = 2;
+      // uint32 to_user_id = 2;
       case 2: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
-          set_has_to_user_id();
+
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &to_user_id_)));
@@ -4503,12 +4079,16 @@ bool IMFileDelOfflineReq::MergePartialFromCodedStream(
         break;
       }
 
-      // required string task_id = 3;
+      // string task_id = 3;
       case 3: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_task_id()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->task_id().data(), static_cast<int>(this->task_id().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "IM.File.IMFileDelOfflineReq.task_id"));
         } else {
           goto handle_unusual;
         }
@@ -4541,80 +4121,58 @@ void IMFileDelOfflineReq::SerializeWithCachedSizes(
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  cached_has_bits = _has_bits_[0];
-  // required uint32 from_user_id = 1;
-  if (cached_has_bits & 0x00000002u) {
+  // uint32 from_user_id = 1;
+  if (this->from_user_id() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(1, this->from_user_id(), output);
   }
 
-  // required uint32 to_user_id = 2;
-  if (cached_has_bits & 0x00000004u) {
+  // uint32 to_user_id = 2;
+  if (this->to_user_id() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(2, this->to_user_id(), output);
   }
 
-  // required string task_id = 3;
-  if (cached_has_bits & 0x00000001u) {
+  // string task_id = 3;
+  if (this->task_id().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->task_id().data(), static_cast<int>(this->task_id().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "IM.File.IMFileDelOfflineReq.task_id");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       3, this->task_id(), output);
   }
 
-  output->WriteRaw(_internal_metadata_.unknown_fields().data(),
-                   static_cast<int>(_internal_metadata_.unknown_fields().size()));
+  output->WriteRaw((::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).data(),
+                   static_cast<int>((::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).size()));
   // @@protoc_insertion_point(serialize_end:IM.File.IMFileDelOfflineReq)
 }
 
-size_t IMFileDelOfflineReq::RequiredFieldsByteSizeFallback() const {
-// @@protoc_insertion_point(required_fields_byte_size_fallback_start:IM.File.IMFileDelOfflineReq)
-  size_t total_size = 0;
-
-  if (has_task_id()) {
-    // required string task_id = 3;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->task_id());
-  }
-
-  if (has_from_user_id()) {
-    // required uint32 from_user_id = 1;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->from_user_id());
-  }
-
-  if (has_to_user_id()) {
-    // required uint32 to_user_id = 2;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->to_user_id());
-  }
-
-  return total_size;
-}
 size_t IMFileDelOfflineReq::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:IM.File.IMFileDelOfflineReq)
   size_t total_size = 0;
 
-  total_size += _internal_metadata_.unknown_fields().size();
+  total_size += (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).size();
 
-  if (((_has_bits_[0] & 0x00000007) ^ 0x00000007) == 0) {  // All required fields are present.
-    // required string task_id = 3;
+  // string task_id = 3;
+  if (this->task_id().size() > 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
         this->task_id());
+  }
 
-    // required uint32 from_user_id = 1;
+  // uint32 from_user_id = 1;
+  if (this->from_user_id() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::UInt32Size(
         this->from_user_id());
+  }
 
-    // required uint32 to_user_id = 2;
+  // uint32 to_user_id = 2;
+  if (this->to_user_id() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::UInt32Size(
         this->to_user_id());
-
-  } else {
-    total_size += RequiredFieldsByteSizeFallback();
   }
+
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = cached_size;
@@ -4634,19 +4192,15 @@ void IMFileDelOfflineReq::MergeFrom(const IMFileDelOfflineReq& from) {
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  cached_has_bits = from._has_bits_[0];
-  if (cached_has_bits & 7u) {
-    if (cached_has_bits & 0x00000001u) {
-      set_has_task_id();
-      task_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.task_id_);
-    }
-    if (cached_has_bits & 0x00000002u) {
-      from_user_id_ = from.from_user_id_;
-    }
-    if (cached_has_bits & 0x00000004u) {
-      to_user_id_ = from.to_user_id_;
-    }
-    _has_bits_[0] |= cached_has_bits;
+  if (from.task_id().size() > 0) {
+
+    task_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.task_id_);
+  }
+  if (from.from_user_id() != 0) {
+    set_from_user_id(from.from_user_id());
+  }
+  if (from.to_user_id() != 0) {
+    set_to_user_id(from.to_user_id());
   }
 }
 
@@ -4658,7 +4212,6 @@ void IMFileDelOfflineReq::CopyFrom(const IMFileDelOfflineReq& from) {
 }
 
 bool IMFileDelOfflineReq::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
   return true;
 }
 
@@ -4671,7 +4224,6 @@ void IMFileDelOfflineReq::InternalSwap(IMFileDelOfflineReq* other) {
   task_id_.Swap(&other->task_id_);
   swap(from_user_id_, other->from_user_id_);
   swap(to_user_id_, other->to_user_id_);
-  swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   swap(_cached_size_, other->_cached_size_);
 }

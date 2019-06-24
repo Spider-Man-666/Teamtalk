@@ -57,13 +57,9 @@ typedef GPB_ENUM(IMP2PCmdMsg_FieldNumber) {
 /** cmd id:		0x0601 */
 @property(nonatomic, readwrite) uint32_t fromUserId;
 
-@property(nonatomic, readwrite) BOOL hasFromUserId;
 @property(nonatomic, readwrite) uint32_t toUserId;
 
-@property(nonatomic, readwrite) BOOL hasToUserId;
 @property(nonatomic, readwrite, copy, null_resettable) NSString *cmdMsgData;
-/** Test to see if @c cmdMsgData has been set. */
-@property(nonatomic, readwrite) BOOL hasCmdMsgData;
 
 @end
 

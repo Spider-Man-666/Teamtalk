@@ -20,10 +20,3 @@ protoc -I=$SRC_DIR --objc_out=$DST_DIR/objc/ $SRC_DIR/*.proto
 #PYTHON
 mkdir -p $DST_DIR/python
 protoc -I=$SRC_DIR --python_out=$DST_DIR/python/ $SRC_DIR/*.proto
-
-
-# ADD_S by Spider-Man@2019/6/24 增加C#代码生成
-#CSHARP
-mkdir -p $DST_DIR/csharp
-protoc -I=$SRC_DIR --python_out=$DST_DIR/csharp/ $SRC_DIR/*.proto
-# ADD_E by Spider-Man@2019/6/24

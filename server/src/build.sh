@@ -209,6 +209,9 @@ build() {
 
     cp tools/daeml ../$build_version/
     cp ../run/restart.sh ../$build_version/
+# ADD_S by Spider-Man@2019/6/24 增加拷贝重启所有服务脚本
+    cp ../run/reboot_teamtalk.sh ../$build_version/
+# ADD_E by Spider-Man@2019/6/24
 
     cd ../
     tar zcvf    $build_name $build_version

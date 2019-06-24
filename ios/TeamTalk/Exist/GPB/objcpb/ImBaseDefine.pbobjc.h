@@ -33,6 +33,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 /** service id */
 typedef GPB_ENUM(ServiceID) {
+  /**
+   * Value used if any message's field encounters a value that is not defined
+   * by this enum. The message will also have C functions to get/set the rawValue
+   * of the field.
+   **/
+  ServiceID_GPBUnrecognizedEnumeratorValue = kGPBUnrecognizedEnumeratorValue,
+  ServiceID_SidUniversal = 0,
+
   /** for login */
   ServiceID_SidLogin = 1,
 
@@ -60,6 +68,13 @@ BOOL ServiceID_IsValidValue(int32_t value);
 
 /** command id for login */
 typedef GPB_ENUM(LoginCmdID) {
+  /**
+   * Value used if any message's field encounters a value that is not defined
+   * by this enum. The message will also have C functions to get/set the rawValue
+   * of the field.
+   **/
+  LoginCmdID_GPBUnrecognizedEnumeratorValue = kGPBUnrecognizedEnumeratorValue,
+  LoginCmdID_CidLoginUniversal = 0,
   LoginCmdID_CidLoginReqMsgserver = 257,
   LoginCmdID_CidLoginResMsgserver = 258,
   LoginCmdID_CidLoginReqUserlogin = 259,
@@ -91,6 +106,13 @@ BOOL LoginCmdID_IsValidValue(int32_t value);
 
 /** command id for buddy list */
 typedef GPB_ENUM(BuddyListCmdID) {
+  /**
+   * Value used if any message's field encounters a value that is not defined
+   * by this enum. The message will also have C functions to get/set the rawValue
+   * of the field.
+   **/
+  BuddyListCmdID_GPBUnrecognizedEnumeratorValue = kGPBUnrecognizedEnumeratorValue,
+  BuddyListCmdID_CidBuddyUniversal = 0,
   BuddyListCmdID_CidBuddyListRecentContactSessionRequest = 513,
   BuddyListCmdID_CidBuddyListRecentContactSessionResponse = 514,
   BuddyListCmdID_CidBuddyListStatusNotify = 515,
@@ -132,6 +154,13 @@ BOOL BuddyListCmdID_IsValidValue(int32_t value);
 
 /** command id for msg */
 typedef GPB_ENUM(MessageCmdID) {
+  /**
+   * Value used if any message's field encounters a value that is not defined
+   * by this enum. The message will also have C functions to get/set the rawValue
+   * of the field.
+   **/
+  MessageCmdID_GPBUnrecognizedEnumeratorValue = kGPBUnrecognizedEnumeratorValue,
+  MessageCmdID_CidMsgUniversal = 0,
   MessageCmdID_CidMsgData = 769,
   MessageCmdID_CidMsgDataAck = 770,
   MessageCmdID_CidMsgReadAck = 771,
@@ -164,6 +193,13 @@ BOOL MessageCmdID_IsValidValue(int32_t value);
 
 /** command id for group message */
 typedef GPB_ENUM(GroupCmdID) {
+  /**
+   * Value used if any message's field encounters a value that is not defined
+   * by this enum. The message will also have C functions to get/set the rawValue
+   * of the field.
+   **/
+  GroupCmdID_GPBUnrecognizedEnumeratorValue = kGPBUnrecognizedEnumeratorValue,
+  GroupCmdID_CidGroupUniversal = 0,
   GroupCmdID_CidGroupNormalListRequest = 1025,
   GroupCmdID_CidGroupNormalListResponse = 1026,
   GroupCmdID_CidGroupInfoRequest = 1027,
@@ -188,6 +224,14 @@ BOOL GroupCmdID_IsValidValue(int32_t value);
 #pragma mark - Enum FileCmdID
 
 typedef GPB_ENUM(FileCmdID) {
+  /**
+   * Value used if any message's field encounters a value that is not defined
+   * by this enum. The message will also have C functions to get/set the rawValue
+   * of the field.
+   **/
+  FileCmdID_GPBUnrecognizedEnumeratorValue = kGPBUnrecognizedEnumeratorValue,
+  FileCmdID_CidFileUniversal = 0,
+
   /** sender/receiver need to login to */
   FileCmdID_CidFileLoginReq = 1281,
 
@@ -221,6 +265,13 @@ BOOL FileCmdID_IsValidValue(int32_t value);
 
 /** command id for switch service */
 typedef GPB_ENUM(SwitchServiceCmdID) {
+  /**
+   * Value used if any message's field encounters a value that is not defined
+   * by this enum. The message will also have C functions to get/set the rawValue
+   * of the field.
+   **/
+  SwitchServiceCmdID_GPBUnrecognizedEnumeratorValue = kGPBUnrecognizedEnumeratorValue,
+  SwitchServiceCmdID_CidSwitchP2PUniversal = 0,
   SwitchServiceCmdID_CidSwitchP2PCmd = 1537,
 };
 
@@ -235,6 +286,13 @@ BOOL SwitchServiceCmdID_IsValidValue(int32_t value);
 #pragma mark - Enum OtherCmdID
 
 typedef GPB_ENUM(OtherCmdID) {
+  /**
+   * Value used if any message's field encounters a value that is not defined
+   * by this enum. The message will also have C functions to get/set the rawValue
+   * of the field.
+   **/
+  OtherCmdID_GPBUnrecognizedEnumeratorValue = kGPBUnrecognizedEnumeratorValue,
+  OtherCmdID_CidOtherUniversal = 0,
   OtherCmdID_CidOtherHeartbeat = 1793,
   OtherCmdID_CidOtherStopRecvPacket = 1794,
   OtherCmdID_CidOtherValidateReq = 1795,
@@ -269,6 +327,12 @@ BOOL OtherCmdID_IsValidValue(int32_t value);
 #pragma mark - Enum ResultType
 
 typedef GPB_ENUM(ResultType) {
+  /**
+   * Value used if any message's field encounters a value that is not defined
+   * by this enum. The message will also have C functions to get/set the rawValue
+   * of the field.
+   **/
+  ResultType_GPBUnrecognizedEnumeratorValue = kGPBUnrecognizedEnumeratorValue,
   ResultType_RefuseReasonNone = 0,
   ResultType_RefuseReasonNoMsgServer = 1,
   ResultType_RefuseReasonMsgServerFull = 2,
@@ -290,6 +354,13 @@ BOOL ResultType_IsValidValue(int32_t value);
 #pragma mark - Enum KickReasonType
 
 typedef GPB_ENUM(KickReasonType) {
+  /**
+   * Value used if any message's field encounters a value that is not defined
+   * by this enum. The message will also have C functions to get/set the rawValue
+   * of the field.
+   **/
+  KickReasonType_GPBUnrecognizedEnumeratorValue = kGPBUnrecognizedEnumeratorValue,
+  KickReasonType_KickReasonUniversal = 0,
   KickReasonType_KickReasonDuplicateUser = 1,
   KickReasonType_KickReasonMobileKick = 2,
 };
@@ -305,6 +376,13 @@ BOOL KickReasonType_IsValidValue(int32_t value);
 #pragma mark - Enum OnlineListType
 
 typedef GPB_ENUM(OnlineListType) {
+  /**
+   * Value used if any message's field encounters a value that is not defined
+   * by this enum. The message will also have C functions to get/set the rawValue
+   * of the field.
+   **/
+  OnlineListType_GPBUnrecognizedEnumeratorValue = kGPBUnrecognizedEnumeratorValue,
+  OnlineListType_OnlineListUniversal = 0,
   OnlineListType_OnlineListTypeFriendList = 1,
 };
 
@@ -319,6 +397,13 @@ BOOL OnlineListType_IsValidValue(int32_t value);
 #pragma mark - Enum UserStatType
 
 typedef GPB_ENUM(UserStatType) {
+  /**
+   * Value used if any message's field encounters a value that is not defined
+   * by this enum. The message will also have C functions to get/set the rawValue
+   * of the field.
+   **/
+  UserStatType_GPBUnrecognizedEnumeratorValue = kGPBUnrecognizedEnumeratorValue,
+  UserStatType_UserStatusUniversal = 0,
   UserStatType_UserStatusOnline = 1,
   UserStatType_UserStatusOffline = 2,
   UserStatType_UserStatusLeave = 3,
@@ -335,6 +420,14 @@ BOOL UserStatType_IsValidValue(int32_t value);
 #pragma mark - Enum SessionType
 
 typedef GPB_ENUM(SessionType) {
+  /**
+   * Value used if any message's field encounters a value that is not defined
+   * by this enum. The message will also have C functions to get/set the rawValue
+   * of the field.
+   **/
+  SessionType_GPBUnrecognizedEnumeratorValue = kGPBUnrecognizedEnumeratorValue,
+  SessionType_SessionTypeUniversal = 0,
+
   /** 单个用户会话 */
   SessionType_SessionTypeSingle = 1,
 
@@ -353,6 +446,13 @@ BOOL SessionType_IsValidValue(int32_t value);
 #pragma mark - Enum MsgType
 
 typedef GPB_ENUM(MsgType) {
+  /**
+   * Value used if any message's field encounters a value that is not defined
+   * by this enum. The message will also have C functions to get/set the rawValue
+   * of the field.
+   **/
+  MsgType_GPBUnrecognizedEnumeratorValue = kGPBUnrecognizedEnumeratorValue,
+  MsgType_MsgTypeUniversal = 0,
   MsgType_MsgTypeSingleText = 1,
   MsgType_MsgTypeSingleAudio = 2,
   MsgType_MsgTypeGroupText = 17,
@@ -370,6 +470,13 @@ BOOL MsgType_IsValidValue(int32_t value);
 #pragma mark - Enum ClientType
 
 typedef GPB_ENUM(ClientType) {
+  /**
+   * Value used if any message's field encounters a value that is not defined
+   * by this enum. The message will also have C functions to get/set the rawValue
+   * of the field.
+   **/
+  ClientType_GPBUnrecognizedEnumeratorValue = kGPBUnrecognizedEnumeratorValue,
+  ClientType_ClientTypeUniversal = 0,
   ClientType_ClientTypeWindows = 1,
   ClientType_ClientTypeMac = 2,
   ClientType_ClientTypeIos = 17,
@@ -387,6 +494,13 @@ BOOL ClientType_IsValidValue(int32_t value);
 #pragma mark - Enum GroupType
 
 typedef GPB_ENUM(GroupType) {
+  /**
+   * Value used if any message's field encounters a value that is not defined
+   * by this enum. The message will also have C functions to get/set the rawValue
+   * of the field.
+   **/
+  GroupType_GPBUnrecognizedEnumeratorValue = kGPBUnrecognizedEnumeratorValue,
+  GroupType_GroupTypeuniversal = 0,
   GroupType_GroupTypeNormal = 1,
   GroupType_GroupTypeTmp = 2,
 };
@@ -402,6 +516,13 @@ BOOL GroupType_IsValidValue(int32_t value);
 #pragma mark - Enum GroupModifyType
 
 typedef GPB_ENUM(GroupModifyType) {
+  /**
+   * Value used if any message's field encounters a value that is not defined
+   * by this enum. The message will also have C functions to get/set the rawValue
+   * of the field.
+   **/
+  GroupModifyType_GPBUnrecognizedEnumeratorValue = kGPBUnrecognizedEnumeratorValue,
+  GroupModifyType_GroupUniversal = 0,
   GroupModifyType_GroupModifyTypeAdd = 1,
   GroupModifyType_GroupModifyTypeDel = 2,
 };
@@ -417,6 +538,13 @@ BOOL GroupModifyType_IsValidValue(int32_t value);
 #pragma mark - Enum TransferFileType
 
 typedef GPB_ENUM(TransferFileType) {
+  /**
+   * Value used if any message's field encounters a value that is not defined
+   * by this enum. The message will also have C functions to get/set the rawValue
+   * of the field.
+   **/
+  TransferFileType_GPBUnrecognizedEnumeratorValue = kGPBUnrecognizedEnumeratorValue,
+  TransferFileType_FileTypeUniversal = 0,
   TransferFileType_FileTypeOnline = 1,
   TransferFileType_FileTypeOffline = 2,
 };
@@ -432,6 +560,12 @@ BOOL TransferFileType_IsValidValue(int32_t value);
 #pragma mark - Enum ClientFileState
 
 typedef GPB_ENUM(ClientFileState) {
+  /**
+   * Value used if any message's field encounters a value that is not defined
+   * by this enum. The message will also have C functions to get/set the rawValue
+   * of the field.
+   **/
+  ClientFileState_GPBUnrecognizedEnumeratorValue = kGPBUnrecognizedEnumeratorValue,
   ClientFileState_ClientFilePeerReady = 0,
   ClientFileState_ClientFileCancel = 1,
   ClientFileState_ClientFileRefuse = 2,
@@ -449,6 +583,13 @@ BOOL ClientFileState_IsValidValue(int32_t value);
 #pragma mark - Enum ClientFileRole
 
 typedef GPB_ENUM(ClientFileRole) {
+  /**
+   * Value used if any message's field encounters a value that is not defined
+   * by this enum. The message will also have C functions to get/set the rawValue
+   * of the field.
+   **/
+  ClientFileRole_GPBUnrecognizedEnumeratorValue = kGPBUnrecognizedEnumeratorValue,
+  ClientFileRole_ClientRealtimeUniversal = 0,
   ClientFileRole_ClientRealtimeSender = 1,
   ClientFileRole_ClientRealtimeRecver = 2,
   ClientFileRole_ClientOfflineUpload = 3,
@@ -466,6 +607,12 @@ BOOL ClientFileRole_IsValidValue(int32_t value);
 #pragma mark - Enum FileServerError
 
 typedef GPB_ENUM(FileServerError) {
+  /**
+   * Value used if any message's field encounters a value that is not defined
+   * by this enum. The message will also have C functions to get/set the rawValue
+   * of the field.
+   **/
+  FileServerError_GPBUnrecognizedEnumeratorValue = kGPBUnrecognizedEnumeratorValue,
   FileServerError_FileServerErrnoOk = 0,
   FileServerError_FileServerErrnoCreateTaskIdError = 1,
   FileServerError_FileServerErrnoCreateTaskError = 2,
@@ -492,6 +639,12 @@ BOOL FileServerError_IsValidValue(int32_t value);
 #pragma mark - Enum SessionStatusType
 
 typedef GPB_ENUM(SessionStatusType) {
+  /**
+   * Value used if any message's field encounters a value that is not defined
+   * by this enum. The message will also have C functions to get/set the rawValue
+   * of the field.
+   **/
+  SessionStatusType_GPBUnrecognizedEnumeratorValue = kGPBUnrecognizedEnumeratorValue,
   SessionStatusType_SessionStatusOk = 0,
   SessionStatusType_SessionStatusDelete = 1,
 };
@@ -507,6 +660,12 @@ BOOL SessionStatusType_IsValidValue(int32_t value);
 #pragma mark - Enum DepartmentStatusType
 
 typedef GPB_ENUM(DepartmentStatusType) {
+  /**
+   * Value used if any message's field encounters a value that is not defined
+   * by this enum. The message will also have C functions to get/set the rawValue
+   * of the field.
+   **/
+  DepartmentStatusType_GPBUnrecognizedEnumeratorValue = kGPBUnrecognizedEnumeratorValue,
   DepartmentStatusType_DeptStatusOk = 0,
   DepartmentStatusType_DeptStatusDelete = 1,
 };
@@ -544,12 +703,9 @@ typedef GPB_ENUM(IpAddr_FieldNumber) {
 @interface IpAddr : GPBMessage
 
 @property(nonatomic, readwrite, copy, null_resettable) NSString *ip;
-/** Test to see if @c ip has been set. */
-@property(nonatomic, readwrite) BOOL hasIp;
 
 @property(nonatomic, readwrite) uint32_t port;
 
-@property(nonatomic, readwrite) BOOL hasPort;
 @end
 
 #pragma mark - UserInfo
@@ -572,48 +728,30 @@ typedef GPB_ENUM(UserInfo_FieldNumber) {
 
 @property(nonatomic, readwrite) uint32_t userId;
 
-@property(nonatomic, readwrite) BOOL hasUserId;
 /** // 用户性别,男：1 女：2 人妖/外星人：0 */
 @property(nonatomic, readwrite) uint32_t userGender;
 
-@property(nonatomic, readwrite) BOOL hasUserGender;
 /** 绰号 */
 @property(nonatomic, readwrite, copy, null_resettable) NSString *userNickName;
-/** Test to see if @c userNickName has been set. */
-@property(nonatomic, readwrite) BOOL hasUserNickName;
 
 @property(nonatomic, readwrite, copy, null_resettable) NSString *avatarURL;
-/** Test to see if @c avatarURL has been set. */
-@property(nonatomic, readwrite) BOOL hasAvatarURL;
 
 @property(nonatomic, readwrite) uint32_t departmentId;
 
-@property(nonatomic, readwrite) BOOL hasDepartmentId;
 @property(nonatomic, readwrite, copy, null_resettable) NSString *email;
-/** Test to see if @c email has been set. */
-@property(nonatomic, readwrite) BOOL hasEmail;
 
 /** 真名 */
 @property(nonatomic, readwrite, copy, null_resettable) NSString *userRealName;
-/** Test to see if @c userRealName has been set. */
-@property(nonatomic, readwrite) BOOL hasUserRealName;
 
 @property(nonatomic, readwrite, copy, null_resettable) NSString *userTel;
-/** Test to see if @c userTel has been set. */
-@property(nonatomic, readwrite) BOOL hasUserTel;
 
 /** 用户名拼音 */
 @property(nonatomic, readwrite, copy, null_resettable) NSString *userDomain;
-/** Test to see if @c userDomain has been set. */
-@property(nonatomic, readwrite) BOOL hasUserDomain;
 
 /** 0:在职  1. 试用期 2. 正式 3. 离职 4.实习,  client端需要对“离职”进行不展示 */
 @property(nonatomic, readwrite) uint32_t status;
 
-@property(nonatomic, readwrite) BOOL hasStatus;
 @property(nonatomic, readwrite, copy, null_resettable) NSString *signInfo;
-/** Test to see if @c signInfo has been set. */
-@property(nonatomic, readwrite) BOOL hasSignInfo;
 
 @end
 
@@ -634,30 +772,57 @@ typedef GPB_ENUM(ContactSessionInfo_FieldNumber) {
 
 @property(nonatomic, readwrite) uint32_t sessionId;
 
-@property(nonatomic, readwrite) BOOL hasSessionId;
 @property(nonatomic, readwrite) SessionType sessionType;
 
-@property(nonatomic, readwrite) BOOL hasSessionType;
 @property(nonatomic, readwrite) SessionStatusType sessionStatus;
 
-@property(nonatomic, readwrite) BOOL hasSessionStatus;
 @property(nonatomic, readwrite) uint32_t updatedTime;
 
-@property(nonatomic, readwrite) BOOL hasUpdatedTime;
 @property(nonatomic, readwrite) uint32_t latestMsgId;
 
-@property(nonatomic, readwrite) BOOL hasLatestMsgId;
 @property(nonatomic, readwrite, copy, null_resettable) NSData *latestMsgData;
-/** Test to see if @c latestMsgData has been set. */
-@property(nonatomic, readwrite) BOOL hasLatestMsgData;
 
 @property(nonatomic, readwrite) MsgType latestMsgType;
 
-@property(nonatomic, readwrite) BOOL hasLatestMsgType;
 @property(nonatomic, readwrite) uint32_t latestMsgFromUserId;
 
-@property(nonatomic, readwrite) BOOL hasLatestMsgFromUserId;
 @end
+
+/**
+ * Fetches the raw value of a @c ContactSessionInfo's @c sessionType property, even
+ * if the value was not defined by the enum at the time the code was generated.
+ **/
+int32_t ContactSessionInfo_SessionType_RawValue(ContactSessionInfo *message);
+/**
+ * Sets the raw value of an @c ContactSessionInfo's @c sessionType property, allowing
+ * it to be set to a value that was not defined by the enum at the time the code
+ * was generated.
+ **/
+void SetContactSessionInfo_SessionType_RawValue(ContactSessionInfo *message, int32_t value);
+
+/**
+ * Fetches the raw value of a @c ContactSessionInfo's @c sessionStatus property, even
+ * if the value was not defined by the enum at the time the code was generated.
+ **/
+int32_t ContactSessionInfo_SessionStatus_RawValue(ContactSessionInfo *message);
+/**
+ * Sets the raw value of an @c ContactSessionInfo's @c sessionStatus property, allowing
+ * it to be set to a value that was not defined by the enum at the time the code
+ * was generated.
+ **/
+void SetContactSessionInfo_SessionStatus_RawValue(ContactSessionInfo *message, int32_t value);
+
+/**
+ * Fetches the raw value of a @c ContactSessionInfo's @c latestMsgType property, even
+ * if the value was not defined by the enum at the time the code was generated.
+ **/
+int32_t ContactSessionInfo_LatestMsgType_RawValue(ContactSessionInfo *message);
+/**
+ * Sets the raw value of an @c ContactSessionInfo's @c latestMsgType property, allowing
+ * it to be set to a value that was not defined by the enum at the time the code
+ * was generated.
+ **/
+void SetContactSessionInfo_LatestMsgType_RawValue(ContactSessionInfo *message, int32_t value);
 
 #pragma mark - UserStat
 
@@ -670,11 +835,21 @@ typedef GPB_ENUM(UserStat_FieldNumber) {
 
 @property(nonatomic, readwrite) uint32_t userId;
 
-@property(nonatomic, readwrite) BOOL hasUserId;
 @property(nonatomic, readwrite) UserStatType status;
 
-@property(nonatomic, readwrite) BOOL hasStatus;
 @end
+
+/**
+ * Fetches the raw value of a @c UserStat's @c status property, even
+ * if the value was not defined by the enum at the time the code was generated.
+ **/
+int32_t UserStat_Status_RawValue(UserStat *message);
+/**
+ * Sets the raw value of an @c UserStat's @c status property, allowing
+ * it to be set to a value that was not defined by the enum at the time the code
+ * was generated.
+ **/
+void SetUserStat_Status_RawValue(UserStat *message, int32_t value);
 
 #pragma mark - ServerUserStat
 
@@ -688,14 +863,35 @@ typedef GPB_ENUM(ServerUserStat_FieldNumber) {
 
 @property(nonatomic, readwrite) uint32_t userId;
 
-@property(nonatomic, readwrite) BOOL hasUserId;
 @property(nonatomic, readwrite) UserStatType status;
 
-@property(nonatomic, readwrite) BOOL hasStatus;
 @property(nonatomic, readwrite) ClientType clientType;
 
-@property(nonatomic, readwrite) BOOL hasClientType;
 @end
+
+/**
+ * Fetches the raw value of a @c ServerUserStat's @c status property, even
+ * if the value was not defined by the enum at the time the code was generated.
+ **/
+int32_t ServerUserStat_Status_RawValue(ServerUserStat *message);
+/**
+ * Sets the raw value of an @c ServerUserStat's @c status property, allowing
+ * it to be set to a value that was not defined by the enum at the time the code
+ * was generated.
+ **/
+void SetServerUserStat_Status_RawValue(ServerUserStat *message, int32_t value);
+
+/**
+ * Fetches the raw value of a @c ServerUserStat's @c clientType property, even
+ * if the value was not defined by the enum at the time the code was generated.
+ **/
+int32_t ServerUserStat_ClientType_RawValue(ServerUserStat *message);
+/**
+ * Sets the raw value of an @c ServerUserStat's @c clientType property, allowing
+ * it to be set to a value that was not defined by the enum at the time the code
+ * was generated.
+ **/
+void SetServerUserStat_ClientType_RawValue(ServerUserStat *message, int32_t value);
 
 #pragma mark - UnreadInfo
 
@@ -713,28 +909,44 @@ typedef GPB_ENUM(UnreadInfo_FieldNumber) {
 
 @property(nonatomic, readwrite) uint32_t sessionId;
 
-@property(nonatomic, readwrite) BOOL hasSessionId;
 @property(nonatomic, readwrite) SessionType sessionType;
 
-@property(nonatomic, readwrite) BOOL hasSessionType;
 @property(nonatomic, readwrite) uint32_t unreadCnt;
 
-@property(nonatomic, readwrite) BOOL hasUnreadCnt;
 @property(nonatomic, readwrite) uint32_t latestMsgId;
 
-@property(nonatomic, readwrite) BOOL hasLatestMsgId;
 @property(nonatomic, readwrite, copy, null_resettable) NSData *latestMsgData;
-/** Test to see if @c latestMsgData has been set. */
-@property(nonatomic, readwrite) BOOL hasLatestMsgData;
 
 @property(nonatomic, readwrite) MsgType latestMsgType;
 
-@property(nonatomic, readwrite) BOOL hasLatestMsgType;
 /** 发送得用户id */
 @property(nonatomic, readwrite) uint32_t latestMsgFromUserId;
 
-@property(nonatomic, readwrite) BOOL hasLatestMsgFromUserId;
 @end
+
+/**
+ * Fetches the raw value of a @c UnreadInfo's @c sessionType property, even
+ * if the value was not defined by the enum at the time the code was generated.
+ **/
+int32_t UnreadInfo_SessionType_RawValue(UnreadInfo *message);
+/**
+ * Sets the raw value of an @c UnreadInfo's @c sessionType property, allowing
+ * it to be set to a value that was not defined by the enum at the time the code
+ * was generated.
+ **/
+void SetUnreadInfo_SessionType_RawValue(UnreadInfo *message, int32_t value);
+
+/**
+ * Fetches the raw value of a @c UnreadInfo's @c latestMsgType property, even
+ * if the value was not defined by the enum at the time the code was generated.
+ **/
+int32_t UnreadInfo_LatestMsgType_RawValue(UnreadInfo *message);
+/**
+ * Sets the raw value of an @c UnreadInfo's @c latestMsgType property, allowing
+ * it to be set to a value that was not defined by the enum at the time the code
+ * was generated.
+ **/
+void SetUnreadInfo_LatestMsgType_RawValue(UnreadInfo *message, int32_t value);
 
 #pragma mark - MsgInfo
 
@@ -750,22 +962,28 @@ typedef GPB_ENUM(MsgInfo_FieldNumber) {
 
 @property(nonatomic, readwrite) uint32_t msgId;
 
-@property(nonatomic, readwrite) BOOL hasMsgId;
 /** 发送的用户id */
 @property(nonatomic, readwrite) uint32_t fromSessionId;
 
-@property(nonatomic, readwrite) BOOL hasFromSessionId;
 @property(nonatomic, readwrite) uint32_t createTime;
 
-@property(nonatomic, readwrite) BOOL hasCreateTime;
 @property(nonatomic, readwrite) MsgType msgType;
 
-@property(nonatomic, readwrite) BOOL hasMsgType;
 @property(nonatomic, readwrite, copy, null_resettable) NSData *msgData;
-/** Test to see if @c msgData has been set. */
-@property(nonatomic, readwrite) BOOL hasMsgData;
 
 @end
+
+/**
+ * Fetches the raw value of a @c MsgInfo's @c msgType property, even
+ * if the value was not defined by the enum at the time the code was generated.
+ **/
+int32_t MsgInfo_MsgType_RawValue(MsgInfo *message);
+/**
+ * Sets the raw value of an @c MsgInfo's @c msgType property, allowing
+ * it to be set to a value that was not defined by the enum at the time the code
+ * was generated.
+ **/
+void SetMsgInfo_MsgType_RawValue(MsgInfo *message, int32_t value);
 
 #pragma mark - GroupVersionInfo
 
@@ -778,10 +996,8 @@ typedef GPB_ENUM(GroupVersionInfo_FieldNumber) {
 
 @property(nonatomic, readwrite) uint32_t groupId;
 
-@property(nonatomic, readwrite) BOOL hasGroupId;
 @property(nonatomic, readwrite) uint32_t version;
 
-@property(nonatomic, readwrite) BOOL hasVersion;
 @end
 
 #pragma mark - GroupInfo
@@ -801,33 +1017,36 @@ typedef GPB_ENUM(GroupInfo_FieldNumber) {
 
 @property(nonatomic, readwrite) uint32_t groupId;
 
-@property(nonatomic, readwrite) BOOL hasGroupId;
 @property(nonatomic, readwrite) uint32_t version;
 
-@property(nonatomic, readwrite) BOOL hasVersion;
 @property(nonatomic, readwrite, copy, null_resettable) NSString *groupName;
-/** Test to see if @c groupName has been set. */
-@property(nonatomic, readwrite) BOOL hasGroupName;
 
 @property(nonatomic, readwrite, copy, null_resettable) NSString *groupAvatar;
-/** Test to see if @c groupAvatar has been set. */
-@property(nonatomic, readwrite) BOOL hasGroupAvatar;
 
 @property(nonatomic, readwrite) uint32_t groupCreatorId;
 
-@property(nonatomic, readwrite) BOOL hasGroupCreatorId;
 @property(nonatomic, readwrite) GroupType groupType;
 
-@property(nonatomic, readwrite) BOOL hasGroupType;
 /** 1: shield  0: not shield */
 @property(nonatomic, readwrite) uint32_t shieldStatus;
 
-@property(nonatomic, readwrite) BOOL hasShieldStatus;
 @property(nonatomic, readwrite, strong, null_resettable) GPBUInt32Array *groupMemberListArray;
 /** The number of items in @c groupMemberListArray without causing the array to be created. */
 @property(nonatomic, readonly) NSUInteger groupMemberListArray_Count;
 
 @end
+
+/**
+ * Fetches the raw value of a @c GroupInfo's @c groupType property, even
+ * if the value was not defined by the enum at the time the code was generated.
+ **/
+int32_t GroupInfo_GroupType_RawValue(GroupInfo *message);
+/**
+ * Sets the raw value of an @c GroupInfo's @c groupType property, allowing
+ * it to be set to a value that was not defined by the enum at the time the code
+ * was generated.
+ **/
+void SetGroupInfo_GroupType_RawValue(GroupInfo *message, int32_t value);
 
 #pragma mark - UserTokenInfo
 
@@ -843,22 +1062,28 @@ typedef GPB_ENUM(UserTokenInfo_FieldNumber) {
 
 @property(nonatomic, readwrite) uint32_t userId;
 
-@property(nonatomic, readwrite) BOOL hasUserId;
 @property(nonatomic, readwrite) ClientType userType;
 
-@property(nonatomic, readwrite) BOOL hasUserType;
 @property(nonatomic, readwrite, copy, null_resettable) NSString *token;
-/** Test to see if @c token has been set. */
-@property(nonatomic, readwrite) BOOL hasToken;
 
 @property(nonatomic, readwrite) uint32_t pushCount;
 
-@property(nonatomic, readwrite) BOOL hasPushCount;
 /** 1: 正常推送  	2:无打扰式推送 */
 @property(nonatomic, readwrite) uint32_t pushType;
 
-@property(nonatomic, readwrite) BOOL hasPushType;
 @end
+
+/**
+ * Fetches the raw value of a @c UserTokenInfo's @c userType property, even
+ * if the value was not defined by the enum at the time the code was generated.
+ **/
+int32_t UserTokenInfo_UserType_RawValue(UserTokenInfo *message);
+/**
+ * Sets the raw value of an @c UserTokenInfo's @c userType property, allowing
+ * it to be set to a value that was not defined by the enum at the time the code
+ * was generated.
+ **/
+void SetUserTokenInfo_UserType_RawValue(UserTokenInfo *message, int32_t value);
 
 #pragma mark - PushResult
 
@@ -870,12 +1095,9 @@ typedef GPB_ENUM(PushResult_FieldNumber) {
 @interface PushResult : GPBMessage
 
 @property(nonatomic, readwrite, copy, null_resettable) NSString *userToken;
-/** Test to see if @c userToken has been set. */
-@property(nonatomic, readwrite) BOOL hasUserToken;
 
 @property(nonatomic, readwrite) uint32_t resultCode;
 
-@property(nonatomic, readwrite) BOOL hasResultCode;
 @end
 
 #pragma mark - ShieldStatus
@@ -890,14 +1112,11 @@ typedef GPB_ENUM(ShieldStatus_FieldNumber) {
 
 @property(nonatomic, readwrite) uint32_t userId;
 
-@property(nonatomic, readwrite) BOOL hasUserId;
 @property(nonatomic, readwrite) uint32_t groupId;
 
-@property(nonatomic, readwrite) BOOL hasGroupId;
 /** 1: shield  0: not shield */
 @property(nonatomic, readwrite) uint32_t shieldStatus;
 
-@property(nonatomic, readwrite) BOOL hasShieldStatus;
 @end
 
 #pragma mark - OfflineFileInfo
@@ -913,18 +1132,12 @@ typedef GPB_ENUM(OfflineFileInfo_FieldNumber) {
 
 @property(nonatomic, readwrite) uint32_t fromUserId;
 
-@property(nonatomic, readwrite) BOOL hasFromUserId;
 @property(nonatomic, readwrite, copy, null_resettable) NSString *taskId;
-/** Test to see if @c taskId has been set. */
-@property(nonatomic, readwrite) BOOL hasTaskId;
 
 @property(nonatomic, readwrite, copy, null_resettable) NSString *fileName;
-/** Test to see if @c fileName has been set. */
-@property(nonatomic, readwrite) BOOL hasFileName;
 
 @property(nonatomic, readwrite) uint32_t fileSize;
 
-@property(nonatomic, readwrite) BOOL hasFileSize;
 @end
 
 #pragma mark - DepartInfo
@@ -941,21 +1154,27 @@ typedef GPB_ENUM(DepartInfo_FieldNumber) {
 
 @property(nonatomic, readwrite) uint32_t deptId;
 
-@property(nonatomic, readwrite) BOOL hasDeptId;
 @property(nonatomic, readwrite) uint32_t priority;
 
-@property(nonatomic, readwrite) BOOL hasPriority;
 @property(nonatomic, readwrite, copy, null_resettable) NSString *deptName;
-/** Test to see if @c deptName has been set. */
-@property(nonatomic, readwrite) BOOL hasDeptName;
 
 @property(nonatomic, readwrite) uint32_t parentDeptId;
 
-@property(nonatomic, readwrite) BOOL hasParentDeptId;
 @property(nonatomic, readwrite) DepartmentStatusType deptStatus;
 
-@property(nonatomic, readwrite) BOOL hasDeptStatus;
 @end
+
+/**
+ * Fetches the raw value of a @c DepartInfo's @c deptStatus property, even
+ * if the value was not defined by the enum at the time the code was generated.
+ **/
+int32_t DepartInfo_DeptStatus_RawValue(DepartInfo *message);
+/**
+ * Sets the raw value of an @c DepartInfo's @c deptStatus property, allowing
+ * it to be set to a value that was not defined by the enum at the time the code
+ * was generated.
+ **/
+void SetDepartInfo_DeptStatus_RawValue(DepartInfo *message, int32_t value);
 
 #pragma mark - PushShieldStatus
 
@@ -968,11 +1187,9 @@ typedef GPB_ENUM(PushShieldStatus_FieldNumber) {
 
 @property(nonatomic, readwrite) uint32_t userId;
 
-@property(nonatomic, readwrite) BOOL hasUserId;
 /** 1: shield  0: not shield */
 @property(nonatomic, readwrite) uint32_t shieldStatus;
 
-@property(nonatomic, readwrite) BOOL hasShieldStatus;
 @end
 
 NS_ASSUME_NONNULL_END

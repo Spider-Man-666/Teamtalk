@@ -417,15 +417,14 @@ IMMsgData::IMMsgData()
 IMMsgData::IMMsgData(const IMMsgData& from)
   : ::google::protobuf::MessageLite(),
       _internal_metadata_(NULL),
-      _has_bits_(from._has_bits_),
       _cached_size_(0) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   msg_data_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.has_msg_data()) {
+  if (from.msg_data().size() > 0) {
     msg_data_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.msg_data_);
   }
   attach_data_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.has_attach_data()) {
+  if (from.attach_data().size() > 0) {
     attach_data_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.attach_data_);
   }
   ::memcpy(&from_user_id_, &from.from_user_id_,
@@ -435,13 +434,12 @@ IMMsgData::IMMsgData(const IMMsgData& from)
 }
 
 void IMMsgData::SharedCtor() {
-  _cached_size_ = 0;
   msg_data_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   attach_data_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(&from_user_id_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&create_time_) -
-      reinterpret_cast<char*>(&from_user_id_)) + sizeof(create_time_));
-  msg_type_ = 1;
+      reinterpret_cast<char*>(&msg_type_) -
+      reinterpret_cast<char*>(&from_user_id_)) + sizeof(msg_type_));
+  _cached_size_ = 0;
 }
 
 IMMsgData::~IMMsgData() {
@@ -478,24 +476,11 @@ void IMMsgData::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 3u) {
-    if (cached_has_bits & 0x00000001u) {
-      GOOGLE_DCHECK(!msg_data_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()));
-      (*msg_data_.UnsafeRawStringPointer())->clear();
-    }
-    if (cached_has_bits & 0x00000002u) {
-      GOOGLE_DCHECK(!attach_data_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()));
-      (*attach_data_.UnsafeRawStringPointer())->clear();
-    }
-  }
-  if (cached_has_bits & 124u) {
-    ::memset(&from_user_id_, 0, static_cast<size_t>(
-        reinterpret_cast<char*>(&create_time_) -
-        reinterpret_cast<char*>(&from_user_id_)) + sizeof(create_time_));
-    msg_type_ = 1;
-  }
-  _has_bits_.Clear();
+  msg_data_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  attach_data_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::memset(&from_user_id_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&msg_type_) -
+      reinterpret_cast<char*>(&from_user_id_)) + sizeof(msg_type_));
   _internal_metadata_.Clear();
 }
 
@@ -515,11 +500,11 @@ bool IMMsgData::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required uint32 from_user_id = 1;
+      // uint32 from_user_id = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
-          set_has_from_user_id();
+
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &from_user_id_)));
@@ -529,11 +514,11 @@ bool IMMsgData::MergePartialFromCodedStream(
         break;
       }
 
-      // required uint32 to_session_id = 2;
+      // uint32 to_session_id = 2;
       case 2: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
-          set_has_to_session_id();
+
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &to_session_id_)));
@@ -543,11 +528,11 @@ bool IMMsgData::MergePartialFromCodedStream(
         break;
       }
 
-      // required uint32 msg_id = 3;
+      // uint32 msg_id = 3;
       case 3: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(24u /* 24 & 0xFF */)) {
-          set_has_msg_id();
+
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &msg_id_)));
@@ -557,11 +542,11 @@ bool IMMsgData::MergePartialFromCodedStream(
         break;
       }
 
-      // required uint32 create_time = 4;
+      // uint32 create_time = 4;
       case 4: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(32u /* 32 & 0xFF */)) {
-          set_has_create_time();
+
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &create_time_)));
@@ -571,7 +556,7 @@ bool IMMsgData::MergePartialFromCodedStream(
         break;
       }
 
-      // required .IM.BaseDefine.MsgType msg_type = 5;
+      // .IM.BaseDefine.MsgType msg_type = 5;
       case 5: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(40u /* 40 & 0xFF */)) {
@@ -579,20 +564,14 @@ bool IMMsgData::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
                  input, &value)));
-          if (::IM::BaseDefine::MsgType_IsValid(value)) {
-            set_msg_type(static_cast< ::IM::BaseDefine::MsgType >(value));
-          } else {
-            unknown_fields_stream.WriteVarint32(40u);
-            unknown_fields_stream.WriteVarint32(
-                static_cast< ::google::protobuf::uint32>(value));
-          }
+          set_msg_type(static_cast< ::IM::BaseDefine::MsgType >(value));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // required bytes msg_data = 6;
+      // bytes msg_data = 6;
       case 6: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(50u /* 50 & 0xFF */)) {
@@ -604,7 +583,7 @@ bool IMMsgData::MergePartialFromCodedStream(
         break;
       }
 
-      // optional bytes attach_data = 20;
+      // bytes attach_data = 20;
       case 20: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(162u /* 162 & 0xFF */)) {
@@ -642,141 +621,101 @@ void IMMsgData::SerializeWithCachedSizes(
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  cached_has_bits = _has_bits_[0];
-  // required uint32 from_user_id = 1;
-  if (cached_has_bits & 0x00000004u) {
+  // uint32 from_user_id = 1;
+  if (this->from_user_id() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(1, this->from_user_id(), output);
   }
 
-  // required uint32 to_session_id = 2;
-  if (cached_has_bits & 0x00000008u) {
+  // uint32 to_session_id = 2;
+  if (this->to_session_id() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(2, this->to_session_id(), output);
   }
 
-  // required uint32 msg_id = 3;
-  if (cached_has_bits & 0x00000010u) {
+  // uint32 msg_id = 3;
+  if (this->msg_id() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(3, this->msg_id(), output);
   }
 
-  // required uint32 create_time = 4;
-  if (cached_has_bits & 0x00000020u) {
+  // uint32 create_time = 4;
+  if (this->create_time() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(4, this->create_time(), output);
   }
 
-  // required .IM.BaseDefine.MsgType msg_type = 5;
-  if (cached_has_bits & 0x00000040u) {
+  // .IM.BaseDefine.MsgType msg_type = 5;
+  if (this->msg_type() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       5, this->msg_type(), output);
   }
 
-  // required bytes msg_data = 6;
-  if (cached_has_bits & 0x00000001u) {
+  // bytes msg_data = 6;
+  if (this->msg_data().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
       6, this->msg_data(), output);
   }
 
-  // optional bytes attach_data = 20;
-  if (cached_has_bits & 0x00000002u) {
+  // bytes attach_data = 20;
+  if (this->attach_data().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
       20, this->attach_data(), output);
   }
 
-  output->WriteRaw(_internal_metadata_.unknown_fields().data(),
-                   static_cast<int>(_internal_metadata_.unknown_fields().size()));
+  output->WriteRaw((::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).data(),
+                   static_cast<int>((::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).size()));
   // @@protoc_insertion_point(serialize_end:IM.Message.IMMsgData)
 }
 
-size_t IMMsgData::RequiredFieldsByteSizeFallback() const {
-// @@protoc_insertion_point(required_fields_byte_size_fallback_start:IM.Message.IMMsgData)
-  size_t total_size = 0;
-
-  if (has_msg_data()) {
-    // required bytes msg_data = 6;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::BytesSize(
-        this->msg_data());
-  }
-
-  if (has_from_user_id()) {
-    // required uint32 from_user_id = 1;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->from_user_id());
-  }
-
-  if (has_to_session_id()) {
-    // required uint32 to_session_id = 2;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->to_session_id());
-  }
-
-  if (has_msg_id()) {
-    // required uint32 msg_id = 3;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->msg_id());
-  }
-
-  if (has_create_time()) {
-    // required uint32 create_time = 4;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->create_time());
-  }
-
-  if (has_msg_type()) {
-    // required .IM.BaseDefine.MsgType msg_type = 5;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::EnumSize(this->msg_type());
-  }
-
-  return total_size;
-}
 size_t IMMsgData::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:IM.Message.IMMsgData)
   size_t total_size = 0;
 
-  total_size += _internal_metadata_.unknown_fields().size();
+  total_size += (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).size();
 
-  if (((_has_bits_[0] & 0x0000007d) ^ 0x0000007d) == 0) {  // All required fields are present.
-    // required bytes msg_data = 6;
+  // bytes msg_data = 6;
+  if (this->msg_data().size() > 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::BytesSize(
         this->msg_data());
-
-    // required uint32 from_user_id = 1;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->from_user_id());
-
-    // required uint32 to_session_id = 2;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->to_session_id());
-
-    // required uint32 msg_id = 3;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->msg_id());
-
-    // required uint32 create_time = 4;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->create_time());
-
-    // required .IM.BaseDefine.MsgType msg_type = 5;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::EnumSize(this->msg_type());
-
-  } else {
-    total_size += RequiredFieldsByteSizeFallback();
   }
-  // optional bytes attach_data = 20;
-  if (has_attach_data()) {
+
+  // bytes attach_data = 20;
+  if (this->attach_data().size() > 0) {
     total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::BytesSize(
         this->attach_data());
+  }
+
+  // uint32 from_user_id = 1;
+  if (this->from_user_id() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        this->from_user_id());
+  }
+
+  // uint32 to_session_id = 2;
+  if (this->to_session_id() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        this->to_session_id());
+  }
+
+  // uint32 msg_id = 3;
+  if (this->msg_id() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        this->msg_id());
+  }
+
+  // uint32 create_time = 4;
+  if (this->create_time() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        this->create_time());
+  }
+
+  // .IM.BaseDefine.MsgType msg_type = 5;
+  if (this->msg_type() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::EnumSize(this->msg_type());
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
@@ -798,32 +737,28 @@ void IMMsgData::MergeFrom(const IMMsgData& from) {
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  cached_has_bits = from._has_bits_[0];
-  if (cached_has_bits & 127u) {
-    if (cached_has_bits & 0x00000001u) {
-      set_has_msg_data();
-      msg_data_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.msg_data_);
-    }
-    if (cached_has_bits & 0x00000002u) {
-      set_has_attach_data();
-      attach_data_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.attach_data_);
-    }
-    if (cached_has_bits & 0x00000004u) {
-      from_user_id_ = from.from_user_id_;
-    }
-    if (cached_has_bits & 0x00000008u) {
-      to_session_id_ = from.to_session_id_;
-    }
-    if (cached_has_bits & 0x00000010u) {
-      msg_id_ = from.msg_id_;
-    }
-    if (cached_has_bits & 0x00000020u) {
-      create_time_ = from.create_time_;
-    }
-    if (cached_has_bits & 0x00000040u) {
-      msg_type_ = from.msg_type_;
-    }
-    _has_bits_[0] |= cached_has_bits;
+  if (from.msg_data().size() > 0) {
+
+    msg_data_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.msg_data_);
+  }
+  if (from.attach_data().size() > 0) {
+
+    attach_data_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.attach_data_);
+  }
+  if (from.from_user_id() != 0) {
+    set_from_user_id(from.from_user_id());
+  }
+  if (from.to_session_id() != 0) {
+    set_to_session_id(from.to_session_id());
+  }
+  if (from.msg_id() != 0) {
+    set_msg_id(from.msg_id());
+  }
+  if (from.create_time() != 0) {
+    set_create_time(from.create_time());
+  }
+  if (from.msg_type() != 0) {
+    set_msg_type(from.msg_type());
   }
 }
 
@@ -835,7 +770,6 @@ void IMMsgData::CopyFrom(const IMMsgData& from) {
 }
 
 bool IMMsgData::IsInitialized() const {
-  if ((_has_bits_[0] & 0x0000007d) != 0x0000007d) return false;
   return true;
 }
 
@@ -852,7 +786,6 @@ void IMMsgData::InternalSwap(IMMsgData* other) {
   swap(msg_id_, other->msg_id_);
   swap(create_time_, other->create_time_);
   swap(msg_type_, other->msg_type_);
-  swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   swap(_cached_size_, other->_cached_size_);
 }
@@ -884,7 +817,6 @@ IMMsgDataAck::IMMsgDataAck()
 IMMsgDataAck::IMMsgDataAck(const IMMsgDataAck& from)
   : ::google::protobuf::MessageLite(),
       _internal_metadata_(NULL),
-      _has_bits_(from._has_bits_),
       _cached_size_(0) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::memcpy(&user_id_, &from.user_id_,
@@ -894,11 +826,10 @@ IMMsgDataAck::IMMsgDataAck(const IMMsgDataAck& from)
 }
 
 void IMMsgDataAck::SharedCtor() {
-  _cached_size_ = 0;
   ::memset(&user_id_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&msg_id_) -
-      reinterpret_cast<char*>(&user_id_)) + sizeof(msg_id_));
-  session_type_ = 1;
+      reinterpret_cast<char*>(&session_type_) -
+      reinterpret_cast<char*>(&user_id_)) + sizeof(session_type_));
+  _cached_size_ = 0;
 }
 
 IMMsgDataAck::~IMMsgDataAck() {
@@ -933,14 +864,9 @@ void IMMsgDataAck::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 15u) {
-    ::memset(&user_id_, 0, static_cast<size_t>(
-        reinterpret_cast<char*>(&msg_id_) -
-        reinterpret_cast<char*>(&user_id_)) + sizeof(msg_id_));
-    session_type_ = 1;
-  }
-  _has_bits_.Clear();
+  ::memset(&user_id_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&session_type_) -
+      reinterpret_cast<char*>(&user_id_)) + sizeof(session_type_));
   _internal_metadata_.Clear();
 }
 
@@ -960,11 +886,11 @@ bool IMMsgDataAck::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required uint32 user_id = 1;
+      // uint32 user_id = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
-          set_has_user_id();
+
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &user_id_)));
@@ -974,11 +900,11 @@ bool IMMsgDataAck::MergePartialFromCodedStream(
         break;
       }
 
-      // required uint32 session_id = 2;
+      // uint32 session_id = 2;
       case 2: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
-          set_has_session_id();
+
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &session_id_)));
@@ -988,11 +914,11 @@ bool IMMsgDataAck::MergePartialFromCodedStream(
         break;
       }
 
-      // required uint32 msg_id = 3;
+      // uint32 msg_id = 3;
       case 3: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(24u /* 24 & 0xFF */)) {
-          set_has_msg_id();
+
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &msg_id_)));
@@ -1002,7 +928,7 @@ bool IMMsgDataAck::MergePartialFromCodedStream(
         break;
       }
 
-      // required .IM.BaseDefine.SessionType session_type = 4;
+      // .IM.BaseDefine.SessionType session_type = 4;
       case 4: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(32u /* 32 & 0xFF */)) {
@@ -1010,13 +936,7 @@ bool IMMsgDataAck::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
                  input, &value)));
-          if (::IM::BaseDefine::SessionType_IsValid(value)) {
-            set_session_type(static_cast< ::IM::BaseDefine::SessionType >(value));
-          } else {
-            unknown_fields_stream.WriteVarint32(32u);
-            unknown_fields_stream.WriteVarint32(
-                static_cast< ::google::protobuf::uint32>(value));
-          }
+          set_session_type(static_cast< ::IM::BaseDefine::SessionType >(value));
         } else {
           goto handle_unusual;
         }
@@ -1049,95 +969,65 @@ void IMMsgDataAck::SerializeWithCachedSizes(
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  cached_has_bits = _has_bits_[0];
-  // required uint32 user_id = 1;
-  if (cached_has_bits & 0x00000001u) {
+  // uint32 user_id = 1;
+  if (this->user_id() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(1, this->user_id(), output);
   }
 
-  // required uint32 session_id = 2;
-  if (cached_has_bits & 0x00000002u) {
+  // uint32 session_id = 2;
+  if (this->session_id() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(2, this->session_id(), output);
   }
 
-  // required uint32 msg_id = 3;
-  if (cached_has_bits & 0x00000004u) {
+  // uint32 msg_id = 3;
+  if (this->msg_id() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(3, this->msg_id(), output);
   }
 
-  // required .IM.BaseDefine.SessionType session_type = 4;
-  if (cached_has_bits & 0x00000008u) {
+  // .IM.BaseDefine.SessionType session_type = 4;
+  if (this->session_type() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       4, this->session_type(), output);
   }
 
-  output->WriteRaw(_internal_metadata_.unknown_fields().data(),
-                   static_cast<int>(_internal_metadata_.unknown_fields().size()));
+  output->WriteRaw((::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).data(),
+                   static_cast<int>((::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).size()));
   // @@protoc_insertion_point(serialize_end:IM.Message.IMMsgDataAck)
 }
 
-size_t IMMsgDataAck::RequiredFieldsByteSizeFallback() const {
-// @@protoc_insertion_point(required_fields_byte_size_fallback_start:IM.Message.IMMsgDataAck)
-  size_t total_size = 0;
-
-  if (has_user_id()) {
-    // required uint32 user_id = 1;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->user_id());
-  }
-
-  if (has_session_id()) {
-    // required uint32 session_id = 2;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->session_id());
-  }
-
-  if (has_msg_id()) {
-    // required uint32 msg_id = 3;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->msg_id());
-  }
-
-  if (has_session_type()) {
-    // required .IM.BaseDefine.SessionType session_type = 4;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::EnumSize(this->session_type());
-  }
-
-  return total_size;
-}
 size_t IMMsgDataAck::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:IM.Message.IMMsgDataAck)
   size_t total_size = 0;
 
-  total_size += _internal_metadata_.unknown_fields().size();
+  total_size += (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).size();
 
-  if (((_has_bits_[0] & 0x0000000f) ^ 0x0000000f) == 0) {  // All required fields are present.
-    // required uint32 user_id = 1;
+  // uint32 user_id = 1;
+  if (this->user_id() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::UInt32Size(
         this->user_id());
+  }
 
-    // required uint32 session_id = 2;
+  // uint32 session_id = 2;
+  if (this->session_id() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::UInt32Size(
         this->session_id());
+  }
 
-    // required uint32 msg_id = 3;
+  // uint32 msg_id = 3;
+  if (this->msg_id() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::UInt32Size(
         this->msg_id());
+  }
 
-    // required .IM.BaseDefine.SessionType session_type = 4;
+  // .IM.BaseDefine.SessionType session_type = 4;
+  if (this->session_type() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::EnumSize(this->session_type());
-
-  } else {
-    total_size += RequiredFieldsByteSizeFallback();
   }
+
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = cached_size;
@@ -1157,21 +1047,17 @@ void IMMsgDataAck::MergeFrom(const IMMsgDataAck& from) {
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  cached_has_bits = from._has_bits_[0];
-  if (cached_has_bits & 15u) {
-    if (cached_has_bits & 0x00000001u) {
-      user_id_ = from.user_id_;
-    }
-    if (cached_has_bits & 0x00000002u) {
-      session_id_ = from.session_id_;
-    }
-    if (cached_has_bits & 0x00000004u) {
-      msg_id_ = from.msg_id_;
-    }
-    if (cached_has_bits & 0x00000008u) {
-      session_type_ = from.session_type_;
-    }
-    _has_bits_[0] |= cached_has_bits;
+  if (from.user_id() != 0) {
+    set_user_id(from.user_id());
+  }
+  if (from.session_id() != 0) {
+    set_session_id(from.session_id());
+  }
+  if (from.msg_id() != 0) {
+    set_msg_id(from.msg_id());
+  }
+  if (from.session_type() != 0) {
+    set_session_type(from.session_type());
   }
 }
 
@@ -1183,7 +1069,6 @@ void IMMsgDataAck::CopyFrom(const IMMsgDataAck& from) {
 }
 
 bool IMMsgDataAck::IsInitialized() const {
-  if ((_has_bits_[0] & 0x0000000f) != 0x0000000f) return false;
   return true;
 }
 
@@ -1197,7 +1082,6 @@ void IMMsgDataAck::InternalSwap(IMMsgDataAck* other) {
   swap(session_id_, other->session_id_);
   swap(msg_id_, other->msg_id_);
   swap(session_type_, other->session_type_);
-  swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   swap(_cached_size_, other->_cached_size_);
 }
@@ -1229,7 +1113,6 @@ IMMsgDataReadAck::IMMsgDataReadAck()
 IMMsgDataReadAck::IMMsgDataReadAck(const IMMsgDataReadAck& from)
   : ::google::protobuf::MessageLite(),
       _internal_metadata_(NULL),
-      _has_bits_(from._has_bits_),
       _cached_size_(0) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::memcpy(&user_id_, &from.user_id_,
@@ -1239,11 +1122,10 @@ IMMsgDataReadAck::IMMsgDataReadAck(const IMMsgDataReadAck& from)
 }
 
 void IMMsgDataReadAck::SharedCtor() {
-  _cached_size_ = 0;
   ::memset(&user_id_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&msg_id_) -
-      reinterpret_cast<char*>(&user_id_)) + sizeof(msg_id_));
-  session_type_ = 1;
+      reinterpret_cast<char*>(&session_type_) -
+      reinterpret_cast<char*>(&user_id_)) + sizeof(session_type_));
+  _cached_size_ = 0;
 }
 
 IMMsgDataReadAck::~IMMsgDataReadAck() {
@@ -1278,14 +1160,9 @@ void IMMsgDataReadAck::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 15u) {
-    ::memset(&user_id_, 0, static_cast<size_t>(
-        reinterpret_cast<char*>(&msg_id_) -
-        reinterpret_cast<char*>(&user_id_)) + sizeof(msg_id_));
-    session_type_ = 1;
-  }
-  _has_bits_.Clear();
+  ::memset(&user_id_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&session_type_) -
+      reinterpret_cast<char*>(&user_id_)) + sizeof(session_type_));
   _internal_metadata_.Clear();
 }
 
@@ -1305,11 +1182,11 @@ bool IMMsgDataReadAck::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required uint32 user_id = 1;
+      // uint32 user_id = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
-          set_has_user_id();
+
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &user_id_)));
@@ -1319,11 +1196,11 @@ bool IMMsgDataReadAck::MergePartialFromCodedStream(
         break;
       }
 
-      // required uint32 session_id = 2;
+      // uint32 session_id = 2;
       case 2: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
-          set_has_session_id();
+
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &session_id_)));
@@ -1333,11 +1210,11 @@ bool IMMsgDataReadAck::MergePartialFromCodedStream(
         break;
       }
 
-      // required uint32 msg_id = 3;
+      // uint32 msg_id = 3;
       case 3: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(24u /* 24 & 0xFF */)) {
-          set_has_msg_id();
+
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &msg_id_)));
@@ -1347,7 +1224,7 @@ bool IMMsgDataReadAck::MergePartialFromCodedStream(
         break;
       }
 
-      // required .IM.BaseDefine.SessionType session_type = 4;
+      // .IM.BaseDefine.SessionType session_type = 4;
       case 4: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(32u /* 32 & 0xFF */)) {
@@ -1355,13 +1232,7 @@ bool IMMsgDataReadAck::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
                  input, &value)));
-          if (::IM::BaseDefine::SessionType_IsValid(value)) {
-            set_session_type(static_cast< ::IM::BaseDefine::SessionType >(value));
-          } else {
-            unknown_fields_stream.WriteVarint32(32u);
-            unknown_fields_stream.WriteVarint32(
-                static_cast< ::google::protobuf::uint32>(value));
-          }
+          set_session_type(static_cast< ::IM::BaseDefine::SessionType >(value));
         } else {
           goto handle_unusual;
         }
@@ -1394,95 +1265,65 @@ void IMMsgDataReadAck::SerializeWithCachedSizes(
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  cached_has_bits = _has_bits_[0];
-  // required uint32 user_id = 1;
-  if (cached_has_bits & 0x00000001u) {
+  // uint32 user_id = 1;
+  if (this->user_id() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(1, this->user_id(), output);
   }
 
-  // required uint32 session_id = 2;
-  if (cached_has_bits & 0x00000002u) {
+  // uint32 session_id = 2;
+  if (this->session_id() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(2, this->session_id(), output);
   }
 
-  // required uint32 msg_id = 3;
-  if (cached_has_bits & 0x00000004u) {
+  // uint32 msg_id = 3;
+  if (this->msg_id() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(3, this->msg_id(), output);
   }
 
-  // required .IM.BaseDefine.SessionType session_type = 4;
-  if (cached_has_bits & 0x00000008u) {
+  // .IM.BaseDefine.SessionType session_type = 4;
+  if (this->session_type() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       4, this->session_type(), output);
   }
 
-  output->WriteRaw(_internal_metadata_.unknown_fields().data(),
-                   static_cast<int>(_internal_metadata_.unknown_fields().size()));
+  output->WriteRaw((::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).data(),
+                   static_cast<int>((::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).size()));
   // @@protoc_insertion_point(serialize_end:IM.Message.IMMsgDataReadAck)
 }
 
-size_t IMMsgDataReadAck::RequiredFieldsByteSizeFallback() const {
-// @@protoc_insertion_point(required_fields_byte_size_fallback_start:IM.Message.IMMsgDataReadAck)
-  size_t total_size = 0;
-
-  if (has_user_id()) {
-    // required uint32 user_id = 1;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->user_id());
-  }
-
-  if (has_session_id()) {
-    // required uint32 session_id = 2;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->session_id());
-  }
-
-  if (has_msg_id()) {
-    // required uint32 msg_id = 3;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->msg_id());
-  }
-
-  if (has_session_type()) {
-    // required .IM.BaseDefine.SessionType session_type = 4;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::EnumSize(this->session_type());
-  }
-
-  return total_size;
-}
 size_t IMMsgDataReadAck::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:IM.Message.IMMsgDataReadAck)
   size_t total_size = 0;
 
-  total_size += _internal_metadata_.unknown_fields().size();
+  total_size += (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).size();
 
-  if (((_has_bits_[0] & 0x0000000f) ^ 0x0000000f) == 0) {  // All required fields are present.
-    // required uint32 user_id = 1;
+  // uint32 user_id = 1;
+  if (this->user_id() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::UInt32Size(
         this->user_id());
+  }
 
-    // required uint32 session_id = 2;
+  // uint32 session_id = 2;
+  if (this->session_id() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::UInt32Size(
         this->session_id());
+  }
 
-    // required uint32 msg_id = 3;
+  // uint32 msg_id = 3;
+  if (this->msg_id() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::UInt32Size(
         this->msg_id());
+  }
 
-    // required .IM.BaseDefine.SessionType session_type = 4;
+  // .IM.BaseDefine.SessionType session_type = 4;
+  if (this->session_type() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::EnumSize(this->session_type());
-
-  } else {
-    total_size += RequiredFieldsByteSizeFallback();
   }
+
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = cached_size;
@@ -1502,21 +1343,17 @@ void IMMsgDataReadAck::MergeFrom(const IMMsgDataReadAck& from) {
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  cached_has_bits = from._has_bits_[0];
-  if (cached_has_bits & 15u) {
-    if (cached_has_bits & 0x00000001u) {
-      user_id_ = from.user_id_;
-    }
-    if (cached_has_bits & 0x00000002u) {
-      session_id_ = from.session_id_;
-    }
-    if (cached_has_bits & 0x00000004u) {
-      msg_id_ = from.msg_id_;
-    }
-    if (cached_has_bits & 0x00000008u) {
-      session_type_ = from.session_type_;
-    }
-    _has_bits_[0] |= cached_has_bits;
+  if (from.user_id() != 0) {
+    set_user_id(from.user_id());
+  }
+  if (from.session_id() != 0) {
+    set_session_id(from.session_id());
+  }
+  if (from.msg_id() != 0) {
+    set_msg_id(from.msg_id());
+  }
+  if (from.session_type() != 0) {
+    set_session_type(from.session_type());
   }
 }
 
@@ -1528,7 +1365,6 @@ void IMMsgDataReadAck::CopyFrom(const IMMsgDataReadAck& from) {
 }
 
 bool IMMsgDataReadAck::IsInitialized() const {
-  if ((_has_bits_[0] & 0x0000000f) != 0x0000000f) return false;
   return true;
 }
 
@@ -1542,7 +1378,6 @@ void IMMsgDataReadAck::InternalSwap(IMMsgDataReadAck* other) {
   swap(session_id_, other->session_id_);
   swap(msg_id_, other->msg_id_);
   swap(session_type_, other->session_type_);
-  swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   swap(_cached_size_, other->_cached_size_);
 }
@@ -1574,7 +1409,6 @@ IMMsgDataReadNotify::IMMsgDataReadNotify()
 IMMsgDataReadNotify::IMMsgDataReadNotify(const IMMsgDataReadNotify& from)
   : ::google::protobuf::MessageLite(),
       _internal_metadata_(NULL),
-      _has_bits_(from._has_bits_),
       _cached_size_(0) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::memcpy(&user_id_, &from.user_id_,
@@ -1584,11 +1418,10 @@ IMMsgDataReadNotify::IMMsgDataReadNotify(const IMMsgDataReadNotify& from)
 }
 
 void IMMsgDataReadNotify::SharedCtor() {
-  _cached_size_ = 0;
   ::memset(&user_id_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&msg_id_) -
-      reinterpret_cast<char*>(&user_id_)) + sizeof(msg_id_));
-  session_type_ = 1;
+      reinterpret_cast<char*>(&session_type_) -
+      reinterpret_cast<char*>(&user_id_)) + sizeof(session_type_));
+  _cached_size_ = 0;
 }
 
 IMMsgDataReadNotify::~IMMsgDataReadNotify() {
@@ -1623,14 +1456,9 @@ void IMMsgDataReadNotify::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 15u) {
-    ::memset(&user_id_, 0, static_cast<size_t>(
-        reinterpret_cast<char*>(&msg_id_) -
-        reinterpret_cast<char*>(&user_id_)) + sizeof(msg_id_));
-    session_type_ = 1;
-  }
-  _has_bits_.Clear();
+  ::memset(&user_id_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&session_type_) -
+      reinterpret_cast<char*>(&user_id_)) + sizeof(session_type_));
   _internal_metadata_.Clear();
 }
 
@@ -1650,11 +1478,11 @@ bool IMMsgDataReadNotify::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required uint32 user_id = 1;
+      // uint32 user_id = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
-          set_has_user_id();
+
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &user_id_)));
@@ -1664,11 +1492,11 @@ bool IMMsgDataReadNotify::MergePartialFromCodedStream(
         break;
       }
 
-      // required uint32 session_id = 2;
+      // uint32 session_id = 2;
       case 2: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
-          set_has_session_id();
+
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &session_id_)));
@@ -1678,11 +1506,11 @@ bool IMMsgDataReadNotify::MergePartialFromCodedStream(
         break;
       }
 
-      // required uint32 msg_id = 3;
+      // uint32 msg_id = 3;
       case 3: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(24u /* 24 & 0xFF */)) {
-          set_has_msg_id();
+
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &msg_id_)));
@@ -1692,7 +1520,7 @@ bool IMMsgDataReadNotify::MergePartialFromCodedStream(
         break;
       }
 
-      // required .IM.BaseDefine.SessionType session_type = 4;
+      // .IM.BaseDefine.SessionType session_type = 4;
       case 4: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(32u /* 32 & 0xFF */)) {
@@ -1700,13 +1528,7 @@ bool IMMsgDataReadNotify::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
                  input, &value)));
-          if (::IM::BaseDefine::SessionType_IsValid(value)) {
-            set_session_type(static_cast< ::IM::BaseDefine::SessionType >(value));
-          } else {
-            unknown_fields_stream.WriteVarint32(32u);
-            unknown_fields_stream.WriteVarint32(
-                static_cast< ::google::protobuf::uint32>(value));
-          }
+          set_session_type(static_cast< ::IM::BaseDefine::SessionType >(value));
         } else {
           goto handle_unusual;
         }
@@ -1739,95 +1561,65 @@ void IMMsgDataReadNotify::SerializeWithCachedSizes(
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  cached_has_bits = _has_bits_[0];
-  // required uint32 user_id = 1;
-  if (cached_has_bits & 0x00000001u) {
+  // uint32 user_id = 1;
+  if (this->user_id() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(1, this->user_id(), output);
   }
 
-  // required uint32 session_id = 2;
-  if (cached_has_bits & 0x00000002u) {
+  // uint32 session_id = 2;
+  if (this->session_id() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(2, this->session_id(), output);
   }
 
-  // required uint32 msg_id = 3;
-  if (cached_has_bits & 0x00000004u) {
+  // uint32 msg_id = 3;
+  if (this->msg_id() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(3, this->msg_id(), output);
   }
 
-  // required .IM.BaseDefine.SessionType session_type = 4;
-  if (cached_has_bits & 0x00000008u) {
+  // .IM.BaseDefine.SessionType session_type = 4;
+  if (this->session_type() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       4, this->session_type(), output);
   }
 
-  output->WriteRaw(_internal_metadata_.unknown_fields().data(),
-                   static_cast<int>(_internal_metadata_.unknown_fields().size()));
+  output->WriteRaw((::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).data(),
+                   static_cast<int>((::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).size()));
   // @@protoc_insertion_point(serialize_end:IM.Message.IMMsgDataReadNotify)
 }
 
-size_t IMMsgDataReadNotify::RequiredFieldsByteSizeFallback() const {
-// @@protoc_insertion_point(required_fields_byte_size_fallback_start:IM.Message.IMMsgDataReadNotify)
-  size_t total_size = 0;
-
-  if (has_user_id()) {
-    // required uint32 user_id = 1;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->user_id());
-  }
-
-  if (has_session_id()) {
-    // required uint32 session_id = 2;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->session_id());
-  }
-
-  if (has_msg_id()) {
-    // required uint32 msg_id = 3;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->msg_id());
-  }
-
-  if (has_session_type()) {
-    // required .IM.BaseDefine.SessionType session_type = 4;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::EnumSize(this->session_type());
-  }
-
-  return total_size;
-}
 size_t IMMsgDataReadNotify::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:IM.Message.IMMsgDataReadNotify)
   size_t total_size = 0;
 
-  total_size += _internal_metadata_.unknown_fields().size();
+  total_size += (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).size();
 
-  if (((_has_bits_[0] & 0x0000000f) ^ 0x0000000f) == 0) {  // All required fields are present.
-    // required uint32 user_id = 1;
+  // uint32 user_id = 1;
+  if (this->user_id() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::UInt32Size(
         this->user_id());
+  }
 
-    // required uint32 session_id = 2;
+  // uint32 session_id = 2;
+  if (this->session_id() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::UInt32Size(
         this->session_id());
+  }
 
-    // required uint32 msg_id = 3;
+  // uint32 msg_id = 3;
+  if (this->msg_id() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::UInt32Size(
         this->msg_id());
+  }
 
-    // required .IM.BaseDefine.SessionType session_type = 4;
+  // .IM.BaseDefine.SessionType session_type = 4;
+  if (this->session_type() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::EnumSize(this->session_type());
-
-  } else {
-    total_size += RequiredFieldsByteSizeFallback();
   }
+
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = cached_size;
@@ -1847,21 +1639,17 @@ void IMMsgDataReadNotify::MergeFrom(const IMMsgDataReadNotify& from) {
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  cached_has_bits = from._has_bits_[0];
-  if (cached_has_bits & 15u) {
-    if (cached_has_bits & 0x00000001u) {
-      user_id_ = from.user_id_;
-    }
-    if (cached_has_bits & 0x00000002u) {
-      session_id_ = from.session_id_;
-    }
-    if (cached_has_bits & 0x00000004u) {
-      msg_id_ = from.msg_id_;
-    }
-    if (cached_has_bits & 0x00000008u) {
-      session_type_ = from.session_type_;
-    }
-    _has_bits_[0] |= cached_has_bits;
+  if (from.user_id() != 0) {
+    set_user_id(from.user_id());
+  }
+  if (from.session_id() != 0) {
+    set_session_id(from.session_id());
+  }
+  if (from.msg_id() != 0) {
+    set_msg_id(from.msg_id());
+  }
+  if (from.session_type() != 0) {
+    set_session_type(from.session_type());
   }
 }
 
@@ -1873,7 +1661,6 @@ void IMMsgDataReadNotify::CopyFrom(const IMMsgDataReadNotify& from) {
 }
 
 bool IMMsgDataReadNotify::IsInitialized() const {
-  if ((_has_bits_[0] & 0x0000000f) != 0x0000000f) return false;
   return true;
 }
 
@@ -1887,7 +1674,6 @@ void IMMsgDataReadNotify::InternalSwap(IMMsgDataReadNotify* other) {
   swap(session_id_, other->session_id_);
   swap(msg_id_, other->msg_id_);
   swap(session_type_, other->session_type_);
-  swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   swap(_cached_size_, other->_cached_size_);
 }
@@ -1915,7 +1701,6 @@ IMClientTimeReq::IMClientTimeReq()
 IMClientTimeReq::IMClientTimeReq(const IMClientTimeReq& from)
   : ::google::protobuf::MessageLite(),
       _internal_metadata_(NULL),
-      _has_bits_(from._has_bits_),
       _cached_size_(0) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   // @@protoc_insertion_point(copy_constructor:IM.Message.IMClientTimeReq)
@@ -1957,7 +1742,6 @@ void IMClientTimeReq::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  _has_bits_.Clear();
   _internal_metadata_.Clear();
 }
 
@@ -1998,8 +1782,8 @@ void IMClientTimeReq::SerializeWithCachedSizes(
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  output->WriteRaw(_internal_metadata_.unknown_fields().data(),
-                   static_cast<int>(_internal_metadata_.unknown_fields().size()));
+  output->WriteRaw((::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).data(),
+                   static_cast<int>((::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).size()));
   // @@protoc_insertion_point(serialize_end:IM.Message.IMClientTimeReq)
 }
 
@@ -2007,7 +1791,7 @@ size_t IMClientTimeReq::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:IM.Message.IMClientTimeReq)
   size_t total_size = 0;
 
-  total_size += _internal_metadata_.unknown_fields().size();
+  total_size += (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).size();
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
@@ -2047,7 +1831,6 @@ void IMClientTimeReq::Swap(IMClientTimeReq* other) {
 }
 void IMClientTimeReq::InternalSwap(IMClientTimeReq* other) {
   using std::swap;
-  swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   swap(_cached_size_, other->_cached_size_);
 }
@@ -2076,7 +1859,6 @@ IMClientTimeRsp::IMClientTimeRsp()
 IMClientTimeRsp::IMClientTimeRsp(const IMClientTimeRsp& from)
   : ::google::protobuf::MessageLite(),
       _internal_metadata_(NULL),
-      _has_bits_(from._has_bits_),
       _cached_size_(0) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   server_time_ = from.server_time_;
@@ -2084,8 +1866,8 @@ IMClientTimeRsp::IMClientTimeRsp(const IMClientTimeRsp& from)
 }
 
 void IMClientTimeRsp::SharedCtor() {
-  _cached_size_ = 0;
   server_time_ = 0u;
+  _cached_size_ = 0;
 }
 
 IMClientTimeRsp::~IMClientTimeRsp() {
@@ -2121,7 +1903,6 @@ void IMClientTimeRsp::Clear() {
   (void) cached_has_bits;
 
   server_time_ = 0u;
-  _has_bits_.Clear();
   _internal_metadata_.Clear();
 }
 
@@ -2141,11 +1922,11 @@ bool IMClientTimeRsp::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required uint32 server_time = 1;
+      // uint32 server_time = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
-          set_has_server_time();
+
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &server_time_)));
@@ -2181,14 +1962,13 @@ void IMClientTimeRsp::SerializeWithCachedSizes(
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  cached_has_bits = _has_bits_[0];
-  // required uint32 server_time = 1;
-  if (cached_has_bits & 0x00000001u) {
+  // uint32 server_time = 1;
+  if (this->server_time() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(1, this->server_time(), output);
   }
 
-  output->WriteRaw(_internal_metadata_.unknown_fields().data(),
-                   static_cast<int>(_internal_metadata_.unknown_fields().size()));
+  output->WriteRaw((::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).data(),
+                   static_cast<int>((::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).size()));
   // @@protoc_insertion_point(serialize_end:IM.Message.IMClientTimeRsp)
 }
 
@@ -2196,14 +1976,15 @@ size_t IMClientTimeRsp::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:IM.Message.IMClientTimeRsp)
   size_t total_size = 0;
 
-  total_size += _internal_metadata_.unknown_fields().size();
+  total_size += (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).size();
 
-  // required uint32 server_time = 1;
-  if (has_server_time()) {
+  // uint32 server_time = 1;
+  if (this->server_time() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::UInt32Size(
         this->server_time());
   }
+
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = cached_size;
@@ -2223,7 +2004,7 @@ void IMClientTimeRsp::MergeFrom(const IMClientTimeRsp& from) {
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (from.has_server_time()) {
+  if (from.server_time() != 0) {
     set_server_time(from.server_time());
   }
 }
@@ -2236,7 +2017,6 @@ void IMClientTimeRsp::CopyFrom(const IMClientTimeRsp& from) {
 }
 
 bool IMClientTimeRsp::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
   return true;
 }
 
@@ -2247,7 +2027,6 @@ void IMClientTimeRsp::Swap(IMClientTimeRsp* other) {
 void IMClientTimeRsp::InternalSwap(IMClientTimeRsp* other) {
   using std::swap;
   swap(server_time_, other->server_time_);
-  swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   swap(_cached_size_, other->_cached_size_);
 }
@@ -2277,11 +2056,10 @@ IMUnreadMsgCntReq::IMUnreadMsgCntReq()
 IMUnreadMsgCntReq::IMUnreadMsgCntReq(const IMUnreadMsgCntReq& from)
   : ::google::protobuf::MessageLite(),
       _internal_metadata_(NULL),
-      _has_bits_(from._has_bits_),
       _cached_size_(0) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   attach_data_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.has_attach_data()) {
+  if (from.attach_data().size() > 0) {
     attach_data_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.attach_data_);
   }
   user_id_ = from.user_id_;
@@ -2289,9 +2067,9 @@ IMUnreadMsgCntReq::IMUnreadMsgCntReq(const IMUnreadMsgCntReq& from)
 }
 
 void IMUnreadMsgCntReq::SharedCtor() {
-  _cached_size_ = 0;
   attach_data_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   user_id_ = 0u;
+  _cached_size_ = 0;
 }
 
 IMUnreadMsgCntReq::~IMUnreadMsgCntReq() {
@@ -2327,13 +2105,8 @@ void IMUnreadMsgCntReq::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 0x00000001u) {
-    GOOGLE_DCHECK(!attach_data_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()));
-    (*attach_data_.UnsafeRawStringPointer())->clear();
-  }
+  attach_data_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   user_id_ = 0u;
-  _has_bits_.Clear();
   _internal_metadata_.Clear();
 }
 
@@ -2353,11 +2126,11 @@ bool IMUnreadMsgCntReq::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required uint32 user_id = 1;
+      // uint32 user_id = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
-          set_has_user_id();
+
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &user_id_)));
@@ -2367,7 +2140,7 @@ bool IMUnreadMsgCntReq::MergePartialFromCodedStream(
         break;
       }
 
-      // optional bytes attach_data = 20;
+      // bytes attach_data = 20;
       case 20: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(162u /* 162 & 0xFF */)) {
@@ -2405,20 +2178,19 @@ void IMUnreadMsgCntReq::SerializeWithCachedSizes(
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  cached_has_bits = _has_bits_[0];
-  // required uint32 user_id = 1;
-  if (cached_has_bits & 0x00000002u) {
+  // uint32 user_id = 1;
+  if (this->user_id() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(1, this->user_id(), output);
   }
 
-  // optional bytes attach_data = 20;
-  if (cached_has_bits & 0x00000001u) {
+  // bytes attach_data = 20;
+  if (this->attach_data().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
       20, this->attach_data(), output);
   }
 
-  output->WriteRaw(_internal_metadata_.unknown_fields().data(),
-                   static_cast<int>(_internal_metadata_.unknown_fields().size()));
+  output->WriteRaw((::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).data(),
+                   static_cast<int>((::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).size()));
   // @@protoc_insertion_point(serialize_end:IM.Message.IMUnreadMsgCntReq)
 }
 
@@ -2426,19 +2198,20 @@ size_t IMUnreadMsgCntReq::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:IM.Message.IMUnreadMsgCntReq)
   size_t total_size = 0;
 
-  total_size += _internal_metadata_.unknown_fields().size();
+  total_size += (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).size();
 
-  // required uint32 user_id = 1;
-  if (has_user_id()) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->user_id());
-  }
-  // optional bytes attach_data = 20;
-  if (has_attach_data()) {
+  // bytes attach_data = 20;
+  if (this->attach_data().size() > 0) {
     total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::BytesSize(
         this->attach_data());
+  }
+
+  // uint32 user_id = 1;
+  if (this->user_id() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        this->user_id());
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
@@ -2460,16 +2233,12 @@ void IMUnreadMsgCntReq::MergeFrom(const IMUnreadMsgCntReq& from) {
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  cached_has_bits = from._has_bits_[0];
-  if (cached_has_bits & 3u) {
-    if (cached_has_bits & 0x00000001u) {
-      set_has_attach_data();
-      attach_data_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.attach_data_);
-    }
-    if (cached_has_bits & 0x00000002u) {
-      user_id_ = from.user_id_;
-    }
-    _has_bits_[0] |= cached_has_bits;
+  if (from.attach_data().size() > 0) {
+
+    attach_data_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.attach_data_);
+  }
+  if (from.user_id() != 0) {
+    set_user_id(from.user_id());
   }
 }
 
@@ -2481,7 +2250,6 @@ void IMUnreadMsgCntReq::CopyFrom(const IMUnreadMsgCntReq& from) {
 }
 
 bool IMUnreadMsgCntReq::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000002) != 0x00000002) return false;
   return true;
 }
 
@@ -2493,7 +2261,6 @@ void IMUnreadMsgCntReq::InternalSwap(IMUnreadMsgCntReq* other) {
   using std::swap;
   attach_data_.Swap(&other->attach_data_);
   swap(user_id_, other->user_id_);
-  swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   swap(_cached_size_, other->_cached_size_);
 }
@@ -2528,12 +2295,11 @@ IMUnreadMsgCntRsp::IMUnreadMsgCntRsp()
 IMUnreadMsgCntRsp::IMUnreadMsgCntRsp(const IMUnreadMsgCntRsp& from)
   : ::google::protobuf::MessageLite(),
       _internal_metadata_(NULL),
-      _has_bits_(from._has_bits_),
-      _cached_size_(0),
-      unreadinfo_list_(from.unreadinfo_list_) {
+      unreadinfo_list_(from.unreadinfo_list_),
+      _cached_size_(0) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   attach_data_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.has_attach_data()) {
+  if (from.attach_data().size() > 0) {
     attach_data_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.attach_data_);
   }
   ::memcpy(&user_id_, &from.user_id_,
@@ -2543,11 +2309,11 @@ IMUnreadMsgCntRsp::IMUnreadMsgCntRsp(const IMUnreadMsgCntRsp& from)
 }
 
 void IMUnreadMsgCntRsp::SharedCtor() {
-  _cached_size_ = 0;
   attach_data_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(&user_id_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&total_cnt_) -
       reinterpret_cast<char*>(&user_id_)) + sizeof(total_cnt_));
+  _cached_size_ = 0;
 }
 
 IMUnreadMsgCntRsp::~IMUnreadMsgCntRsp() {
@@ -2584,17 +2350,10 @@ void IMUnreadMsgCntRsp::Clear() {
   (void) cached_has_bits;
 
   unreadinfo_list_.Clear();
-  cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 0x00000001u) {
-    GOOGLE_DCHECK(!attach_data_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()));
-    (*attach_data_.UnsafeRawStringPointer())->clear();
-  }
-  if (cached_has_bits & 6u) {
-    ::memset(&user_id_, 0, static_cast<size_t>(
-        reinterpret_cast<char*>(&total_cnt_) -
-        reinterpret_cast<char*>(&user_id_)) + sizeof(total_cnt_));
-  }
-  _has_bits_.Clear();
+  attach_data_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::memset(&user_id_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&total_cnt_) -
+      reinterpret_cast<char*>(&user_id_)) + sizeof(total_cnt_));
   _internal_metadata_.Clear();
 }
 
@@ -2614,11 +2373,11 @@ bool IMUnreadMsgCntRsp::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required uint32 user_id = 1;
+      // uint32 user_id = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
-          set_has_user_id();
+
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &user_id_)));
@@ -2628,11 +2387,11 @@ bool IMUnreadMsgCntRsp::MergePartialFromCodedStream(
         break;
       }
 
-      // required uint32 total_cnt = 2;
+      // uint32 total_cnt = 2;
       case 2: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
-          set_has_total_cnt();
+
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &total_cnt_)));
@@ -2653,7 +2412,7 @@ bool IMUnreadMsgCntRsp::MergePartialFromCodedStream(
         break;
       }
 
-      // optional bytes attach_data = 20;
+      // bytes attach_data = 20;
       case 20: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(162u /* 162 & 0xFF */)) {
@@ -2691,75 +2450,40 @@ void IMUnreadMsgCntRsp::SerializeWithCachedSizes(
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  cached_has_bits = _has_bits_[0];
-  // required uint32 user_id = 1;
-  if (cached_has_bits & 0x00000002u) {
+  // uint32 user_id = 1;
+  if (this->user_id() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(1, this->user_id(), output);
   }
 
-  // required uint32 total_cnt = 2;
-  if (cached_has_bits & 0x00000004u) {
+  // uint32 total_cnt = 2;
+  if (this->total_cnt() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(2, this->total_cnt(), output);
   }
 
   // repeated .IM.BaseDefine.UnreadInfo unreadinfo_list = 3;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->unreadinfo_list_size()); i < n; i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessage(
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       3, this->unreadinfo_list(static_cast<int>(i)), output);
   }
 
-  // optional bytes attach_data = 20;
-  if (cached_has_bits & 0x00000001u) {
+  // bytes attach_data = 20;
+  if (this->attach_data().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
       20, this->attach_data(), output);
   }
 
-  output->WriteRaw(_internal_metadata_.unknown_fields().data(),
-                   static_cast<int>(_internal_metadata_.unknown_fields().size()));
+  output->WriteRaw((::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).data(),
+                   static_cast<int>((::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).size()));
   // @@protoc_insertion_point(serialize_end:IM.Message.IMUnreadMsgCntRsp)
 }
 
-size_t IMUnreadMsgCntRsp::RequiredFieldsByteSizeFallback() const {
-// @@protoc_insertion_point(required_fields_byte_size_fallback_start:IM.Message.IMUnreadMsgCntRsp)
-  size_t total_size = 0;
-
-  if (has_user_id()) {
-    // required uint32 user_id = 1;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->user_id());
-  }
-
-  if (has_total_cnt()) {
-    // required uint32 total_cnt = 2;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->total_cnt());
-  }
-
-  return total_size;
-}
 size_t IMUnreadMsgCntRsp::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:IM.Message.IMUnreadMsgCntRsp)
   size_t total_size = 0;
 
-  total_size += _internal_metadata_.unknown_fields().size();
+  total_size += (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).size();
 
-  if (((_has_bits_[0] & 0x00000006) ^ 0x00000006) == 0) {  // All required fields are present.
-    // required uint32 user_id = 1;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->user_id());
-
-    // required uint32 total_cnt = 2;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->total_cnt());
-
-  } else {
-    total_size += RequiredFieldsByteSizeFallback();
-  }
   // repeated .IM.BaseDefine.UnreadInfo unreadinfo_list = 3;
   {
     unsigned int count = static_cast<unsigned int>(this->unreadinfo_list_size());
@@ -2771,11 +2495,25 @@ size_t IMUnreadMsgCntRsp::ByteSizeLong() const {
     }
   }
 
-  // optional bytes attach_data = 20;
-  if (has_attach_data()) {
+  // bytes attach_data = 20;
+  if (this->attach_data().size() > 0) {
     total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::BytesSize(
         this->attach_data());
+  }
+
+  // uint32 user_id = 1;
+  if (this->user_id() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        this->user_id());
+  }
+
+  // uint32 total_cnt = 2;
+  if (this->total_cnt() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        this->total_cnt());
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
@@ -2798,19 +2536,15 @@ void IMUnreadMsgCntRsp::MergeFrom(const IMUnreadMsgCntRsp& from) {
   (void) cached_has_bits;
 
   unreadinfo_list_.MergeFrom(from.unreadinfo_list_);
-  cached_has_bits = from._has_bits_[0];
-  if (cached_has_bits & 7u) {
-    if (cached_has_bits & 0x00000001u) {
-      set_has_attach_data();
-      attach_data_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.attach_data_);
-    }
-    if (cached_has_bits & 0x00000002u) {
-      user_id_ = from.user_id_;
-    }
-    if (cached_has_bits & 0x00000004u) {
-      total_cnt_ = from.total_cnt_;
-    }
-    _has_bits_[0] |= cached_has_bits;
+  if (from.attach_data().size() > 0) {
+
+    attach_data_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.attach_data_);
+  }
+  if (from.user_id() != 0) {
+    set_user_id(from.user_id());
+  }
+  if (from.total_cnt() != 0) {
+    set_total_cnt(from.total_cnt());
   }
 }
 
@@ -2822,8 +2556,6 @@ void IMUnreadMsgCntRsp::CopyFrom(const IMUnreadMsgCntRsp& from) {
 }
 
 bool IMUnreadMsgCntRsp::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000006) != 0x00000006) return false;
-  if (!::google::protobuf::internal::AllAreInitialized(this->unreadinfo_list())) return false;
   return true;
 }
 
@@ -2837,7 +2569,6 @@ void IMUnreadMsgCntRsp::InternalSwap(IMUnreadMsgCntRsp* other) {
   attach_data_.Swap(&other->attach_data_);
   swap(user_id_, other->user_id_);
   swap(total_cnt_, other->total_cnt_);
-  swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   swap(_cached_size_, other->_cached_size_);
 }
@@ -2871,26 +2602,24 @@ IMGetMsgListReq::IMGetMsgListReq()
 IMGetMsgListReq::IMGetMsgListReq(const IMGetMsgListReq& from)
   : ::google::protobuf::MessageLite(),
       _internal_metadata_(NULL),
-      _has_bits_(from._has_bits_),
       _cached_size_(0) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   attach_data_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.has_attach_data()) {
+  if (from.attach_data().size() > 0) {
     attach_data_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.attach_data_);
   }
   ::memcpy(&user_id_, &from.user_id_,
-    static_cast<size_t>(reinterpret_cast<char*>(&session_type_) -
-    reinterpret_cast<char*>(&user_id_)) + sizeof(session_type_));
+    static_cast<size_t>(reinterpret_cast<char*>(&msg_cnt_) -
+    reinterpret_cast<char*>(&user_id_)) + sizeof(msg_cnt_));
   // @@protoc_insertion_point(copy_constructor:IM.Message.IMGetMsgListReq)
 }
 
 void IMGetMsgListReq::SharedCtor() {
-  _cached_size_ = 0;
   attach_data_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(&user_id_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&msg_cnt_) -
       reinterpret_cast<char*>(&user_id_)) + sizeof(msg_cnt_));
-  session_type_ = 1;
+  _cached_size_ = 0;
 }
 
 IMGetMsgListReq::~IMGetMsgListReq() {
@@ -2926,18 +2655,10 @@ void IMGetMsgListReq::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 0x00000001u) {
-    GOOGLE_DCHECK(!attach_data_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()));
-    (*attach_data_.UnsafeRawStringPointer())->clear();
-  }
-  if (cached_has_bits & 62u) {
-    ::memset(&user_id_, 0, static_cast<size_t>(
-        reinterpret_cast<char*>(&msg_cnt_) -
-        reinterpret_cast<char*>(&user_id_)) + sizeof(msg_cnt_));
-    session_type_ = 1;
-  }
-  _has_bits_.Clear();
+  attach_data_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::memset(&user_id_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&msg_cnt_) -
+      reinterpret_cast<char*>(&user_id_)) + sizeof(msg_cnt_));
   _internal_metadata_.Clear();
 }
 
@@ -2957,11 +2678,11 @@ bool IMGetMsgListReq::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required uint32 user_id = 1;
+      // uint32 user_id = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
-          set_has_user_id();
+
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &user_id_)));
@@ -2971,7 +2692,7 @@ bool IMGetMsgListReq::MergePartialFromCodedStream(
         break;
       }
 
-      // required .IM.BaseDefine.SessionType session_type = 2;
+      // .IM.BaseDefine.SessionType session_type = 2;
       case 2: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
@@ -2979,24 +2700,18 @@ bool IMGetMsgListReq::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
                  input, &value)));
-          if (::IM::BaseDefine::SessionType_IsValid(value)) {
-            set_session_type(static_cast< ::IM::BaseDefine::SessionType >(value));
-          } else {
-            unknown_fields_stream.WriteVarint32(16u);
-            unknown_fields_stream.WriteVarint32(
-                static_cast< ::google::protobuf::uint32>(value));
-          }
+          set_session_type(static_cast< ::IM::BaseDefine::SessionType >(value));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // required uint32 session_id = 3;
+      // uint32 session_id = 3;
       case 3: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(24u /* 24 & 0xFF */)) {
-          set_has_session_id();
+
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &session_id_)));
@@ -3006,11 +2721,11 @@ bool IMGetMsgListReq::MergePartialFromCodedStream(
         break;
       }
 
-      // required uint32 msg_id_begin = 4;
+      // uint32 msg_id_begin = 4;
       case 4: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(32u /* 32 & 0xFF */)) {
-          set_has_msg_id_begin();
+
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &msg_id_begin_)));
@@ -3020,11 +2735,11 @@ bool IMGetMsgListReq::MergePartialFromCodedStream(
         break;
       }
 
-      // required uint32 msg_cnt = 5;
+      // uint32 msg_cnt = 5;
       case 5: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(40u /* 40 & 0xFF */)) {
-          set_has_msg_cnt();
+
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &msg_cnt_)));
@@ -3034,7 +2749,7 @@ bool IMGetMsgListReq::MergePartialFromCodedStream(
         break;
       }
 
-      // optional bytes attach_data = 20;
+      // bytes attach_data = 20;
       case 20: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(162u /* 162 & 0xFF */)) {
@@ -3072,123 +2787,88 @@ void IMGetMsgListReq::SerializeWithCachedSizes(
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  cached_has_bits = _has_bits_[0];
-  // required uint32 user_id = 1;
-  if (cached_has_bits & 0x00000002u) {
+  // uint32 user_id = 1;
+  if (this->user_id() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(1, this->user_id(), output);
   }
 
-  // required .IM.BaseDefine.SessionType session_type = 2;
-  if (cached_has_bits & 0x00000020u) {
+  // .IM.BaseDefine.SessionType session_type = 2;
+  if (this->session_type() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       2, this->session_type(), output);
   }
 
-  // required uint32 session_id = 3;
-  if (cached_has_bits & 0x00000004u) {
+  // uint32 session_id = 3;
+  if (this->session_id() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(3, this->session_id(), output);
   }
 
-  // required uint32 msg_id_begin = 4;
-  if (cached_has_bits & 0x00000008u) {
+  // uint32 msg_id_begin = 4;
+  if (this->msg_id_begin() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(4, this->msg_id_begin(), output);
   }
 
-  // required uint32 msg_cnt = 5;
-  if (cached_has_bits & 0x00000010u) {
+  // uint32 msg_cnt = 5;
+  if (this->msg_cnt() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(5, this->msg_cnt(), output);
   }
 
-  // optional bytes attach_data = 20;
-  if (cached_has_bits & 0x00000001u) {
+  // bytes attach_data = 20;
+  if (this->attach_data().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
       20, this->attach_data(), output);
   }
 
-  output->WriteRaw(_internal_metadata_.unknown_fields().data(),
-                   static_cast<int>(_internal_metadata_.unknown_fields().size()));
+  output->WriteRaw((::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).data(),
+                   static_cast<int>((::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).size()));
   // @@protoc_insertion_point(serialize_end:IM.Message.IMGetMsgListReq)
 }
 
-size_t IMGetMsgListReq::RequiredFieldsByteSizeFallback() const {
-// @@protoc_insertion_point(required_fields_byte_size_fallback_start:IM.Message.IMGetMsgListReq)
-  size_t total_size = 0;
-
-  if (has_user_id()) {
-    // required uint32 user_id = 1;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->user_id());
-  }
-
-  if (has_session_id()) {
-    // required uint32 session_id = 3;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->session_id());
-  }
-
-  if (has_msg_id_begin()) {
-    // required uint32 msg_id_begin = 4;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->msg_id_begin());
-  }
-
-  if (has_msg_cnt()) {
-    // required uint32 msg_cnt = 5;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->msg_cnt());
-  }
-
-  if (has_session_type()) {
-    // required .IM.BaseDefine.SessionType session_type = 2;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::EnumSize(this->session_type());
-  }
-
-  return total_size;
-}
 size_t IMGetMsgListReq::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:IM.Message.IMGetMsgListReq)
   size_t total_size = 0;
 
-  total_size += _internal_metadata_.unknown_fields().size();
+  total_size += (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).size();
 
-  if (((_has_bits_[0] & 0x0000003e) ^ 0x0000003e) == 0) {  // All required fields are present.
-    // required uint32 user_id = 1;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->user_id());
-
-    // required uint32 session_id = 3;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->session_id());
-
-    // required uint32 msg_id_begin = 4;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->msg_id_begin());
-
-    // required uint32 msg_cnt = 5;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->msg_cnt());
-
-    // required .IM.BaseDefine.SessionType session_type = 2;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::EnumSize(this->session_type());
-
-  } else {
-    total_size += RequiredFieldsByteSizeFallback();
-  }
-  // optional bytes attach_data = 20;
-  if (has_attach_data()) {
+  // bytes attach_data = 20;
+  if (this->attach_data().size() > 0) {
     total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::BytesSize(
         this->attach_data());
+  }
+
+  // uint32 user_id = 1;
+  if (this->user_id() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        this->user_id());
+  }
+
+  // .IM.BaseDefine.SessionType session_type = 2;
+  if (this->session_type() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::EnumSize(this->session_type());
+  }
+
+  // uint32 session_id = 3;
+  if (this->session_id() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        this->session_id());
+  }
+
+  // uint32 msg_id_begin = 4;
+  if (this->msg_id_begin() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        this->msg_id_begin());
+  }
+
+  // uint32 msg_cnt = 5;
+  if (this->msg_cnt() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        this->msg_cnt());
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
@@ -3210,28 +2890,24 @@ void IMGetMsgListReq::MergeFrom(const IMGetMsgListReq& from) {
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  cached_has_bits = from._has_bits_[0];
-  if (cached_has_bits & 63u) {
-    if (cached_has_bits & 0x00000001u) {
-      set_has_attach_data();
-      attach_data_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.attach_data_);
-    }
-    if (cached_has_bits & 0x00000002u) {
-      user_id_ = from.user_id_;
-    }
-    if (cached_has_bits & 0x00000004u) {
-      session_id_ = from.session_id_;
-    }
-    if (cached_has_bits & 0x00000008u) {
-      msg_id_begin_ = from.msg_id_begin_;
-    }
-    if (cached_has_bits & 0x00000010u) {
-      msg_cnt_ = from.msg_cnt_;
-    }
-    if (cached_has_bits & 0x00000020u) {
-      session_type_ = from.session_type_;
-    }
-    _has_bits_[0] |= cached_has_bits;
+  if (from.attach_data().size() > 0) {
+
+    attach_data_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.attach_data_);
+  }
+  if (from.user_id() != 0) {
+    set_user_id(from.user_id());
+  }
+  if (from.session_type() != 0) {
+    set_session_type(from.session_type());
+  }
+  if (from.session_id() != 0) {
+    set_session_id(from.session_id());
+  }
+  if (from.msg_id_begin() != 0) {
+    set_msg_id_begin(from.msg_id_begin());
+  }
+  if (from.msg_cnt() != 0) {
+    set_msg_cnt(from.msg_cnt());
   }
 }
 
@@ -3243,7 +2919,6 @@ void IMGetMsgListReq::CopyFrom(const IMGetMsgListReq& from) {
 }
 
 bool IMGetMsgListReq::IsInitialized() const {
-  if ((_has_bits_[0] & 0x0000003e) != 0x0000003e) return false;
   return true;
 }
 
@@ -3255,11 +2930,10 @@ void IMGetMsgListReq::InternalSwap(IMGetMsgListReq* other) {
   using std::swap;
   attach_data_.Swap(&other->attach_data_);
   swap(user_id_, other->user_id_);
+  swap(session_type_, other->session_type_);
   swap(session_id_, other->session_id_);
   swap(msg_id_begin_, other->msg_id_begin_);
   swap(msg_cnt_, other->msg_cnt_);
-  swap(session_type_, other->session_type_);
-  swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   swap(_cached_size_, other->_cached_size_);
 }
@@ -3296,27 +2970,25 @@ IMGetMsgListRsp::IMGetMsgListRsp()
 IMGetMsgListRsp::IMGetMsgListRsp(const IMGetMsgListRsp& from)
   : ::google::protobuf::MessageLite(),
       _internal_metadata_(NULL),
-      _has_bits_(from._has_bits_),
-      _cached_size_(0),
-      msg_list_(from.msg_list_) {
+      msg_list_(from.msg_list_),
+      _cached_size_(0) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   attach_data_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.has_attach_data()) {
+  if (from.attach_data().size() > 0) {
     attach_data_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.attach_data_);
   }
   ::memcpy(&user_id_, &from.user_id_,
-    static_cast<size_t>(reinterpret_cast<char*>(&session_type_) -
-    reinterpret_cast<char*>(&user_id_)) + sizeof(session_type_));
+    static_cast<size_t>(reinterpret_cast<char*>(&msg_id_begin_) -
+    reinterpret_cast<char*>(&user_id_)) + sizeof(msg_id_begin_));
   // @@protoc_insertion_point(copy_constructor:IM.Message.IMGetMsgListRsp)
 }
 
 void IMGetMsgListRsp::SharedCtor() {
-  _cached_size_ = 0;
   attach_data_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(&user_id_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&msg_id_begin_) -
       reinterpret_cast<char*>(&user_id_)) + sizeof(msg_id_begin_));
-  session_type_ = 1;
+  _cached_size_ = 0;
 }
 
 IMGetMsgListRsp::~IMGetMsgListRsp() {
@@ -3353,18 +3025,10 @@ void IMGetMsgListRsp::Clear() {
   (void) cached_has_bits;
 
   msg_list_.Clear();
-  cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 0x00000001u) {
-    GOOGLE_DCHECK(!attach_data_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()));
-    (*attach_data_.UnsafeRawStringPointer())->clear();
-  }
-  if (cached_has_bits & 30u) {
-    ::memset(&user_id_, 0, static_cast<size_t>(
-        reinterpret_cast<char*>(&msg_id_begin_) -
-        reinterpret_cast<char*>(&user_id_)) + sizeof(msg_id_begin_));
-    session_type_ = 1;
-  }
-  _has_bits_.Clear();
+  attach_data_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::memset(&user_id_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&msg_id_begin_) -
+      reinterpret_cast<char*>(&user_id_)) + sizeof(msg_id_begin_));
   _internal_metadata_.Clear();
 }
 
@@ -3384,11 +3048,11 @@ bool IMGetMsgListRsp::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required uint32 user_id = 1;
+      // uint32 user_id = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
-          set_has_user_id();
+
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &user_id_)));
@@ -3398,7 +3062,7 @@ bool IMGetMsgListRsp::MergePartialFromCodedStream(
         break;
       }
 
-      // required .IM.BaseDefine.SessionType session_type = 2;
+      // .IM.BaseDefine.SessionType session_type = 2;
       case 2: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
@@ -3406,24 +3070,18 @@ bool IMGetMsgListRsp::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
                  input, &value)));
-          if (::IM::BaseDefine::SessionType_IsValid(value)) {
-            set_session_type(static_cast< ::IM::BaseDefine::SessionType >(value));
-          } else {
-            unknown_fields_stream.WriteVarint32(16u);
-            unknown_fields_stream.WriteVarint32(
-                static_cast< ::google::protobuf::uint32>(value));
-          }
+          set_session_type(static_cast< ::IM::BaseDefine::SessionType >(value));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // required uint32 session_id = 3;
+      // uint32 session_id = 3;
       case 3: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(24u /* 24 & 0xFF */)) {
-          set_has_session_id();
+
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &session_id_)));
@@ -3433,11 +3091,11 @@ bool IMGetMsgListRsp::MergePartialFromCodedStream(
         break;
       }
 
-      // required uint32 msg_id_begin = 4;
+      // uint32 msg_id_begin = 4;
       case 4: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(32u /* 32 & 0xFF */)) {
-          set_has_msg_id_begin();
+
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &msg_id_begin_)));
@@ -3458,7 +3116,7 @@ bool IMGetMsgListRsp::MergePartialFromCodedStream(
         break;
       }
 
-      // optional bytes attach_data = 20;
+      // bytes attach_data = 20;
       case 20: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(162u /* 162 & 0xFF */)) {
@@ -3496,108 +3154,51 @@ void IMGetMsgListRsp::SerializeWithCachedSizes(
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  cached_has_bits = _has_bits_[0];
-  // required uint32 user_id = 1;
-  if (cached_has_bits & 0x00000002u) {
+  // uint32 user_id = 1;
+  if (this->user_id() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(1, this->user_id(), output);
   }
 
-  // required .IM.BaseDefine.SessionType session_type = 2;
-  if (cached_has_bits & 0x00000010u) {
+  // .IM.BaseDefine.SessionType session_type = 2;
+  if (this->session_type() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       2, this->session_type(), output);
   }
 
-  // required uint32 session_id = 3;
-  if (cached_has_bits & 0x00000004u) {
+  // uint32 session_id = 3;
+  if (this->session_id() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(3, this->session_id(), output);
   }
 
-  // required uint32 msg_id_begin = 4;
-  if (cached_has_bits & 0x00000008u) {
+  // uint32 msg_id_begin = 4;
+  if (this->msg_id_begin() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(4, this->msg_id_begin(), output);
   }
 
   // repeated .IM.BaseDefine.MsgInfo msg_list = 5;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->msg_list_size()); i < n; i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessage(
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       5, this->msg_list(static_cast<int>(i)), output);
   }
 
-  // optional bytes attach_data = 20;
-  if (cached_has_bits & 0x00000001u) {
+  // bytes attach_data = 20;
+  if (this->attach_data().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
       20, this->attach_data(), output);
   }
 
-  output->WriteRaw(_internal_metadata_.unknown_fields().data(),
-                   static_cast<int>(_internal_metadata_.unknown_fields().size()));
+  output->WriteRaw((::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).data(),
+                   static_cast<int>((::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).size()));
   // @@protoc_insertion_point(serialize_end:IM.Message.IMGetMsgListRsp)
 }
 
-size_t IMGetMsgListRsp::RequiredFieldsByteSizeFallback() const {
-// @@protoc_insertion_point(required_fields_byte_size_fallback_start:IM.Message.IMGetMsgListRsp)
-  size_t total_size = 0;
-
-  if (has_user_id()) {
-    // required uint32 user_id = 1;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->user_id());
-  }
-
-  if (has_session_id()) {
-    // required uint32 session_id = 3;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->session_id());
-  }
-
-  if (has_msg_id_begin()) {
-    // required uint32 msg_id_begin = 4;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->msg_id_begin());
-  }
-
-  if (has_session_type()) {
-    // required .IM.BaseDefine.SessionType session_type = 2;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::EnumSize(this->session_type());
-  }
-
-  return total_size;
-}
 size_t IMGetMsgListRsp::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:IM.Message.IMGetMsgListRsp)
   size_t total_size = 0;
 
-  total_size += _internal_metadata_.unknown_fields().size();
+  total_size += (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).size();
 
-  if (((_has_bits_[0] & 0x0000001e) ^ 0x0000001e) == 0) {  // All required fields are present.
-    // required uint32 user_id = 1;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->user_id());
-
-    // required uint32 session_id = 3;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->session_id());
-
-    // required uint32 msg_id_begin = 4;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->msg_id_begin());
-
-    // required .IM.BaseDefine.SessionType session_type = 2;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::EnumSize(this->session_type());
-
-  } else {
-    total_size += RequiredFieldsByteSizeFallback();
-  }
   // repeated .IM.BaseDefine.MsgInfo msg_list = 5;
   {
     unsigned int count = static_cast<unsigned int>(this->msg_list_size());
@@ -3609,11 +3210,38 @@ size_t IMGetMsgListRsp::ByteSizeLong() const {
     }
   }
 
-  // optional bytes attach_data = 20;
-  if (has_attach_data()) {
+  // bytes attach_data = 20;
+  if (this->attach_data().size() > 0) {
     total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::BytesSize(
         this->attach_data());
+  }
+
+  // uint32 user_id = 1;
+  if (this->user_id() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        this->user_id());
+  }
+
+  // .IM.BaseDefine.SessionType session_type = 2;
+  if (this->session_type() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::EnumSize(this->session_type());
+  }
+
+  // uint32 session_id = 3;
+  if (this->session_id() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        this->session_id());
+  }
+
+  // uint32 msg_id_begin = 4;
+  if (this->msg_id_begin() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        this->msg_id_begin());
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
@@ -3636,25 +3264,21 @@ void IMGetMsgListRsp::MergeFrom(const IMGetMsgListRsp& from) {
   (void) cached_has_bits;
 
   msg_list_.MergeFrom(from.msg_list_);
-  cached_has_bits = from._has_bits_[0];
-  if (cached_has_bits & 31u) {
-    if (cached_has_bits & 0x00000001u) {
-      set_has_attach_data();
-      attach_data_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.attach_data_);
-    }
-    if (cached_has_bits & 0x00000002u) {
-      user_id_ = from.user_id_;
-    }
-    if (cached_has_bits & 0x00000004u) {
-      session_id_ = from.session_id_;
-    }
-    if (cached_has_bits & 0x00000008u) {
-      msg_id_begin_ = from.msg_id_begin_;
-    }
-    if (cached_has_bits & 0x00000010u) {
-      session_type_ = from.session_type_;
-    }
-    _has_bits_[0] |= cached_has_bits;
+  if (from.attach_data().size() > 0) {
+
+    attach_data_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.attach_data_);
+  }
+  if (from.user_id() != 0) {
+    set_user_id(from.user_id());
+  }
+  if (from.session_type() != 0) {
+    set_session_type(from.session_type());
+  }
+  if (from.session_id() != 0) {
+    set_session_id(from.session_id());
+  }
+  if (from.msg_id_begin() != 0) {
+    set_msg_id_begin(from.msg_id_begin());
   }
 }
 
@@ -3666,8 +3290,6 @@ void IMGetMsgListRsp::CopyFrom(const IMGetMsgListRsp& from) {
 }
 
 bool IMGetMsgListRsp::IsInitialized() const {
-  if ((_has_bits_[0] & 0x0000001e) != 0x0000001e) return false;
-  if (!::google::protobuf::internal::AllAreInitialized(this->msg_list())) return false;
   return true;
 }
 
@@ -3680,10 +3302,9 @@ void IMGetMsgListRsp::InternalSwap(IMGetMsgListRsp* other) {
   msg_list_.InternalSwap(&other->msg_list_);
   attach_data_.Swap(&other->attach_data_);
   swap(user_id_, other->user_id_);
+  swap(session_type_, other->session_type_);
   swap(session_id_, other->session_id_);
   swap(msg_id_begin_, other->msg_id_begin_);
-  swap(session_type_, other->session_type_);
-  swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   swap(_cached_size_, other->_cached_size_);
 }
@@ -3715,26 +3336,24 @@ IMGetLatestMsgIdReq::IMGetLatestMsgIdReq()
 IMGetLatestMsgIdReq::IMGetLatestMsgIdReq(const IMGetLatestMsgIdReq& from)
   : ::google::protobuf::MessageLite(),
       _internal_metadata_(NULL),
-      _has_bits_(from._has_bits_),
       _cached_size_(0) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   attach_data_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.has_attach_data()) {
+  if (from.attach_data().size() > 0) {
     attach_data_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.attach_data_);
   }
   ::memcpy(&user_id_, &from.user_id_,
-    static_cast<size_t>(reinterpret_cast<char*>(&session_type_) -
-    reinterpret_cast<char*>(&user_id_)) + sizeof(session_type_));
+    static_cast<size_t>(reinterpret_cast<char*>(&session_id_) -
+    reinterpret_cast<char*>(&user_id_)) + sizeof(session_id_));
   // @@protoc_insertion_point(copy_constructor:IM.Message.IMGetLatestMsgIdReq)
 }
 
 void IMGetLatestMsgIdReq::SharedCtor() {
-  _cached_size_ = 0;
   attach_data_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(&user_id_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&session_id_) -
       reinterpret_cast<char*>(&user_id_)) + sizeof(session_id_));
-  session_type_ = 1;
+  _cached_size_ = 0;
 }
 
 IMGetLatestMsgIdReq::~IMGetLatestMsgIdReq() {
@@ -3770,18 +3389,10 @@ void IMGetLatestMsgIdReq::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 0x00000001u) {
-    GOOGLE_DCHECK(!attach_data_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()));
-    (*attach_data_.UnsafeRawStringPointer())->clear();
-  }
-  if (cached_has_bits & 14u) {
-    ::memset(&user_id_, 0, static_cast<size_t>(
-        reinterpret_cast<char*>(&session_id_) -
-        reinterpret_cast<char*>(&user_id_)) + sizeof(session_id_));
-    session_type_ = 1;
-  }
-  _has_bits_.Clear();
+  attach_data_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::memset(&user_id_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&session_id_) -
+      reinterpret_cast<char*>(&user_id_)) + sizeof(session_id_));
   _internal_metadata_.Clear();
 }
 
@@ -3801,11 +3412,11 @@ bool IMGetLatestMsgIdReq::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required uint32 user_id = 1;
+      // uint32 user_id = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
-          set_has_user_id();
+
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &user_id_)));
@@ -3815,7 +3426,7 @@ bool IMGetLatestMsgIdReq::MergePartialFromCodedStream(
         break;
       }
 
-      // required .IM.BaseDefine.SessionType session_type = 2;
+      // .IM.BaseDefine.SessionType session_type = 2;
       case 2: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
@@ -3823,24 +3434,18 @@ bool IMGetLatestMsgIdReq::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
                  input, &value)));
-          if (::IM::BaseDefine::SessionType_IsValid(value)) {
-            set_session_type(static_cast< ::IM::BaseDefine::SessionType >(value));
-          } else {
-            unknown_fields_stream.WriteVarint32(16u);
-            unknown_fields_stream.WriteVarint32(
-                static_cast< ::google::protobuf::uint32>(value));
-          }
+          set_session_type(static_cast< ::IM::BaseDefine::SessionType >(value));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // required uint32 session_id = 3;
+      // uint32 session_id = 3;
       case 3: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(24u /* 24 & 0xFF */)) {
-          set_has_session_id();
+
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &session_id_)));
@@ -3850,7 +3455,7 @@ bool IMGetLatestMsgIdReq::MergePartialFromCodedStream(
         break;
       }
 
-      // optional bytes attach_data = 20;
+      // bytes attach_data = 20;
       case 20: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(162u /* 162 & 0xFF */)) {
@@ -3888,89 +3493,64 @@ void IMGetLatestMsgIdReq::SerializeWithCachedSizes(
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  cached_has_bits = _has_bits_[0];
-  // required uint32 user_id = 1;
-  if (cached_has_bits & 0x00000002u) {
+  // uint32 user_id = 1;
+  if (this->user_id() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(1, this->user_id(), output);
   }
 
-  // required .IM.BaseDefine.SessionType session_type = 2;
-  if (cached_has_bits & 0x00000008u) {
+  // .IM.BaseDefine.SessionType session_type = 2;
+  if (this->session_type() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       2, this->session_type(), output);
   }
 
-  // required uint32 session_id = 3;
-  if (cached_has_bits & 0x00000004u) {
+  // uint32 session_id = 3;
+  if (this->session_id() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(3, this->session_id(), output);
   }
 
-  // optional bytes attach_data = 20;
-  if (cached_has_bits & 0x00000001u) {
+  // bytes attach_data = 20;
+  if (this->attach_data().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
       20, this->attach_data(), output);
   }
 
-  output->WriteRaw(_internal_metadata_.unknown_fields().data(),
-                   static_cast<int>(_internal_metadata_.unknown_fields().size()));
+  output->WriteRaw((::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).data(),
+                   static_cast<int>((::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).size()));
   // @@protoc_insertion_point(serialize_end:IM.Message.IMGetLatestMsgIdReq)
 }
 
-size_t IMGetLatestMsgIdReq::RequiredFieldsByteSizeFallback() const {
-// @@protoc_insertion_point(required_fields_byte_size_fallback_start:IM.Message.IMGetLatestMsgIdReq)
-  size_t total_size = 0;
-
-  if (has_user_id()) {
-    // required uint32 user_id = 1;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->user_id());
-  }
-
-  if (has_session_id()) {
-    // required uint32 session_id = 3;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->session_id());
-  }
-
-  if (has_session_type()) {
-    // required .IM.BaseDefine.SessionType session_type = 2;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::EnumSize(this->session_type());
-  }
-
-  return total_size;
-}
 size_t IMGetLatestMsgIdReq::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:IM.Message.IMGetLatestMsgIdReq)
   size_t total_size = 0;
 
-  total_size += _internal_metadata_.unknown_fields().size();
+  total_size += (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).size();
 
-  if (((_has_bits_[0] & 0x0000000e) ^ 0x0000000e) == 0) {  // All required fields are present.
-    // required uint32 user_id = 1;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->user_id());
-
-    // required uint32 session_id = 3;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->session_id());
-
-    // required .IM.BaseDefine.SessionType session_type = 2;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::EnumSize(this->session_type());
-
-  } else {
-    total_size += RequiredFieldsByteSizeFallback();
-  }
-  // optional bytes attach_data = 20;
-  if (has_attach_data()) {
+  // bytes attach_data = 20;
+  if (this->attach_data().size() > 0) {
     total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::BytesSize(
         this->attach_data());
+  }
+
+  // uint32 user_id = 1;
+  if (this->user_id() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        this->user_id());
+  }
+
+  // .IM.BaseDefine.SessionType session_type = 2;
+  if (this->session_type() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::EnumSize(this->session_type());
+  }
+
+  // uint32 session_id = 3;
+  if (this->session_id() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        this->session_id());
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
@@ -3992,22 +3572,18 @@ void IMGetLatestMsgIdReq::MergeFrom(const IMGetLatestMsgIdReq& from) {
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  cached_has_bits = from._has_bits_[0];
-  if (cached_has_bits & 15u) {
-    if (cached_has_bits & 0x00000001u) {
-      set_has_attach_data();
-      attach_data_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.attach_data_);
-    }
-    if (cached_has_bits & 0x00000002u) {
-      user_id_ = from.user_id_;
-    }
-    if (cached_has_bits & 0x00000004u) {
-      session_id_ = from.session_id_;
-    }
-    if (cached_has_bits & 0x00000008u) {
-      session_type_ = from.session_type_;
-    }
-    _has_bits_[0] |= cached_has_bits;
+  if (from.attach_data().size() > 0) {
+
+    attach_data_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.attach_data_);
+  }
+  if (from.user_id() != 0) {
+    set_user_id(from.user_id());
+  }
+  if (from.session_type() != 0) {
+    set_session_type(from.session_type());
+  }
+  if (from.session_id() != 0) {
+    set_session_id(from.session_id());
   }
 }
 
@@ -4019,7 +3595,6 @@ void IMGetLatestMsgIdReq::CopyFrom(const IMGetLatestMsgIdReq& from) {
 }
 
 bool IMGetLatestMsgIdReq::IsInitialized() const {
-  if ((_has_bits_[0] & 0x0000000e) != 0x0000000e) return false;
   return true;
 }
 
@@ -4031,9 +3606,8 @@ void IMGetLatestMsgIdReq::InternalSwap(IMGetLatestMsgIdReq* other) {
   using std::swap;
   attach_data_.Swap(&other->attach_data_);
   swap(user_id_, other->user_id_);
-  swap(session_id_, other->session_id_);
   swap(session_type_, other->session_type_);
-  swap(_has_bits_[0], other->_has_bits_[0]);
+  swap(session_id_, other->session_id_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   swap(_cached_size_, other->_cached_size_);
 }
@@ -4066,26 +3640,24 @@ IMGetLatestMsgIdRsp::IMGetLatestMsgIdRsp()
 IMGetLatestMsgIdRsp::IMGetLatestMsgIdRsp(const IMGetLatestMsgIdRsp& from)
   : ::google::protobuf::MessageLite(),
       _internal_metadata_(NULL),
-      _has_bits_(from._has_bits_),
       _cached_size_(0) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   attach_data_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.has_attach_data()) {
+  if (from.attach_data().size() > 0) {
     attach_data_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.attach_data_);
   }
   ::memcpy(&user_id_, &from.user_id_,
-    static_cast<size_t>(reinterpret_cast<char*>(&session_type_) -
-    reinterpret_cast<char*>(&user_id_)) + sizeof(session_type_));
+    static_cast<size_t>(reinterpret_cast<char*>(&latest_msg_id_) -
+    reinterpret_cast<char*>(&user_id_)) + sizeof(latest_msg_id_));
   // @@protoc_insertion_point(copy_constructor:IM.Message.IMGetLatestMsgIdRsp)
 }
 
 void IMGetLatestMsgIdRsp::SharedCtor() {
-  _cached_size_ = 0;
   attach_data_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(&user_id_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&latest_msg_id_) -
       reinterpret_cast<char*>(&user_id_)) + sizeof(latest_msg_id_));
-  session_type_ = 1;
+  _cached_size_ = 0;
 }
 
 IMGetLatestMsgIdRsp::~IMGetLatestMsgIdRsp() {
@@ -4121,18 +3693,10 @@ void IMGetLatestMsgIdRsp::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 0x00000001u) {
-    GOOGLE_DCHECK(!attach_data_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()));
-    (*attach_data_.UnsafeRawStringPointer())->clear();
-  }
-  if (cached_has_bits & 30u) {
-    ::memset(&user_id_, 0, static_cast<size_t>(
-        reinterpret_cast<char*>(&latest_msg_id_) -
-        reinterpret_cast<char*>(&user_id_)) + sizeof(latest_msg_id_));
-    session_type_ = 1;
-  }
-  _has_bits_.Clear();
+  attach_data_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::memset(&user_id_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&latest_msg_id_) -
+      reinterpret_cast<char*>(&user_id_)) + sizeof(latest_msg_id_));
   _internal_metadata_.Clear();
 }
 
@@ -4152,11 +3716,11 @@ bool IMGetLatestMsgIdRsp::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required uint32 user_id = 1;
+      // uint32 user_id = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
-          set_has_user_id();
+
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &user_id_)));
@@ -4166,7 +3730,7 @@ bool IMGetLatestMsgIdRsp::MergePartialFromCodedStream(
         break;
       }
 
-      // required .IM.BaseDefine.SessionType session_type = 2;
+      // .IM.BaseDefine.SessionType session_type = 2;
       case 2: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
@@ -4174,24 +3738,18 @@ bool IMGetLatestMsgIdRsp::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
                  input, &value)));
-          if (::IM::BaseDefine::SessionType_IsValid(value)) {
-            set_session_type(static_cast< ::IM::BaseDefine::SessionType >(value));
-          } else {
-            unknown_fields_stream.WriteVarint32(16u);
-            unknown_fields_stream.WriteVarint32(
-                static_cast< ::google::protobuf::uint32>(value));
-          }
+          set_session_type(static_cast< ::IM::BaseDefine::SessionType >(value));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // required uint32 session_id = 3;
+      // uint32 session_id = 3;
       case 3: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(24u /* 24 & 0xFF */)) {
-          set_has_session_id();
+
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &session_id_)));
@@ -4201,11 +3759,11 @@ bool IMGetLatestMsgIdRsp::MergePartialFromCodedStream(
         break;
       }
 
-      // required uint32 latest_msg_id = 4;
+      // uint32 latest_msg_id = 4;
       case 4: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(32u /* 32 & 0xFF */)) {
-          set_has_latest_msg_id();
+
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &latest_msg_id_)));
@@ -4215,7 +3773,7 @@ bool IMGetLatestMsgIdRsp::MergePartialFromCodedStream(
         break;
       }
 
-      // optional bytes attach_data = 20;
+      // bytes attach_data = 20;
       case 20: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(162u /* 162 & 0xFF */)) {
@@ -4253,106 +3811,76 @@ void IMGetLatestMsgIdRsp::SerializeWithCachedSizes(
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  cached_has_bits = _has_bits_[0];
-  // required uint32 user_id = 1;
-  if (cached_has_bits & 0x00000002u) {
+  // uint32 user_id = 1;
+  if (this->user_id() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(1, this->user_id(), output);
   }
 
-  // required .IM.BaseDefine.SessionType session_type = 2;
-  if (cached_has_bits & 0x00000010u) {
+  // .IM.BaseDefine.SessionType session_type = 2;
+  if (this->session_type() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       2, this->session_type(), output);
   }
 
-  // required uint32 session_id = 3;
-  if (cached_has_bits & 0x00000004u) {
+  // uint32 session_id = 3;
+  if (this->session_id() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(3, this->session_id(), output);
   }
 
-  // required uint32 latest_msg_id = 4;
-  if (cached_has_bits & 0x00000008u) {
+  // uint32 latest_msg_id = 4;
+  if (this->latest_msg_id() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(4, this->latest_msg_id(), output);
   }
 
-  // optional bytes attach_data = 20;
-  if (cached_has_bits & 0x00000001u) {
+  // bytes attach_data = 20;
+  if (this->attach_data().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
       20, this->attach_data(), output);
   }
 
-  output->WriteRaw(_internal_metadata_.unknown_fields().data(),
-                   static_cast<int>(_internal_metadata_.unknown_fields().size()));
+  output->WriteRaw((::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).data(),
+                   static_cast<int>((::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).size()));
   // @@protoc_insertion_point(serialize_end:IM.Message.IMGetLatestMsgIdRsp)
 }
 
-size_t IMGetLatestMsgIdRsp::RequiredFieldsByteSizeFallback() const {
-// @@protoc_insertion_point(required_fields_byte_size_fallback_start:IM.Message.IMGetLatestMsgIdRsp)
-  size_t total_size = 0;
-
-  if (has_user_id()) {
-    // required uint32 user_id = 1;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->user_id());
-  }
-
-  if (has_session_id()) {
-    // required uint32 session_id = 3;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->session_id());
-  }
-
-  if (has_latest_msg_id()) {
-    // required uint32 latest_msg_id = 4;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->latest_msg_id());
-  }
-
-  if (has_session_type()) {
-    // required .IM.BaseDefine.SessionType session_type = 2;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::EnumSize(this->session_type());
-  }
-
-  return total_size;
-}
 size_t IMGetLatestMsgIdRsp::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:IM.Message.IMGetLatestMsgIdRsp)
   size_t total_size = 0;
 
-  total_size += _internal_metadata_.unknown_fields().size();
+  total_size += (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).size();
 
-  if (((_has_bits_[0] & 0x0000001e) ^ 0x0000001e) == 0) {  // All required fields are present.
-    // required uint32 user_id = 1;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->user_id());
-
-    // required uint32 session_id = 3;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->session_id());
-
-    // required uint32 latest_msg_id = 4;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->latest_msg_id());
-
-    // required .IM.BaseDefine.SessionType session_type = 2;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::EnumSize(this->session_type());
-
-  } else {
-    total_size += RequiredFieldsByteSizeFallback();
-  }
-  // optional bytes attach_data = 20;
-  if (has_attach_data()) {
+  // bytes attach_data = 20;
+  if (this->attach_data().size() > 0) {
     total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::BytesSize(
         this->attach_data());
+  }
+
+  // uint32 user_id = 1;
+  if (this->user_id() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        this->user_id());
+  }
+
+  // .IM.BaseDefine.SessionType session_type = 2;
+  if (this->session_type() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::EnumSize(this->session_type());
+  }
+
+  // uint32 session_id = 3;
+  if (this->session_id() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        this->session_id());
+  }
+
+  // uint32 latest_msg_id = 4;
+  if (this->latest_msg_id() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        this->latest_msg_id());
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
@@ -4374,25 +3902,21 @@ void IMGetLatestMsgIdRsp::MergeFrom(const IMGetLatestMsgIdRsp& from) {
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  cached_has_bits = from._has_bits_[0];
-  if (cached_has_bits & 31u) {
-    if (cached_has_bits & 0x00000001u) {
-      set_has_attach_data();
-      attach_data_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.attach_data_);
-    }
-    if (cached_has_bits & 0x00000002u) {
-      user_id_ = from.user_id_;
-    }
-    if (cached_has_bits & 0x00000004u) {
-      session_id_ = from.session_id_;
-    }
-    if (cached_has_bits & 0x00000008u) {
-      latest_msg_id_ = from.latest_msg_id_;
-    }
-    if (cached_has_bits & 0x00000010u) {
-      session_type_ = from.session_type_;
-    }
-    _has_bits_[0] |= cached_has_bits;
+  if (from.attach_data().size() > 0) {
+
+    attach_data_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.attach_data_);
+  }
+  if (from.user_id() != 0) {
+    set_user_id(from.user_id());
+  }
+  if (from.session_type() != 0) {
+    set_session_type(from.session_type());
+  }
+  if (from.session_id() != 0) {
+    set_session_id(from.session_id());
+  }
+  if (from.latest_msg_id() != 0) {
+    set_latest_msg_id(from.latest_msg_id());
   }
 }
 
@@ -4404,7 +3928,6 @@ void IMGetLatestMsgIdRsp::CopyFrom(const IMGetLatestMsgIdRsp& from) {
 }
 
 bool IMGetLatestMsgIdRsp::IsInitialized() const {
-  if ((_has_bits_[0] & 0x0000001e) != 0x0000001e) return false;
   return true;
 }
 
@@ -4416,10 +3939,9 @@ void IMGetLatestMsgIdRsp::InternalSwap(IMGetLatestMsgIdRsp* other) {
   using std::swap;
   attach_data_.Swap(&other->attach_data_);
   swap(user_id_, other->user_id_);
+  swap(session_type_, other->session_type_);
   swap(session_id_, other->session_id_);
   swap(latest_msg_id_, other->latest_msg_id_);
-  swap(session_type_, other->session_type_);
-  swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   swap(_cached_size_, other->_cached_size_);
 }
@@ -4452,27 +3974,25 @@ IMGetMsgByIdReq::IMGetMsgByIdReq()
 IMGetMsgByIdReq::IMGetMsgByIdReq(const IMGetMsgByIdReq& from)
   : ::google::protobuf::MessageLite(),
       _internal_metadata_(NULL),
-      _has_bits_(from._has_bits_),
-      _cached_size_(0),
-      msg_id_list_(from.msg_id_list_) {
+      msg_id_list_(from.msg_id_list_),
+      _cached_size_(0) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   attach_data_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.has_attach_data()) {
+  if (from.attach_data().size() > 0) {
     attach_data_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.attach_data_);
   }
   ::memcpy(&user_id_, &from.user_id_,
-    static_cast<size_t>(reinterpret_cast<char*>(&session_type_) -
-    reinterpret_cast<char*>(&user_id_)) + sizeof(session_type_));
+    static_cast<size_t>(reinterpret_cast<char*>(&session_id_) -
+    reinterpret_cast<char*>(&user_id_)) + sizeof(session_id_));
   // @@protoc_insertion_point(copy_constructor:IM.Message.IMGetMsgByIdReq)
 }
 
 void IMGetMsgByIdReq::SharedCtor() {
-  _cached_size_ = 0;
   attach_data_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(&user_id_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&session_id_) -
       reinterpret_cast<char*>(&user_id_)) + sizeof(session_id_));
-  session_type_ = 1;
+  _cached_size_ = 0;
 }
 
 IMGetMsgByIdReq::~IMGetMsgByIdReq() {
@@ -4509,18 +4029,10 @@ void IMGetMsgByIdReq::Clear() {
   (void) cached_has_bits;
 
   msg_id_list_.Clear();
-  cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 0x00000001u) {
-    GOOGLE_DCHECK(!attach_data_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()));
-    (*attach_data_.UnsafeRawStringPointer())->clear();
-  }
-  if (cached_has_bits & 14u) {
-    ::memset(&user_id_, 0, static_cast<size_t>(
-        reinterpret_cast<char*>(&session_id_) -
-        reinterpret_cast<char*>(&user_id_)) + sizeof(session_id_));
-    session_type_ = 1;
-  }
-  _has_bits_.Clear();
+  attach_data_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::memset(&user_id_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&session_id_) -
+      reinterpret_cast<char*>(&user_id_)) + sizeof(session_id_));
   _internal_metadata_.Clear();
 }
 
@@ -4540,11 +4052,11 @@ bool IMGetMsgByIdReq::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required uint32 user_id = 1;
+      // uint32 user_id = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
-          set_has_user_id();
+
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &user_id_)));
@@ -4554,7 +4066,7 @@ bool IMGetMsgByIdReq::MergePartialFromCodedStream(
         break;
       }
 
-      // required .IM.BaseDefine.SessionType session_type = 2;
+      // .IM.BaseDefine.SessionType session_type = 2;
       case 2: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
@@ -4562,24 +4074,18 @@ bool IMGetMsgByIdReq::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
                  input, &value)));
-          if (::IM::BaseDefine::SessionType_IsValid(value)) {
-            set_session_type(static_cast< ::IM::BaseDefine::SessionType >(value));
-          } else {
-            unknown_fields_stream.WriteVarint32(16u);
-            unknown_fields_stream.WriteVarint32(
-                static_cast< ::google::protobuf::uint32>(value));
-          }
+          set_session_type(static_cast< ::IM::BaseDefine::SessionType >(value));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // required uint32 session_id = 3;
+      // uint32 session_id = 3;
       case 3: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(24u /* 24 & 0xFF */)) {
-          set_has_session_id();
+
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &session_id_)));
@@ -4592,23 +4098,23 @@ bool IMGetMsgByIdReq::MergePartialFromCodedStream(
       // repeated uint32 msg_id_list = 4;
       case 4: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(32u /* 32 & 0xFF */)) {
-          DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitive<
-                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
-                 1, 32u, input, this->mutable_msg_id_list())));
-        } else if (
-            static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(34u /* 34 & 0xFF */)) {
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPackedPrimitiveNoInline<
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPackedPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, this->mutable_msg_id_list())));
+        } else if (
+            static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(32u /* 32 & 0xFF */)) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitiveNoInline<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 1, 34u, input, this->mutable_msg_id_list())));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // optional bytes attach_data = 20;
+      // bytes attach_data = 20;
       case 20: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(162u /* 162 & 0xFF */)) {
@@ -4646,104 +4152,91 @@ void IMGetMsgByIdReq::SerializeWithCachedSizes(
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  cached_has_bits = _has_bits_[0];
-  // required uint32 user_id = 1;
-  if (cached_has_bits & 0x00000002u) {
+  // uint32 user_id = 1;
+  if (this->user_id() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(1, this->user_id(), output);
   }
 
-  // required .IM.BaseDefine.SessionType session_type = 2;
-  if (cached_has_bits & 0x00000008u) {
+  // .IM.BaseDefine.SessionType session_type = 2;
+  if (this->session_type() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       2, this->session_type(), output);
   }
 
-  // required uint32 session_id = 3;
-  if (cached_has_bits & 0x00000004u) {
+  // uint32 session_id = 3;
+  if (this->session_id() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(3, this->session_id(), output);
   }
 
   // repeated uint32 msg_id_list = 4;
+  if (this->msg_id_list_size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteTag(4, ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED, output);
+    output->WriteVarint32(static_cast< ::google::protobuf::uint32>(
+        _msg_id_list_cached_byte_size_));
+  }
   for (int i = 0, n = this->msg_id_list_size(); i < n; i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteUInt32(
-      4, this->msg_id_list(i), output);
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32NoTag(
+      this->msg_id_list(i), output);
   }
 
-  // optional bytes attach_data = 20;
-  if (cached_has_bits & 0x00000001u) {
+  // bytes attach_data = 20;
+  if (this->attach_data().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
       20, this->attach_data(), output);
   }
 
-  output->WriteRaw(_internal_metadata_.unknown_fields().data(),
-                   static_cast<int>(_internal_metadata_.unknown_fields().size()));
+  output->WriteRaw((::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).data(),
+                   static_cast<int>((::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).size()));
   // @@protoc_insertion_point(serialize_end:IM.Message.IMGetMsgByIdReq)
 }
 
-size_t IMGetMsgByIdReq::RequiredFieldsByteSizeFallback() const {
-// @@protoc_insertion_point(required_fields_byte_size_fallback_start:IM.Message.IMGetMsgByIdReq)
-  size_t total_size = 0;
-
-  if (has_user_id()) {
-    // required uint32 user_id = 1;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->user_id());
-  }
-
-  if (has_session_id()) {
-    // required uint32 session_id = 3;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->session_id());
-  }
-
-  if (has_session_type()) {
-    // required .IM.BaseDefine.SessionType session_type = 2;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::EnumSize(this->session_type());
-  }
-
-  return total_size;
-}
 size_t IMGetMsgByIdReq::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:IM.Message.IMGetMsgByIdReq)
   size_t total_size = 0;
 
-  total_size += _internal_metadata_.unknown_fields().size();
+  total_size += (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).size();
 
-  if (((_has_bits_[0] & 0x0000000e) ^ 0x0000000e) == 0) {  // All required fields are present.
-    // required uint32 user_id = 1;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->user_id());
-
-    // required uint32 session_id = 3;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->session_id());
-
-    // required .IM.BaseDefine.SessionType session_type = 2;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::EnumSize(this->session_type());
-
-  } else {
-    total_size += RequiredFieldsByteSizeFallback();
-  }
   // repeated uint32 msg_id_list = 4;
   {
     size_t data_size = ::google::protobuf::internal::WireFormatLite::
       UInt32Size(this->msg_id_list_);
-    total_size += 1 *
-                  ::google::protobuf::internal::FromIntSize(this->msg_id_list_size());
+    if (data_size > 0) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+            static_cast< ::google::protobuf::int32>(data_size));
+    }
+    int cached_size = ::google::protobuf::internal::ToCachedSize(data_size);
+    GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+    _msg_id_list_cached_byte_size_ = cached_size;
+    GOOGLE_SAFE_CONCURRENT_WRITES_END();
     total_size += data_size;
   }
 
-  // optional bytes attach_data = 20;
-  if (has_attach_data()) {
+  // bytes attach_data = 20;
+  if (this->attach_data().size() > 0) {
     total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::BytesSize(
         this->attach_data());
+  }
+
+  // uint32 user_id = 1;
+  if (this->user_id() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        this->user_id());
+  }
+
+  // .IM.BaseDefine.SessionType session_type = 2;
+  if (this->session_type() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::EnumSize(this->session_type());
+  }
+
+  // uint32 session_id = 3;
+  if (this->session_id() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        this->session_id());
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
@@ -4766,22 +4259,18 @@ void IMGetMsgByIdReq::MergeFrom(const IMGetMsgByIdReq& from) {
   (void) cached_has_bits;
 
   msg_id_list_.MergeFrom(from.msg_id_list_);
-  cached_has_bits = from._has_bits_[0];
-  if (cached_has_bits & 15u) {
-    if (cached_has_bits & 0x00000001u) {
-      set_has_attach_data();
-      attach_data_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.attach_data_);
-    }
-    if (cached_has_bits & 0x00000002u) {
-      user_id_ = from.user_id_;
-    }
-    if (cached_has_bits & 0x00000004u) {
-      session_id_ = from.session_id_;
-    }
-    if (cached_has_bits & 0x00000008u) {
-      session_type_ = from.session_type_;
-    }
-    _has_bits_[0] |= cached_has_bits;
+  if (from.attach_data().size() > 0) {
+
+    attach_data_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.attach_data_);
+  }
+  if (from.user_id() != 0) {
+    set_user_id(from.user_id());
+  }
+  if (from.session_type() != 0) {
+    set_session_type(from.session_type());
+  }
+  if (from.session_id() != 0) {
+    set_session_id(from.session_id());
   }
 }
 
@@ -4793,7 +4282,6 @@ void IMGetMsgByIdReq::CopyFrom(const IMGetMsgByIdReq& from) {
 }
 
 bool IMGetMsgByIdReq::IsInitialized() const {
-  if ((_has_bits_[0] & 0x0000000e) != 0x0000000e) return false;
   return true;
 }
 
@@ -4806,9 +4294,8 @@ void IMGetMsgByIdReq::InternalSwap(IMGetMsgByIdReq* other) {
   msg_id_list_.InternalSwap(&other->msg_id_list_);
   attach_data_.Swap(&other->attach_data_);
   swap(user_id_, other->user_id_);
-  swap(session_id_, other->session_id_);
   swap(session_type_, other->session_type_);
-  swap(_has_bits_[0], other->_has_bits_[0]);
+  swap(session_id_, other->session_id_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   swap(_cached_size_, other->_cached_size_);
 }
@@ -4844,27 +4331,25 @@ IMGetMsgByIdRsp::IMGetMsgByIdRsp()
 IMGetMsgByIdRsp::IMGetMsgByIdRsp(const IMGetMsgByIdRsp& from)
   : ::google::protobuf::MessageLite(),
       _internal_metadata_(NULL),
-      _has_bits_(from._has_bits_),
-      _cached_size_(0),
-      msg_list_(from.msg_list_) {
+      msg_list_(from.msg_list_),
+      _cached_size_(0) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   attach_data_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.has_attach_data()) {
+  if (from.attach_data().size() > 0) {
     attach_data_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.attach_data_);
   }
   ::memcpy(&user_id_, &from.user_id_,
-    static_cast<size_t>(reinterpret_cast<char*>(&session_type_) -
-    reinterpret_cast<char*>(&user_id_)) + sizeof(session_type_));
+    static_cast<size_t>(reinterpret_cast<char*>(&session_id_) -
+    reinterpret_cast<char*>(&user_id_)) + sizeof(session_id_));
   // @@protoc_insertion_point(copy_constructor:IM.Message.IMGetMsgByIdRsp)
 }
 
 void IMGetMsgByIdRsp::SharedCtor() {
-  _cached_size_ = 0;
   attach_data_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(&user_id_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&session_id_) -
       reinterpret_cast<char*>(&user_id_)) + sizeof(session_id_));
-  session_type_ = 1;
+  _cached_size_ = 0;
 }
 
 IMGetMsgByIdRsp::~IMGetMsgByIdRsp() {
@@ -4901,18 +4386,10 @@ void IMGetMsgByIdRsp::Clear() {
   (void) cached_has_bits;
 
   msg_list_.Clear();
-  cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 0x00000001u) {
-    GOOGLE_DCHECK(!attach_data_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()));
-    (*attach_data_.UnsafeRawStringPointer())->clear();
-  }
-  if (cached_has_bits & 14u) {
-    ::memset(&user_id_, 0, static_cast<size_t>(
-        reinterpret_cast<char*>(&session_id_) -
-        reinterpret_cast<char*>(&user_id_)) + sizeof(session_id_));
-    session_type_ = 1;
-  }
-  _has_bits_.Clear();
+  attach_data_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::memset(&user_id_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&session_id_) -
+      reinterpret_cast<char*>(&user_id_)) + sizeof(session_id_));
   _internal_metadata_.Clear();
 }
 
@@ -4932,11 +4409,11 @@ bool IMGetMsgByIdRsp::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required uint32 user_id = 1;
+      // uint32 user_id = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
-          set_has_user_id();
+
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &user_id_)));
@@ -4946,7 +4423,7 @@ bool IMGetMsgByIdRsp::MergePartialFromCodedStream(
         break;
       }
 
-      // required .IM.BaseDefine.SessionType session_type = 2;
+      // .IM.BaseDefine.SessionType session_type = 2;
       case 2: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
@@ -4954,24 +4431,18 @@ bool IMGetMsgByIdRsp::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
                  input, &value)));
-          if (::IM::BaseDefine::SessionType_IsValid(value)) {
-            set_session_type(static_cast< ::IM::BaseDefine::SessionType >(value));
-          } else {
-            unknown_fields_stream.WriteVarint32(16u);
-            unknown_fields_stream.WriteVarint32(
-                static_cast< ::google::protobuf::uint32>(value));
-          }
+          set_session_type(static_cast< ::IM::BaseDefine::SessionType >(value));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // required uint32 session_id = 3;
+      // uint32 session_id = 3;
       case 3: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(24u /* 24 & 0xFF */)) {
-          set_has_session_id();
+
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &session_id_)));
@@ -4992,7 +4463,7 @@ bool IMGetMsgByIdRsp::MergePartialFromCodedStream(
         break;
       }
 
-      // optional bytes attach_data = 20;
+      // bytes attach_data = 20;
       case 20: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(162u /* 162 & 0xFF */)) {
@@ -5030,91 +4501,46 @@ void IMGetMsgByIdRsp::SerializeWithCachedSizes(
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  cached_has_bits = _has_bits_[0];
-  // required uint32 user_id = 1;
-  if (cached_has_bits & 0x00000002u) {
+  // uint32 user_id = 1;
+  if (this->user_id() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(1, this->user_id(), output);
   }
 
-  // required .IM.BaseDefine.SessionType session_type = 2;
-  if (cached_has_bits & 0x00000008u) {
+  // .IM.BaseDefine.SessionType session_type = 2;
+  if (this->session_type() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       2, this->session_type(), output);
   }
 
-  // required uint32 session_id = 3;
-  if (cached_has_bits & 0x00000004u) {
+  // uint32 session_id = 3;
+  if (this->session_id() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(3, this->session_id(), output);
   }
 
   // repeated .IM.BaseDefine.MsgInfo msg_list = 4;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->msg_list_size()); i < n; i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessage(
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       4, this->msg_list(static_cast<int>(i)), output);
   }
 
-  // optional bytes attach_data = 20;
-  if (cached_has_bits & 0x00000001u) {
+  // bytes attach_data = 20;
+  if (this->attach_data().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
       20, this->attach_data(), output);
   }
 
-  output->WriteRaw(_internal_metadata_.unknown_fields().data(),
-                   static_cast<int>(_internal_metadata_.unknown_fields().size()));
+  output->WriteRaw((::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).data(),
+                   static_cast<int>((::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).size()));
   // @@protoc_insertion_point(serialize_end:IM.Message.IMGetMsgByIdRsp)
 }
 
-size_t IMGetMsgByIdRsp::RequiredFieldsByteSizeFallback() const {
-// @@protoc_insertion_point(required_fields_byte_size_fallback_start:IM.Message.IMGetMsgByIdRsp)
-  size_t total_size = 0;
-
-  if (has_user_id()) {
-    // required uint32 user_id = 1;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->user_id());
-  }
-
-  if (has_session_id()) {
-    // required uint32 session_id = 3;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->session_id());
-  }
-
-  if (has_session_type()) {
-    // required .IM.BaseDefine.SessionType session_type = 2;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::EnumSize(this->session_type());
-  }
-
-  return total_size;
-}
 size_t IMGetMsgByIdRsp::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:IM.Message.IMGetMsgByIdRsp)
   size_t total_size = 0;
 
-  total_size += _internal_metadata_.unknown_fields().size();
+  total_size += (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()).size();
 
-  if (((_has_bits_[0] & 0x0000000e) ^ 0x0000000e) == 0) {  // All required fields are present.
-    // required uint32 user_id = 1;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->user_id());
-
-    // required uint32 session_id = 3;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->session_id());
-
-    // required .IM.BaseDefine.SessionType session_type = 2;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::EnumSize(this->session_type());
-
-  } else {
-    total_size += RequiredFieldsByteSizeFallback();
-  }
   // repeated .IM.BaseDefine.MsgInfo msg_list = 4;
   {
     unsigned int count = static_cast<unsigned int>(this->msg_list_size());
@@ -5126,11 +4552,31 @@ size_t IMGetMsgByIdRsp::ByteSizeLong() const {
     }
   }
 
-  // optional bytes attach_data = 20;
-  if (has_attach_data()) {
+  // bytes attach_data = 20;
+  if (this->attach_data().size() > 0) {
     total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::BytesSize(
         this->attach_data());
+  }
+
+  // uint32 user_id = 1;
+  if (this->user_id() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        this->user_id());
+  }
+
+  // .IM.BaseDefine.SessionType session_type = 2;
+  if (this->session_type() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::EnumSize(this->session_type());
+  }
+
+  // uint32 session_id = 3;
+  if (this->session_id() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        this->session_id());
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
@@ -5153,22 +4599,18 @@ void IMGetMsgByIdRsp::MergeFrom(const IMGetMsgByIdRsp& from) {
   (void) cached_has_bits;
 
   msg_list_.MergeFrom(from.msg_list_);
-  cached_has_bits = from._has_bits_[0];
-  if (cached_has_bits & 15u) {
-    if (cached_has_bits & 0x00000001u) {
-      set_has_attach_data();
-      attach_data_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.attach_data_);
-    }
-    if (cached_has_bits & 0x00000002u) {
-      user_id_ = from.user_id_;
-    }
-    if (cached_has_bits & 0x00000004u) {
-      session_id_ = from.session_id_;
-    }
-    if (cached_has_bits & 0x00000008u) {
-      session_type_ = from.session_type_;
-    }
-    _has_bits_[0] |= cached_has_bits;
+  if (from.attach_data().size() > 0) {
+
+    attach_data_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.attach_data_);
+  }
+  if (from.user_id() != 0) {
+    set_user_id(from.user_id());
+  }
+  if (from.session_type() != 0) {
+    set_session_type(from.session_type());
+  }
+  if (from.session_id() != 0) {
+    set_session_id(from.session_id());
   }
 }
 
@@ -5180,8 +4622,6 @@ void IMGetMsgByIdRsp::CopyFrom(const IMGetMsgByIdRsp& from) {
 }
 
 bool IMGetMsgByIdRsp::IsInitialized() const {
-  if ((_has_bits_[0] & 0x0000000e) != 0x0000000e) return false;
-  if (!::google::protobuf::internal::AllAreInitialized(this->msg_list())) return false;
   return true;
 }
 
@@ -5194,9 +4634,8 @@ void IMGetMsgByIdRsp::InternalSwap(IMGetMsgByIdRsp* other) {
   msg_list_.InternalSwap(&other->msg_list_);
   attach_data_.Swap(&other->attach_data_);
   swap(user_id_, other->user_id_);
-  swap(session_id_, other->session_id_);
   swap(session_type_, other->session_type_);
-  swap(_has_bits_[0], other->_has_bits_[0]);
+  swap(session_id_, other->session_id_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   swap(_cached_size_, other->_cached_size_);
 }

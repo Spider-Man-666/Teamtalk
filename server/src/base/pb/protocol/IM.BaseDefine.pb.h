@@ -24,11 +24,12 @@
 #include <google/protobuf/arenastring.h>
 #include <google/protobuf/generated_message_table_driven.h>
 #include <google/protobuf/generated_message_util.h>
-#include <google/protobuf/metadata_lite.h>
-#include <google/protobuf/message_lite.h>
+#include <google/protobuf/metadata.h>
+#include <google/protobuf/message.h>
 #include <google/protobuf/repeated_field.h>  // IWYU pragma: export
 #include <google/protobuf/extension_set.h>  // IWYU pragma: export
-#include <google/protobuf/generated_enum_util.h>
+#include <google/protobuf/generated_enum_reflection.h>
+#include <google/protobuf/unknown_field_set.h>
 // @@protoc_insertion_point(includes)
 
 namespace protobuf_IM_2eBaseDefine_2eproto {
@@ -41,6 +42,7 @@ struct TableStruct {
   static const ::google::protobuf::internal::SerializationTable serialization_table[];
   static const ::google::protobuf::uint32 offsets[];
 };
+void AddDescriptors();
 void InitDefaultsIpAddrImpl();
 void InitDefaultsIpAddr();
 void InitDefaultsUserInfoImpl();
@@ -142,6 +144,7 @@ namespace IM {
 namespace BaseDefine {
 
 enum ServiceID {
+  SID_UNIVERSAL = 0,
   SID_LOGIN = 1,
   SID_BUDDY_LIST = 2,
   SID_MSG = 3,
@@ -149,14 +152,27 @@ enum ServiceID {
   SID_FILE = 5,
   SID_SWITCH_SERVICE = 6,
   SID_OTHER = 7,
-  SID_INTERNAL = 8
+  SID_INTERNAL = 8,
+  ServiceID_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  ServiceID_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
 };
 bool ServiceID_IsValid(int value);
-const ServiceID ServiceID_MIN = SID_LOGIN;
+const ServiceID ServiceID_MIN = SID_UNIVERSAL;
 const ServiceID ServiceID_MAX = SID_INTERNAL;
 const int ServiceID_ARRAYSIZE = ServiceID_MAX + 1;
 
+const ::google::protobuf::EnumDescriptor* ServiceID_descriptor();
+inline const ::std::string& ServiceID_Name(ServiceID value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    ServiceID_descriptor(), value);
+}
+inline bool ServiceID_Parse(
+    const ::std::string& name, ServiceID* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<ServiceID>(
+    ServiceID_descriptor(), name, value);
+}
 enum LoginCmdID {
+  CID_LOGIN_UNIVERSAL = 0,
   CID_LOGIN_REQ_MSGSERVER = 257,
   CID_LOGIN_RES_MSGSERVER = 258,
   CID_LOGIN_REQ_USERLOGIN = 259,
@@ -171,14 +187,27 @@ enum LoginCmdID {
   CID_LOGIN_REQ_PUSH_SHIELD = 268,
   CID_LOGIN_RES_PUSH_SHIELD = 269,
   CID_LOGIN_REQ_QUERY_PUSH_SHIELD = 270,
-  CID_LOGIN_RES_QUERY_PUSH_SHIELD = 271
+  CID_LOGIN_RES_QUERY_PUSH_SHIELD = 271,
+  LoginCmdID_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  LoginCmdID_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
 };
 bool LoginCmdID_IsValid(int value);
-const LoginCmdID LoginCmdID_MIN = CID_LOGIN_REQ_MSGSERVER;
+const LoginCmdID LoginCmdID_MIN = CID_LOGIN_UNIVERSAL;
 const LoginCmdID LoginCmdID_MAX = CID_LOGIN_RES_QUERY_PUSH_SHIELD;
 const int LoginCmdID_ARRAYSIZE = LoginCmdID_MAX + 1;
 
+const ::google::protobuf::EnumDescriptor* LoginCmdID_descriptor();
+inline const ::std::string& LoginCmdID_Name(LoginCmdID value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    LoginCmdID_descriptor(), value);
+}
+inline bool LoginCmdID_Parse(
+    const ::std::string& name, LoginCmdID* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<LoginCmdID>(
+    LoginCmdID_descriptor(), name, value);
+}
 enum BuddyListCmdID {
+  CID_BUDDY_UNIVERSAL = 0,
   CID_BUDDY_LIST_RECENT_CONTACT_SESSION_REQUEST = 513,
   CID_BUDDY_LIST_RECENT_CONTACT_SESSION_RESPONSE = 514,
   CID_BUDDY_LIST_STATUS_NOTIFY = 515,
@@ -199,14 +228,27 @@ enum BuddyListCmdID {
   CID_BUDDY_LIST_AVATAR_CHANGED_NOTIFY = 530,
   CID_BUDDY_LIST_CHANGE_SIGN_INFO_REQUEST = 531,
   CID_BUDDY_LIST_CHANGE_SIGN_INFO_RESPONSE = 532,
-  CID_BUDDY_LIST_SIGN_INFO_CHANGED_NOTIFY = 533
+  CID_BUDDY_LIST_SIGN_INFO_CHANGED_NOTIFY = 533,
+  BuddyListCmdID_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  BuddyListCmdID_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
 };
 bool BuddyListCmdID_IsValid(int value);
-const BuddyListCmdID BuddyListCmdID_MIN = CID_BUDDY_LIST_RECENT_CONTACT_SESSION_REQUEST;
+const BuddyListCmdID BuddyListCmdID_MIN = CID_BUDDY_UNIVERSAL;
 const BuddyListCmdID BuddyListCmdID_MAX = CID_BUDDY_LIST_SIGN_INFO_CHANGED_NOTIFY;
 const int BuddyListCmdID_ARRAYSIZE = BuddyListCmdID_MAX + 1;
 
+const ::google::protobuf::EnumDescriptor* BuddyListCmdID_descriptor();
+inline const ::std::string& BuddyListCmdID_Name(BuddyListCmdID value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    BuddyListCmdID_descriptor(), value);
+}
+inline bool BuddyListCmdID_Parse(
+    const ::std::string& name, BuddyListCmdID* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<BuddyListCmdID>(
+    BuddyListCmdID_descriptor(), name, value);
+}
 enum MessageCmdID {
+  CID_MSG_UNIVERSAL = 0,
   CID_MSG_DATA = 769,
   CID_MSG_DATA_ACK = 770,
   CID_MSG_READ_ACK = 771,
@@ -220,14 +262,27 @@ enum MessageCmdID {
   CID_MSG_GET_LATEST_MSG_ID_REQ = 779,
   CID_MSG_GET_LATEST_MSG_ID_RSP = 780,
   CID_MSG_GET_BY_MSG_ID_REQ = 781,
-  CID_MSG_GET_BY_MSG_ID_RES = 782
+  CID_MSG_GET_BY_MSG_ID_RES = 782,
+  MessageCmdID_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  MessageCmdID_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
 };
 bool MessageCmdID_IsValid(int value);
-const MessageCmdID MessageCmdID_MIN = CID_MSG_DATA;
+const MessageCmdID MessageCmdID_MIN = CID_MSG_UNIVERSAL;
 const MessageCmdID MessageCmdID_MAX = CID_MSG_GET_BY_MSG_ID_RES;
 const int MessageCmdID_ARRAYSIZE = MessageCmdID_MAX + 1;
 
+const ::google::protobuf::EnumDescriptor* MessageCmdID_descriptor();
+inline const ::std::string& MessageCmdID_Name(MessageCmdID value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    MessageCmdID_descriptor(), value);
+}
+inline bool MessageCmdID_Parse(
+    const ::std::string& name, MessageCmdID* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<MessageCmdID>(
+    MessageCmdID_descriptor(), name, value);
+}
 enum GroupCmdID {
+  CID_GROUP_UNIVERSAL = 0,
   CID_GROUP_NORMAL_LIST_REQUEST = 1025,
   CID_GROUP_NORMAL_LIST_RESPONSE = 1026,
   CID_GROUP_INFO_REQUEST = 1027,
@@ -238,14 +293,27 @@ enum GroupCmdID {
   CID_GROUP_CHANGE_MEMBER_RESPONSE = 1032,
   CID_GROUP_SHIELD_GROUP_REQUEST = 1033,
   CID_GROUP_SHIELD_GROUP_RESPONSE = 1034,
-  CID_GROUP_CHANGE_MEMBER_NOTIFY = 1035
+  CID_GROUP_CHANGE_MEMBER_NOTIFY = 1035,
+  GroupCmdID_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  GroupCmdID_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
 };
 bool GroupCmdID_IsValid(int value);
-const GroupCmdID GroupCmdID_MIN = CID_GROUP_NORMAL_LIST_REQUEST;
+const GroupCmdID GroupCmdID_MIN = CID_GROUP_UNIVERSAL;
 const GroupCmdID GroupCmdID_MAX = CID_GROUP_CHANGE_MEMBER_NOTIFY;
 const int GroupCmdID_ARRAYSIZE = GroupCmdID_MAX + 1;
 
+const ::google::protobuf::EnumDescriptor* GroupCmdID_descriptor();
+inline const ::std::string& GroupCmdID_Name(GroupCmdID value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    GroupCmdID_descriptor(), value);
+}
+inline bool GroupCmdID_Parse(
+    const ::std::string& name, GroupCmdID* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<GroupCmdID>(
+    GroupCmdID_descriptor(), name, value);
+}
 enum FileCmdID {
+  CID_FILE_UNIVERSAL = 0,
   CID_FILE_LOGIN_REQ = 1281,
   CID_FILE_LOGIN_RES = 1282,
   CID_FILE_STATE = 1283,
@@ -257,22 +325,48 @@ enum FileCmdID {
   CID_FILE_HAS_OFFLINE_REQ = 1289,
   CID_FILE_HAS_OFFLINE_RES = 1290,
   CID_FILE_ADD_OFFLINE_REQ = 1291,
-  CID_FILE_DEL_OFFLINE_REQ = 1292
+  CID_FILE_DEL_OFFLINE_REQ = 1292,
+  FileCmdID_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  FileCmdID_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
 };
 bool FileCmdID_IsValid(int value);
-const FileCmdID FileCmdID_MIN = CID_FILE_LOGIN_REQ;
+const FileCmdID FileCmdID_MIN = CID_FILE_UNIVERSAL;
 const FileCmdID FileCmdID_MAX = CID_FILE_DEL_OFFLINE_REQ;
 const int FileCmdID_ARRAYSIZE = FileCmdID_MAX + 1;
 
+const ::google::protobuf::EnumDescriptor* FileCmdID_descriptor();
+inline const ::std::string& FileCmdID_Name(FileCmdID value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    FileCmdID_descriptor(), value);
+}
+inline bool FileCmdID_Parse(
+    const ::std::string& name, FileCmdID* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<FileCmdID>(
+    FileCmdID_descriptor(), name, value);
+}
 enum SwitchServiceCmdID {
-  CID_SWITCH_P2P_CMD = 1537
+  CID_SWITCH_P2P_UNIVERSAL = 0,
+  CID_SWITCH_P2P_CMD = 1537,
+  SwitchServiceCmdID_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  SwitchServiceCmdID_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
 };
 bool SwitchServiceCmdID_IsValid(int value);
-const SwitchServiceCmdID SwitchServiceCmdID_MIN = CID_SWITCH_P2P_CMD;
+const SwitchServiceCmdID SwitchServiceCmdID_MIN = CID_SWITCH_P2P_UNIVERSAL;
 const SwitchServiceCmdID SwitchServiceCmdID_MAX = CID_SWITCH_P2P_CMD;
 const int SwitchServiceCmdID_ARRAYSIZE = SwitchServiceCmdID_MAX + 1;
 
+const ::google::protobuf::EnumDescriptor* SwitchServiceCmdID_descriptor();
+inline const ::std::string& SwitchServiceCmdID_Name(SwitchServiceCmdID value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    SwitchServiceCmdID_descriptor(), value);
+}
+inline bool SwitchServiceCmdID_Parse(
+    const ::std::string& name, SwitchServiceCmdID* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<SwitchServiceCmdID>(
+    SwitchServiceCmdID_descriptor(), name, value);
+}
 enum OtherCmdID {
+  CID_OTHER_UNIVERSAL = 0,
   CID_OTHER_HEARTBEAT = 1793,
   CID_OTHER_STOP_RECV_PACKET = 1794,
   CID_OTHER_VALIDATE_REQ = 1795,
@@ -293,13 +387,25 @@ enum OtherCmdID {
   CID_OTHER_FILE_TRANSFER_REQ = 1841,
   CID_OTHER_FILE_TRANSFER_RSP = 1842,
   CID_OTHER_FILE_SERVER_IP_REQ = 1843,
-  CID_OTHER_FILE_SERVER_IP_RSP = 1844
+  CID_OTHER_FILE_SERVER_IP_RSP = 1844,
+  OtherCmdID_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  OtherCmdID_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
 };
 bool OtherCmdID_IsValid(int value);
-const OtherCmdID OtherCmdID_MIN = CID_OTHER_HEARTBEAT;
+const OtherCmdID OtherCmdID_MIN = CID_OTHER_UNIVERSAL;
 const OtherCmdID OtherCmdID_MAX = CID_OTHER_FILE_SERVER_IP_RSP;
 const int OtherCmdID_ARRAYSIZE = OtherCmdID_MAX + 1;
 
+const ::google::protobuf::EnumDescriptor* OtherCmdID_descriptor();
+inline const ::std::string& OtherCmdID_Name(OtherCmdID value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    OtherCmdID_descriptor(), value);
+}
+inline bool OtherCmdID_Parse(
+    const ::std::string& name, OtherCmdID* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<OtherCmdID>(
+    OtherCmdID_descriptor(), name, value);
+}
 enum ResultType {
   REFUSE_REASON_NONE = 0,
   REFUSE_REASON_NO_MSG_SERVER = 1,
@@ -308,120 +414,274 @@ enum ResultType {
   REFUSE_REASON_NO_LOGIN_SERVER = 4,
   REFUSE_REASON_NO_ROUTE_SERVER = 5,
   REFUSE_REASON_DB_VALIDATE_FAILED = 6,
-  REFUSE_REASON_VERSION_TOO_OLD = 7
+  REFUSE_REASON_VERSION_TOO_OLD = 7,
+  ResultType_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  ResultType_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
 };
 bool ResultType_IsValid(int value);
 const ResultType ResultType_MIN = REFUSE_REASON_NONE;
 const ResultType ResultType_MAX = REFUSE_REASON_VERSION_TOO_OLD;
 const int ResultType_ARRAYSIZE = ResultType_MAX + 1;
 
+const ::google::protobuf::EnumDescriptor* ResultType_descriptor();
+inline const ::std::string& ResultType_Name(ResultType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    ResultType_descriptor(), value);
+}
+inline bool ResultType_Parse(
+    const ::std::string& name, ResultType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<ResultType>(
+    ResultType_descriptor(), name, value);
+}
 enum KickReasonType {
+  KICK_REASON_UNIVERSAL = 0,
   KICK_REASON_DUPLICATE_USER = 1,
-  KICK_REASON_MOBILE_KICK = 2
+  KICK_REASON_MOBILE_KICK = 2,
+  KickReasonType_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  KickReasonType_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
 };
 bool KickReasonType_IsValid(int value);
-const KickReasonType KickReasonType_MIN = KICK_REASON_DUPLICATE_USER;
+const KickReasonType KickReasonType_MIN = KICK_REASON_UNIVERSAL;
 const KickReasonType KickReasonType_MAX = KICK_REASON_MOBILE_KICK;
 const int KickReasonType_ARRAYSIZE = KickReasonType_MAX + 1;
 
+const ::google::protobuf::EnumDescriptor* KickReasonType_descriptor();
+inline const ::std::string& KickReasonType_Name(KickReasonType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    KickReasonType_descriptor(), value);
+}
+inline bool KickReasonType_Parse(
+    const ::std::string& name, KickReasonType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<KickReasonType>(
+    KickReasonType_descriptor(), name, value);
+}
 enum OnlineListType {
-  ONLINE_LIST_TYPE_FRIEND_LIST = 1
+  ONLINE_LIST_UNIVERSAL = 0,
+  ONLINE_LIST_TYPE_FRIEND_LIST = 1,
+  OnlineListType_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  OnlineListType_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
 };
 bool OnlineListType_IsValid(int value);
-const OnlineListType OnlineListType_MIN = ONLINE_LIST_TYPE_FRIEND_LIST;
+const OnlineListType OnlineListType_MIN = ONLINE_LIST_UNIVERSAL;
 const OnlineListType OnlineListType_MAX = ONLINE_LIST_TYPE_FRIEND_LIST;
 const int OnlineListType_ARRAYSIZE = OnlineListType_MAX + 1;
 
+const ::google::protobuf::EnumDescriptor* OnlineListType_descriptor();
+inline const ::std::string& OnlineListType_Name(OnlineListType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    OnlineListType_descriptor(), value);
+}
+inline bool OnlineListType_Parse(
+    const ::std::string& name, OnlineListType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<OnlineListType>(
+    OnlineListType_descriptor(), name, value);
+}
 enum UserStatType {
+  USER_STATUS_UNIVERSAL = 0,
   USER_STATUS_ONLINE = 1,
   USER_STATUS_OFFLINE = 2,
-  USER_STATUS_LEAVE = 3
+  USER_STATUS_LEAVE = 3,
+  UserStatType_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  UserStatType_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
 };
 bool UserStatType_IsValid(int value);
-const UserStatType UserStatType_MIN = USER_STATUS_ONLINE;
+const UserStatType UserStatType_MIN = USER_STATUS_UNIVERSAL;
 const UserStatType UserStatType_MAX = USER_STATUS_LEAVE;
 const int UserStatType_ARRAYSIZE = UserStatType_MAX + 1;
 
+const ::google::protobuf::EnumDescriptor* UserStatType_descriptor();
+inline const ::std::string& UserStatType_Name(UserStatType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    UserStatType_descriptor(), value);
+}
+inline bool UserStatType_Parse(
+    const ::std::string& name, UserStatType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<UserStatType>(
+    UserStatType_descriptor(), name, value);
+}
 enum SessionType {
+  SESSION_TYPE_UNIVERSAL = 0,
   SESSION_TYPE_SINGLE = 1,
-  SESSION_TYPE_GROUP = 2
+  SESSION_TYPE_GROUP = 2,
+  SessionType_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  SessionType_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
 };
 bool SessionType_IsValid(int value);
-const SessionType SessionType_MIN = SESSION_TYPE_SINGLE;
+const SessionType SessionType_MIN = SESSION_TYPE_UNIVERSAL;
 const SessionType SessionType_MAX = SESSION_TYPE_GROUP;
 const int SessionType_ARRAYSIZE = SessionType_MAX + 1;
 
+const ::google::protobuf::EnumDescriptor* SessionType_descriptor();
+inline const ::std::string& SessionType_Name(SessionType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    SessionType_descriptor(), value);
+}
+inline bool SessionType_Parse(
+    const ::std::string& name, SessionType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<SessionType>(
+    SessionType_descriptor(), name, value);
+}
 enum MsgType {
+  MSG_TYPE_UNIVERSAL = 0,
   MSG_TYPE_SINGLE_TEXT = 1,
   MSG_TYPE_SINGLE_AUDIO = 2,
   MSG_TYPE_GROUP_TEXT = 17,
-  MSG_TYPE_GROUP_AUDIO = 18
+  MSG_TYPE_GROUP_AUDIO = 18,
+  MsgType_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  MsgType_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
 };
 bool MsgType_IsValid(int value);
-const MsgType MsgType_MIN = MSG_TYPE_SINGLE_TEXT;
+const MsgType MsgType_MIN = MSG_TYPE_UNIVERSAL;
 const MsgType MsgType_MAX = MSG_TYPE_GROUP_AUDIO;
 const int MsgType_ARRAYSIZE = MsgType_MAX + 1;
 
+const ::google::protobuf::EnumDescriptor* MsgType_descriptor();
+inline const ::std::string& MsgType_Name(MsgType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    MsgType_descriptor(), value);
+}
+inline bool MsgType_Parse(
+    const ::std::string& name, MsgType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<MsgType>(
+    MsgType_descriptor(), name, value);
+}
 enum ClientType {
+  CLIENT_TYPE_UNIVERSAL = 0,
   CLIENT_TYPE_WINDOWS = 1,
   CLIENT_TYPE_MAC = 2,
   CLIENT_TYPE_IOS = 17,
-  CLIENT_TYPE_ANDROID = 18
+  CLIENT_TYPE_ANDROID = 18,
+  ClientType_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  ClientType_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
 };
 bool ClientType_IsValid(int value);
-const ClientType ClientType_MIN = CLIENT_TYPE_WINDOWS;
+const ClientType ClientType_MIN = CLIENT_TYPE_UNIVERSAL;
 const ClientType ClientType_MAX = CLIENT_TYPE_ANDROID;
 const int ClientType_ARRAYSIZE = ClientType_MAX + 1;
 
+const ::google::protobuf::EnumDescriptor* ClientType_descriptor();
+inline const ::std::string& ClientType_Name(ClientType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    ClientType_descriptor(), value);
+}
+inline bool ClientType_Parse(
+    const ::std::string& name, ClientType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<ClientType>(
+    ClientType_descriptor(), name, value);
+}
 enum GroupType {
+  GROUP_TYPEUNIVERSAL = 0,
   GROUP_TYPE_NORMAL = 1,
-  GROUP_TYPE_TMP = 2
+  GROUP_TYPE_TMP = 2,
+  GroupType_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  GroupType_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
 };
 bool GroupType_IsValid(int value);
-const GroupType GroupType_MIN = GROUP_TYPE_NORMAL;
+const GroupType GroupType_MIN = GROUP_TYPEUNIVERSAL;
 const GroupType GroupType_MAX = GROUP_TYPE_TMP;
 const int GroupType_ARRAYSIZE = GroupType_MAX + 1;
 
+const ::google::protobuf::EnumDescriptor* GroupType_descriptor();
+inline const ::std::string& GroupType_Name(GroupType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    GroupType_descriptor(), value);
+}
+inline bool GroupType_Parse(
+    const ::std::string& name, GroupType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<GroupType>(
+    GroupType_descriptor(), name, value);
+}
 enum GroupModifyType {
+  GROUP_UNIVERSAL = 0,
   GROUP_MODIFY_TYPE_ADD = 1,
-  GROUP_MODIFY_TYPE_DEL = 2
+  GROUP_MODIFY_TYPE_DEL = 2,
+  GroupModifyType_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  GroupModifyType_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
 };
 bool GroupModifyType_IsValid(int value);
-const GroupModifyType GroupModifyType_MIN = GROUP_MODIFY_TYPE_ADD;
+const GroupModifyType GroupModifyType_MIN = GROUP_UNIVERSAL;
 const GroupModifyType GroupModifyType_MAX = GROUP_MODIFY_TYPE_DEL;
 const int GroupModifyType_ARRAYSIZE = GroupModifyType_MAX + 1;
 
+const ::google::protobuf::EnumDescriptor* GroupModifyType_descriptor();
+inline const ::std::string& GroupModifyType_Name(GroupModifyType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    GroupModifyType_descriptor(), value);
+}
+inline bool GroupModifyType_Parse(
+    const ::std::string& name, GroupModifyType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<GroupModifyType>(
+    GroupModifyType_descriptor(), name, value);
+}
 enum TransferFileType {
+  FILE_TYPE_UNIVERSAL = 0,
   FILE_TYPE_ONLINE = 1,
-  FILE_TYPE_OFFLINE = 2
+  FILE_TYPE_OFFLINE = 2,
+  TransferFileType_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  TransferFileType_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
 };
 bool TransferFileType_IsValid(int value);
-const TransferFileType TransferFileType_MIN = FILE_TYPE_ONLINE;
+const TransferFileType TransferFileType_MIN = FILE_TYPE_UNIVERSAL;
 const TransferFileType TransferFileType_MAX = FILE_TYPE_OFFLINE;
 const int TransferFileType_ARRAYSIZE = TransferFileType_MAX + 1;
 
+const ::google::protobuf::EnumDescriptor* TransferFileType_descriptor();
+inline const ::std::string& TransferFileType_Name(TransferFileType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    TransferFileType_descriptor(), value);
+}
+inline bool TransferFileType_Parse(
+    const ::std::string& name, TransferFileType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<TransferFileType>(
+    TransferFileType_descriptor(), name, value);
+}
 enum ClientFileState {
   CLIENT_FILE_PEER_READY = 0,
   CLIENT_FILE_CANCEL = 1,
   CLIENT_FILE_REFUSE = 2,
-  CLIENT_FILE_DONE = 3
+  CLIENT_FILE_DONE = 3,
+  ClientFileState_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  ClientFileState_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
 };
 bool ClientFileState_IsValid(int value);
 const ClientFileState ClientFileState_MIN = CLIENT_FILE_PEER_READY;
 const ClientFileState ClientFileState_MAX = CLIENT_FILE_DONE;
 const int ClientFileState_ARRAYSIZE = ClientFileState_MAX + 1;
 
+const ::google::protobuf::EnumDescriptor* ClientFileState_descriptor();
+inline const ::std::string& ClientFileState_Name(ClientFileState value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    ClientFileState_descriptor(), value);
+}
+inline bool ClientFileState_Parse(
+    const ::std::string& name, ClientFileState* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<ClientFileState>(
+    ClientFileState_descriptor(), name, value);
+}
 enum ClientFileRole {
+  CLIENT_REALTIME_UNIVERSAL = 0,
   CLIENT_REALTIME_SENDER = 1,
   CLIENT_REALTIME_RECVER = 2,
   CLIENT_OFFLINE_UPLOAD = 3,
-  CLIENT_OFFLINE_DOWNLOAD = 4
+  CLIENT_OFFLINE_DOWNLOAD = 4,
+  ClientFileRole_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  ClientFileRole_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
 };
 bool ClientFileRole_IsValid(int value);
-const ClientFileRole ClientFileRole_MIN = CLIENT_REALTIME_SENDER;
+const ClientFileRole ClientFileRole_MIN = CLIENT_REALTIME_UNIVERSAL;
 const ClientFileRole ClientFileRole_MAX = CLIENT_OFFLINE_DOWNLOAD;
 const int ClientFileRole_ARRAYSIZE = ClientFileRole_MAX + 1;
 
+const ::google::protobuf::EnumDescriptor* ClientFileRole_descriptor();
+inline const ::std::string& ClientFileRole_Name(ClientFileRole value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    ClientFileRole_descriptor(), value);
+}
+inline bool ClientFileRole_Parse(
+    const ::std::string& name, ClientFileRole* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<ClientFileRole>(
+    ClientFileRole_descriptor(), name, value);
+}
 enum FileServerError {
   FILE_SERVER_ERRNO_OK = 0,
   FILE_SERVER_ERRNO_CREATE_TASK_ID_ERROR = 1,
@@ -435,34 +695,70 @@ enum FileServerError {
   FILE_SERVER_ERRNO_PULL_DATA_READ_FILE_HEADER_ERROR = 9,
   FILE_SERVER_ERRNO_PULL_DATA_ALLOC_MEM_ERROR = 10,
   FILE_SERVER_ERRNO_PULL_DATA_SEEK_OFFSET_ERROR = 11,
-  FILE_SERVER_ERRNO_PULL_DATA_FINISHED = 12
+  FILE_SERVER_ERRNO_PULL_DATA_FINISHED = 12,
+  FileServerError_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  FileServerError_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
 };
 bool FileServerError_IsValid(int value);
 const FileServerError FileServerError_MIN = FILE_SERVER_ERRNO_OK;
 const FileServerError FileServerError_MAX = FILE_SERVER_ERRNO_PULL_DATA_FINISHED;
 const int FileServerError_ARRAYSIZE = FileServerError_MAX + 1;
 
+const ::google::protobuf::EnumDescriptor* FileServerError_descriptor();
+inline const ::std::string& FileServerError_Name(FileServerError value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    FileServerError_descriptor(), value);
+}
+inline bool FileServerError_Parse(
+    const ::std::string& name, FileServerError* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<FileServerError>(
+    FileServerError_descriptor(), name, value);
+}
 enum SessionStatusType {
   SESSION_STATUS_OK = 0,
-  SESSION_STATUS_DELETE = 1
+  SESSION_STATUS_DELETE = 1,
+  SessionStatusType_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  SessionStatusType_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
 };
 bool SessionStatusType_IsValid(int value);
 const SessionStatusType SessionStatusType_MIN = SESSION_STATUS_OK;
 const SessionStatusType SessionStatusType_MAX = SESSION_STATUS_DELETE;
 const int SessionStatusType_ARRAYSIZE = SessionStatusType_MAX + 1;
 
+const ::google::protobuf::EnumDescriptor* SessionStatusType_descriptor();
+inline const ::std::string& SessionStatusType_Name(SessionStatusType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    SessionStatusType_descriptor(), value);
+}
+inline bool SessionStatusType_Parse(
+    const ::std::string& name, SessionStatusType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<SessionStatusType>(
+    SessionStatusType_descriptor(), name, value);
+}
 enum DepartmentStatusType {
   DEPT_STATUS_OK = 0,
-  DEPT_STATUS_DELETE = 1
+  DEPT_STATUS_DELETE = 1,
+  DepartmentStatusType_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  DepartmentStatusType_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
 };
 bool DepartmentStatusType_IsValid(int value);
 const DepartmentStatusType DepartmentStatusType_MIN = DEPT_STATUS_OK;
 const DepartmentStatusType DepartmentStatusType_MAX = DEPT_STATUS_DELETE;
 const int DepartmentStatusType_ARRAYSIZE = DepartmentStatusType_MAX + 1;
 
+const ::google::protobuf::EnumDescriptor* DepartmentStatusType_descriptor();
+inline const ::std::string& DepartmentStatusType_Name(DepartmentStatusType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    DepartmentStatusType_descriptor(), value);
+}
+inline bool DepartmentStatusType_Parse(
+    const ::std::string& name, DepartmentStatusType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<DepartmentStatusType>(
+    DepartmentStatusType_descriptor(), name, value);
+}
 // ===================================================================
 
-class IpAddr : public ::google::protobuf::MessageLite /* @@protoc_insertion_point(class_definition:IM.BaseDefine.IpAddr) */ {
+class IpAddr : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:IM.BaseDefine.IpAddr) */ {
  public:
   IpAddr();
   virtual ~IpAddr();
@@ -488,13 +784,7 @@ class IpAddr : public ::google::protobuf::MessageLite /* @@protoc_insertion_poin
     return *this;
   }
   #endif
-  inline const ::std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields();
-  }
-  inline ::std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields();
-  }
-
+  static const ::google::protobuf::Descriptor* descriptor();
   static const IpAddr& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
@@ -515,8 +805,8 @@ class IpAddr : public ::google::protobuf::MessageLite /* @@protoc_insertion_poin
   inline IpAddr* New() const PROTOBUF_FINAL { return New(NULL); }
 
   IpAddr* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
-  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from)
-    PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
   void CopyFrom(const IpAddr& from);
   void MergeFrom(const IpAddr& from);
   void Clear() PROTOBUF_FINAL;
@@ -527,12 +817,13 @@ class IpAddr : public ::google::protobuf::MessageLite /* @@protoc_insertion_poin
       ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
   void SerializeWithCachedSizes(
       ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  void DiscardUnknownFields();
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
   int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
   private:
   void SharedCtor();
   void SharedDtor();
-  void SetCachedSize(int size) const;
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(IpAddr* other);
   private:
   inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
@@ -543,14 +834,13 @@ class IpAddr : public ::google::protobuf::MessageLite /* @@protoc_insertion_poin
   }
   public:
 
-  ::std::string GetTypeName() const PROTOBUF_FINAL;
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
 
   // accessors -------------------------------------------------------
 
-  // required string ip = 1;
-  bool has_ip() const;
+  // string ip = 1;
   void clear_ip();
   static const int kIpFieldNumber = 1;
   const ::std::string& ip() const;
@@ -564,8 +854,7 @@ class IpAddr : public ::google::protobuf::MessageLite /* @@protoc_insertion_poin
   ::std::string* release_ip();
   void set_allocated_ip(::std::string* ip);
 
-  // required uint32 port = 2;
-  bool has_port() const;
+  // uint32 port = 2;
   void clear_port();
   static const int kPortFieldNumber = 2;
   ::google::protobuf::uint32 port() const;
@@ -573,25 +862,17 @@ class IpAddr : public ::google::protobuf::MessageLite /* @@protoc_insertion_poin
 
   // @@protoc_insertion_point(class_scope:IM.BaseDefine.IpAddr)
  private:
-  void set_has_ip();
-  void clear_has_ip();
-  void set_has_port();
-  void clear_has_port();
 
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
-
-  ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
-  ::google::protobuf::internal::HasBits<1> _has_bits_;
-  mutable int _cached_size_;
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::ArenaStringPtr ip_;
   ::google::protobuf::uint32 port_;
+  mutable int _cached_size_;
   friend struct ::protobuf_IM_2eBaseDefine_2eproto::TableStruct;
   friend void ::protobuf_IM_2eBaseDefine_2eproto::InitDefaultsIpAddrImpl();
 };
 // -------------------------------------------------------------------
 
-class UserInfo : public ::google::protobuf::MessageLite /* @@protoc_insertion_point(class_definition:IM.BaseDefine.UserInfo) */ {
+class UserInfo : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:IM.BaseDefine.UserInfo) */ {
  public:
   UserInfo();
   virtual ~UserInfo();
@@ -617,13 +898,7 @@ class UserInfo : public ::google::protobuf::MessageLite /* @@protoc_insertion_po
     return *this;
   }
   #endif
-  inline const ::std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields();
-  }
-  inline ::std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields();
-  }
-
+  static const ::google::protobuf::Descriptor* descriptor();
   static const UserInfo& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
@@ -644,8 +919,8 @@ class UserInfo : public ::google::protobuf::MessageLite /* @@protoc_insertion_po
   inline UserInfo* New() const PROTOBUF_FINAL { return New(NULL); }
 
   UserInfo* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
-  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from)
-    PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
   void CopyFrom(const UserInfo& from);
   void MergeFrom(const UserInfo& from);
   void Clear() PROTOBUF_FINAL;
@@ -656,12 +931,13 @@ class UserInfo : public ::google::protobuf::MessageLite /* @@protoc_insertion_po
       ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
   void SerializeWithCachedSizes(
       ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  void DiscardUnknownFields();
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
   int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
   private:
   void SharedCtor();
   void SharedDtor();
-  void SetCachedSize(int size) const;
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(UserInfo* other);
   private:
   inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
@@ -672,14 +948,13 @@ class UserInfo : public ::google::protobuf::MessageLite /* @@protoc_insertion_po
   }
   public:
 
-  ::std::string GetTypeName() const PROTOBUF_FINAL;
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
 
   // accessors -------------------------------------------------------
 
-  // required string user_nick_name = 3;
-  bool has_user_nick_name() const;
+  // string user_nick_name = 3;
   void clear_user_nick_name();
   static const int kUserNickNameFieldNumber = 3;
   const ::std::string& user_nick_name() const;
@@ -693,8 +968,7 @@ class UserInfo : public ::google::protobuf::MessageLite /* @@protoc_insertion_po
   ::std::string* release_user_nick_name();
   void set_allocated_user_nick_name(::std::string* user_nick_name);
 
-  // required string avatar_url = 4;
-  bool has_avatar_url() const;
+  // string avatar_url = 4;
   void clear_avatar_url();
   static const int kAvatarUrlFieldNumber = 4;
   const ::std::string& avatar_url() const;
@@ -708,8 +982,7 @@ class UserInfo : public ::google::protobuf::MessageLite /* @@protoc_insertion_po
   ::std::string* release_avatar_url();
   void set_allocated_avatar_url(::std::string* avatar_url);
 
-  // required string email = 6;
-  bool has_email() const;
+  // string email = 6;
   void clear_email();
   static const int kEmailFieldNumber = 6;
   const ::std::string& email() const;
@@ -723,8 +996,7 @@ class UserInfo : public ::google::protobuf::MessageLite /* @@protoc_insertion_po
   ::std::string* release_email();
   void set_allocated_email(::std::string* email);
 
-  // required string user_real_name = 7;
-  bool has_user_real_name() const;
+  // string user_real_name = 7;
   void clear_user_real_name();
   static const int kUserRealNameFieldNumber = 7;
   const ::std::string& user_real_name() const;
@@ -738,8 +1010,7 @@ class UserInfo : public ::google::protobuf::MessageLite /* @@protoc_insertion_po
   ::std::string* release_user_real_name();
   void set_allocated_user_real_name(::std::string* user_real_name);
 
-  // required string user_tel = 8;
-  bool has_user_tel() const;
+  // string user_tel = 8;
   void clear_user_tel();
   static const int kUserTelFieldNumber = 8;
   const ::std::string& user_tel() const;
@@ -753,8 +1024,7 @@ class UserInfo : public ::google::protobuf::MessageLite /* @@protoc_insertion_po
   ::std::string* release_user_tel();
   void set_allocated_user_tel(::std::string* user_tel);
 
-  // required string user_domain = 9;
-  bool has_user_domain() const;
+  // string user_domain = 9;
   void clear_user_domain();
   static const int kUserDomainFieldNumber = 9;
   const ::std::string& user_domain() const;
@@ -768,8 +1038,7 @@ class UserInfo : public ::google::protobuf::MessageLite /* @@protoc_insertion_po
   ::std::string* release_user_domain();
   void set_allocated_user_domain(::std::string* user_domain);
 
-  // optional string sign_info = 11;
-  bool has_sign_info() const;
+  // string sign_info = 11;
   void clear_sign_info();
   static const int kSignInfoFieldNumber = 11;
   const ::std::string& sign_info() const;
@@ -783,29 +1052,25 @@ class UserInfo : public ::google::protobuf::MessageLite /* @@protoc_insertion_po
   ::std::string* release_sign_info();
   void set_allocated_sign_info(::std::string* sign_info);
 
-  // required uint32 user_id = 1;
-  bool has_user_id() const;
+  // uint32 user_id = 1;
   void clear_user_id();
   static const int kUserIdFieldNumber = 1;
   ::google::protobuf::uint32 user_id() const;
   void set_user_id(::google::protobuf::uint32 value);
 
-  // required uint32 user_gender = 2;
-  bool has_user_gender() const;
+  // uint32 user_gender = 2;
   void clear_user_gender();
   static const int kUserGenderFieldNumber = 2;
   ::google::protobuf::uint32 user_gender() const;
   void set_user_gender(::google::protobuf::uint32 value);
 
-  // required uint32 department_id = 5;
-  bool has_department_id() const;
+  // uint32 department_id = 5;
   void clear_department_id();
   static const int kDepartmentIdFieldNumber = 5;
   ::google::protobuf::uint32 department_id() const;
   void set_department_id(::google::protobuf::uint32 value);
 
-  // required uint32 status = 10;
-  bool has_status() const;
+  // uint32 status = 10;
   void clear_status();
   static const int kStatusFieldNumber = 10;
   ::google::protobuf::uint32 status() const;
@@ -813,35 +1078,8 @@ class UserInfo : public ::google::protobuf::MessageLite /* @@protoc_insertion_po
 
   // @@protoc_insertion_point(class_scope:IM.BaseDefine.UserInfo)
  private:
-  void set_has_user_id();
-  void clear_has_user_id();
-  void set_has_user_gender();
-  void clear_has_user_gender();
-  void set_has_user_nick_name();
-  void clear_has_user_nick_name();
-  void set_has_avatar_url();
-  void clear_has_avatar_url();
-  void set_has_department_id();
-  void clear_has_department_id();
-  void set_has_email();
-  void clear_has_email();
-  void set_has_user_real_name();
-  void clear_has_user_real_name();
-  void set_has_user_tel();
-  void clear_has_user_tel();
-  void set_has_user_domain();
-  void clear_has_user_domain();
-  void set_has_status();
-  void clear_has_status();
-  void set_has_sign_info();
-  void clear_has_sign_info();
 
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
-
-  ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
-  ::google::protobuf::internal::HasBits<1> _has_bits_;
-  mutable int _cached_size_;
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::ArenaStringPtr user_nick_name_;
   ::google::protobuf::internal::ArenaStringPtr avatar_url_;
   ::google::protobuf::internal::ArenaStringPtr email_;
@@ -853,12 +1091,13 @@ class UserInfo : public ::google::protobuf::MessageLite /* @@protoc_insertion_po
   ::google::protobuf::uint32 user_gender_;
   ::google::protobuf::uint32 department_id_;
   ::google::protobuf::uint32 status_;
+  mutable int _cached_size_;
   friend struct ::protobuf_IM_2eBaseDefine_2eproto::TableStruct;
   friend void ::protobuf_IM_2eBaseDefine_2eproto::InitDefaultsUserInfoImpl();
 };
 // -------------------------------------------------------------------
 
-class ContactSessionInfo : public ::google::protobuf::MessageLite /* @@protoc_insertion_point(class_definition:IM.BaseDefine.ContactSessionInfo) */ {
+class ContactSessionInfo : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:IM.BaseDefine.ContactSessionInfo) */ {
  public:
   ContactSessionInfo();
   virtual ~ContactSessionInfo();
@@ -884,13 +1123,7 @@ class ContactSessionInfo : public ::google::protobuf::MessageLite /* @@protoc_in
     return *this;
   }
   #endif
-  inline const ::std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields();
-  }
-  inline ::std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields();
-  }
-
+  static const ::google::protobuf::Descriptor* descriptor();
   static const ContactSessionInfo& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
@@ -911,8 +1144,8 @@ class ContactSessionInfo : public ::google::protobuf::MessageLite /* @@protoc_in
   inline ContactSessionInfo* New() const PROTOBUF_FINAL { return New(NULL); }
 
   ContactSessionInfo* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
-  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from)
-    PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
   void CopyFrom(const ContactSessionInfo& from);
   void MergeFrom(const ContactSessionInfo& from);
   void Clear() PROTOBUF_FINAL;
@@ -923,12 +1156,13 @@ class ContactSessionInfo : public ::google::protobuf::MessageLite /* @@protoc_in
       ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
   void SerializeWithCachedSizes(
       ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  void DiscardUnknownFields();
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
   int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
   private:
   void SharedCtor();
   void SharedDtor();
-  void SetCachedSize(int size) const;
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(ContactSessionInfo* other);
   private:
   inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
@@ -939,14 +1173,13 @@ class ContactSessionInfo : public ::google::protobuf::MessageLite /* @@protoc_in
   }
   public:
 
-  ::std::string GetTypeName() const PROTOBUF_FINAL;
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
 
   // accessors -------------------------------------------------------
 
-  // required bytes latest_msg_data = 6;
-  bool has_latest_msg_data() const;
+  // bytes latest_msg_data = 6;
   void clear_latest_msg_data();
   static const int kLatestMsgDataFieldNumber = 6;
   const ::std::string& latest_msg_data() const;
@@ -960,94 +1193,67 @@ class ContactSessionInfo : public ::google::protobuf::MessageLite /* @@protoc_in
   ::std::string* release_latest_msg_data();
   void set_allocated_latest_msg_data(::std::string* latest_msg_data);
 
-  // required uint32 session_id = 1;
-  bool has_session_id() const;
+  // uint32 session_id = 1;
   void clear_session_id();
   static const int kSessionIdFieldNumber = 1;
   ::google::protobuf::uint32 session_id() const;
   void set_session_id(::google::protobuf::uint32 value);
 
-  // required .IM.BaseDefine.SessionStatusType session_status = 3;
-  bool has_session_status() const;
-  void clear_session_status();
-  static const int kSessionStatusFieldNumber = 3;
-  ::IM::BaseDefine::SessionStatusType session_status() const;
-  void set_session_status(::IM::BaseDefine::SessionStatusType value);
-
-  // required uint32 updated_time = 4;
-  bool has_updated_time() const;
-  void clear_updated_time();
-  static const int kUpdatedTimeFieldNumber = 4;
-  ::google::protobuf::uint32 updated_time() const;
-  void set_updated_time(::google::protobuf::uint32 value);
-
-  // required uint32 latest_msg_id = 5;
-  bool has_latest_msg_id() const;
-  void clear_latest_msg_id();
-  static const int kLatestMsgIdFieldNumber = 5;
-  ::google::protobuf::uint32 latest_msg_id() const;
-  void set_latest_msg_id(::google::protobuf::uint32 value);
-
-  // required uint32 latest_msg_from_user_id = 8;
-  bool has_latest_msg_from_user_id() const;
-  void clear_latest_msg_from_user_id();
-  static const int kLatestMsgFromUserIdFieldNumber = 8;
-  ::google::protobuf::uint32 latest_msg_from_user_id() const;
-  void set_latest_msg_from_user_id(::google::protobuf::uint32 value);
-
-  // required .IM.BaseDefine.SessionType session_type = 2;
-  bool has_session_type() const;
+  // .IM.BaseDefine.SessionType session_type = 2;
   void clear_session_type();
   static const int kSessionTypeFieldNumber = 2;
   ::IM::BaseDefine::SessionType session_type() const;
   void set_session_type(::IM::BaseDefine::SessionType value);
 
-  // required .IM.BaseDefine.MsgType latest_msg_type = 7;
-  bool has_latest_msg_type() const;
+  // .IM.BaseDefine.SessionStatusType session_status = 3;
+  void clear_session_status();
+  static const int kSessionStatusFieldNumber = 3;
+  ::IM::BaseDefine::SessionStatusType session_status() const;
+  void set_session_status(::IM::BaseDefine::SessionStatusType value);
+
+  // uint32 updated_time = 4;
+  void clear_updated_time();
+  static const int kUpdatedTimeFieldNumber = 4;
+  ::google::protobuf::uint32 updated_time() const;
+  void set_updated_time(::google::protobuf::uint32 value);
+
+  // uint32 latest_msg_id = 5;
+  void clear_latest_msg_id();
+  static const int kLatestMsgIdFieldNumber = 5;
+  ::google::protobuf::uint32 latest_msg_id() const;
+  void set_latest_msg_id(::google::protobuf::uint32 value);
+
+  // .IM.BaseDefine.MsgType latest_msg_type = 7;
   void clear_latest_msg_type();
   static const int kLatestMsgTypeFieldNumber = 7;
   ::IM::BaseDefine::MsgType latest_msg_type() const;
   void set_latest_msg_type(::IM::BaseDefine::MsgType value);
 
+  // uint32 latest_msg_from_user_id = 8;
+  void clear_latest_msg_from_user_id();
+  static const int kLatestMsgFromUserIdFieldNumber = 8;
+  ::google::protobuf::uint32 latest_msg_from_user_id() const;
+  void set_latest_msg_from_user_id(::google::protobuf::uint32 value);
+
   // @@protoc_insertion_point(class_scope:IM.BaseDefine.ContactSessionInfo)
  private:
-  void set_has_session_id();
-  void clear_has_session_id();
-  void set_has_session_type();
-  void clear_has_session_type();
-  void set_has_session_status();
-  void clear_has_session_status();
-  void set_has_updated_time();
-  void clear_has_updated_time();
-  void set_has_latest_msg_id();
-  void clear_has_latest_msg_id();
-  void set_has_latest_msg_data();
-  void clear_has_latest_msg_data();
-  void set_has_latest_msg_type();
-  void clear_has_latest_msg_type();
-  void set_has_latest_msg_from_user_id();
-  void clear_has_latest_msg_from_user_id();
 
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
-
-  ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
-  ::google::protobuf::internal::HasBits<1> _has_bits_;
-  mutable int _cached_size_;
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::ArenaStringPtr latest_msg_data_;
   ::google::protobuf::uint32 session_id_;
+  int session_type_;
   int session_status_;
   ::google::protobuf::uint32 updated_time_;
   ::google::protobuf::uint32 latest_msg_id_;
-  ::google::protobuf::uint32 latest_msg_from_user_id_;
-  int session_type_;
   int latest_msg_type_;
+  ::google::protobuf::uint32 latest_msg_from_user_id_;
+  mutable int _cached_size_;
   friend struct ::protobuf_IM_2eBaseDefine_2eproto::TableStruct;
   friend void ::protobuf_IM_2eBaseDefine_2eproto::InitDefaultsContactSessionInfoImpl();
 };
 // -------------------------------------------------------------------
 
-class UserStat : public ::google::protobuf::MessageLite /* @@protoc_insertion_point(class_definition:IM.BaseDefine.UserStat) */ {
+class UserStat : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:IM.BaseDefine.UserStat) */ {
  public:
   UserStat();
   virtual ~UserStat();
@@ -1073,13 +1279,7 @@ class UserStat : public ::google::protobuf::MessageLite /* @@protoc_insertion_po
     return *this;
   }
   #endif
-  inline const ::std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields();
-  }
-  inline ::std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields();
-  }
-
+  static const ::google::protobuf::Descriptor* descriptor();
   static const UserStat& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
@@ -1100,8 +1300,8 @@ class UserStat : public ::google::protobuf::MessageLite /* @@protoc_insertion_po
   inline UserStat* New() const PROTOBUF_FINAL { return New(NULL); }
 
   UserStat* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
-  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from)
-    PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
   void CopyFrom(const UserStat& from);
   void MergeFrom(const UserStat& from);
   void Clear() PROTOBUF_FINAL;
@@ -1112,12 +1312,13 @@ class UserStat : public ::google::protobuf::MessageLite /* @@protoc_insertion_po
       ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
   void SerializeWithCachedSizes(
       ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  void DiscardUnknownFields();
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
   int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
   private:
   void SharedCtor();
   void SharedDtor();
-  void SetCachedSize(int size) const;
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(UserStat* other);
   private:
   inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
@@ -1128,21 +1329,19 @@ class UserStat : public ::google::protobuf::MessageLite /* @@protoc_insertion_po
   }
   public:
 
-  ::std::string GetTypeName() const PROTOBUF_FINAL;
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
 
   // accessors -------------------------------------------------------
 
-  // required uint32 user_id = 1;
-  bool has_user_id() const;
+  // uint32 user_id = 1;
   void clear_user_id();
   static const int kUserIdFieldNumber = 1;
   ::google::protobuf::uint32 user_id() const;
   void set_user_id(::google::protobuf::uint32 value);
 
-  // required .IM.BaseDefine.UserStatType status = 2;
-  bool has_status() const;
+  // .IM.BaseDefine.UserStatType status = 2;
   void clear_status();
   static const int kStatusFieldNumber = 2;
   ::IM::BaseDefine::UserStatType status() const;
@@ -1150,25 +1349,17 @@ class UserStat : public ::google::protobuf::MessageLite /* @@protoc_insertion_po
 
   // @@protoc_insertion_point(class_scope:IM.BaseDefine.UserStat)
  private:
-  void set_has_user_id();
-  void clear_has_user_id();
-  void set_has_status();
-  void clear_has_status();
 
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
-
-  ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
-  ::google::protobuf::internal::HasBits<1> _has_bits_;
-  mutable int _cached_size_;
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::uint32 user_id_;
   int status_;
+  mutable int _cached_size_;
   friend struct ::protobuf_IM_2eBaseDefine_2eproto::TableStruct;
   friend void ::protobuf_IM_2eBaseDefine_2eproto::InitDefaultsUserStatImpl();
 };
 // -------------------------------------------------------------------
 
-class ServerUserStat : public ::google::protobuf::MessageLite /* @@protoc_insertion_point(class_definition:IM.BaseDefine.ServerUserStat) */ {
+class ServerUserStat : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:IM.BaseDefine.ServerUserStat) */ {
  public:
   ServerUserStat();
   virtual ~ServerUserStat();
@@ -1194,13 +1385,7 @@ class ServerUserStat : public ::google::protobuf::MessageLite /* @@protoc_insert
     return *this;
   }
   #endif
-  inline const ::std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields();
-  }
-  inline ::std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields();
-  }
-
+  static const ::google::protobuf::Descriptor* descriptor();
   static const ServerUserStat& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
@@ -1221,8 +1406,8 @@ class ServerUserStat : public ::google::protobuf::MessageLite /* @@protoc_insert
   inline ServerUserStat* New() const PROTOBUF_FINAL { return New(NULL); }
 
   ServerUserStat* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
-  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from)
-    PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
   void CopyFrom(const ServerUserStat& from);
   void MergeFrom(const ServerUserStat& from);
   void Clear() PROTOBUF_FINAL;
@@ -1233,12 +1418,13 @@ class ServerUserStat : public ::google::protobuf::MessageLite /* @@protoc_insert
       ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
   void SerializeWithCachedSizes(
       ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  void DiscardUnknownFields();
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
   int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
   private:
   void SharedCtor();
   void SharedDtor();
-  void SetCachedSize(int size) const;
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(ServerUserStat* other);
   private:
   inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
@@ -1249,28 +1435,25 @@ class ServerUserStat : public ::google::protobuf::MessageLite /* @@protoc_insert
   }
   public:
 
-  ::std::string GetTypeName() const PROTOBUF_FINAL;
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
 
   // accessors -------------------------------------------------------
 
-  // required uint32 user_id = 1;
-  bool has_user_id() const;
+  // uint32 user_id = 1;
   void clear_user_id();
   static const int kUserIdFieldNumber = 1;
   ::google::protobuf::uint32 user_id() const;
   void set_user_id(::google::protobuf::uint32 value);
 
-  // required .IM.BaseDefine.UserStatType status = 2;
-  bool has_status() const;
+  // .IM.BaseDefine.UserStatType status = 2;
   void clear_status();
   static const int kStatusFieldNumber = 2;
   ::IM::BaseDefine::UserStatType status() const;
   void set_status(::IM::BaseDefine::UserStatType value);
 
-  // required .IM.BaseDefine.ClientType client_type = 3;
-  bool has_client_type() const;
+  // .IM.BaseDefine.ClientType client_type = 3;
   void clear_client_type();
   static const int kClientTypeFieldNumber = 3;
   ::IM::BaseDefine::ClientType client_type() const;
@@ -1278,28 +1461,18 @@ class ServerUserStat : public ::google::protobuf::MessageLite /* @@protoc_insert
 
   // @@protoc_insertion_point(class_scope:IM.BaseDefine.ServerUserStat)
  private:
-  void set_has_user_id();
-  void clear_has_user_id();
-  void set_has_status();
-  void clear_has_status();
-  void set_has_client_type();
-  void clear_has_client_type();
 
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
-
-  ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
-  ::google::protobuf::internal::HasBits<1> _has_bits_;
-  mutable int _cached_size_;
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::uint32 user_id_;
   int status_;
   int client_type_;
+  mutable int _cached_size_;
   friend struct ::protobuf_IM_2eBaseDefine_2eproto::TableStruct;
   friend void ::protobuf_IM_2eBaseDefine_2eproto::InitDefaultsServerUserStatImpl();
 };
 // -------------------------------------------------------------------
 
-class UnreadInfo : public ::google::protobuf::MessageLite /* @@protoc_insertion_point(class_definition:IM.BaseDefine.UnreadInfo) */ {
+class UnreadInfo : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:IM.BaseDefine.UnreadInfo) */ {
  public:
   UnreadInfo();
   virtual ~UnreadInfo();
@@ -1325,13 +1498,7 @@ class UnreadInfo : public ::google::protobuf::MessageLite /* @@protoc_insertion_
     return *this;
   }
   #endif
-  inline const ::std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields();
-  }
-  inline ::std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields();
-  }
-
+  static const ::google::protobuf::Descriptor* descriptor();
   static const UnreadInfo& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
@@ -1352,8 +1519,8 @@ class UnreadInfo : public ::google::protobuf::MessageLite /* @@protoc_insertion_
   inline UnreadInfo* New() const PROTOBUF_FINAL { return New(NULL); }
 
   UnreadInfo* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
-  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from)
-    PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
   void CopyFrom(const UnreadInfo& from);
   void MergeFrom(const UnreadInfo& from);
   void Clear() PROTOBUF_FINAL;
@@ -1364,12 +1531,13 @@ class UnreadInfo : public ::google::protobuf::MessageLite /* @@protoc_insertion_
       ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
   void SerializeWithCachedSizes(
       ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  void DiscardUnknownFields();
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
   int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
   private:
   void SharedCtor();
   void SharedDtor();
-  void SetCachedSize(int size) const;
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(UnreadInfo* other);
   private:
   inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
@@ -1380,14 +1548,13 @@ class UnreadInfo : public ::google::protobuf::MessageLite /* @@protoc_insertion_
   }
   public:
 
-  ::std::string GetTypeName() const PROTOBUF_FINAL;
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
 
   // accessors -------------------------------------------------------
 
-  // required bytes latest_msg_data = 5;
-  bool has_latest_msg_data() const;
+  // bytes latest_msg_data = 5;
   void clear_latest_msg_data();
   static const int kLatestMsgDataFieldNumber = 5;
   const ::std::string& latest_msg_data() const;
@@ -1401,84 +1568,60 @@ class UnreadInfo : public ::google::protobuf::MessageLite /* @@protoc_insertion_
   ::std::string* release_latest_msg_data();
   void set_allocated_latest_msg_data(::std::string* latest_msg_data);
 
-  // required uint32 session_id = 1;
-  bool has_session_id() const;
+  // uint32 session_id = 1;
   void clear_session_id();
   static const int kSessionIdFieldNumber = 1;
   ::google::protobuf::uint32 session_id() const;
   void set_session_id(::google::protobuf::uint32 value);
 
-  // required uint32 unread_cnt = 3;
-  bool has_unread_cnt() const;
-  void clear_unread_cnt();
-  static const int kUnreadCntFieldNumber = 3;
-  ::google::protobuf::uint32 unread_cnt() const;
-  void set_unread_cnt(::google::protobuf::uint32 value);
-
-  // required uint32 latest_msg_id = 4;
-  bool has_latest_msg_id() const;
-  void clear_latest_msg_id();
-  static const int kLatestMsgIdFieldNumber = 4;
-  ::google::protobuf::uint32 latest_msg_id() const;
-  void set_latest_msg_id(::google::protobuf::uint32 value);
-
-  // required uint32 latest_msg_from_user_id = 7;
-  bool has_latest_msg_from_user_id() const;
-  void clear_latest_msg_from_user_id();
-  static const int kLatestMsgFromUserIdFieldNumber = 7;
-  ::google::protobuf::uint32 latest_msg_from_user_id() const;
-  void set_latest_msg_from_user_id(::google::protobuf::uint32 value);
-
-  // required .IM.BaseDefine.SessionType session_type = 2;
-  bool has_session_type() const;
+  // .IM.BaseDefine.SessionType session_type = 2;
   void clear_session_type();
   static const int kSessionTypeFieldNumber = 2;
   ::IM::BaseDefine::SessionType session_type() const;
   void set_session_type(::IM::BaseDefine::SessionType value);
 
-  // required .IM.BaseDefine.MsgType latest_msg_type = 6;
-  bool has_latest_msg_type() const;
+  // uint32 unread_cnt = 3;
+  void clear_unread_cnt();
+  static const int kUnreadCntFieldNumber = 3;
+  ::google::protobuf::uint32 unread_cnt() const;
+  void set_unread_cnt(::google::protobuf::uint32 value);
+
+  // uint32 latest_msg_id = 4;
+  void clear_latest_msg_id();
+  static const int kLatestMsgIdFieldNumber = 4;
+  ::google::protobuf::uint32 latest_msg_id() const;
+  void set_latest_msg_id(::google::protobuf::uint32 value);
+
+  // .IM.BaseDefine.MsgType latest_msg_type = 6;
   void clear_latest_msg_type();
   static const int kLatestMsgTypeFieldNumber = 6;
   ::IM::BaseDefine::MsgType latest_msg_type() const;
   void set_latest_msg_type(::IM::BaseDefine::MsgType value);
 
+  // uint32 latest_msg_from_user_id = 7;
+  void clear_latest_msg_from_user_id();
+  static const int kLatestMsgFromUserIdFieldNumber = 7;
+  ::google::protobuf::uint32 latest_msg_from_user_id() const;
+  void set_latest_msg_from_user_id(::google::protobuf::uint32 value);
+
   // @@protoc_insertion_point(class_scope:IM.BaseDefine.UnreadInfo)
  private:
-  void set_has_session_id();
-  void clear_has_session_id();
-  void set_has_session_type();
-  void clear_has_session_type();
-  void set_has_unread_cnt();
-  void clear_has_unread_cnt();
-  void set_has_latest_msg_id();
-  void clear_has_latest_msg_id();
-  void set_has_latest_msg_data();
-  void clear_has_latest_msg_data();
-  void set_has_latest_msg_type();
-  void clear_has_latest_msg_type();
-  void set_has_latest_msg_from_user_id();
-  void clear_has_latest_msg_from_user_id();
 
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
-
-  ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
-  ::google::protobuf::internal::HasBits<1> _has_bits_;
-  mutable int _cached_size_;
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::ArenaStringPtr latest_msg_data_;
   ::google::protobuf::uint32 session_id_;
+  int session_type_;
   ::google::protobuf::uint32 unread_cnt_;
   ::google::protobuf::uint32 latest_msg_id_;
-  ::google::protobuf::uint32 latest_msg_from_user_id_;
-  int session_type_;
   int latest_msg_type_;
+  ::google::protobuf::uint32 latest_msg_from_user_id_;
+  mutable int _cached_size_;
   friend struct ::protobuf_IM_2eBaseDefine_2eproto::TableStruct;
   friend void ::protobuf_IM_2eBaseDefine_2eproto::InitDefaultsUnreadInfoImpl();
 };
 // -------------------------------------------------------------------
 
-class MsgInfo : public ::google::protobuf::MessageLite /* @@protoc_insertion_point(class_definition:IM.BaseDefine.MsgInfo) */ {
+class MsgInfo : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:IM.BaseDefine.MsgInfo) */ {
  public:
   MsgInfo();
   virtual ~MsgInfo();
@@ -1504,13 +1647,7 @@ class MsgInfo : public ::google::protobuf::MessageLite /* @@protoc_insertion_poi
     return *this;
   }
   #endif
-  inline const ::std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields();
-  }
-  inline ::std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields();
-  }
-
+  static const ::google::protobuf::Descriptor* descriptor();
   static const MsgInfo& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
@@ -1531,8 +1668,8 @@ class MsgInfo : public ::google::protobuf::MessageLite /* @@protoc_insertion_poi
   inline MsgInfo* New() const PROTOBUF_FINAL { return New(NULL); }
 
   MsgInfo* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
-  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from)
-    PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
   void CopyFrom(const MsgInfo& from);
   void MergeFrom(const MsgInfo& from);
   void Clear() PROTOBUF_FINAL;
@@ -1543,12 +1680,13 @@ class MsgInfo : public ::google::protobuf::MessageLite /* @@protoc_insertion_poi
       ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
   void SerializeWithCachedSizes(
       ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  void DiscardUnknownFields();
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
   int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
   private:
   void SharedCtor();
   void SharedDtor();
-  void SetCachedSize(int size) const;
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(MsgInfo* other);
   private:
   inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
@@ -1559,14 +1697,13 @@ class MsgInfo : public ::google::protobuf::MessageLite /* @@protoc_insertion_poi
   }
   public:
 
-  ::std::string GetTypeName() const PROTOBUF_FINAL;
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
 
   // accessors -------------------------------------------------------
 
-  // required bytes msg_data = 5;
-  bool has_msg_data() const;
+  // bytes msg_data = 5;
   void clear_msg_data();
   static const int kMsgDataFieldNumber = 5;
   const ::std::string& msg_data() const;
@@ -1580,29 +1717,25 @@ class MsgInfo : public ::google::protobuf::MessageLite /* @@protoc_insertion_poi
   ::std::string* release_msg_data();
   void set_allocated_msg_data(::std::string* msg_data);
 
-  // required uint32 msg_id = 1;
-  bool has_msg_id() const;
+  // uint32 msg_id = 1;
   void clear_msg_id();
   static const int kMsgIdFieldNumber = 1;
   ::google::protobuf::uint32 msg_id() const;
   void set_msg_id(::google::protobuf::uint32 value);
 
-  // required uint32 from_session_id = 2;
-  bool has_from_session_id() const;
+  // uint32 from_session_id = 2;
   void clear_from_session_id();
   static const int kFromSessionIdFieldNumber = 2;
   ::google::protobuf::uint32 from_session_id() const;
   void set_from_session_id(::google::protobuf::uint32 value);
 
-  // required uint32 create_time = 3;
-  bool has_create_time() const;
+  // uint32 create_time = 3;
   void clear_create_time();
   static const int kCreateTimeFieldNumber = 3;
   ::google::protobuf::uint32 create_time() const;
   void set_create_time(::google::protobuf::uint32 value);
 
-  // required .IM.BaseDefine.MsgType msg_type = 4;
-  bool has_msg_type() const;
+  // .IM.BaseDefine.MsgType msg_type = 4;
   void clear_msg_type();
   static const int kMsgTypeFieldNumber = 4;
   ::IM::BaseDefine::MsgType msg_type() const;
@@ -1610,34 +1743,20 @@ class MsgInfo : public ::google::protobuf::MessageLite /* @@protoc_insertion_poi
 
   // @@protoc_insertion_point(class_scope:IM.BaseDefine.MsgInfo)
  private:
-  void set_has_msg_id();
-  void clear_has_msg_id();
-  void set_has_from_session_id();
-  void clear_has_from_session_id();
-  void set_has_create_time();
-  void clear_has_create_time();
-  void set_has_msg_type();
-  void clear_has_msg_type();
-  void set_has_msg_data();
-  void clear_has_msg_data();
 
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
-
-  ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
-  ::google::protobuf::internal::HasBits<1> _has_bits_;
-  mutable int _cached_size_;
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::ArenaStringPtr msg_data_;
   ::google::protobuf::uint32 msg_id_;
   ::google::protobuf::uint32 from_session_id_;
   ::google::protobuf::uint32 create_time_;
   int msg_type_;
+  mutable int _cached_size_;
   friend struct ::protobuf_IM_2eBaseDefine_2eproto::TableStruct;
   friend void ::protobuf_IM_2eBaseDefine_2eproto::InitDefaultsMsgInfoImpl();
 };
 // -------------------------------------------------------------------
 
-class GroupVersionInfo : public ::google::protobuf::MessageLite /* @@protoc_insertion_point(class_definition:IM.BaseDefine.GroupVersionInfo) */ {
+class GroupVersionInfo : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:IM.BaseDefine.GroupVersionInfo) */ {
  public:
   GroupVersionInfo();
   virtual ~GroupVersionInfo();
@@ -1663,13 +1782,7 @@ class GroupVersionInfo : public ::google::protobuf::MessageLite /* @@protoc_inse
     return *this;
   }
   #endif
-  inline const ::std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields();
-  }
-  inline ::std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields();
-  }
-
+  static const ::google::protobuf::Descriptor* descriptor();
   static const GroupVersionInfo& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
@@ -1690,8 +1803,8 @@ class GroupVersionInfo : public ::google::protobuf::MessageLite /* @@protoc_inse
   inline GroupVersionInfo* New() const PROTOBUF_FINAL { return New(NULL); }
 
   GroupVersionInfo* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
-  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from)
-    PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
   void CopyFrom(const GroupVersionInfo& from);
   void MergeFrom(const GroupVersionInfo& from);
   void Clear() PROTOBUF_FINAL;
@@ -1702,12 +1815,13 @@ class GroupVersionInfo : public ::google::protobuf::MessageLite /* @@protoc_inse
       ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
   void SerializeWithCachedSizes(
       ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  void DiscardUnknownFields();
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
   int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
   private:
   void SharedCtor();
   void SharedDtor();
-  void SetCachedSize(int size) const;
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(GroupVersionInfo* other);
   private:
   inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
@@ -1718,21 +1832,19 @@ class GroupVersionInfo : public ::google::protobuf::MessageLite /* @@protoc_inse
   }
   public:
 
-  ::std::string GetTypeName() const PROTOBUF_FINAL;
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
 
   // accessors -------------------------------------------------------
 
-  // required uint32 group_id = 1;
-  bool has_group_id() const;
+  // uint32 group_id = 1;
   void clear_group_id();
   static const int kGroupIdFieldNumber = 1;
   ::google::protobuf::uint32 group_id() const;
   void set_group_id(::google::protobuf::uint32 value);
 
-  // required uint32 version = 2;
-  bool has_version() const;
+  // uint32 version = 2;
   void clear_version();
   static const int kVersionFieldNumber = 2;
   ::google::protobuf::uint32 version() const;
@@ -1740,25 +1852,17 @@ class GroupVersionInfo : public ::google::protobuf::MessageLite /* @@protoc_inse
 
   // @@protoc_insertion_point(class_scope:IM.BaseDefine.GroupVersionInfo)
  private:
-  void set_has_group_id();
-  void clear_has_group_id();
-  void set_has_version();
-  void clear_has_version();
 
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
-
-  ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
-  ::google::protobuf::internal::HasBits<1> _has_bits_;
-  mutable int _cached_size_;
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::uint32 group_id_;
   ::google::protobuf::uint32 version_;
+  mutable int _cached_size_;
   friend struct ::protobuf_IM_2eBaseDefine_2eproto::TableStruct;
   friend void ::protobuf_IM_2eBaseDefine_2eproto::InitDefaultsGroupVersionInfoImpl();
 };
 // -------------------------------------------------------------------
 
-class GroupInfo : public ::google::protobuf::MessageLite /* @@protoc_insertion_point(class_definition:IM.BaseDefine.GroupInfo) */ {
+class GroupInfo : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:IM.BaseDefine.GroupInfo) */ {
  public:
   GroupInfo();
   virtual ~GroupInfo();
@@ -1784,13 +1888,7 @@ class GroupInfo : public ::google::protobuf::MessageLite /* @@protoc_insertion_p
     return *this;
   }
   #endif
-  inline const ::std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields();
-  }
-  inline ::std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields();
-  }
-
+  static const ::google::protobuf::Descriptor* descriptor();
   static const GroupInfo& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
@@ -1811,8 +1909,8 @@ class GroupInfo : public ::google::protobuf::MessageLite /* @@protoc_insertion_p
   inline GroupInfo* New() const PROTOBUF_FINAL { return New(NULL); }
 
   GroupInfo* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
-  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from)
-    PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
   void CopyFrom(const GroupInfo& from);
   void MergeFrom(const GroupInfo& from);
   void Clear() PROTOBUF_FINAL;
@@ -1823,12 +1921,13 @@ class GroupInfo : public ::google::protobuf::MessageLite /* @@protoc_insertion_p
       ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
   void SerializeWithCachedSizes(
       ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  void DiscardUnknownFields();
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
   int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
   private:
   void SharedCtor();
   void SharedDtor();
-  void SetCachedSize(int size) const;
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(GroupInfo* other);
   private:
   inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
@@ -1839,7 +1938,7 @@ class GroupInfo : public ::google::protobuf::MessageLite /* @@protoc_insertion_p
   }
   public:
 
-  ::std::string GetTypeName() const PROTOBUF_FINAL;
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
 
@@ -1857,8 +1956,7 @@ class GroupInfo : public ::google::protobuf::MessageLite /* @@protoc_insertion_p
   ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >*
       mutable_group_member_list();
 
-  // required string group_name = 3;
-  bool has_group_name() const;
+  // string group_name = 3;
   void clear_group_name();
   static const int kGroupNameFieldNumber = 3;
   const ::std::string& group_name() const;
@@ -1872,8 +1970,7 @@ class GroupInfo : public ::google::protobuf::MessageLite /* @@protoc_insertion_p
   ::std::string* release_group_name();
   void set_allocated_group_name(::std::string* group_name);
 
-  // required string group_avatar = 4;
-  bool has_group_avatar() const;
+  // string group_avatar = 4;
   void clear_group_avatar();
   static const int kGroupAvatarFieldNumber = 4;
   const ::std::string& group_avatar() const;
@@ -1887,78 +1984,56 @@ class GroupInfo : public ::google::protobuf::MessageLite /* @@protoc_insertion_p
   ::std::string* release_group_avatar();
   void set_allocated_group_avatar(::std::string* group_avatar);
 
-  // required uint32 group_id = 1;
-  bool has_group_id() const;
+  // uint32 group_id = 1;
   void clear_group_id();
   static const int kGroupIdFieldNumber = 1;
   ::google::protobuf::uint32 group_id() const;
   void set_group_id(::google::protobuf::uint32 value);
 
-  // required uint32 version = 2;
-  bool has_version() const;
+  // uint32 version = 2;
   void clear_version();
   static const int kVersionFieldNumber = 2;
   ::google::protobuf::uint32 version() const;
   void set_version(::google::protobuf::uint32 value);
 
-  // required uint32 group_creator_id = 5;
-  bool has_group_creator_id() const;
+  // uint32 group_creator_id = 5;
   void clear_group_creator_id();
   static const int kGroupCreatorIdFieldNumber = 5;
   ::google::protobuf::uint32 group_creator_id() const;
   void set_group_creator_id(::google::protobuf::uint32 value);
 
-  // required uint32 shield_status = 7;
-  bool has_shield_status() const;
-  void clear_shield_status();
-  static const int kShieldStatusFieldNumber = 7;
-  ::google::protobuf::uint32 shield_status() const;
-  void set_shield_status(::google::protobuf::uint32 value);
-
-  // required .IM.BaseDefine.GroupType group_type = 6;
-  bool has_group_type() const;
+  // .IM.BaseDefine.GroupType group_type = 6;
   void clear_group_type();
   static const int kGroupTypeFieldNumber = 6;
   ::IM::BaseDefine::GroupType group_type() const;
   void set_group_type(::IM::BaseDefine::GroupType value);
 
+  // uint32 shield_status = 7;
+  void clear_shield_status();
+  static const int kShieldStatusFieldNumber = 7;
+  ::google::protobuf::uint32 shield_status() const;
+  void set_shield_status(::google::protobuf::uint32 value);
+
   // @@protoc_insertion_point(class_scope:IM.BaseDefine.GroupInfo)
  private:
-  void set_has_group_id();
-  void clear_has_group_id();
-  void set_has_version();
-  void clear_has_version();
-  void set_has_group_name();
-  void clear_has_group_name();
-  void set_has_group_avatar();
-  void clear_has_group_avatar();
-  void set_has_group_creator_id();
-  void clear_has_group_creator_id();
-  void set_has_group_type();
-  void clear_has_group_type();
-  void set_has_shield_status();
-  void clear_has_shield_status();
 
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
-
-  ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
-  ::google::protobuf::internal::HasBits<1> _has_bits_;
-  mutable int _cached_size_;
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::RepeatedField< ::google::protobuf::uint32 > group_member_list_;
+  mutable int _group_member_list_cached_byte_size_;
   ::google::protobuf::internal::ArenaStringPtr group_name_;
   ::google::protobuf::internal::ArenaStringPtr group_avatar_;
   ::google::protobuf::uint32 group_id_;
   ::google::protobuf::uint32 version_;
   ::google::protobuf::uint32 group_creator_id_;
-  ::google::protobuf::uint32 shield_status_;
   int group_type_;
+  ::google::protobuf::uint32 shield_status_;
+  mutable int _cached_size_;
   friend struct ::protobuf_IM_2eBaseDefine_2eproto::TableStruct;
   friend void ::protobuf_IM_2eBaseDefine_2eproto::InitDefaultsGroupInfoImpl();
 };
 // -------------------------------------------------------------------
 
-class UserTokenInfo : public ::google::protobuf::MessageLite /* @@protoc_insertion_point(class_definition:IM.BaseDefine.UserTokenInfo) */ {
+class UserTokenInfo : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:IM.BaseDefine.UserTokenInfo) */ {
  public:
   UserTokenInfo();
   virtual ~UserTokenInfo();
@@ -1984,13 +2059,7 @@ class UserTokenInfo : public ::google::protobuf::MessageLite /* @@protoc_inserti
     return *this;
   }
   #endif
-  inline const ::std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields();
-  }
-  inline ::std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields();
-  }
-
+  static const ::google::protobuf::Descriptor* descriptor();
   static const UserTokenInfo& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
@@ -2011,8 +2080,8 @@ class UserTokenInfo : public ::google::protobuf::MessageLite /* @@protoc_inserti
   inline UserTokenInfo* New() const PROTOBUF_FINAL { return New(NULL); }
 
   UserTokenInfo* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
-  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from)
-    PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
   void CopyFrom(const UserTokenInfo& from);
   void MergeFrom(const UserTokenInfo& from);
   void Clear() PROTOBUF_FINAL;
@@ -2023,12 +2092,13 @@ class UserTokenInfo : public ::google::protobuf::MessageLite /* @@protoc_inserti
       ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
   void SerializeWithCachedSizes(
       ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  void DiscardUnknownFields();
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
   int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
   private:
   void SharedCtor();
   void SharedDtor();
-  void SetCachedSize(int size) const;
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(UserTokenInfo* other);
   private:
   inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
@@ -2039,14 +2109,13 @@ class UserTokenInfo : public ::google::protobuf::MessageLite /* @@protoc_inserti
   }
   public:
 
-  ::std::string GetTypeName() const PROTOBUF_FINAL;
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
 
   // accessors -------------------------------------------------------
 
-  // required string token = 3;
-  bool has_token() const;
+  // string token = 3;
   void clear_token();
   static const int kTokenFieldNumber = 3;
   const ::std::string& token() const;
@@ -2060,64 +2129,46 @@ class UserTokenInfo : public ::google::protobuf::MessageLite /* @@protoc_inserti
   ::std::string* release_token();
   void set_allocated_token(::std::string* token);
 
-  // required uint32 user_id = 1;
-  bool has_user_id() const;
+  // uint32 user_id = 1;
   void clear_user_id();
   static const int kUserIdFieldNumber = 1;
   ::google::protobuf::uint32 user_id() const;
   void set_user_id(::google::protobuf::uint32 value);
 
-  // required uint32 push_count = 4;
-  bool has_push_count() const;
-  void clear_push_count();
-  static const int kPushCountFieldNumber = 4;
-  ::google::protobuf::uint32 push_count() const;
-  void set_push_count(::google::protobuf::uint32 value);
-
-  // required uint32 push_type = 5;
-  bool has_push_type() const;
-  void clear_push_type();
-  static const int kPushTypeFieldNumber = 5;
-  ::google::protobuf::uint32 push_type() const;
-  void set_push_type(::google::protobuf::uint32 value);
-
-  // required .IM.BaseDefine.ClientType user_type = 2;
-  bool has_user_type() const;
+  // .IM.BaseDefine.ClientType user_type = 2;
   void clear_user_type();
   static const int kUserTypeFieldNumber = 2;
   ::IM::BaseDefine::ClientType user_type() const;
   void set_user_type(::IM::BaseDefine::ClientType value);
 
+  // uint32 push_count = 4;
+  void clear_push_count();
+  static const int kPushCountFieldNumber = 4;
+  ::google::protobuf::uint32 push_count() const;
+  void set_push_count(::google::protobuf::uint32 value);
+
+  // uint32 push_type = 5;
+  void clear_push_type();
+  static const int kPushTypeFieldNumber = 5;
+  ::google::protobuf::uint32 push_type() const;
+  void set_push_type(::google::protobuf::uint32 value);
+
   // @@protoc_insertion_point(class_scope:IM.BaseDefine.UserTokenInfo)
  private:
-  void set_has_user_id();
-  void clear_has_user_id();
-  void set_has_user_type();
-  void clear_has_user_type();
-  void set_has_token();
-  void clear_has_token();
-  void set_has_push_count();
-  void clear_has_push_count();
-  void set_has_push_type();
-  void clear_has_push_type();
 
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
-
-  ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
-  ::google::protobuf::internal::HasBits<1> _has_bits_;
-  mutable int _cached_size_;
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::ArenaStringPtr token_;
   ::google::protobuf::uint32 user_id_;
+  int user_type_;
   ::google::protobuf::uint32 push_count_;
   ::google::protobuf::uint32 push_type_;
-  int user_type_;
+  mutable int _cached_size_;
   friend struct ::protobuf_IM_2eBaseDefine_2eproto::TableStruct;
   friend void ::protobuf_IM_2eBaseDefine_2eproto::InitDefaultsUserTokenInfoImpl();
 };
 // -------------------------------------------------------------------
 
-class PushResult : public ::google::protobuf::MessageLite /* @@protoc_insertion_point(class_definition:IM.BaseDefine.PushResult) */ {
+class PushResult : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:IM.BaseDefine.PushResult) */ {
  public:
   PushResult();
   virtual ~PushResult();
@@ -2143,13 +2194,7 @@ class PushResult : public ::google::protobuf::MessageLite /* @@protoc_insertion_
     return *this;
   }
   #endif
-  inline const ::std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields();
-  }
-  inline ::std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields();
-  }
-
+  static const ::google::protobuf::Descriptor* descriptor();
   static const PushResult& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
@@ -2170,8 +2215,8 @@ class PushResult : public ::google::protobuf::MessageLite /* @@protoc_insertion_
   inline PushResult* New() const PROTOBUF_FINAL { return New(NULL); }
 
   PushResult* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
-  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from)
-    PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
   void CopyFrom(const PushResult& from);
   void MergeFrom(const PushResult& from);
   void Clear() PROTOBUF_FINAL;
@@ -2182,12 +2227,13 @@ class PushResult : public ::google::protobuf::MessageLite /* @@protoc_insertion_
       ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
   void SerializeWithCachedSizes(
       ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  void DiscardUnknownFields();
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
   int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
   private:
   void SharedCtor();
   void SharedDtor();
-  void SetCachedSize(int size) const;
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(PushResult* other);
   private:
   inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
@@ -2198,14 +2244,13 @@ class PushResult : public ::google::protobuf::MessageLite /* @@protoc_insertion_
   }
   public:
 
-  ::std::string GetTypeName() const PROTOBUF_FINAL;
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
 
   // accessors -------------------------------------------------------
 
-  // required string user_token = 1;
-  bool has_user_token() const;
+  // string user_token = 1;
   void clear_user_token();
   static const int kUserTokenFieldNumber = 1;
   const ::std::string& user_token() const;
@@ -2219,8 +2264,7 @@ class PushResult : public ::google::protobuf::MessageLite /* @@protoc_insertion_
   ::std::string* release_user_token();
   void set_allocated_user_token(::std::string* user_token);
 
-  // required uint32 result_code = 2;
-  bool has_result_code() const;
+  // uint32 result_code = 2;
   void clear_result_code();
   static const int kResultCodeFieldNumber = 2;
   ::google::protobuf::uint32 result_code() const;
@@ -2228,25 +2272,17 @@ class PushResult : public ::google::protobuf::MessageLite /* @@protoc_insertion_
 
   // @@protoc_insertion_point(class_scope:IM.BaseDefine.PushResult)
  private:
-  void set_has_user_token();
-  void clear_has_user_token();
-  void set_has_result_code();
-  void clear_has_result_code();
 
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
-
-  ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
-  ::google::protobuf::internal::HasBits<1> _has_bits_;
-  mutable int _cached_size_;
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::ArenaStringPtr user_token_;
   ::google::protobuf::uint32 result_code_;
+  mutable int _cached_size_;
   friend struct ::protobuf_IM_2eBaseDefine_2eproto::TableStruct;
   friend void ::protobuf_IM_2eBaseDefine_2eproto::InitDefaultsPushResultImpl();
 };
 // -------------------------------------------------------------------
 
-class ShieldStatus : public ::google::protobuf::MessageLite /* @@protoc_insertion_point(class_definition:IM.BaseDefine.ShieldStatus) */ {
+class ShieldStatus : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:IM.BaseDefine.ShieldStatus) */ {
  public:
   ShieldStatus();
   virtual ~ShieldStatus();
@@ -2272,13 +2308,7 @@ class ShieldStatus : public ::google::protobuf::MessageLite /* @@protoc_insertio
     return *this;
   }
   #endif
-  inline const ::std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields();
-  }
-  inline ::std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields();
-  }
-
+  static const ::google::protobuf::Descriptor* descriptor();
   static const ShieldStatus& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
@@ -2299,8 +2329,8 @@ class ShieldStatus : public ::google::protobuf::MessageLite /* @@protoc_insertio
   inline ShieldStatus* New() const PROTOBUF_FINAL { return New(NULL); }
 
   ShieldStatus* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
-  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from)
-    PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
   void CopyFrom(const ShieldStatus& from);
   void MergeFrom(const ShieldStatus& from);
   void Clear() PROTOBUF_FINAL;
@@ -2311,12 +2341,13 @@ class ShieldStatus : public ::google::protobuf::MessageLite /* @@protoc_insertio
       ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
   void SerializeWithCachedSizes(
       ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  void DiscardUnknownFields();
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
   int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
   private:
   void SharedCtor();
   void SharedDtor();
-  void SetCachedSize(int size) const;
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(ShieldStatus* other);
   private:
   inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
@@ -2327,28 +2358,25 @@ class ShieldStatus : public ::google::protobuf::MessageLite /* @@protoc_insertio
   }
   public:
 
-  ::std::string GetTypeName() const PROTOBUF_FINAL;
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
 
   // accessors -------------------------------------------------------
 
-  // required uint32 user_id = 1;
-  bool has_user_id() const;
+  // uint32 user_id = 1;
   void clear_user_id();
   static const int kUserIdFieldNumber = 1;
   ::google::protobuf::uint32 user_id() const;
   void set_user_id(::google::protobuf::uint32 value);
 
-  // required uint32 group_id = 2;
-  bool has_group_id() const;
+  // uint32 group_id = 2;
   void clear_group_id();
   static const int kGroupIdFieldNumber = 2;
   ::google::protobuf::uint32 group_id() const;
   void set_group_id(::google::protobuf::uint32 value);
 
-  // required uint32 shield_status = 3;
-  bool has_shield_status() const;
+  // uint32 shield_status = 3;
   void clear_shield_status();
   static const int kShieldStatusFieldNumber = 3;
   ::google::protobuf::uint32 shield_status() const;
@@ -2356,28 +2384,18 @@ class ShieldStatus : public ::google::protobuf::MessageLite /* @@protoc_insertio
 
   // @@protoc_insertion_point(class_scope:IM.BaseDefine.ShieldStatus)
  private:
-  void set_has_user_id();
-  void clear_has_user_id();
-  void set_has_group_id();
-  void clear_has_group_id();
-  void set_has_shield_status();
-  void clear_has_shield_status();
 
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
-
-  ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
-  ::google::protobuf::internal::HasBits<1> _has_bits_;
-  mutable int _cached_size_;
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::uint32 user_id_;
   ::google::protobuf::uint32 group_id_;
   ::google::protobuf::uint32 shield_status_;
+  mutable int _cached_size_;
   friend struct ::protobuf_IM_2eBaseDefine_2eproto::TableStruct;
   friend void ::protobuf_IM_2eBaseDefine_2eproto::InitDefaultsShieldStatusImpl();
 };
 // -------------------------------------------------------------------
 
-class OfflineFileInfo : public ::google::protobuf::MessageLite /* @@protoc_insertion_point(class_definition:IM.BaseDefine.OfflineFileInfo) */ {
+class OfflineFileInfo : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:IM.BaseDefine.OfflineFileInfo) */ {
  public:
   OfflineFileInfo();
   virtual ~OfflineFileInfo();
@@ -2403,13 +2421,7 @@ class OfflineFileInfo : public ::google::protobuf::MessageLite /* @@protoc_inser
     return *this;
   }
   #endif
-  inline const ::std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields();
-  }
-  inline ::std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields();
-  }
-
+  static const ::google::protobuf::Descriptor* descriptor();
   static const OfflineFileInfo& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
@@ -2430,8 +2442,8 @@ class OfflineFileInfo : public ::google::protobuf::MessageLite /* @@protoc_inser
   inline OfflineFileInfo* New() const PROTOBUF_FINAL { return New(NULL); }
 
   OfflineFileInfo* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
-  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from)
-    PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
   void CopyFrom(const OfflineFileInfo& from);
   void MergeFrom(const OfflineFileInfo& from);
   void Clear() PROTOBUF_FINAL;
@@ -2442,12 +2454,13 @@ class OfflineFileInfo : public ::google::protobuf::MessageLite /* @@protoc_inser
       ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
   void SerializeWithCachedSizes(
       ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  void DiscardUnknownFields();
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
   int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
   private:
   void SharedCtor();
   void SharedDtor();
-  void SetCachedSize(int size) const;
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(OfflineFileInfo* other);
   private:
   inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
@@ -2458,14 +2471,13 @@ class OfflineFileInfo : public ::google::protobuf::MessageLite /* @@protoc_inser
   }
   public:
 
-  ::std::string GetTypeName() const PROTOBUF_FINAL;
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
 
   // accessors -------------------------------------------------------
 
-  // required string task_id = 2;
-  bool has_task_id() const;
+  // string task_id = 2;
   void clear_task_id();
   static const int kTaskIdFieldNumber = 2;
   const ::std::string& task_id() const;
@@ -2479,8 +2491,7 @@ class OfflineFileInfo : public ::google::protobuf::MessageLite /* @@protoc_inser
   ::std::string* release_task_id();
   void set_allocated_task_id(::std::string* task_id);
 
-  // required string file_name = 3;
-  bool has_file_name() const;
+  // string file_name = 3;
   void clear_file_name();
   static const int kFileNameFieldNumber = 3;
   const ::std::string& file_name() const;
@@ -2494,15 +2505,13 @@ class OfflineFileInfo : public ::google::protobuf::MessageLite /* @@protoc_inser
   ::std::string* release_file_name();
   void set_allocated_file_name(::std::string* file_name);
 
-  // required uint32 from_user_id = 1;
-  bool has_from_user_id() const;
+  // uint32 from_user_id = 1;
   void clear_from_user_id();
   static const int kFromUserIdFieldNumber = 1;
   ::google::protobuf::uint32 from_user_id() const;
   void set_from_user_id(::google::protobuf::uint32 value);
 
-  // required uint32 file_size = 4;
-  bool has_file_size() const;
+  // uint32 file_size = 4;
   void clear_file_size();
   static const int kFileSizeFieldNumber = 4;
   ::google::protobuf::uint32 file_size() const;
@@ -2510,31 +2519,19 @@ class OfflineFileInfo : public ::google::protobuf::MessageLite /* @@protoc_inser
 
   // @@protoc_insertion_point(class_scope:IM.BaseDefine.OfflineFileInfo)
  private:
-  void set_has_from_user_id();
-  void clear_has_from_user_id();
-  void set_has_task_id();
-  void clear_has_task_id();
-  void set_has_file_name();
-  void clear_has_file_name();
-  void set_has_file_size();
-  void clear_has_file_size();
 
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
-
-  ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
-  ::google::protobuf::internal::HasBits<1> _has_bits_;
-  mutable int _cached_size_;
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::ArenaStringPtr task_id_;
   ::google::protobuf::internal::ArenaStringPtr file_name_;
   ::google::protobuf::uint32 from_user_id_;
   ::google::protobuf::uint32 file_size_;
+  mutable int _cached_size_;
   friend struct ::protobuf_IM_2eBaseDefine_2eproto::TableStruct;
   friend void ::protobuf_IM_2eBaseDefine_2eproto::InitDefaultsOfflineFileInfoImpl();
 };
 // -------------------------------------------------------------------
 
-class DepartInfo : public ::google::protobuf::MessageLite /* @@protoc_insertion_point(class_definition:IM.BaseDefine.DepartInfo) */ {
+class DepartInfo : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:IM.BaseDefine.DepartInfo) */ {
  public:
   DepartInfo();
   virtual ~DepartInfo();
@@ -2560,13 +2557,7 @@ class DepartInfo : public ::google::protobuf::MessageLite /* @@protoc_insertion_
     return *this;
   }
   #endif
-  inline const ::std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields();
-  }
-  inline ::std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields();
-  }
-
+  static const ::google::protobuf::Descriptor* descriptor();
   static const DepartInfo& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
@@ -2587,8 +2578,8 @@ class DepartInfo : public ::google::protobuf::MessageLite /* @@protoc_insertion_
   inline DepartInfo* New() const PROTOBUF_FINAL { return New(NULL); }
 
   DepartInfo* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
-  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from)
-    PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
   void CopyFrom(const DepartInfo& from);
   void MergeFrom(const DepartInfo& from);
   void Clear() PROTOBUF_FINAL;
@@ -2599,12 +2590,13 @@ class DepartInfo : public ::google::protobuf::MessageLite /* @@protoc_insertion_
       ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
   void SerializeWithCachedSizes(
       ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  void DiscardUnknownFields();
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
   int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
   private:
   void SharedCtor();
   void SharedDtor();
-  void SetCachedSize(int size) const;
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(DepartInfo* other);
   private:
   inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
@@ -2615,14 +2607,13 @@ class DepartInfo : public ::google::protobuf::MessageLite /* @@protoc_insertion_
   }
   public:
 
-  ::std::string GetTypeName() const PROTOBUF_FINAL;
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
 
   // accessors -------------------------------------------------------
 
-  // required string dept_name = 3;
-  bool has_dept_name() const;
+  // string dept_name = 3;
   void clear_dept_name();
   static const int kDeptNameFieldNumber = 3;
   const ::std::string& dept_name() const;
@@ -2636,29 +2627,25 @@ class DepartInfo : public ::google::protobuf::MessageLite /* @@protoc_insertion_
   ::std::string* release_dept_name();
   void set_allocated_dept_name(::std::string* dept_name);
 
-  // required uint32 dept_id = 1;
-  bool has_dept_id() const;
+  // uint32 dept_id = 1;
   void clear_dept_id();
   static const int kDeptIdFieldNumber = 1;
   ::google::protobuf::uint32 dept_id() const;
   void set_dept_id(::google::protobuf::uint32 value);
 
-  // required uint32 priority = 2;
-  bool has_priority() const;
+  // uint32 priority = 2;
   void clear_priority();
   static const int kPriorityFieldNumber = 2;
   ::google::protobuf::uint32 priority() const;
   void set_priority(::google::protobuf::uint32 value);
 
-  // required uint32 parent_dept_id = 4;
-  bool has_parent_dept_id() const;
+  // uint32 parent_dept_id = 4;
   void clear_parent_dept_id();
   static const int kParentDeptIdFieldNumber = 4;
   ::google::protobuf::uint32 parent_dept_id() const;
   void set_parent_dept_id(::google::protobuf::uint32 value);
 
-  // required .IM.BaseDefine.DepartmentStatusType dept_status = 5;
-  bool has_dept_status() const;
+  // .IM.BaseDefine.DepartmentStatusType dept_status = 5;
   void clear_dept_status();
   static const int kDeptStatusFieldNumber = 5;
   ::IM::BaseDefine::DepartmentStatusType dept_status() const;
@@ -2666,34 +2653,20 @@ class DepartInfo : public ::google::protobuf::MessageLite /* @@protoc_insertion_
 
   // @@protoc_insertion_point(class_scope:IM.BaseDefine.DepartInfo)
  private:
-  void set_has_dept_id();
-  void clear_has_dept_id();
-  void set_has_priority();
-  void clear_has_priority();
-  void set_has_dept_name();
-  void clear_has_dept_name();
-  void set_has_parent_dept_id();
-  void clear_has_parent_dept_id();
-  void set_has_dept_status();
-  void clear_has_dept_status();
 
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
-
-  ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
-  ::google::protobuf::internal::HasBits<1> _has_bits_;
-  mutable int _cached_size_;
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::ArenaStringPtr dept_name_;
   ::google::protobuf::uint32 dept_id_;
   ::google::protobuf::uint32 priority_;
   ::google::protobuf::uint32 parent_dept_id_;
   int dept_status_;
+  mutable int _cached_size_;
   friend struct ::protobuf_IM_2eBaseDefine_2eproto::TableStruct;
   friend void ::protobuf_IM_2eBaseDefine_2eproto::InitDefaultsDepartInfoImpl();
 };
 // -------------------------------------------------------------------
 
-class PushShieldStatus : public ::google::protobuf::MessageLite /* @@protoc_insertion_point(class_definition:IM.BaseDefine.PushShieldStatus) */ {
+class PushShieldStatus : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:IM.BaseDefine.PushShieldStatus) */ {
  public:
   PushShieldStatus();
   virtual ~PushShieldStatus();
@@ -2719,13 +2692,7 @@ class PushShieldStatus : public ::google::protobuf::MessageLite /* @@protoc_inse
     return *this;
   }
   #endif
-  inline const ::std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields();
-  }
-  inline ::std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields();
-  }
-
+  static const ::google::protobuf::Descriptor* descriptor();
   static const PushShieldStatus& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
@@ -2746,8 +2713,8 @@ class PushShieldStatus : public ::google::protobuf::MessageLite /* @@protoc_inse
   inline PushShieldStatus* New() const PROTOBUF_FINAL { return New(NULL); }
 
   PushShieldStatus* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
-  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from)
-    PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
   void CopyFrom(const PushShieldStatus& from);
   void MergeFrom(const PushShieldStatus& from);
   void Clear() PROTOBUF_FINAL;
@@ -2758,12 +2725,13 @@ class PushShieldStatus : public ::google::protobuf::MessageLite /* @@protoc_inse
       ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
   void SerializeWithCachedSizes(
       ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  void DiscardUnknownFields();
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
   int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
   private:
   void SharedCtor();
   void SharedDtor();
-  void SetCachedSize(int size) const;
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(PushShieldStatus* other);
   private:
   inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
@@ -2774,21 +2742,19 @@ class PushShieldStatus : public ::google::protobuf::MessageLite /* @@protoc_inse
   }
   public:
 
-  ::std::string GetTypeName() const PROTOBUF_FINAL;
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
 
   // accessors -------------------------------------------------------
 
-  // required uint32 user_id = 1;
-  bool has_user_id() const;
+  // uint32 user_id = 1;
   void clear_user_id();
   static const int kUserIdFieldNumber = 1;
   ::google::protobuf::uint32 user_id() const;
   void set_user_id(::google::protobuf::uint32 value);
 
-  // required uint32 shield_status = 2;
-  bool has_shield_status() const;
+  // uint32 shield_status = 2;
   void clear_shield_status();
   static const int kShieldStatusFieldNumber = 2;
   ::google::protobuf::uint32 shield_status() const;
@@ -2796,19 +2762,11 @@ class PushShieldStatus : public ::google::protobuf::MessageLite /* @@protoc_inse
 
   // @@protoc_insertion_point(class_scope:IM.BaseDefine.PushShieldStatus)
  private:
-  void set_has_user_id();
-  void clear_has_user_id();
-  void set_has_shield_status();
-  void clear_has_shield_status();
 
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
-
-  ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
-  ::google::protobuf::internal::HasBits<1> _has_bits_;
-  mutable int _cached_size_;
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::uint32 user_id_;
   ::google::protobuf::uint32 shield_status_;
+  mutable int _cached_size_;
   friend struct ::protobuf_IM_2eBaseDefine_2eproto::TableStruct;
   friend void ::protobuf_IM_2eBaseDefine_2eproto::InitDefaultsPushShieldStatusImpl();
 };
@@ -2823,32 +2781,22 @@ class PushShieldStatus : public ::google::protobuf::MessageLite /* @@protoc_inse
 #endif  // __GNUC__
 // IpAddr
 
-// required string ip = 1;
-inline bool IpAddr::has_ip() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void IpAddr::set_has_ip() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void IpAddr::clear_has_ip() {
-  _has_bits_[0] &= ~0x00000001u;
-}
+// string ip = 1;
 inline void IpAddr::clear_ip() {
   ip_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  clear_has_ip();
 }
 inline const ::std::string& IpAddr::ip() const {
   // @@protoc_insertion_point(field_get:IM.BaseDefine.IpAddr.ip)
   return ip_.GetNoArena();
 }
 inline void IpAddr::set_ip(const ::std::string& value) {
-  set_has_ip();
+  
   ip_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
   // @@protoc_insertion_point(field_set:IM.BaseDefine.IpAddr.ip)
 }
 #if LANG_CXX11
 inline void IpAddr::set_ip(::std::string&& value) {
-  set_has_ip();
+  
   ip_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:IM.BaseDefine.IpAddr.ip)
@@ -2856,56 +2804,46 @@ inline void IpAddr::set_ip(::std::string&& value) {
 #endif
 inline void IpAddr::set_ip(const char* value) {
   GOOGLE_DCHECK(value != NULL);
-  set_has_ip();
+  
   ip_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:IM.BaseDefine.IpAddr.ip)
 }
 inline void IpAddr::set_ip(const char* value, size_t size) {
-  set_has_ip();
+  
   ip_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
   // @@protoc_insertion_point(field_set_pointer:IM.BaseDefine.IpAddr.ip)
 }
 inline ::std::string* IpAddr::mutable_ip() {
-  set_has_ip();
+  
   // @@protoc_insertion_point(field_mutable:IM.BaseDefine.IpAddr.ip)
   return ip_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* IpAddr::release_ip() {
   // @@protoc_insertion_point(field_release:IM.BaseDefine.IpAddr.ip)
-  clear_has_ip();
+  
   return ip_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline void IpAddr::set_allocated_ip(::std::string* ip) {
   if (ip != NULL) {
-    set_has_ip();
+    
   } else {
-    clear_has_ip();
+    
   }
   ip_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ip);
   // @@protoc_insertion_point(field_set_allocated:IM.BaseDefine.IpAddr.ip)
 }
 
-// required uint32 port = 2;
-inline bool IpAddr::has_port() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void IpAddr::set_has_port() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void IpAddr::clear_has_port() {
-  _has_bits_[0] &= ~0x00000002u;
-}
+// uint32 port = 2;
 inline void IpAddr::clear_port() {
   port_ = 0u;
-  clear_has_port();
 }
 inline ::google::protobuf::uint32 IpAddr::port() const {
   // @@protoc_insertion_point(field_get:IM.BaseDefine.IpAddr.port)
   return port_;
 }
 inline void IpAddr::set_port(::google::protobuf::uint32 value) {
-  set_has_port();
+  
   port_ = value;
   // @@protoc_insertion_point(field_set:IM.BaseDefine.IpAddr.port)
 }
@@ -2914,80 +2852,50 @@ inline void IpAddr::set_port(::google::protobuf::uint32 value) {
 
 // UserInfo
 
-// required uint32 user_id = 1;
-inline bool UserInfo::has_user_id() const {
-  return (_has_bits_[0] & 0x00000080u) != 0;
-}
-inline void UserInfo::set_has_user_id() {
-  _has_bits_[0] |= 0x00000080u;
-}
-inline void UserInfo::clear_has_user_id() {
-  _has_bits_[0] &= ~0x00000080u;
-}
+// uint32 user_id = 1;
 inline void UserInfo::clear_user_id() {
   user_id_ = 0u;
-  clear_has_user_id();
 }
 inline ::google::protobuf::uint32 UserInfo::user_id() const {
   // @@protoc_insertion_point(field_get:IM.BaseDefine.UserInfo.user_id)
   return user_id_;
 }
 inline void UserInfo::set_user_id(::google::protobuf::uint32 value) {
-  set_has_user_id();
+  
   user_id_ = value;
   // @@protoc_insertion_point(field_set:IM.BaseDefine.UserInfo.user_id)
 }
 
-// required uint32 user_gender = 2;
-inline bool UserInfo::has_user_gender() const {
-  return (_has_bits_[0] & 0x00000100u) != 0;
-}
-inline void UserInfo::set_has_user_gender() {
-  _has_bits_[0] |= 0x00000100u;
-}
-inline void UserInfo::clear_has_user_gender() {
-  _has_bits_[0] &= ~0x00000100u;
-}
+// uint32 user_gender = 2;
 inline void UserInfo::clear_user_gender() {
   user_gender_ = 0u;
-  clear_has_user_gender();
 }
 inline ::google::protobuf::uint32 UserInfo::user_gender() const {
   // @@protoc_insertion_point(field_get:IM.BaseDefine.UserInfo.user_gender)
   return user_gender_;
 }
 inline void UserInfo::set_user_gender(::google::protobuf::uint32 value) {
-  set_has_user_gender();
+  
   user_gender_ = value;
   // @@protoc_insertion_point(field_set:IM.BaseDefine.UserInfo.user_gender)
 }
 
-// required string user_nick_name = 3;
-inline bool UserInfo::has_user_nick_name() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void UserInfo::set_has_user_nick_name() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void UserInfo::clear_has_user_nick_name() {
-  _has_bits_[0] &= ~0x00000001u;
-}
+// string user_nick_name = 3;
 inline void UserInfo::clear_user_nick_name() {
   user_nick_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  clear_has_user_nick_name();
 }
 inline const ::std::string& UserInfo::user_nick_name() const {
   // @@protoc_insertion_point(field_get:IM.BaseDefine.UserInfo.user_nick_name)
   return user_nick_name_.GetNoArena();
 }
 inline void UserInfo::set_user_nick_name(const ::std::string& value) {
-  set_has_user_nick_name();
+  
   user_nick_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
   // @@protoc_insertion_point(field_set:IM.BaseDefine.UserInfo.user_nick_name)
 }
 #if LANG_CXX11
 inline void UserInfo::set_user_nick_name(::std::string&& value) {
-  set_has_user_nick_name();
+  
   user_nick_name_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:IM.BaseDefine.UserInfo.user_nick_name)
@@ -2995,62 +2903,52 @@ inline void UserInfo::set_user_nick_name(::std::string&& value) {
 #endif
 inline void UserInfo::set_user_nick_name(const char* value) {
   GOOGLE_DCHECK(value != NULL);
-  set_has_user_nick_name();
+  
   user_nick_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:IM.BaseDefine.UserInfo.user_nick_name)
 }
 inline void UserInfo::set_user_nick_name(const char* value, size_t size) {
-  set_has_user_nick_name();
+  
   user_nick_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
   // @@protoc_insertion_point(field_set_pointer:IM.BaseDefine.UserInfo.user_nick_name)
 }
 inline ::std::string* UserInfo::mutable_user_nick_name() {
-  set_has_user_nick_name();
+  
   // @@protoc_insertion_point(field_mutable:IM.BaseDefine.UserInfo.user_nick_name)
   return user_nick_name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* UserInfo::release_user_nick_name() {
   // @@protoc_insertion_point(field_release:IM.BaseDefine.UserInfo.user_nick_name)
-  clear_has_user_nick_name();
+  
   return user_nick_name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline void UserInfo::set_allocated_user_nick_name(::std::string* user_nick_name) {
   if (user_nick_name != NULL) {
-    set_has_user_nick_name();
+    
   } else {
-    clear_has_user_nick_name();
+    
   }
   user_nick_name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), user_nick_name);
   // @@protoc_insertion_point(field_set_allocated:IM.BaseDefine.UserInfo.user_nick_name)
 }
 
-// required string avatar_url = 4;
-inline bool UserInfo::has_avatar_url() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void UserInfo::set_has_avatar_url() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void UserInfo::clear_has_avatar_url() {
-  _has_bits_[0] &= ~0x00000002u;
-}
+// string avatar_url = 4;
 inline void UserInfo::clear_avatar_url() {
   avatar_url_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  clear_has_avatar_url();
 }
 inline const ::std::string& UserInfo::avatar_url() const {
   // @@protoc_insertion_point(field_get:IM.BaseDefine.UserInfo.avatar_url)
   return avatar_url_.GetNoArena();
 }
 inline void UserInfo::set_avatar_url(const ::std::string& value) {
-  set_has_avatar_url();
+  
   avatar_url_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
   // @@protoc_insertion_point(field_set:IM.BaseDefine.UserInfo.avatar_url)
 }
 #if LANG_CXX11
 inline void UserInfo::set_avatar_url(::std::string&& value) {
-  set_has_avatar_url();
+  
   avatar_url_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:IM.BaseDefine.UserInfo.avatar_url)
@@ -3058,86 +2956,66 @@ inline void UserInfo::set_avatar_url(::std::string&& value) {
 #endif
 inline void UserInfo::set_avatar_url(const char* value) {
   GOOGLE_DCHECK(value != NULL);
-  set_has_avatar_url();
+  
   avatar_url_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:IM.BaseDefine.UserInfo.avatar_url)
 }
 inline void UserInfo::set_avatar_url(const char* value, size_t size) {
-  set_has_avatar_url();
+  
   avatar_url_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
   // @@protoc_insertion_point(field_set_pointer:IM.BaseDefine.UserInfo.avatar_url)
 }
 inline ::std::string* UserInfo::mutable_avatar_url() {
-  set_has_avatar_url();
+  
   // @@protoc_insertion_point(field_mutable:IM.BaseDefine.UserInfo.avatar_url)
   return avatar_url_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* UserInfo::release_avatar_url() {
   // @@protoc_insertion_point(field_release:IM.BaseDefine.UserInfo.avatar_url)
-  clear_has_avatar_url();
+  
   return avatar_url_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline void UserInfo::set_allocated_avatar_url(::std::string* avatar_url) {
   if (avatar_url != NULL) {
-    set_has_avatar_url();
+    
   } else {
-    clear_has_avatar_url();
+    
   }
   avatar_url_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), avatar_url);
   // @@protoc_insertion_point(field_set_allocated:IM.BaseDefine.UserInfo.avatar_url)
 }
 
-// required uint32 department_id = 5;
-inline bool UserInfo::has_department_id() const {
-  return (_has_bits_[0] & 0x00000200u) != 0;
-}
-inline void UserInfo::set_has_department_id() {
-  _has_bits_[0] |= 0x00000200u;
-}
-inline void UserInfo::clear_has_department_id() {
-  _has_bits_[0] &= ~0x00000200u;
-}
+// uint32 department_id = 5;
 inline void UserInfo::clear_department_id() {
   department_id_ = 0u;
-  clear_has_department_id();
 }
 inline ::google::protobuf::uint32 UserInfo::department_id() const {
   // @@protoc_insertion_point(field_get:IM.BaseDefine.UserInfo.department_id)
   return department_id_;
 }
 inline void UserInfo::set_department_id(::google::protobuf::uint32 value) {
-  set_has_department_id();
+  
   department_id_ = value;
   // @@protoc_insertion_point(field_set:IM.BaseDefine.UserInfo.department_id)
 }
 
-// required string email = 6;
-inline bool UserInfo::has_email() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
-}
-inline void UserInfo::set_has_email() {
-  _has_bits_[0] |= 0x00000004u;
-}
-inline void UserInfo::clear_has_email() {
-  _has_bits_[0] &= ~0x00000004u;
-}
+// string email = 6;
 inline void UserInfo::clear_email() {
   email_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  clear_has_email();
 }
 inline const ::std::string& UserInfo::email() const {
   // @@protoc_insertion_point(field_get:IM.BaseDefine.UserInfo.email)
   return email_.GetNoArena();
 }
 inline void UserInfo::set_email(const ::std::string& value) {
-  set_has_email();
+  
   email_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
   // @@protoc_insertion_point(field_set:IM.BaseDefine.UserInfo.email)
 }
 #if LANG_CXX11
 inline void UserInfo::set_email(::std::string&& value) {
-  set_has_email();
+  
   email_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:IM.BaseDefine.UserInfo.email)
@@ -3145,62 +3023,52 @@ inline void UserInfo::set_email(::std::string&& value) {
 #endif
 inline void UserInfo::set_email(const char* value) {
   GOOGLE_DCHECK(value != NULL);
-  set_has_email();
+  
   email_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:IM.BaseDefine.UserInfo.email)
 }
 inline void UserInfo::set_email(const char* value, size_t size) {
-  set_has_email();
+  
   email_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
   // @@protoc_insertion_point(field_set_pointer:IM.BaseDefine.UserInfo.email)
 }
 inline ::std::string* UserInfo::mutable_email() {
-  set_has_email();
+  
   // @@protoc_insertion_point(field_mutable:IM.BaseDefine.UserInfo.email)
   return email_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* UserInfo::release_email() {
   // @@protoc_insertion_point(field_release:IM.BaseDefine.UserInfo.email)
-  clear_has_email();
+  
   return email_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline void UserInfo::set_allocated_email(::std::string* email) {
   if (email != NULL) {
-    set_has_email();
+    
   } else {
-    clear_has_email();
+    
   }
   email_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), email);
   // @@protoc_insertion_point(field_set_allocated:IM.BaseDefine.UserInfo.email)
 }
 
-// required string user_real_name = 7;
-inline bool UserInfo::has_user_real_name() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
-}
-inline void UserInfo::set_has_user_real_name() {
-  _has_bits_[0] |= 0x00000008u;
-}
-inline void UserInfo::clear_has_user_real_name() {
-  _has_bits_[0] &= ~0x00000008u;
-}
+// string user_real_name = 7;
 inline void UserInfo::clear_user_real_name() {
   user_real_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  clear_has_user_real_name();
 }
 inline const ::std::string& UserInfo::user_real_name() const {
   // @@protoc_insertion_point(field_get:IM.BaseDefine.UserInfo.user_real_name)
   return user_real_name_.GetNoArena();
 }
 inline void UserInfo::set_user_real_name(const ::std::string& value) {
-  set_has_user_real_name();
+  
   user_real_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
   // @@protoc_insertion_point(field_set:IM.BaseDefine.UserInfo.user_real_name)
 }
 #if LANG_CXX11
 inline void UserInfo::set_user_real_name(::std::string&& value) {
-  set_has_user_real_name();
+  
   user_real_name_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:IM.BaseDefine.UserInfo.user_real_name)
@@ -3208,62 +3076,52 @@ inline void UserInfo::set_user_real_name(::std::string&& value) {
 #endif
 inline void UserInfo::set_user_real_name(const char* value) {
   GOOGLE_DCHECK(value != NULL);
-  set_has_user_real_name();
+  
   user_real_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:IM.BaseDefine.UserInfo.user_real_name)
 }
 inline void UserInfo::set_user_real_name(const char* value, size_t size) {
-  set_has_user_real_name();
+  
   user_real_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
   // @@protoc_insertion_point(field_set_pointer:IM.BaseDefine.UserInfo.user_real_name)
 }
 inline ::std::string* UserInfo::mutable_user_real_name() {
-  set_has_user_real_name();
+  
   // @@protoc_insertion_point(field_mutable:IM.BaseDefine.UserInfo.user_real_name)
   return user_real_name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* UserInfo::release_user_real_name() {
   // @@protoc_insertion_point(field_release:IM.BaseDefine.UserInfo.user_real_name)
-  clear_has_user_real_name();
+  
   return user_real_name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline void UserInfo::set_allocated_user_real_name(::std::string* user_real_name) {
   if (user_real_name != NULL) {
-    set_has_user_real_name();
+    
   } else {
-    clear_has_user_real_name();
+    
   }
   user_real_name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), user_real_name);
   // @@protoc_insertion_point(field_set_allocated:IM.BaseDefine.UserInfo.user_real_name)
 }
 
-// required string user_tel = 8;
-inline bool UserInfo::has_user_tel() const {
-  return (_has_bits_[0] & 0x00000010u) != 0;
-}
-inline void UserInfo::set_has_user_tel() {
-  _has_bits_[0] |= 0x00000010u;
-}
-inline void UserInfo::clear_has_user_tel() {
-  _has_bits_[0] &= ~0x00000010u;
-}
+// string user_tel = 8;
 inline void UserInfo::clear_user_tel() {
   user_tel_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  clear_has_user_tel();
 }
 inline const ::std::string& UserInfo::user_tel() const {
   // @@protoc_insertion_point(field_get:IM.BaseDefine.UserInfo.user_tel)
   return user_tel_.GetNoArena();
 }
 inline void UserInfo::set_user_tel(const ::std::string& value) {
-  set_has_user_tel();
+  
   user_tel_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
   // @@protoc_insertion_point(field_set:IM.BaseDefine.UserInfo.user_tel)
 }
 #if LANG_CXX11
 inline void UserInfo::set_user_tel(::std::string&& value) {
-  set_has_user_tel();
+  
   user_tel_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:IM.BaseDefine.UserInfo.user_tel)
@@ -3271,62 +3129,52 @@ inline void UserInfo::set_user_tel(::std::string&& value) {
 #endif
 inline void UserInfo::set_user_tel(const char* value) {
   GOOGLE_DCHECK(value != NULL);
-  set_has_user_tel();
+  
   user_tel_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:IM.BaseDefine.UserInfo.user_tel)
 }
 inline void UserInfo::set_user_tel(const char* value, size_t size) {
-  set_has_user_tel();
+  
   user_tel_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
   // @@protoc_insertion_point(field_set_pointer:IM.BaseDefine.UserInfo.user_tel)
 }
 inline ::std::string* UserInfo::mutable_user_tel() {
-  set_has_user_tel();
+  
   // @@protoc_insertion_point(field_mutable:IM.BaseDefine.UserInfo.user_tel)
   return user_tel_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* UserInfo::release_user_tel() {
   // @@protoc_insertion_point(field_release:IM.BaseDefine.UserInfo.user_tel)
-  clear_has_user_tel();
+  
   return user_tel_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline void UserInfo::set_allocated_user_tel(::std::string* user_tel) {
   if (user_tel != NULL) {
-    set_has_user_tel();
+    
   } else {
-    clear_has_user_tel();
+    
   }
   user_tel_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), user_tel);
   // @@protoc_insertion_point(field_set_allocated:IM.BaseDefine.UserInfo.user_tel)
 }
 
-// required string user_domain = 9;
-inline bool UserInfo::has_user_domain() const {
-  return (_has_bits_[0] & 0x00000020u) != 0;
-}
-inline void UserInfo::set_has_user_domain() {
-  _has_bits_[0] |= 0x00000020u;
-}
-inline void UserInfo::clear_has_user_domain() {
-  _has_bits_[0] &= ~0x00000020u;
-}
+// string user_domain = 9;
 inline void UserInfo::clear_user_domain() {
   user_domain_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  clear_has_user_domain();
 }
 inline const ::std::string& UserInfo::user_domain() const {
   // @@protoc_insertion_point(field_get:IM.BaseDefine.UserInfo.user_domain)
   return user_domain_.GetNoArena();
 }
 inline void UserInfo::set_user_domain(const ::std::string& value) {
-  set_has_user_domain();
+  
   user_domain_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
   // @@protoc_insertion_point(field_set:IM.BaseDefine.UserInfo.user_domain)
 }
 #if LANG_CXX11
 inline void UserInfo::set_user_domain(::std::string&& value) {
-  set_has_user_domain();
+  
   user_domain_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:IM.BaseDefine.UserInfo.user_domain)
@@ -3334,86 +3182,66 @@ inline void UserInfo::set_user_domain(::std::string&& value) {
 #endif
 inline void UserInfo::set_user_domain(const char* value) {
   GOOGLE_DCHECK(value != NULL);
-  set_has_user_domain();
+  
   user_domain_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:IM.BaseDefine.UserInfo.user_domain)
 }
 inline void UserInfo::set_user_domain(const char* value, size_t size) {
-  set_has_user_domain();
+  
   user_domain_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
   // @@protoc_insertion_point(field_set_pointer:IM.BaseDefine.UserInfo.user_domain)
 }
 inline ::std::string* UserInfo::mutable_user_domain() {
-  set_has_user_domain();
+  
   // @@protoc_insertion_point(field_mutable:IM.BaseDefine.UserInfo.user_domain)
   return user_domain_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* UserInfo::release_user_domain() {
   // @@protoc_insertion_point(field_release:IM.BaseDefine.UserInfo.user_domain)
-  clear_has_user_domain();
+  
   return user_domain_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline void UserInfo::set_allocated_user_domain(::std::string* user_domain) {
   if (user_domain != NULL) {
-    set_has_user_domain();
+    
   } else {
-    clear_has_user_domain();
+    
   }
   user_domain_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), user_domain);
   // @@protoc_insertion_point(field_set_allocated:IM.BaseDefine.UserInfo.user_domain)
 }
 
-// required uint32 status = 10;
-inline bool UserInfo::has_status() const {
-  return (_has_bits_[0] & 0x00000400u) != 0;
-}
-inline void UserInfo::set_has_status() {
-  _has_bits_[0] |= 0x00000400u;
-}
-inline void UserInfo::clear_has_status() {
-  _has_bits_[0] &= ~0x00000400u;
-}
+// uint32 status = 10;
 inline void UserInfo::clear_status() {
   status_ = 0u;
-  clear_has_status();
 }
 inline ::google::protobuf::uint32 UserInfo::status() const {
   // @@protoc_insertion_point(field_get:IM.BaseDefine.UserInfo.status)
   return status_;
 }
 inline void UserInfo::set_status(::google::protobuf::uint32 value) {
-  set_has_status();
+  
   status_ = value;
   // @@protoc_insertion_point(field_set:IM.BaseDefine.UserInfo.status)
 }
 
-// optional string sign_info = 11;
-inline bool UserInfo::has_sign_info() const {
-  return (_has_bits_[0] & 0x00000040u) != 0;
-}
-inline void UserInfo::set_has_sign_info() {
-  _has_bits_[0] |= 0x00000040u;
-}
-inline void UserInfo::clear_has_sign_info() {
-  _has_bits_[0] &= ~0x00000040u;
-}
+// string sign_info = 11;
 inline void UserInfo::clear_sign_info() {
   sign_info_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  clear_has_sign_info();
 }
 inline const ::std::string& UserInfo::sign_info() const {
   // @@protoc_insertion_point(field_get:IM.BaseDefine.UserInfo.sign_info)
   return sign_info_.GetNoArena();
 }
 inline void UserInfo::set_sign_info(const ::std::string& value) {
-  set_has_sign_info();
+  
   sign_info_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
   // @@protoc_insertion_point(field_set:IM.BaseDefine.UserInfo.sign_info)
 }
 #if LANG_CXX11
 inline void UserInfo::set_sign_info(::std::string&& value) {
-  set_has_sign_info();
+  
   sign_info_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:IM.BaseDefine.UserInfo.sign_info)
@@ -3421,31 +3249,31 @@ inline void UserInfo::set_sign_info(::std::string&& value) {
 #endif
 inline void UserInfo::set_sign_info(const char* value) {
   GOOGLE_DCHECK(value != NULL);
-  set_has_sign_info();
+  
   sign_info_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:IM.BaseDefine.UserInfo.sign_info)
 }
 inline void UserInfo::set_sign_info(const char* value, size_t size) {
-  set_has_sign_info();
+  
   sign_info_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
   // @@protoc_insertion_point(field_set_pointer:IM.BaseDefine.UserInfo.sign_info)
 }
 inline ::std::string* UserInfo::mutable_sign_info() {
-  set_has_sign_info();
+  
   // @@protoc_insertion_point(field_mutable:IM.BaseDefine.UserInfo.sign_info)
   return sign_info_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* UserInfo::release_sign_info() {
   // @@protoc_insertion_point(field_release:IM.BaseDefine.UserInfo.sign_info)
-  clear_has_sign_info();
+  
   return sign_info_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline void UserInfo::set_allocated_sign_info(::std::string* sign_info) {
   if (sign_info != NULL) {
-    set_has_sign_info();
+    
   } else {
-    clear_has_sign_info();
+    
   }
   sign_info_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), sign_info);
   // @@protoc_insertion_point(field_set_allocated:IM.BaseDefine.UserInfo.sign_info)
@@ -3455,154 +3283,92 @@ inline void UserInfo::set_allocated_sign_info(::std::string* sign_info) {
 
 // ContactSessionInfo
 
-// required uint32 session_id = 1;
-inline bool ContactSessionInfo::has_session_id() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void ContactSessionInfo::set_has_session_id() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void ContactSessionInfo::clear_has_session_id() {
-  _has_bits_[0] &= ~0x00000002u;
-}
+// uint32 session_id = 1;
 inline void ContactSessionInfo::clear_session_id() {
   session_id_ = 0u;
-  clear_has_session_id();
 }
 inline ::google::protobuf::uint32 ContactSessionInfo::session_id() const {
   // @@protoc_insertion_point(field_get:IM.BaseDefine.ContactSessionInfo.session_id)
   return session_id_;
 }
 inline void ContactSessionInfo::set_session_id(::google::protobuf::uint32 value) {
-  set_has_session_id();
+  
   session_id_ = value;
   // @@protoc_insertion_point(field_set:IM.BaseDefine.ContactSessionInfo.session_id)
 }
 
-// required .IM.BaseDefine.SessionType session_type = 2;
-inline bool ContactSessionInfo::has_session_type() const {
-  return (_has_bits_[0] & 0x00000040u) != 0;
-}
-inline void ContactSessionInfo::set_has_session_type() {
-  _has_bits_[0] |= 0x00000040u;
-}
-inline void ContactSessionInfo::clear_has_session_type() {
-  _has_bits_[0] &= ~0x00000040u;
-}
+// .IM.BaseDefine.SessionType session_type = 2;
 inline void ContactSessionInfo::clear_session_type() {
-  session_type_ = 1;
-  clear_has_session_type();
+  session_type_ = 0;
 }
 inline ::IM::BaseDefine::SessionType ContactSessionInfo::session_type() const {
   // @@protoc_insertion_point(field_get:IM.BaseDefine.ContactSessionInfo.session_type)
   return static_cast< ::IM::BaseDefine::SessionType >(session_type_);
 }
 inline void ContactSessionInfo::set_session_type(::IM::BaseDefine::SessionType value) {
-  assert(::IM::BaseDefine::SessionType_IsValid(value));
-  set_has_session_type();
+  
   session_type_ = value;
   // @@protoc_insertion_point(field_set:IM.BaseDefine.ContactSessionInfo.session_type)
 }
 
-// required .IM.BaseDefine.SessionStatusType session_status = 3;
-inline bool ContactSessionInfo::has_session_status() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
-}
-inline void ContactSessionInfo::set_has_session_status() {
-  _has_bits_[0] |= 0x00000004u;
-}
-inline void ContactSessionInfo::clear_has_session_status() {
-  _has_bits_[0] &= ~0x00000004u;
-}
+// .IM.BaseDefine.SessionStatusType session_status = 3;
 inline void ContactSessionInfo::clear_session_status() {
   session_status_ = 0;
-  clear_has_session_status();
 }
 inline ::IM::BaseDefine::SessionStatusType ContactSessionInfo::session_status() const {
   // @@protoc_insertion_point(field_get:IM.BaseDefine.ContactSessionInfo.session_status)
   return static_cast< ::IM::BaseDefine::SessionStatusType >(session_status_);
 }
 inline void ContactSessionInfo::set_session_status(::IM::BaseDefine::SessionStatusType value) {
-  assert(::IM::BaseDefine::SessionStatusType_IsValid(value));
-  set_has_session_status();
+  
   session_status_ = value;
   // @@protoc_insertion_point(field_set:IM.BaseDefine.ContactSessionInfo.session_status)
 }
 
-// required uint32 updated_time = 4;
-inline bool ContactSessionInfo::has_updated_time() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
-}
-inline void ContactSessionInfo::set_has_updated_time() {
-  _has_bits_[0] |= 0x00000008u;
-}
-inline void ContactSessionInfo::clear_has_updated_time() {
-  _has_bits_[0] &= ~0x00000008u;
-}
+// uint32 updated_time = 4;
 inline void ContactSessionInfo::clear_updated_time() {
   updated_time_ = 0u;
-  clear_has_updated_time();
 }
 inline ::google::protobuf::uint32 ContactSessionInfo::updated_time() const {
   // @@protoc_insertion_point(field_get:IM.BaseDefine.ContactSessionInfo.updated_time)
   return updated_time_;
 }
 inline void ContactSessionInfo::set_updated_time(::google::protobuf::uint32 value) {
-  set_has_updated_time();
+  
   updated_time_ = value;
   // @@protoc_insertion_point(field_set:IM.BaseDefine.ContactSessionInfo.updated_time)
 }
 
-// required uint32 latest_msg_id = 5;
-inline bool ContactSessionInfo::has_latest_msg_id() const {
-  return (_has_bits_[0] & 0x00000010u) != 0;
-}
-inline void ContactSessionInfo::set_has_latest_msg_id() {
-  _has_bits_[0] |= 0x00000010u;
-}
-inline void ContactSessionInfo::clear_has_latest_msg_id() {
-  _has_bits_[0] &= ~0x00000010u;
-}
+// uint32 latest_msg_id = 5;
 inline void ContactSessionInfo::clear_latest_msg_id() {
   latest_msg_id_ = 0u;
-  clear_has_latest_msg_id();
 }
 inline ::google::protobuf::uint32 ContactSessionInfo::latest_msg_id() const {
   // @@protoc_insertion_point(field_get:IM.BaseDefine.ContactSessionInfo.latest_msg_id)
   return latest_msg_id_;
 }
 inline void ContactSessionInfo::set_latest_msg_id(::google::protobuf::uint32 value) {
-  set_has_latest_msg_id();
+  
   latest_msg_id_ = value;
   // @@protoc_insertion_point(field_set:IM.BaseDefine.ContactSessionInfo.latest_msg_id)
 }
 
-// required bytes latest_msg_data = 6;
-inline bool ContactSessionInfo::has_latest_msg_data() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void ContactSessionInfo::set_has_latest_msg_data() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void ContactSessionInfo::clear_has_latest_msg_data() {
-  _has_bits_[0] &= ~0x00000001u;
-}
+// bytes latest_msg_data = 6;
 inline void ContactSessionInfo::clear_latest_msg_data() {
   latest_msg_data_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  clear_has_latest_msg_data();
 }
 inline const ::std::string& ContactSessionInfo::latest_msg_data() const {
   // @@protoc_insertion_point(field_get:IM.BaseDefine.ContactSessionInfo.latest_msg_data)
   return latest_msg_data_.GetNoArena();
 }
 inline void ContactSessionInfo::set_latest_msg_data(const ::std::string& value) {
-  set_has_latest_msg_data();
+  
   latest_msg_data_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
   // @@protoc_insertion_point(field_set:IM.BaseDefine.ContactSessionInfo.latest_msg_data)
 }
 #if LANG_CXX11
 inline void ContactSessionInfo::set_latest_msg_data(::std::string&& value) {
-  set_has_latest_msg_data();
+  
   latest_msg_data_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:IM.BaseDefine.ContactSessionInfo.latest_msg_data)
@@ -3610,81 +3376,60 @@ inline void ContactSessionInfo::set_latest_msg_data(::std::string&& value) {
 #endif
 inline void ContactSessionInfo::set_latest_msg_data(const char* value) {
   GOOGLE_DCHECK(value != NULL);
-  set_has_latest_msg_data();
+  
   latest_msg_data_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:IM.BaseDefine.ContactSessionInfo.latest_msg_data)
 }
 inline void ContactSessionInfo::set_latest_msg_data(const void* value, size_t size) {
-  set_has_latest_msg_data();
+  
   latest_msg_data_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
   // @@protoc_insertion_point(field_set_pointer:IM.BaseDefine.ContactSessionInfo.latest_msg_data)
 }
 inline ::std::string* ContactSessionInfo::mutable_latest_msg_data() {
-  set_has_latest_msg_data();
+  
   // @@protoc_insertion_point(field_mutable:IM.BaseDefine.ContactSessionInfo.latest_msg_data)
   return latest_msg_data_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* ContactSessionInfo::release_latest_msg_data() {
   // @@protoc_insertion_point(field_release:IM.BaseDefine.ContactSessionInfo.latest_msg_data)
-  clear_has_latest_msg_data();
+  
   return latest_msg_data_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline void ContactSessionInfo::set_allocated_latest_msg_data(::std::string* latest_msg_data) {
   if (latest_msg_data != NULL) {
-    set_has_latest_msg_data();
+    
   } else {
-    clear_has_latest_msg_data();
+    
   }
   latest_msg_data_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), latest_msg_data);
   // @@protoc_insertion_point(field_set_allocated:IM.BaseDefine.ContactSessionInfo.latest_msg_data)
 }
 
-// required .IM.BaseDefine.MsgType latest_msg_type = 7;
-inline bool ContactSessionInfo::has_latest_msg_type() const {
-  return (_has_bits_[0] & 0x00000080u) != 0;
-}
-inline void ContactSessionInfo::set_has_latest_msg_type() {
-  _has_bits_[0] |= 0x00000080u;
-}
-inline void ContactSessionInfo::clear_has_latest_msg_type() {
-  _has_bits_[0] &= ~0x00000080u;
-}
+// .IM.BaseDefine.MsgType latest_msg_type = 7;
 inline void ContactSessionInfo::clear_latest_msg_type() {
-  latest_msg_type_ = 1;
-  clear_has_latest_msg_type();
+  latest_msg_type_ = 0;
 }
 inline ::IM::BaseDefine::MsgType ContactSessionInfo::latest_msg_type() const {
   // @@protoc_insertion_point(field_get:IM.BaseDefine.ContactSessionInfo.latest_msg_type)
   return static_cast< ::IM::BaseDefine::MsgType >(latest_msg_type_);
 }
 inline void ContactSessionInfo::set_latest_msg_type(::IM::BaseDefine::MsgType value) {
-  assert(::IM::BaseDefine::MsgType_IsValid(value));
-  set_has_latest_msg_type();
+  
   latest_msg_type_ = value;
   // @@protoc_insertion_point(field_set:IM.BaseDefine.ContactSessionInfo.latest_msg_type)
 }
 
-// required uint32 latest_msg_from_user_id = 8;
-inline bool ContactSessionInfo::has_latest_msg_from_user_id() const {
-  return (_has_bits_[0] & 0x00000020u) != 0;
-}
-inline void ContactSessionInfo::set_has_latest_msg_from_user_id() {
-  _has_bits_[0] |= 0x00000020u;
-}
-inline void ContactSessionInfo::clear_has_latest_msg_from_user_id() {
-  _has_bits_[0] &= ~0x00000020u;
-}
+// uint32 latest_msg_from_user_id = 8;
 inline void ContactSessionInfo::clear_latest_msg_from_user_id() {
   latest_msg_from_user_id_ = 0u;
-  clear_has_latest_msg_from_user_id();
 }
 inline ::google::protobuf::uint32 ContactSessionInfo::latest_msg_from_user_id() const {
   // @@protoc_insertion_point(field_get:IM.BaseDefine.ContactSessionInfo.latest_msg_from_user_id)
   return latest_msg_from_user_id_;
 }
 inline void ContactSessionInfo::set_latest_msg_from_user_id(::google::protobuf::uint32 value) {
-  set_has_latest_msg_from_user_id();
+  
   latest_msg_from_user_id_ = value;
   // @@protoc_insertion_point(field_set:IM.BaseDefine.ContactSessionInfo.latest_msg_from_user_id)
 }
@@ -3693,51 +3438,30 @@ inline void ContactSessionInfo::set_latest_msg_from_user_id(::google::protobuf::
 
 // UserStat
 
-// required uint32 user_id = 1;
-inline bool UserStat::has_user_id() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void UserStat::set_has_user_id() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void UserStat::clear_has_user_id() {
-  _has_bits_[0] &= ~0x00000001u;
-}
+// uint32 user_id = 1;
 inline void UserStat::clear_user_id() {
   user_id_ = 0u;
-  clear_has_user_id();
 }
 inline ::google::protobuf::uint32 UserStat::user_id() const {
   // @@protoc_insertion_point(field_get:IM.BaseDefine.UserStat.user_id)
   return user_id_;
 }
 inline void UserStat::set_user_id(::google::protobuf::uint32 value) {
-  set_has_user_id();
+  
   user_id_ = value;
   // @@protoc_insertion_point(field_set:IM.BaseDefine.UserStat.user_id)
 }
 
-// required .IM.BaseDefine.UserStatType status = 2;
-inline bool UserStat::has_status() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void UserStat::set_has_status() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void UserStat::clear_has_status() {
-  _has_bits_[0] &= ~0x00000002u;
-}
+// .IM.BaseDefine.UserStatType status = 2;
 inline void UserStat::clear_status() {
-  status_ = 1;
-  clear_has_status();
+  status_ = 0;
 }
 inline ::IM::BaseDefine::UserStatType UserStat::status() const {
   // @@protoc_insertion_point(field_get:IM.BaseDefine.UserStat.status)
   return static_cast< ::IM::BaseDefine::UserStatType >(status_);
 }
 inline void UserStat::set_status(::IM::BaseDefine::UserStatType value) {
-  assert(::IM::BaseDefine::UserStatType_IsValid(value));
-  set_has_status();
+  
   status_ = value;
   // @@protoc_insertion_point(field_set:IM.BaseDefine.UserStat.status)
 }
@@ -3746,76 +3470,44 @@ inline void UserStat::set_status(::IM::BaseDefine::UserStatType value) {
 
 // ServerUserStat
 
-// required uint32 user_id = 1;
-inline bool ServerUserStat::has_user_id() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void ServerUserStat::set_has_user_id() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void ServerUserStat::clear_has_user_id() {
-  _has_bits_[0] &= ~0x00000001u;
-}
+// uint32 user_id = 1;
 inline void ServerUserStat::clear_user_id() {
   user_id_ = 0u;
-  clear_has_user_id();
 }
 inline ::google::protobuf::uint32 ServerUserStat::user_id() const {
   // @@protoc_insertion_point(field_get:IM.BaseDefine.ServerUserStat.user_id)
   return user_id_;
 }
 inline void ServerUserStat::set_user_id(::google::protobuf::uint32 value) {
-  set_has_user_id();
+  
   user_id_ = value;
   // @@protoc_insertion_point(field_set:IM.BaseDefine.ServerUserStat.user_id)
 }
 
-// required .IM.BaseDefine.UserStatType status = 2;
-inline bool ServerUserStat::has_status() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void ServerUserStat::set_has_status() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void ServerUserStat::clear_has_status() {
-  _has_bits_[0] &= ~0x00000002u;
-}
+// .IM.BaseDefine.UserStatType status = 2;
 inline void ServerUserStat::clear_status() {
-  status_ = 1;
-  clear_has_status();
+  status_ = 0;
 }
 inline ::IM::BaseDefine::UserStatType ServerUserStat::status() const {
   // @@protoc_insertion_point(field_get:IM.BaseDefine.ServerUserStat.status)
   return static_cast< ::IM::BaseDefine::UserStatType >(status_);
 }
 inline void ServerUserStat::set_status(::IM::BaseDefine::UserStatType value) {
-  assert(::IM::BaseDefine::UserStatType_IsValid(value));
-  set_has_status();
+  
   status_ = value;
   // @@protoc_insertion_point(field_set:IM.BaseDefine.ServerUserStat.status)
 }
 
-// required .IM.BaseDefine.ClientType client_type = 3;
-inline bool ServerUserStat::has_client_type() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
-}
-inline void ServerUserStat::set_has_client_type() {
-  _has_bits_[0] |= 0x00000004u;
-}
-inline void ServerUserStat::clear_has_client_type() {
-  _has_bits_[0] &= ~0x00000004u;
-}
+// .IM.BaseDefine.ClientType client_type = 3;
 inline void ServerUserStat::clear_client_type() {
-  client_type_ = 1;
-  clear_has_client_type();
+  client_type_ = 0;
 }
 inline ::IM::BaseDefine::ClientType ServerUserStat::client_type() const {
   // @@protoc_insertion_point(field_get:IM.BaseDefine.ServerUserStat.client_type)
   return static_cast< ::IM::BaseDefine::ClientType >(client_type_);
 }
 inline void ServerUserStat::set_client_type(::IM::BaseDefine::ClientType value) {
-  assert(::IM::BaseDefine::ClientType_IsValid(value));
-  set_has_client_type();
+  
   client_type_ = value;
   // @@protoc_insertion_point(field_set:IM.BaseDefine.ServerUserStat.client_type)
 }
@@ -3824,129 +3516,78 @@ inline void ServerUserStat::set_client_type(::IM::BaseDefine::ClientType value) 
 
 // UnreadInfo
 
-// required uint32 session_id = 1;
-inline bool UnreadInfo::has_session_id() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void UnreadInfo::set_has_session_id() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void UnreadInfo::clear_has_session_id() {
-  _has_bits_[0] &= ~0x00000002u;
-}
+// uint32 session_id = 1;
 inline void UnreadInfo::clear_session_id() {
   session_id_ = 0u;
-  clear_has_session_id();
 }
 inline ::google::protobuf::uint32 UnreadInfo::session_id() const {
   // @@protoc_insertion_point(field_get:IM.BaseDefine.UnreadInfo.session_id)
   return session_id_;
 }
 inline void UnreadInfo::set_session_id(::google::protobuf::uint32 value) {
-  set_has_session_id();
+  
   session_id_ = value;
   // @@protoc_insertion_point(field_set:IM.BaseDefine.UnreadInfo.session_id)
 }
 
-// required .IM.BaseDefine.SessionType session_type = 2;
-inline bool UnreadInfo::has_session_type() const {
-  return (_has_bits_[0] & 0x00000020u) != 0;
-}
-inline void UnreadInfo::set_has_session_type() {
-  _has_bits_[0] |= 0x00000020u;
-}
-inline void UnreadInfo::clear_has_session_type() {
-  _has_bits_[0] &= ~0x00000020u;
-}
+// .IM.BaseDefine.SessionType session_type = 2;
 inline void UnreadInfo::clear_session_type() {
-  session_type_ = 1;
-  clear_has_session_type();
+  session_type_ = 0;
 }
 inline ::IM::BaseDefine::SessionType UnreadInfo::session_type() const {
   // @@protoc_insertion_point(field_get:IM.BaseDefine.UnreadInfo.session_type)
   return static_cast< ::IM::BaseDefine::SessionType >(session_type_);
 }
 inline void UnreadInfo::set_session_type(::IM::BaseDefine::SessionType value) {
-  assert(::IM::BaseDefine::SessionType_IsValid(value));
-  set_has_session_type();
+  
   session_type_ = value;
   // @@protoc_insertion_point(field_set:IM.BaseDefine.UnreadInfo.session_type)
 }
 
-// required uint32 unread_cnt = 3;
-inline bool UnreadInfo::has_unread_cnt() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
-}
-inline void UnreadInfo::set_has_unread_cnt() {
-  _has_bits_[0] |= 0x00000004u;
-}
-inline void UnreadInfo::clear_has_unread_cnt() {
-  _has_bits_[0] &= ~0x00000004u;
-}
+// uint32 unread_cnt = 3;
 inline void UnreadInfo::clear_unread_cnt() {
   unread_cnt_ = 0u;
-  clear_has_unread_cnt();
 }
 inline ::google::protobuf::uint32 UnreadInfo::unread_cnt() const {
   // @@protoc_insertion_point(field_get:IM.BaseDefine.UnreadInfo.unread_cnt)
   return unread_cnt_;
 }
 inline void UnreadInfo::set_unread_cnt(::google::protobuf::uint32 value) {
-  set_has_unread_cnt();
+  
   unread_cnt_ = value;
   // @@protoc_insertion_point(field_set:IM.BaseDefine.UnreadInfo.unread_cnt)
 }
 
-// required uint32 latest_msg_id = 4;
-inline bool UnreadInfo::has_latest_msg_id() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
-}
-inline void UnreadInfo::set_has_latest_msg_id() {
-  _has_bits_[0] |= 0x00000008u;
-}
-inline void UnreadInfo::clear_has_latest_msg_id() {
-  _has_bits_[0] &= ~0x00000008u;
-}
+// uint32 latest_msg_id = 4;
 inline void UnreadInfo::clear_latest_msg_id() {
   latest_msg_id_ = 0u;
-  clear_has_latest_msg_id();
 }
 inline ::google::protobuf::uint32 UnreadInfo::latest_msg_id() const {
   // @@protoc_insertion_point(field_get:IM.BaseDefine.UnreadInfo.latest_msg_id)
   return latest_msg_id_;
 }
 inline void UnreadInfo::set_latest_msg_id(::google::protobuf::uint32 value) {
-  set_has_latest_msg_id();
+  
   latest_msg_id_ = value;
   // @@protoc_insertion_point(field_set:IM.BaseDefine.UnreadInfo.latest_msg_id)
 }
 
-// required bytes latest_msg_data = 5;
-inline bool UnreadInfo::has_latest_msg_data() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void UnreadInfo::set_has_latest_msg_data() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void UnreadInfo::clear_has_latest_msg_data() {
-  _has_bits_[0] &= ~0x00000001u;
-}
+// bytes latest_msg_data = 5;
 inline void UnreadInfo::clear_latest_msg_data() {
   latest_msg_data_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  clear_has_latest_msg_data();
 }
 inline const ::std::string& UnreadInfo::latest_msg_data() const {
   // @@protoc_insertion_point(field_get:IM.BaseDefine.UnreadInfo.latest_msg_data)
   return latest_msg_data_.GetNoArena();
 }
 inline void UnreadInfo::set_latest_msg_data(const ::std::string& value) {
-  set_has_latest_msg_data();
+  
   latest_msg_data_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
   // @@protoc_insertion_point(field_set:IM.BaseDefine.UnreadInfo.latest_msg_data)
 }
 #if LANG_CXX11
 inline void UnreadInfo::set_latest_msg_data(::std::string&& value) {
-  set_has_latest_msg_data();
+  
   latest_msg_data_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:IM.BaseDefine.UnreadInfo.latest_msg_data)
@@ -3954,81 +3595,60 @@ inline void UnreadInfo::set_latest_msg_data(::std::string&& value) {
 #endif
 inline void UnreadInfo::set_latest_msg_data(const char* value) {
   GOOGLE_DCHECK(value != NULL);
-  set_has_latest_msg_data();
+  
   latest_msg_data_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:IM.BaseDefine.UnreadInfo.latest_msg_data)
 }
 inline void UnreadInfo::set_latest_msg_data(const void* value, size_t size) {
-  set_has_latest_msg_data();
+  
   latest_msg_data_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
   // @@protoc_insertion_point(field_set_pointer:IM.BaseDefine.UnreadInfo.latest_msg_data)
 }
 inline ::std::string* UnreadInfo::mutable_latest_msg_data() {
-  set_has_latest_msg_data();
+  
   // @@protoc_insertion_point(field_mutable:IM.BaseDefine.UnreadInfo.latest_msg_data)
   return latest_msg_data_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* UnreadInfo::release_latest_msg_data() {
   // @@protoc_insertion_point(field_release:IM.BaseDefine.UnreadInfo.latest_msg_data)
-  clear_has_latest_msg_data();
+  
   return latest_msg_data_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline void UnreadInfo::set_allocated_latest_msg_data(::std::string* latest_msg_data) {
   if (latest_msg_data != NULL) {
-    set_has_latest_msg_data();
+    
   } else {
-    clear_has_latest_msg_data();
+    
   }
   latest_msg_data_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), latest_msg_data);
   // @@protoc_insertion_point(field_set_allocated:IM.BaseDefine.UnreadInfo.latest_msg_data)
 }
 
-// required .IM.BaseDefine.MsgType latest_msg_type = 6;
-inline bool UnreadInfo::has_latest_msg_type() const {
-  return (_has_bits_[0] & 0x00000040u) != 0;
-}
-inline void UnreadInfo::set_has_latest_msg_type() {
-  _has_bits_[0] |= 0x00000040u;
-}
-inline void UnreadInfo::clear_has_latest_msg_type() {
-  _has_bits_[0] &= ~0x00000040u;
-}
+// .IM.BaseDefine.MsgType latest_msg_type = 6;
 inline void UnreadInfo::clear_latest_msg_type() {
-  latest_msg_type_ = 1;
-  clear_has_latest_msg_type();
+  latest_msg_type_ = 0;
 }
 inline ::IM::BaseDefine::MsgType UnreadInfo::latest_msg_type() const {
   // @@protoc_insertion_point(field_get:IM.BaseDefine.UnreadInfo.latest_msg_type)
   return static_cast< ::IM::BaseDefine::MsgType >(latest_msg_type_);
 }
 inline void UnreadInfo::set_latest_msg_type(::IM::BaseDefine::MsgType value) {
-  assert(::IM::BaseDefine::MsgType_IsValid(value));
-  set_has_latest_msg_type();
+  
   latest_msg_type_ = value;
   // @@protoc_insertion_point(field_set:IM.BaseDefine.UnreadInfo.latest_msg_type)
 }
 
-// required uint32 latest_msg_from_user_id = 7;
-inline bool UnreadInfo::has_latest_msg_from_user_id() const {
-  return (_has_bits_[0] & 0x00000010u) != 0;
-}
-inline void UnreadInfo::set_has_latest_msg_from_user_id() {
-  _has_bits_[0] |= 0x00000010u;
-}
-inline void UnreadInfo::clear_has_latest_msg_from_user_id() {
-  _has_bits_[0] &= ~0x00000010u;
-}
+// uint32 latest_msg_from_user_id = 7;
 inline void UnreadInfo::clear_latest_msg_from_user_id() {
   latest_msg_from_user_id_ = 0u;
-  clear_has_latest_msg_from_user_id();
 }
 inline ::google::protobuf::uint32 UnreadInfo::latest_msg_from_user_id() const {
   // @@protoc_insertion_point(field_get:IM.BaseDefine.UnreadInfo.latest_msg_from_user_id)
   return latest_msg_from_user_id_;
 }
 inline void UnreadInfo::set_latest_msg_from_user_id(::google::protobuf::uint32 value) {
-  set_has_latest_msg_from_user_id();
+  
   latest_msg_from_user_id_ = value;
   // @@protoc_insertion_point(field_set:IM.BaseDefine.UnreadInfo.latest_msg_from_user_id)
 }
@@ -4037,129 +3657,78 @@ inline void UnreadInfo::set_latest_msg_from_user_id(::google::protobuf::uint32 v
 
 // MsgInfo
 
-// required uint32 msg_id = 1;
-inline bool MsgInfo::has_msg_id() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void MsgInfo::set_has_msg_id() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void MsgInfo::clear_has_msg_id() {
-  _has_bits_[0] &= ~0x00000002u;
-}
+// uint32 msg_id = 1;
 inline void MsgInfo::clear_msg_id() {
   msg_id_ = 0u;
-  clear_has_msg_id();
 }
 inline ::google::protobuf::uint32 MsgInfo::msg_id() const {
   // @@protoc_insertion_point(field_get:IM.BaseDefine.MsgInfo.msg_id)
   return msg_id_;
 }
 inline void MsgInfo::set_msg_id(::google::protobuf::uint32 value) {
-  set_has_msg_id();
+  
   msg_id_ = value;
   // @@protoc_insertion_point(field_set:IM.BaseDefine.MsgInfo.msg_id)
 }
 
-// required uint32 from_session_id = 2;
-inline bool MsgInfo::has_from_session_id() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
-}
-inline void MsgInfo::set_has_from_session_id() {
-  _has_bits_[0] |= 0x00000004u;
-}
-inline void MsgInfo::clear_has_from_session_id() {
-  _has_bits_[0] &= ~0x00000004u;
-}
+// uint32 from_session_id = 2;
 inline void MsgInfo::clear_from_session_id() {
   from_session_id_ = 0u;
-  clear_has_from_session_id();
 }
 inline ::google::protobuf::uint32 MsgInfo::from_session_id() const {
   // @@protoc_insertion_point(field_get:IM.BaseDefine.MsgInfo.from_session_id)
   return from_session_id_;
 }
 inline void MsgInfo::set_from_session_id(::google::protobuf::uint32 value) {
-  set_has_from_session_id();
+  
   from_session_id_ = value;
   // @@protoc_insertion_point(field_set:IM.BaseDefine.MsgInfo.from_session_id)
 }
 
-// required uint32 create_time = 3;
-inline bool MsgInfo::has_create_time() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
-}
-inline void MsgInfo::set_has_create_time() {
-  _has_bits_[0] |= 0x00000008u;
-}
-inline void MsgInfo::clear_has_create_time() {
-  _has_bits_[0] &= ~0x00000008u;
-}
+// uint32 create_time = 3;
 inline void MsgInfo::clear_create_time() {
   create_time_ = 0u;
-  clear_has_create_time();
 }
 inline ::google::protobuf::uint32 MsgInfo::create_time() const {
   // @@protoc_insertion_point(field_get:IM.BaseDefine.MsgInfo.create_time)
   return create_time_;
 }
 inline void MsgInfo::set_create_time(::google::protobuf::uint32 value) {
-  set_has_create_time();
+  
   create_time_ = value;
   // @@protoc_insertion_point(field_set:IM.BaseDefine.MsgInfo.create_time)
 }
 
-// required .IM.BaseDefine.MsgType msg_type = 4;
-inline bool MsgInfo::has_msg_type() const {
-  return (_has_bits_[0] & 0x00000010u) != 0;
-}
-inline void MsgInfo::set_has_msg_type() {
-  _has_bits_[0] |= 0x00000010u;
-}
-inline void MsgInfo::clear_has_msg_type() {
-  _has_bits_[0] &= ~0x00000010u;
-}
+// .IM.BaseDefine.MsgType msg_type = 4;
 inline void MsgInfo::clear_msg_type() {
-  msg_type_ = 1;
-  clear_has_msg_type();
+  msg_type_ = 0;
 }
 inline ::IM::BaseDefine::MsgType MsgInfo::msg_type() const {
   // @@protoc_insertion_point(field_get:IM.BaseDefine.MsgInfo.msg_type)
   return static_cast< ::IM::BaseDefine::MsgType >(msg_type_);
 }
 inline void MsgInfo::set_msg_type(::IM::BaseDefine::MsgType value) {
-  assert(::IM::BaseDefine::MsgType_IsValid(value));
-  set_has_msg_type();
+  
   msg_type_ = value;
   // @@protoc_insertion_point(field_set:IM.BaseDefine.MsgInfo.msg_type)
 }
 
-// required bytes msg_data = 5;
-inline bool MsgInfo::has_msg_data() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void MsgInfo::set_has_msg_data() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void MsgInfo::clear_has_msg_data() {
-  _has_bits_[0] &= ~0x00000001u;
-}
+// bytes msg_data = 5;
 inline void MsgInfo::clear_msg_data() {
   msg_data_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  clear_has_msg_data();
 }
 inline const ::std::string& MsgInfo::msg_data() const {
   // @@protoc_insertion_point(field_get:IM.BaseDefine.MsgInfo.msg_data)
   return msg_data_.GetNoArena();
 }
 inline void MsgInfo::set_msg_data(const ::std::string& value) {
-  set_has_msg_data();
+  
   msg_data_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
   // @@protoc_insertion_point(field_set:IM.BaseDefine.MsgInfo.msg_data)
 }
 #if LANG_CXX11
 inline void MsgInfo::set_msg_data(::std::string&& value) {
-  set_has_msg_data();
+  
   msg_data_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:IM.BaseDefine.MsgInfo.msg_data)
@@ -4167,31 +3736,31 @@ inline void MsgInfo::set_msg_data(::std::string&& value) {
 #endif
 inline void MsgInfo::set_msg_data(const char* value) {
   GOOGLE_DCHECK(value != NULL);
-  set_has_msg_data();
+  
   msg_data_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:IM.BaseDefine.MsgInfo.msg_data)
 }
 inline void MsgInfo::set_msg_data(const void* value, size_t size) {
-  set_has_msg_data();
+  
   msg_data_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
   // @@protoc_insertion_point(field_set_pointer:IM.BaseDefine.MsgInfo.msg_data)
 }
 inline ::std::string* MsgInfo::mutable_msg_data() {
-  set_has_msg_data();
+  
   // @@protoc_insertion_point(field_mutable:IM.BaseDefine.MsgInfo.msg_data)
   return msg_data_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* MsgInfo::release_msg_data() {
   // @@protoc_insertion_point(field_release:IM.BaseDefine.MsgInfo.msg_data)
-  clear_has_msg_data();
+  
   return msg_data_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline void MsgInfo::set_allocated_msg_data(::std::string* msg_data) {
   if (msg_data != NULL) {
-    set_has_msg_data();
+    
   } else {
-    clear_has_msg_data();
+    
   }
   msg_data_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), msg_data);
   // @@protoc_insertion_point(field_set_allocated:IM.BaseDefine.MsgInfo.msg_data)
@@ -4201,50 +3770,30 @@ inline void MsgInfo::set_allocated_msg_data(::std::string* msg_data) {
 
 // GroupVersionInfo
 
-// required uint32 group_id = 1;
-inline bool GroupVersionInfo::has_group_id() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void GroupVersionInfo::set_has_group_id() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void GroupVersionInfo::clear_has_group_id() {
-  _has_bits_[0] &= ~0x00000001u;
-}
+// uint32 group_id = 1;
 inline void GroupVersionInfo::clear_group_id() {
   group_id_ = 0u;
-  clear_has_group_id();
 }
 inline ::google::protobuf::uint32 GroupVersionInfo::group_id() const {
   // @@protoc_insertion_point(field_get:IM.BaseDefine.GroupVersionInfo.group_id)
   return group_id_;
 }
 inline void GroupVersionInfo::set_group_id(::google::protobuf::uint32 value) {
-  set_has_group_id();
+  
   group_id_ = value;
   // @@protoc_insertion_point(field_set:IM.BaseDefine.GroupVersionInfo.group_id)
 }
 
-// required uint32 version = 2;
-inline bool GroupVersionInfo::has_version() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void GroupVersionInfo::set_has_version() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void GroupVersionInfo::clear_has_version() {
-  _has_bits_[0] &= ~0x00000002u;
-}
+// uint32 version = 2;
 inline void GroupVersionInfo::clear_version() {
   version_ = 0u;
-  clear_has_version();
 }
 inline ::google::protobuf::uint32 GroupVersionInfo::version() const {
   // @@protoc_insertion_point(field_get:IM.BaseDefine.GroupVersionInfo.version)
   return version_;
 }
 inline void GroupVersionInfo::set_version(::google::protobuf::uint32 value) {
-  set_has_version();
+  
   version_ = value;
   // @@protoc_insertion_point(field_set:IM.BaseDefine.GroupVersionInfo.version)
 }
@@ -4253,80 +3802,50 @@ inline void GroupVersionInfo::set_version(::google::protobuf::uint32 value) {
 
 // GroupInfo
 
-// required uint32 group_id = 1;
-inline bool GroupInfo::has_group_id() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
-}
-inline void GroupInfo::set_has_group_id() {
-  _has_bits_[0] |= 0x00000004u;
-}
-inline void GroupInfo::clear_has_group_id() {
-  _has_bits_[0] &= ~0x00000004u;
-}
+// uint32 group_id = 1;
 inline void GroupInfo::clear_group_id() {
   group_id_ = 0u;
-  clear_has_group_id();
 }
 inline ::google::protobuf::uint32 GroupInfo::group_id() const {
   // @@protoc_insertion_point(field_get:IM.BaseDefine.GroupInfo.group_id)
   return group_id_;
 }
 inline void GroupInfo::set_group_id(::google::protobuf::uint32 value) {
-  set_has_group_id();
+  
   group_id_ = value;
   // @@protoc_insertion_point(field_set:IM.BaseDefine.GroupInfo.group_id)
 }
 
-// required uint32 version = 2;
-inline bool GroupInfo::has_version() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
-}
-inline void GroupInfo::set_has_version() {
-  _has_bits_[0] |= 0x00000008u;
-}
-inline void GroupInfo::clear_has_version() {
-  _has_bits_[0] &= ~0x00000008u;
-}
+// uint32 version = 2;
 inline void GroupInfo::clear_version() {
   version_ = 0u;
-  clear_has_version();
 }
 inline ::google::protobuf::uint32 GroupInfo::version() const {
   // @@protoc_insertion_point(field_get:IM.BaseDefine.GroupInfo.version)
   return version_;
 }
 inline void GroupInfo::set_version(::google::protobuf::uint32 value) {
-  set_has_version();
+  
   version_ = value;
   // @@protoc_insertion_point(field_set:IM.BaseDefine.GroupInfo.version)
 }
 
-// required string group_name = 3;
-inline bool GroupInfo::has_group_name() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void GroupInfo::set_has_group_name() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void GroupInfo::clear_has_group_name() {
-  _has_bits_[0] &= ~0x00000001u;
-}
+// string group_name = 3;
 inline void GroupInfo::clear_group_name() {
   group_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  clear_has_group_name();
 }
 inline const ::std::string& GroupInfo::group_name() const {
   // @@protoc_insertion_point(field_get:IM.BaseDefine.GroupInfo.group_name)
   return group_name_.GetNoArena();
 }
 inline void GroupInfo::set_group_name(const ::std::string& value) {
-  set_has_group_name();
+  
   group_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
   // @@protoc_insertion_point(field_set:IM.BaseDefine.GroupInfo.group_name)
 }
 #if LANG_CXX11
 inline void GroupInfo::set_group_name(::std::string&& value) {
-  set_has_group_name();
+  
   group_name_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:IM.BaseDefine.GroupInfo.group_name)
@@ -4334,62 +3853,52 @@ inline void GroupInfo::set_group_name(::std::string&& value) {
 #endif
 inline void GroupInfo::set_group_name(const char* value) {
   GOOGLE_DCHECK(value != NULL);
-  set_has_group_name();
+  
   group_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:IM.BaseDefine.GroupInfo.group_name)
 }
 inline void GroupInfo::set_group_name(const char* value, size_t size) {
-  set_has_group_name();
+  
   group_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
   // @@protoc_insertion_point(field_set_pointer:IM.BaseDefine.GroupInfo.group_name)
 }
 inline ::std::string* GroupInfo::mutable_group_name() {
-  set_has_group_name();
+  
   // @@protoc_insertion_point(field_mutable:IM.BaseDefine.GroupInfo.group_name)
   return group_name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* GroupInfo::release_group_name() {
   // @@protoc_insertion_point(field_release:IM.BaseDefine.GroupInfo.group_name)
-  clear_has_group_name();
+  
   return group_name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline void GroupInfo::set_allocated_group_name(::std::string* group_name) {
   if (group_name != NULL) {
-    set_has_group_name();
+    
   } else {
-    clear_has_group_name();
+    
   }
   group_name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), group_name);
   // @@protoc_insertion_point(field_set_allocated:IM.BaseDefine.GroupInfo.group_name)
 }
 
-// required string group_avatar = 4;
-inline bool GroupInfo::has_group_avatar() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void GroupInfo::set_has_group_avatar() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void GroupInfo::clear_has_group_avatar() {
-  _has_bits_[0] &= ~0x00000002u;
-}
+// string group_avatar = 4;
 inline void GroupInfo::clear_group_avatar() {
   group_avatar_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  clear_has_group_avatar();
 }
 inline const ::std::string& GroupInfo::group_avatar() const {
   // @@protoc_insertion_point(field_get:IM.BaseDefine.GroupInfo.group_avatar)
   return group_avatar_.GetNoArena();
 }
 inline void GroupInfo::set_group_avatar(const ::std::string& value) {
-  set_has_group_avatar();
+  
   group_avatar_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
   // @@protoc_insertion_point(field_set:IM.BaseDefine.GroupInfo.group_avatar)
 }
 #if LANG_CXX11
 inline void GroupInfo::set_group_avatar(::std::string&& value) {
-  set_has_group_avatar();
+  
   group_avatar_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:IM.BaseDefine.GroupInfo.group_avatar)
@@ -4397,105 +3906,74 @@ inline void GroupInfo::set_group_avatar(::std::string&& value) {
 #endif
 inline void GroupInfo::set_group_avatar(const char* value) {
   GOOGLE_DCHECK(value != NULL);
-  set_has_group_avatar();
+  
   group_avatar_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:IM.BaseDefine.GroupInfo.group_avatar)
 }
 inline void GroupInfo::set_group_avatar(const char* value, size_t size) {
-  set_has_group_avatar();
+  
   group_avatar_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
   // @@protoc_insertion_point(field_set_pointer:IM.BaseDefine.GroupInfo.group_avatar)
 }
 inline ::std::string* GroupInfo::mutable_group_avatar() {
-  set_has_group_avatar();
+  
   // @@protoc_insertion_point(field_mutable:IM.BaseDefine.GroupInfo.group_avatar)
   return group_avatar_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* GroupInfo::release_group_avatar() {
   // @@protoc_insertion_point(field_release:IM.BaseDefine.GroupInfo.group_avatar)
-  clear_has_group_avatar();
+  
   return group_avatar_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline void GroupInfo::set_allocated_group_avatar(::std::string* group_avatar) {
   if (group_avatar != NULL) {
-    set_has_group_avatar();
+    
   } else {
-    clear_has_group_avatar();
+    
   }
   group_avatar_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), group_avatar);
   // @@protoc_insertion_point(field_set_allocated:IM.BaseDefine.GroupInfo.group_avatar)
 }
 
-// required uint32 group_creator_id = 5;
-inline bool GroupInfo::has_group_creator_id() const {
-  return (_has_bits_[0] & 0x00000010u) != 0;
-}
-inline void GroupInfo::set_has_group_creator_id() {
-  _has_bits_[0] |= 0x00000010u;
-}
-inline void GroupInfo::clear_has_group_creator_id() {
-  _has_bits_[0] &= ~0x00000010u;
-}
+// uint32 group_creator_id = 5;
 inline void GroupInfo::clear_group_creator_id() {
   group_creator_id_ = 0u;
-  clear_has_group_creator_id();
 }
 inline ::google::protobuf::uint32 GroupInfo::group_creator_id() const {
   // @@protoc_insertion_point(field_get:IM.BaseDefine.GroupInfo.group_creator_id)
   return group_creator_id_;
 }
 inline void GroupInfo::set_group_creator_id(::google::protobuf::uint32 value) {
-  set_has_group_creator_id();
+  
   group_creator_id_ = value;
   // @@protoc_insertion_point(field_set:IM.BaseDefine.GroupInfo.group_creator_id)
 }
 
-// required .IM.BaseDefine.GroupType group_type = 6;
-inline bool GroupInfo::has_group_type() const {
-  return (_has_bits_[0] & 0x00000040u) != 0;
-}
-inline void GroupInfo::set_has_group_type() {
-  _has_bits_[0] |= 0x00000040u;
-}
-inline void GroupInfo::clear_has_group_type() {
-  _has_bits_[0] &= ~0x00000040u;
-}
+// .IM.BaseDefine.GroupType group_type = 6;
 inline void GroupInfo::clear_group_type() {
-  group_type_ = 1;
-  clear_has_group_type();
+  group_type_ = 0;
 }
 inline ::IM::BaseDefine::GroupType GroupInfo::group_type() const {
   // @@protoc_insertion_point(field_get:IM.BaseDefine.GroupInfo.group_type)
   return static_cast< ::IM::BaseDefine::GroupType >(group_type_);
 }
 inline void GroupInfo::set_group_type(::IM::BaseDefine::GroupType value) {
-  assert(::IM::BaseDefine::GroupType_IsValid(value));
-  set_has_group_type();
+  
   group_type_ = value;
   // @@protoc_insertion_point(field_set:IM.BaseDefine.GroupInfo.group_type)
 }
 
-// required uint32 shield_status = 7;
-inline bool GroupInfo::has_shield_status() const {
-  return (_has_bits_[0] & 0x00000020u) != 0;
-}
-inline void GroupInfo::set_has_shield_status() {
-  _has_bits_[0] |= 0x00000020u;
-}
-inline void GroupInfo::clear_has_shield_status() {
-  _has_bits_[0] &= ~0x00000020u;
-}
+// uint32 shield_status = 7;
 inline void GroupInfo::clear_shield_status() {
   shield_status_ = 0u;
-  clear_has_shield_status();
 }
 inline ::google::protobuf::uint32 GroupInfo::shield_status() const {
   // @@protoc_insertion_point(field_get:IM.BaseDefine.GroupInfo.shield_status)
   return shield_status_;
 }
 inline void GroupInfo::set_shield_status(::google::protobuf::uint32 value) {
-  set_has_shield_status();
+  
   shield_status_ = value;
   // @@protoc_insertion_point(field_set:IM.BaseDefine.GroupInfo.shield_status)
 }
@@ -4534,81 +4012,50 @@ GroupInfo::mutable_group_member_list() {
 
 // UserTokenInfo
 
-// required uint32 user_id = 1;
-inline bool UserTokenInfo::has_user_id() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void UserTokenInfo::set_has_user_id() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void UserTokenInfo::clear_has_user_id() {
-  _has_bits_[0] &= ~0x00000002u;
-}
+// uint32 user_id = 1;
 inline void UserTokenInfo::clear_user_id() {
   user_id_ = 0u;
-  clear_has_user_id();
 }
 inline ::google::protobuf::uint32 UserTokenInfo::user_id() const {
   // @@protoc_insertion_point(field_get:IM.BaseDefine.UserTokenInfo.user_id)
   return user_id_;
 }
 inline void UserTokenInfo::set_user_id(::google::protobuf::uint32 value) {
-  set_has_user_id();
+  
   user_id_ = value;
   // @@protoc_insertion_point(field_set:IM.BaseDefine.UserTokenInfo.user_id)
 }
 
-// required .IM.BaseDefine.ClientType user_type = 2;
-inline bool UserTokenInfo::has_user_type() const {
-  return (_has_bits_[0] & 0x00000010u) != 0;
-}
-inline void UserTokenInfo::set_has_user_type() {
-  _has_bits_[0] |= 0x00000010u;
-}
-inline void UserTokenInfo::clear_has_user_type() {
-  _has_bits_[0] &= ~0x00000010u;
-}
+// .IM.BaseDefine.ClientType user_type = 2;
 inline void UserTokenInfo::clear_user_type() {
-  user_type_ = 1;
-  clear_has_user_type();
+  user_type_ = 0;
 }
 inline ::IM::BaseDefine::ClientType UserTokenInfo::user_type() const {
   // @@protoc_insertion_point(field_get:IM.BaseDefine.UserTokenInfo.user_type)
   return static_cast< ::IM::BaseDefine::ClientType >(user_type_);
 }
 inline void UserTokenInfo::set_user_type(::IM::BaseDefine::ClientType value) {
-  assert(::IM::BaseDefine::ClientType_IsValid(value));
-  set_has_user_type();
+  
   user_type_ = value;
   // @@protoc_insertion_point(field_set:IM.BaseDefine.UserTokenInfo.user_type)
 }
 
-// required string token = 3;
-inline bool UserTokenInfo::has_token() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void UserTokenInfo::set_has_token() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void UserTokenInfo::clear_has_token() {
-  _has_bits_[0] &= ~0x00000001u;
-}
+// string token = 3;
 inline void UserTokenInfo::clear_token() {
   token_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  clear_has_token();
 }
 inline const ::std::string& UserTokenInfo::token() const {
   // @@protoc_insertion_point(field_get:IM.BaseDefine.UserTokenInfo.token)
   return token_.GetNoArena();
 }
 inline void UserTokenInfo::set_token(const ::std::string& value) {
-  set_has_token();
+  
   token_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
   // @@protoc_insertion_point(field_set:IM.BaseDefine.UserTokenInfo.token)
 }
 #if LANG_CXX11
 inline void UserTokenInfo::set_token(::std::string&& value) {
-  set_has_token();
+  
   token_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:IM.BaseDefine.UserTokenInfo.token)
@@ -4616,80 +4063,60 @@ inline void UserTokenInfo::set_token(::std::string&& value) {
 #endif
 inline void UserTokenInfo::set_token(const char* value) {
   GOOGLE_DCHECK(value != NULL);
-  set_has_token();
+  
   token_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:IM.BaseDefine.UserTokenInfo.token)
 }
 inline void UserTokenInfo::set_token(const char* value, size_t size) {
-  set_has_token();
+  
   token_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
   // @@protoc_insertion_point(field_set_pointer:IM.BaseDefine.UserTokenInfo.token)
 }
 inline ::std::string* UserTokenInfo::mutable_token() {
-  set_has_token();
+  
   // @@protoc_insertion_point(field_mutable:IM.BaseDefine.UserTokenInfo.token)
   return token_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* UserTokenInfo::release_token() {
   // @@protoc_insertion_point(field_release:IM.BaseDefine.UserTokenInfo.token)
-  clear_has_token();
+  
   return token_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline void UserTokenInfo::set_allocated_token(::std::string* token) {
   if (token != NULL) {
-    set_has_token();
+    
   } else {
-    clear_has_token();
+    
   }
   token_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), token);
   // @@protoc_insertion_point(field_set_allocated:IM.BaseDefine.UserTokenInfo.token)
 }
 
-// required uint32 push_count = 4;
-inline bool UserTokenInfo::has_push_count() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
-}
-inline void UserTokenInfo::set_has_push_count() {
-  _has_bits_[0] |= 0x00000004u;
-}
-inline void UserTokenInfo::clear_has_push_count() {
-  _has_bits_[0] &= ~0x00000004u;
-}
+// uint32 push_count = 4;
 inline void UserTokenInfo::clear_push_count() {
   push_count_ = 0u;
-  clear_has_push_count();
 }
 inline ::google::protobuf::uint32 UserTokenInfo::push_count() const {
   // @@protoc_insertion_point(field_get:IM.BaseDefine.UserTokenInfo.push_count)
   return push_count_;
 }
 inline void UserTokenInfo::set_push_count(::google::protobuf::uint32 value) {
-  set_has_push_count();
+  
   push_count_ = value;
   // @@protoc_insertion_point(field_set:IM.BaseDefine.UserTokenInfo.push_count)
 }
 
-// required uint32 push_type = 5;
-inline bool UserTokenInfo::has_push_type() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
-}
-inline void UserTokenInfo::set_has_push_type() {
-  _has_bits_[0] |= 0x00000008u;
-}
-inline void UserTokenInfo::clear_has_push_type() {
-  _has_bits_[0] &= ~0x00000008u;
-}
+// uint32 push_type = 5;
 inline void UserTokenInfo::clear_push_type() {
   push_type_ = 0u;
-  clear_has_push_type();
 }
 inline ::google::protobuf::uint32 UserTokenInfo::push_type() const {
   // @@protoc_insertion_point(field_get:IM.BaseDefine.UserTokenInfo.push_type)
   return push_type_;
 }
 inline void UserTokenInfo::set_push_type(::google::protobuf::uint32 value) {
-  set_has_push_type();
+  
   push_type_ = value;
   // @@protoc_insertion_point(field_set:IM.BaseDefine.UserTokenInfo.push_type)
 }
@@ -4698,32 +4125,22 @@ inline void UserTokenInfo::set_push_type(::google::protobuf::uint32 value) {
 
 // PushResult
 
-// required string user_token = 1;
-inline bool PushResult::has_user_token() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void PushResult::set_has_user_token() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void PushResult::clear_has_user_token() {
-  _has_bits_[0] &= ~0x00000001u;
-}
+// string user_token = 1;
 inline void PushResult::clear_user_token() {
   user_token_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  clear_has_user_token();
 }
 inline const ::std::string& PushResult::user_token() const {
   // @@protoc_insertion_point(field_get:IM.BaseDefine.PushResult.user_token)
   return user_token_.GetNoArena();
 }
 inline void PushResult::set_user_token(const ::std::string& value) {
-  set_has_user_token();
+  
   user_token_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
   // @@protoc_insertion_point(field_set:IM.BaseDefine.PushResult.user_token)
 }
 #if LANG_CXX11
 inline void PushResult::set_user_token(::std::string&& value) {
-  set_has_user_token();
+  
   user_token_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:IM.BaseDefine.PushResult.user_token)
@@ -4731,56 +4148,46 @@ inline void PushResult::set_user_token(::std::string&& value) {
 #endif
 inline void PushResult::set_user_token(const char* value) {
   GOOGLE_DCHECK(value != NULL);
-  set_has_user_token();
+  
   user_token_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:IM.BaseDefine.PushResult.user_token)
 }
 inline void PushResult::set_user_token(const char* value, size_t size) {
-  set_has_user_token();
+  
   user_token_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
   // @@protoc_insertion_point(field_set_pointer:IM.BaseDefine.PushResult.user_token)
 }
 inline ::std::string* PushResult::mutable_user_token() {
-  set_has_user_token();
+  
   // @@protoc_insertion_point(field_mutable:IM.BaseDefine.PushResult.user_token)
   return user_token_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* PushResult::release_user_token() {
   // @@protoc_insertion_point(field_release:IM.BaseDefine.PushResult.user_token)
-  clear_has_user_token();
+  
   return user_token_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline void PushResult::set_allocated_user_token(::std::string* user_token) {
   if (user_token != NULL) {
-    set_has_user_token();
+    
   } else {
-    clear_has_user_token();
+    
   }
   user_token_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), user_token);
   // @@protoc_insertion_point(field_set_allocated:IM.BaseDefine.PushResult.user_token)
 }
 
-// required uint32 result_code = 2;
-inline bool PushResult::has_result_code() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void PushResult::set_has_result_code() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void PushResult::clear_has_result_code() {
-  _has_bits_[0] &= ~0x00000002u;
-}
+// uint32 result_code = 2;
 inline void PushResult::clear_result_code() {
   result_code_ = 0u;
-  clear_has_result_code();
 }
 inline ::google::protobuf::uint32 PushResult::result_code() const {
   // @@protoc_insertion_point(field_get:IM.BaseDefine.PushResult.result_code)
   return result_code_;
 }
 inline void PushResult::set_result_code(::google::protobuf::uint32 value) {
-  set_has_result_code();
+  
   result_code_ = value;
   // @@protoc_insertion_point(field_set:IM.BaseDefine.PushResult.result_code)
 }
@@ -4789,74 +4196,44 @@ inline void PushResult::set_result_code(::google::protobuf::uint32 value) {
 
 // ShieldStatus
 
-// required uint32 user_id = 1;
-inline bool ShieldStatus::has_user_id() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void ShieldStatus::set_has_user_id() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void ShieldStatus::clear_has_user_id() {
-  _has_bits_[0] &= ~0x00000001u;
-}
+// uint32 user_id = 1;
 inline void ShieldStatus::clear_user_id() {
   user_id_ = 0u;
-  clear_has_user_id();
 }
 inline ::google::protobuf::uint32 ShieldStatus::user_id() const {
   // @@protoc_insertion_point(field_get:IM.BaseDefine.ShieldStatus.user_id)
   return user_id_;
 }
 inline void ShieldStatus::set_user_id(::google::protobuf::uint32 value) {
-  set_has_user_id();
+  
   user_id_ = value;
   // @@protoc_insertion_point(field_set:IM.BaseDefine.ShieldStatus.user_id)
 }
 
-// required uint32 group_id = 2;
-inline bool ShieldStatus::has_group_id() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void ShieldStatus::set_has_group_id() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void ShieldStatus::clear_has_group_id() {
-  _has_bits_[0] &= ~0x00000002u;
-}
+// uint32 group_id = 2;
 inline void ShieldStatus::clear_group_id() {
   group_id_ = 0u;
-  clear_has_group_id();
 }
 inline ::google::protobuf::uint32 ShieldStatus::group_id() const {
   // @@protoc_insertion_point(field_get:IM.BaseDefine.ShieldStatus.group_id)
   return group_id_;
 }
 inline void ShieldStatus::set_group_id(::google::protobuf::uint32 value) {
-  set_has_group_id();
+  
   group_id_ = value;
   // @@protoc_insertion_point(field_set:IM.BaseDefine.ShieldStatus.group_id)
 }
 
-// required uint32 shield_status = 3;
-inline bool ShieldStatus::has_shield_status() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
-}
-inline void ShieldStatus::set_has_shield_status() {
-  _has_bits_[0] |= 0x00000004u;
-}
-inline void ShieldStatus::clear_has_shield_status() {
-  _has_bits_[0] &= ~0x00000004u;
-}
+// uint32 shield_status = 3;
 inline void ShieldStatus::clear_shield_status() {
   shield_status_ = 0u;
-  clear_has_shield_status();
 }
 inline ::google::protobuf::uint32 ShieldStatus::shield_status() const {
   // @@protoc_insertion_point(field_get:IM.BaseDefine.ShieldStatus.shield_status)
   return shield_status_;
 }
 inline void ShieldStatus::set_shield_status(::google::protobuf::uint32 value) {
-  set_has_shield_status();
+  
   shield_status_ = value;
   // @@protoc_insertion_point(field_set:IM.BaseDefine.ShieldStatus.shield_status)
 }
@@ -4865,56 +4242,36 @@ inline void ShieldStatus::set_shield_status(::google::protobuf::uint32 value) {
 
 // OfflineFileInfo
 
-// required uint32 from_user_id = 1;
-inline bool OfflineFileInfo::has_from_user_id() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
-}
-inline void OfflineFileInfo::set_has_from_user_id() {
-  _has_bits_[0] |= 0x00000004u;
-}
-inline void OfflineFileInfo::clear_has_from_user_id() {
-  _has_bits_[0] &= ~0x00000004u;
-}
+// uint32 from_user_id = 1;
 inline void OfflineFileInfo::clear_from_user_id() {
   from_user_id_ = 0u;
-  clear_has_from_user_id();
 }
 inline ::google::protobuf::uint32 OfflineFileInfo::from_user_id() const {
   // @@protoc_insertion_point(field_get:IM.BaseDefine.OfflineFileInfo.from_user_id)
   return from_user_id_;
 }
 inline void OfflineFileInfo::set_from_user_id(::google::protobuf::uint32 value) {
-  set_has_from_user_id();
+  
   from_user_id_ = value;
   // @@protoc_insertion_point(field_set:IM.BaseDefine.OfflineFileInfo.from_user_id)
 }
 
-// required string task_id = 2;
-inline bool OfflineFileInfo::has_task_id() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void OfflineFileInfo::set_has_task_id() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void OfflineFileInfo::clear_has_task_id() {
-  _has_bits_[0] &= ~0x00000001u;
-}
+// string task_id = 2;
 inline void OfflineFileInfo::clear_task_id() {
   task_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  clear_has_task_id();
 }
 inline const ::std::string& OfflineFileInfo::task_id() const {
   // @@protoc_insertion_point(field_get:IM.BaseDefine.OfflineFileInfo.task_id)
   return task_id_.GetNoArena();
 }
 inline void OfflineFileInfo::set_task_id(const ::std::string& value) {
-  set_has_task_id();
+  
   task_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
   // @@protoc_insertion_point(field_set:IM.BaseDefine.OfflineFileInfo.task_id)
 }
 #if LANG_CXX11
 inline void OfflineFileInfo::set_task_id(::std::string&& value) {
-  set_has_task_id();
+  
   task_id_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:IM.BaseDefine.OfflineFileInfo.task_id)
@@ -4922,62 +4279,52 @@ inline void OfflineFileInfo::set_task_id(::std::string&& value) {
 #endif
 inline void OfflineFileInfo::set_task_id(const char* value) {
   GOOGLE_DCHECK(value != NULL);
-  set_has_task_id();
+  
   task_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:IM.BaseDefine.OfflineFileInfo.task_id)
 }
 inline void OfflineFileInfo::set_task_id(const char* value, size_t size) {
-  set_has_task_id();
+  
   task_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
   // @@protoc_insertion_point(field_set_pointer:IM.BaseDefine.OfflineFileInfo.task_id)
 }
 inline ::std::string* OfflineFileInfo::mutable_task_id() {
-  set_has_task_id();
+  
   // @@protoc_insertion_point(field_mutable:IM.BaseDefine.OfflineFileInfo.task_id)
   return task_id_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* OfflineFileInfo::release_task_id() {
   // @@protoc_insertion_point(field_release:IM.BaseDefine.OfflineFileInfo.task_id)
-  clear_has_task_id();
+  
   return task_id_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline void OfflineFileInfo::set_allocated_task_id(::std::string* task_id) {
   if (task_id != NULL) {
-    set_has_task_id();
+    
   } else {
-    clear_has_task_id();
+    
   }
   task_id_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), task_id);
   // @@protoc_insertion_point(field_set_allocated:IM.BaseDefine.OfflineFileInfo.task_id)
 }
 
-// required string file_name = 3;
-inline bool OfflineFileInfo::has_file_name() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void OfflineFileInfo::set_has_file_name() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void OfflineFileInfo::clear_has_file_name() {
-  _has_bits_[0] &= ~0x00000002u;
-}
+// string file_name = 3;
 inline void OfflineFileInfo::clear_file_name() {
   file_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  clear_has_file_name();
 }
 inline const ::std::string& OfflineFileInfo::file_name() const {
   // @@protoc_insertion_point(field_get:IM.BaseDefine.OfflineFileInfo.file_name)
   return file_name_.GetNoArena();
 }
 inline void OfflineFileInfo::set_file_name(const ::std::string& value) {
-  set_has_file_name();
+  
   file_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
   // @@protoc_insertion_point(field_set:IM.BaseDefine.OfflineFileInfo.file_name)
 }
 #if LANG_CXX11
 inline void OfflineFileInfo::set_file_name(::std::string&& value) {
-  set_has_file_name();
+  
   file_name_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:IM.BaseDefine.OfflineFileInfo.file_name)
@@ -4985,56 +4332,46 @@ inline void OfflineFileInfo::set_file_name(::std::string&& value) {
 #endif
 inline void OfflineFileInfo::set_file_name(const char* value) {
   GOOGLE_DCHECK(value != NULL);
-  set_has_file_name();
+  
   file_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:IM.BaseDefine.OfflineFileInfo.file_name)
 }
 inline void OfflineFileInfo::set_file_name(const char* value, size_t size) {
-  set_has_file_name();
+  
   file_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
   // @@protoc_insertion_point(field_set_pointer:IM.BaseDefine.OfflineFileInfo.file_name)
 }
 inline ::std::string* OfflineFileInfo::mutable_file_name() {
-  set_has_file_name();
+  
   // @@protoc_insertion_point(field_mutable:IM.BaseDefine.OfflineFileInfo.file_name)
   return file_name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* OfflineFileInfo::release_file_name() {
   // @@protoc_insertion_point(field_release:IM.BaseDefine.OfflineFileInfo.file_name)
-  clear_has_file_name();
+  
   return file_name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline void OfflineFileInfo::set_allocated_file_name(::std::string* file_name) {
   if (file_name != NULL) {
-    set_has_file_name();
+    
   } else {
-    clear_has_file_name();
+    
   }
   file_name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), file_name);
   // @@protoc_insertion_point(field_set_allocated:IM.BaseDefine.OfflineFileInfo.file_name)
 }
 
-// required uint32 file_size = 4;
-inline bool OfflineFileInfo::has_file_size() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
-}
-inline void OfflineFileInfo::set_has_file_size() {
-  _has_bits_[0] |= 0x00000008u;
-}
-inline void OfflineFileInfo::clear_has_file_size() {
-  _has_bits_[0] &= ~0x00000008u;
-}
+// uint32 file_size = 4;
 inline void OfflineFileInfo::clear_file_size() {
   file_size_ = 0u;
-  clear_has_file_size();
 }
 inline ::google::protobuf::uint32 OfflineFileInfo::file_size() const {
   // @@protoc_insertion_point(field_get:IM.BaseDefine.OfflineFileInfo.file_size)
   return file_size_;
 }
 inline void OfflineFileInfo::set_file_size(::google::protobuf::uint32 value) {
-  set_has_file_size();
+  
   file_size_ = value;
   // @@protoc_insertion_point(field_set:IM.BaseDefine.OfflineFileInfo.file_size)
 }
@@ -5043,80 +4380,50 @@ inline void OfflineFileInfo::set_file_size(::google::protobuf::uint32 value) {
 
 // DepartInfo
 
-// required uint32 dept_id = 1;
-inline bool DepartInfo::has_dept_id() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void DepartInfo::set_has_dept_id() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void DepartInfo::clear_has_dept_id() {
-  _has_bits_[0] &= ~0x00000002u;
-}
+// uint32 dept_id = 1;
 inline void DepartInfo::clear_dept_id() {
   dept_id_ = 0u;
-  clear_has_dept_id();
 }
 inline ::google::protobuf::uint32 DepartInfo::dept_id() const {
   // @@protoc_insertion_point(field_get:IM.BaseDefine.DepartInfo.dept_id)
   return dept_id_;
 }
 inline void DepartInfo::set_dept_id(::google::protobuf::uint32 value) {
-  set_has_dept_id();
+  
   dept_id_ = value;
   // @@protoc_insertion_point(field_set:IM.BaseDefine.DepartInfo.dept_id)
 }
 
-// required uint32 priority = 2;
-inline bool DepartInfo::has_priority() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
-}
-inline void DepartInfo::set_has_priority() {
-  _has_bits_[0] |= 0x00000004u;
-}
-inline void DepartInfo::clear_has_priority() {
-  _has_bits_[0] &= ~0x00000004u;
-}
+// uint32 priority = 2;
 inline void DepartInfo::clear_priority() {
   priority_ = 0u;
-  clear_has_priority();
 }
 inline ::google::protobuf::uint32 DepartInfo::priority() const {
   // @@protoc_insertion_point(field_get:IM.BaseDefine.DepartInfo.priority)
   return priority_;
 }
 inline void DepartInfo::set_priority(::google::protobuf::uint32 value) {
-  set_has_priority();
+  
   priority_ = value;
   // @@protoc_insertion_point(field_set:IM.BaseDefine.DepartInfo.priority)
 }
 
-// required string dept_name = 3;
-inline bool DepartInfo::has_dept_name() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void DepartInfo::set_has_dept_name() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void DepartInfo::clear_has_dept_name() {
-  _has_bits_[0] &= ~0x00000001u;
-}
+// string dept_name = 3;
 inline void DepartInfo::clear_dept_name() {
   dept_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  clear_has_dept_name();
 }
 inline const ::std::string& DepartInfo::dept_name() const {
   // @@protoc_insertion_point(field_get:IM.BaseDefine.DepartInfo.dept_name)
   return dept_name_.GetNoArena();
 }
 inline void DepartInfo::set_dept_name(const ::std::string& value) {
-  set_has_dept_name();
+  
   dept_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
   // @@protoc_insertion_point(field_set:IM.BaseDefine.DepartInfo.dept_name)
 }
 #if LANG_CXX11
 inline void DepartInfo::set_dept_name(::std::string&& value) {
-  set_has_dept_name();
+  
   dept_name_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:IM.BaseDefine.DepartInfo.dept_name)
@@ -5124,81 +4431,60 @@ inline void DepartInfo::set_dept_name(::std::string&& value) {
 #endif
 inline void DepartInfo::set_dept_name(const char* value) {
   GOOGLE_DCHECK(value != NULL);
-  set_has_dept_name();
+  
   dept_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:IM.BaseDefine.DepartInfo.dept_name)
 }
 inline void DepartInfo::set_dept_name(const char* value, size_t size) {
-  set_has_dept_name();
+  
   dept_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
   // @@protoc_insertion_point(field_set_pointer:IM.BaseDefine.DepartInfo.dept_name)
 }
 inline ::std::string* DepartInfo::mutable_dept_name() {
-  set_has_dept_name();
+  
   // @@protoc_insertion_point(field_mutable:IM.BaseDefine.DepartInfo.dept_name)
   return dept_name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* DepartInfo::release_dept_name() {
   // @@protoc_insertion_point(field_release:IM.BaseDefine.DepartInfo.dept_name)
-  clear_has_dept_name();
+  
   return dept_name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline void DepartInfo::set_allocated_dept_name(::std::string* dept_name) {
   if (dept_name != NULL) {
-    set_has_dept_name();
+    
   } else {
-    clear_has_dept_name();
+    
   }
   dept_name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), dept_name);
   // @@protoc_insertion_point(field_set_allocated:IM.BaseDefine.DepartInfo.dept_name)
 }
 
-// required uint32 parent_dept_id = 4;
-inline bool DepartInfo::has_parent_dept_id() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
-}
-inline void DepartInfo::set_has_parent_dept_id() {
-  _has_bits_[0] |= 0x00000008u;
-}
-inline void DepartInfo::clear_has_parent_dept_id() {
-  _has_bits_[0] &= ~0x00000008u;
-}
+// uint32 parent_dept_id = 4;
 inline void DepartInfo::clear_parent_dept_id() {
   parent_dept_id_ = 0u;
-  clear_has_parent_dept_id();
 }
 inline ::google::protobuf::uint32 DepartInfo::parent_dept_id() const {
   // @@protoc_insertion_point(field_get:IM.BaseDefine.DepartInfo.parent_dept_id)
   return parent_dept_id_;
 }
 inline void DepartInfo::set_parent_dept_id(::google::protobuf::uint32 value) {
-  set_has_parent_dept_id();
+  
   parent_dept_id_ = value;
   // @@protoc_insertion_point(field_set:IM.BaseDefine.DepartInfo.parent_dept_id)
 }
 
-// required .IM.BaseDefine.DepartmentStatusType dept_status = 5;
-inline bool DepartInfo::has_dept_status() const {
-  return (_has_bits_[0] & 0x00000010u) != 0;
-}
-inline void DepartInfo::set_has_dept_status() {
-  _has_bits_[0] |= 0x00000010u;
-}
-inline void DepartInfo::clear_has_dept_status() {
-  _has_bits_[0] &= ~0x00000010u;
-}
+// .IM.BaseDefine.DepartmentStatusType dept_status = 5;
 inline void DepartInfo::clear_dept_status() {
   dept_status_ = 0;
-  clear_has_dept_status();
 }
 inline ::IM::BaseDefine::DepartmentStatusType DepartInfo::dept_status() const {
   // @@protoc_insertion_point(field_get:IM.BaseDefine.DepartInfo.dept_status)
   return static_cast< ::IM::BaseDefine::DepartmentStatusType >(dept_status_);
 }
 inline void DepartInfo::set_dept_status(::IM::BaseDefine::DepartmentStatusType value) {
-  assert(::IM::BaseDefine::DepartmentStatusType_IsValid(value));
-  set_has_dept_status();
+  
   dept_status_ = value;
   // @@protoc_insertion_point(field_set:IM.BaseDefine.DepartInfo.dept_status)
 }
@@ -5207,50 +4493,30 @@ inline void DepartInfo::set_dept_status(::IM::BaseDefine::DepartmentStatusType v
 
 // PushShieldStatus
 
-// required uint32 user_id = 1;
-inline bool PushShieldStatus::has_user_id() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void PushShieldStatus::set_has_user_id() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void PushShieldStatus::clear_has_user_id() {
-  _has_bits_[0] &= ~0x00000001u;
-}
+// uint32 user_id = 1;
 inline void PushShieldStatus::clear_user_id() {
   user_id_ = 0u;
-  clear_has_user_id();
 }
 inline ::google::protobuf::uint32 PushShieldStatus::user_id() const {
   // @@protoc_insertion_point(field_get:IM.BaseDefine.PushShieldStatus.user_id)
   return user_id_;
 }
 inline void PushShieldStatus::set_user_id(::google::protobuf::uint32 value) {
-  set_has_user_id();
+  
   user_id_ = value;
   // @@protoc_insertion_point(field_set:IM.BaseDefine.PushShieldStatus.user_id)
 }
 
-// required uint32 shield_status = 2;
-inline bool PushShieldStatus::has_shield_status() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void PushShieldStatus::set_has_shield_status() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void PushShieldStatus::clear_has_shield_status() {
-  _has_bits_[0] &= ~0x00000002u;
-}
+// uint32 shield_status = 2;
 inline void PushShieldStatus::clear_shield_status() {
   shield_status_ = 0u;
-  clear_has_shield_status();
 }
 inline ::google::protobuf::uint32 PushShieldStatus::shield_status() const {
   // @@protoc_insertion_point(field_get:IM.BaseDefine.PushShieldStatus.shield_status)
   return shield_status_;
 }
 inline void PushShieldStatus::set_shield_status(::google::protobuf::uint32 value) {
-  set_has_shield_status();
+  
   shield_status_ = value;
   // @@protoc_insertion_point(field_set:IM.BaseDefine.PushShieldStatus.shield_status)
 }
@@ -5296,28 +4562,120 @@ namespace google {
 namespace protobuf {
 
 template <> struct is_proto_enum< ::IM::BaseDefine::ServiceID> : ::google::protobuf::internal::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::IM::BaseDefine::ServiceID>() {
+  return ::IM::BaseDefine::ServiceID_descriptor();
+}
 template <> struct is_proto_enum< ::IM::BaseDefine::LoginCmdID> : ::google::protobuf::internal::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::IM::BaseDefine::LoginCmdID>() {
+  return ::IM::BaseDefine::LoginCmdID_descriptor();
+}
 template <> struct is_proto_enum< ::IM::BaseDefine::BuddyListCmdID> : ::google::protobuf::internal::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::IM::BaseDefine::BuddyListCmdID>() {
+  return ::IM::BaseDefine::BuddyListCmdID_descriptor();
+}
 template <> struct is_proto_enum< ::IM::BaseDefine::MessageCmdID> : ::google::protobuf::internal::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::IM::BaseDefine::MessageCmdID>() {
+  return ::IM::BaseDefine::MessageCmdID_descriptor();
+}
 template <> struct is_proto_enum< ::IM::BaseDefine::GroupCmdID> : ::google::protobuf::internal::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::IM::BaseDefine::GroupCmdID>() {
+  return ::IM::BaseDefine::GroupCmdID_descriptor();
+}
 template <> struct is_proto_enum< ::IM::BaseDefine::FileCmdID> : ::google::protobuf::internal::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::IM::BaseDefine::FileCmdID>() {
+  return ::IM::BaseDefine::FileCmdID_descriptor();
+}
 template <> struct is_proto_enum< ::IM::BaseDefine::SwitchServiceCmdID> : ::google::protobuf::internal::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::IM::BaseDefine::SwitchServiceCmdID>() {
+  return ::IM::BaseDefine::SwitchServiceCmdID_descriptor();
+}
 template <> struct is_proto_enum< ::IM::BaseDefine::OtherCmdID> : ::google::protobuf::internal::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::IM::BaseDefine::OtherCmdID>() {
+  return ::IM::BaseDefine::OtherCmdID_descriptor();
+}
 template <> struct is_proto_enum< ::IM::BaseDefine::ResultType> : ::google::protobuf::internal::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::IM::BaseDefine::ResultType>() {
+  return ::IM::BaseDefine::ResultType_descriptor();
+}
 template <> struct is_proto_enum< ::IM::BaseDefine::KickReasonType> : ::google::protobuf::internal::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::IM::BaseDefine::KickReasonType>() {
+  return ::IM::BaseDefine::KickReasonType_descriptor();
+}
 template <> struct is_proto_enum< ::IM::BaseDefine::OnlineListType> : ::google::protobuf::internal::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::IM::BaseDefine::OnlineListType>() {
+  return ::IM::BaseDefine::OnlineListType_descriptor();
+}
 template <> struct is_proto_enum< ::IM::BaseDefine::UserStatType> : ::google::protobuf::internal::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::IM::BaseDefine::UserStatType>() {
+  return ::IM::BaseDefine::UserStatType_descriptor();
+}
 template <> struct is_proto_enum< ::IM::BaseDefine::SessionType> : ::google::protobuf::internal::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::IM::BaseDefine::SessionType>() {
+  return ::IM::BaseDefine::SessionType_descriptor();
+}
 template <> struct is_proto_enum< ::IM::BaseDefine::MsgType> : ::google::protobuf::internal::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::IM::BaseDefine::MsgType>() {
+  return ::IM::BaseDefine::MsgType_descriptor();
+}
 template <> struct is_proto_enum< ::IM::BaseDefine::ClientType> : ::google::protobuf::internal::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::IM::BaseDefine::ClientType>() {
+  return ::IM::BaseDefine::ClientType_descriptor();
+}
 template <> struct is_proto_enum< ::IM::BaseDefine::GroupType> : ::google::protobuf::internal::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::IM::BaseDefine::GroupType>() {
+  return ::IM::BaseDefine::GroupType_descriptor();
+}
 template <> struct is_proto_enum< ::IM::BaseDefine::GroupModifyType> : ::google::protobuf::internal::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::IM::BaseDefine::GroupModifyType>() {
+  return ::IM::BaseDefine::GroupModifyType_descriptor();
+}
 template <> struct is_proto_enum< ::IM::BaseDefine::TransferFileType> : ::google::protobuf::internal::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::IM::BaseDefine::TransferFileType>() {
+  return ::IM::BaseDefine::TransferFileType_descriptor();
+}
 template <> struct is_proto_enum< ::IM::BaseDefine::ClientFileState> : ::google::protobuf::internal::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::IM::BaseDefine::ClientFileState>() {
+  return ::IM::BaseDefine::ClientFileState_descriptor();
+}
 template <> struct is_proto_enum< ::IM::BaseDefine::ClientFileRole> : ::google::protobuf::internal::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::IM::BaseDefine::ClientFileRole>() {
+  return ::IM::BaseDefine::ClientFileRole_descriptor();
+}
 template <> struct is_proto_enum< ::IM::BaseDefine::FileServerError> : ::google::protobuf::internal::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::IM::BaseDefine::FileServerError>() {
+  return ::IM::BaseDefine::FileServerError_descriptor();
+}
 template <> struct is_proto_enum< ::IM::BaseDefine::SessionStatusType> : ::google::protobuf::internal::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::IM::BaseDefine::SessionStatusType>() {
+  return ::IM::BaseDefine::SessionStatusType_descriptor();
+}
 template <> struct is_proto_enum< ::IM::BaseDefine::DepartmentStatusType> : ::google::protobuf::internal::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::IM::BaseDefine::DepartmentStatusType>() {
+  return ::IM::BaseDefine::DepartmentStatusType_descriptor();
+}
 
 }  // namespace protobuf
 }  // namespace google
