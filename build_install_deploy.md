@@ -168,6 +168,7 @@ INSERT INTO `teamtalk`.`IMUser` (`id`, `sex`, `name`, `domain`, `nick`, `passwor
 > cd /home/repo/TeamTalk/server  
 > tar -zxvf im-server-0.6.0.tar.gz  
 > 修改login_server/loginserver.conf   msfs=http://127.0.0.1:8700/ discovery=http://127.0.0.1/api/discovery  为 msfs=http://本机IP:8700/ discovery=http://本机IP/api/discovery
+> 修改auto_setup/im_web/conf/config.php 中的 $config['msfs_url'] = 'http://127.0.0.1:8700/'; 为 $config['msfs_url'] = 'http://本机IP:8700/'; 不修改头像会不能上传下载
 
 > sync_lib_for_zip.sh  
 > restart.sh all
